@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/hermes-view/static/css/main.8cb281b7.css",
-    "main.js": "/hermes-view/static/js/main.ced41d5c.js",
-    "static/js/787.5a93ff1e.chunk.js": "/hermes-view/static/js/787.5a93ff1e.chunk.js",
-    "index.html": "/hermes-view/index.html",
-    "main.8cb281b7.css.map": "/hermes-view/static/css/main.8cb281b7.css.map",
-    "main.ced41d5c.js.map": "/hermes-view/static/js/main.ced41d5c.js.map",
-    "787.5a93ff1e.chunk.js.map": "/hermes-view/static/js/787.5a93ff1e.chunk.js.map"
+    "main.css": "/static/css/main.8cb281b7.css",
+    "main.js": "/static/js/main.12792ad5.js",
+    "static/js/787.5a93ff1e.chunk.js": "/static/js/787.5a93ff1e.chunk.js",
+    "index.html": "/index.html",
+    "main.8cb281b7.css.map": "/static/css/main.8cb281b7.css.map",
+    "main.12792ad5.js.map": "/static/js/main.12792ad5.js.map",
+    "787.5a93ff1e.chunk.js.map": "/static/js/787.5a93ff1e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8cb281b7.css",
-    "static/js/main.ced41d5c.js"
+    "static/js/main.12792ad5.js"
   ]
 }
