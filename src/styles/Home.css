@@ -1,0 +1,147 @@
+body {
+  background-color: #ffffff;
+}  
+  
+.container {
+  padding: 20px;
+  margin-left: auto; 
+  margin-right: auto; 
+  max-width: 1200px; 
+  border-radius: 8px; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+  
+.welcome, .services, .call-to-action {
+  margin: 4em auto;
+}
+
+.centered-header{
+  text-align: center;
+}
+
+.welcome{
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-color: #3498db;
+  border-style: solid;
+  margin-left: 0;
+  margin-right: 0;
+  margin: 0;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the children horizontally */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  section {
+    margin-bottom: 2em;
+  }
+  
+
+  h1 {
+    color: black;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+    position: relative; /* Needed for absolute positioning of the pseudo-element */
+    display: inline-block; /* Ensures the line is only as wide as the text */
+    margin-bottom: 1em; /* Space below the heading */
+  }
+  
+  h1::after {
+    content: '';
+    display: block;
+    width: 50px; /* Width of the decorative line */
+    height: 5px; /* Increased thickness of the line */
+    background-color: #3498db; /* Color of the line */
+    position: absolute;
+    left: 0;
+    bottom: -6px; /* Adjusted for the new thickness */
+    border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  }
+  
+  h2 {
+    color: #3498db;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    position: relative; /* Needed for absolute positioning of the pseudo-element */
+    display: inline-block; /* Ensures the line is only as wide as the text */
+    margin-bottom: 1em; /* Space below the heading */
+  }
+  
+  h2::after {
+    content: '';
+    display: block;
+    width: 100%; /* Width of the decorative line */
+    height: 5px; /* Increased thickness of the line */
+    background-color: black;
+    position: absolute;
+    left: 0;
+    bottom: -6px; /* Adjusted for the new thickness */
+    border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    margin: 0.5em 0;
+    padding-left: 1em;
+    text-indent: -0.7em;
+  }
+  
+  .dashed-list li::before {
+    content: "— "; /* Keep the dash here */
+    color: #3498db;
+    /* ... other styles ... */
+  }
+  
+  p {
+    font-size: 1.1rem;
+    margin: 1em 0;
+  }
+  
+  .call-to-action h2 {
+    text-align: center;
+  }
+  
+  h1, h2 {
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+    font-size: 40px;
+
+  }
+  
+  p {
+    text-rendering: optimizeSpeed;
+  }
+  
+#services_img{
+  float: right;
+  width: 450px;
+  height: 450px;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.full-width-bg-colored{
+  background-color: rgb(107, 110, 110);
+}

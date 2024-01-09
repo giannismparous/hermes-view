@@ -1,0 +1,18 @@
+.social-media-links {
+    display: flex;
+    justify-content: center; /* Center the links */
+    padding: 20px 0; /* Add some padding at the top and bottom */
+  }
+  
+  .social-media-links a {
+    margin: 0 10px; /* Add space between the icons */
+    color: #333; /* Icon color, adjust as needed */
+    font-size: 24px; /* Icon size, adjust as needed */
+    transition: color 0.3s ease; /* Smooth color transition for hover effect */
+  }
+  
+  .social-media-links a:hover,
+  .social-media-links a:focus {
+    color: #3498db; /* Icon hover color, adjust as needed */
+  }
+  

@@ -1,0 +1,70 @@
+nav {
+    background-color: #FFFFFF;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Add padding to the nav bar */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: fixed; /* Fix position to the top of the window */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    right: 0; /* Stretch right to fill the full width */
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  /* Add padding to the body to prevent it from hiding behind the nav bar */
+  body {
+    padding-top: 60px; /* This should be equal to the height of your nav bar */
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: rgb(36, 35, 35);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: #000000;
+    font-weight: bold;
+  }
+  
+  .social-media-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-media-icons a {
+    color: rgb(59, 57, 57);
+    margin-left: 15px;
+    font-size: 1.1rem; /* Adjust size to match your nav links */
+    transition: color 0.3s ease;
+  }
+  
+  .social-media-icons a:hover,
+  .social-media-icons a:focus {
+    color: #000000; /* Or any color that fits your design */
+  }
+  
+  
+  /* Add responsive design as necessary */
+  @media (max-width: 768px) {
+    .social-media-icons {
+      display: none; /* Optional: hides social media icons on small screens */
+    }
+    
+  }
