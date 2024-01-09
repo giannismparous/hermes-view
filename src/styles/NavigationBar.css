@@ -61,10 +61,21 @@ nav {
   }
   
   
-  /* Add responsive design as necessary */
   @media (max-width: 768px) {
-    .social-media-icons {
-      display: none; /* Optional: hides social media icons on small screens */
+    nav ul {
+      flex-direction: column; /* Stack nav items vertically */
+      align-items: flex-start; /* Align nav items to the start */
     }
-    
+  
+    nav ul li {
+      margin: 5px 0; /* Adjust margin for smaller screens */
+    }
+  
+    nav ul li a {
+      font-size: 1rem; /* Reduce font size for smaller screens */
+    }
+  
+    .social-media-icons {
+      margin-top: 10px; /* Add some spacing above social media icons */
+    }
   }

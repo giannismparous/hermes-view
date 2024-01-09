@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import "../styles/NavigationBar.css";
+import Logo from "./Logo";
 
 function NavigationBar() {
   return (
     <nav>
+      <div className="logo-container">
+        <Logo />
+      </div>
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/products">Products</Link></li>

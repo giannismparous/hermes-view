@@ -1,0 +1,12 @@
+.logo {
+    height: 40px; /* Default height for larger screens */
+    width: auto;
+    display: block;
+    margin-right: 10px; /* Add some spacing between the logo and the navigation links */
+  
+    /* Adjustments for smaller screens */
+    @media (max-width: 768px) {
+      height: 30px; /* Adjust height for smaller screens */
+      margin-right: 5px; /* Reduce margin for smaller screens */
+    }
+  }
