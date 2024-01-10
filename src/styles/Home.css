@@ -145,3 +145,12 @@ body {
 .full-width-bg-colored{
   background-color: rgb(107, 110, 110);
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+body, .container {
+  overflow-x: hidden;
+}
