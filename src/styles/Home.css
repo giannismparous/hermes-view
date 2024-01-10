@@ -1,5 +1,5 @@
 body {
-  background-color: #ffffff;
+  background-color: #181818;
 }  
   
 .container {
@@ -22,7 +22,7 @@ body {
 
 .welcome{
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-color: #3498db;
+  border-color: #8a5a00;
   border-style: solid;
   margin-left: 0;
   margin-right: 0;
@@ -34,8 +34,18 @@ body {
     flex-direction: column;
     align-items: center; /* This will center the children horizontally */
     font-family: 'Arial', sans-serif;
-    color: #333;
+    color: #ffffff;
     line-height: 1.6;
+  }
+
+  .home h1{
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+  }
+
+  .home p{
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
   }
   
   section {
@@ -44,7 +54,7 @@ body {
   
 
   h1 {
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 2.5rem;
     font-weight: bold;
     text-rendering: optimizeLegibility;
@@ -58,7 +68,7 @@ body {
     display: block;
     width: 50px; /* Width of the decorative line */
     height: 5px; /* Increased thickness of the line */
-    background-color: #3498db; /* Color of the line */
+    background-color: #8a5a00; /* Color of the line */
     position: absolute;
     left: 0;
     bottom: -6px; /* Adjusted for the new thickness */
@@ -66,7 +76,7 @@ body {
   }
   
   h2 {
-    color: #3498db;
+    color: #ffffff;
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -81,7 +91,7 @@ body {
     display: block;
     width: 100%; /* Width of the decorative line */
     height: 5px; /* Increased thickness of the line */
-    background-color: black;
+    background-color: #8a5a00;
     position: absolute;
     left: 0;
     bottom: -6px; /* Adjusted for the new thickness */
@@ -101,7 +111,7 @@ body {
   
   .dashed-list li::before {
     content: "— "; /* Keep the dash here */
-    color: #3498db;
+    color: #8a5a00;
     /* ... other styles ... */
   }
   
@@ -118,7 +128,6 @@ body {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 40px;
-
   }
   
   p {
@@ -143,7 +152,7 @@ body {
 }
 
 .full-width-bg-colored{
-  background-color: rgb(107, 110, 110);
+  background-color: rgb(0, 0, 0);
 }
 
 *, *::before, *::after {
@@ -153,4 +162,8 @@ body {
 
 body, .container {
   overflow-x: hidden;
+}
+
+a {
+  color: #8a5a00;
 }

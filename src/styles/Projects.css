@@ -1,7 +1,7 @@
 /* Apply the container class to each section */
 .projects-main{
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-color: #3498db;
+  border-color: #8a5a00;
   border-style: solid;
 }
 
@@ -42,16 +42,16 @@
     }
 
     .project-item a{
-      color: #0c88db;
+      color: #ffffff;
       text-decoration: none; /* Remove underline */
     }
   
     .project-item a:visited {
-      color: black;
+      color: rgb(252, 252, 252);
     }
     
     .project-item a:hover, .project-item a:active {
-      color: black;
+      color: rgb(255, 255, 255);
     }
 
     .project-item.animate {

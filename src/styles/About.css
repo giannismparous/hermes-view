@@ -1,7 +1,7 @@
 /* Apply the container class to each section */
 .about-main{
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-color: #3498db;
+  border-color: #8a5a00;
   border-style: solid;
 }
 
@@ -27,4 +27,3 @@
     color: #333;
     line-height: 1.6;
   }
-  
