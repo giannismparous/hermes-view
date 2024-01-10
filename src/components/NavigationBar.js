@@ -13,10 +13,10 @@ function NavigationBar() {
       </div>
       <ul>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/products">Products</Link></li>
-        <li><Link to="/projects">Projects</Link></li>
-        <li><Link to="/contact">Contact Us</Link></li>
+        {/* <li><Link to="/products">Products</Link></li>
+        <li><Link to="/projects">Projects</Link></li> */}
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact Us</Link></li>
       </ul>
       <div className="social-media-icons">
         {/* Replace '#' with your actual social media profile links */}

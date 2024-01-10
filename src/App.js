@@ -20,13 +20,12 @@ function App() {
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
+        {/* <Route path="/products" element={<Products />} /> */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/projects" element={<Projects />} />
+        {/* <Route path="/projects" element={<Projects />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
-        <Route path="/projects/:projectId" element={<ProjectDetail />} />
+        <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
       </Routes>
     </Router>
   );

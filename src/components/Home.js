@@ -10,11 +10,11 @@ function Home() {
     return (
         <div ref={scrollRef} className="home">
           <ImageScroller />
-          <section className="welcome container animate-on-scroll">
+          <section className="container golden-container animate-on-scroll">
             <h1>Welcome to HermesView</h1>
             <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
           </section>
-        <section className="services container animate-on-scroll">
+        <section className="container services animate-on-scroll">
           <div className="centered-header">
           <h2>Our Services</h2>
           </div>
@@ -35,7 +35,7 @@ function Home() {
           <p>With Hermes View, real estate agencies can present properties in the most captivating and innovative manner, ensuring prospective clients experience every facet of a space, no matter the type. Elevate your listings and captivate your audience with our immersive VR tours.</p>
         </section>
         
-        <section className="call-to-action container animate-on-scroll">
+        <section className="container animate-on-scroll">
         <div className="centered-header">
         <h2>Get in Touch</h2>
         </div>
