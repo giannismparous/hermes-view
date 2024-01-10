@@ -124,3 +124,10 @@ color: #8a5a00;
   width: 450px;
   height: 450px;
   }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px; /* Adjust padding for smaller screens if needed */
+    max-width: none; /* Remove max-width on smaller screens */
+  }
+}
