@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.c4bd9509.css",
+    "main.css": "/static/css/main.25f8f6f3.css",
     "main.js": "/static/js/main.79fc5f1b.js",
     "static/js/787.6ec3084c.chunk.js": "/static/js/787.6ec3084c.chunk.js",
     "static/media/hermes-view-logo.png": "/static/media/hermes-view-logo.f6a7d1b7d7deff970c55.png",
     "index.html": "/index.html",
-    "main.c4bd9509.css.map": "/static/css/main.c4bd9509.css.map",
+    "main.25f8f6f3.css.map": "/static/css/main.25f8f6f3.css.map",
     "main.79fc5f1b.js.map": "/static/js/main.79fc5f1b.js.map",
     "787.6ec3084c.chunk.js.map": "/static/js/787.6ec3084c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4bd9509.css",
+    "static/css/main.25f8f6f3.css",
     "static/js/main.79fc5f1b.js"
   ]
 }
