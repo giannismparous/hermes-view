@@ -9,6 +9,8 @@ function SamplePage() {
     bottom: 0,
     width: "100%",
     height: "100%",
+    border: "none",  // Remove borders
+    outline: "none", // Remove outline (focus border)
   };
 
   return (
@@ -18,7 +20,9 @@ function SamplePage() {
         title="3D Vista Project"
         src="/samples/sample1/index.htm"  // Update the path accordingly
         style={iframeStyle}
+
         allowFullScreen
+        
       ></iframe>
     </div>
   );
