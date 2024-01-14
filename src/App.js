@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={bodyStyle}>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
