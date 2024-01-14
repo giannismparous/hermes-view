@@ -9,7 +9,10 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_xr7p4nn', 'template_slxggff', form.current, 'Ds0o_PNgxgdmtdIce')
+    emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      form.current,
+      process.env.REACT_APP_EMAILJS_USER_ID)
       .then((result) => {
           alert('Message sent successfully!');
       }, (error) => {
@@ -23,7 +26,7 @@ function Contact() {
     <div className="contact" ref={scrollRef}>
       <section className="contact-container container animate-on-scroll">
         <h1>Reach out to us</h1>
-        <p>Email us at hermesview@gmail.com or fill out the form below:</p>
+        <p>Fill out the form below:</p>
         
         <form className="contact-form" ref={form} onSubmit={sendEmail}>
           <label htmlFor="name">Name:</label>

@@ -1,15 +1,20 @@
 import React from "react";
 import "../styles/Home.css";
 import useScrollAnimation from './useScrollAnimation';
-import ImageScroller from './ImageScroller'; // The path to your ImageScroller component
+import ImageSlider from "./ImageSlider";
 
 function Home() {
 
     const scrollRef = useScrollAnimation();
+    const images = [
+      '../slider_images/pic1.jpg',
+      '../slider_images/pic2.jpg',
+      '../slider_images/pic3.jpg',
+    ];
 
     return (
         <div ref={scrollRef} className="home">
-          {/* <ImageScroller /> */}
+          <ImageSlider images={images}/>
           <section className="container golden-container animate-on-scroll">
             <h1>Welcome to HermesView</h1>
             <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
@@ -18,7 +23,6 @@ function Home() {
           <div className="centered-header">
           <h2>Our Services</h2>
           </div>
-          <p>Specializing in PA installations, multi-room installations, and enhanced sound systems, ACE Audio & Conference is at the forefront of new audio technology. We provide bespoke design and permanent installation solutions to meet all your audio needs.</p>
           <img src='../other_images/services.jpg' alt="Services" id="services_img" ></img>
           <p>At Hermes View, we pride ourselves on offering state-of-the-art VR tours to cater to the diverse needs of real estate agencies. Our expansive range of services encompasses:</p>
           <ul className="dashed-list">
