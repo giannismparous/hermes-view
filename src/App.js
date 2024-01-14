@@ -2,7 +2,6 @@ import React from "react";
 import {
   Routes,
   Route,
-  HashRouter,
 } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -31,8 +30,7 @@ function SamplePage() {
 
 function App() {
   return (
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <NavigationBar />
+    <div>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
@@ -43,7 +41,8 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
         <Route path="/sample" element={<SamplePage />} />
       </Routes>
-    </HashRouter>
+      <NavigationBar />
+    </div>
   );
 }
 
