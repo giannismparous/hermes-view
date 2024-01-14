@@ -1,8 +1,8 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
+  HashRouter,
 } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -31,7 +31,7 @@ function SamplePage() {
 
 function App() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -43,7 +43,7 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
         <Route path="/sample" element={<SamplePage />} />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
