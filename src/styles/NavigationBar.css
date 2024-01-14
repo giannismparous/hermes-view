@@ -12,11 +12,7 @@ nav {
     right: 0; /* Stretch right to fill the full width */
     z-index: 1000; /* Ensure it's above other content */
   }
-  
-  /* Add padding to the body to prevent it from hiding behind the nav bar */
-  body {
-    padding-top: 60px; /* This should be equal to the height of your nav bar */
-  }
+
   
   nav ul {
     list-style: none;

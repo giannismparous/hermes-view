@@ -2,6 +2,7 @@ import React from "react";
 import {
   Routes,
   Route,
+  useLocation,
 } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -12,23 +13,23 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
-
-function SamplePage() {
-  return (
-    <div>
-      {/* You can use an iframe or another component to embed your 3D Vista project */}
-      <iframe
-        title="3D Vista Project"
-        src="/samples/sample1/index.htm"  // Update the path accordingly
-        width="100%"
-        height="1000px"
-        allowFullScreen
-      ></iframe>
-    </div>
-  );
-}
+import SamplePage from "./components/SamplePage";
 
 function App() {
+
+  const location = useLocation();
+
+  // Define an array of paths where you want to hide the NavigationBar
+  const pathsWithoutNavBar = ["/sample"];
+
+  // Check if the current path is in the array of paths without NavBar
+  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname);
+
+  // Dynamic styling for body's padding-top
+  const bodyStyle = {
+    paddingTop: shouldHideNavBar ? '0' : '60px', // Set to 0 when NavBar should be hidden
+  };
+
   return (
     <div>
       <Routes>
@@ -41,7 +42,7 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
         <Route path="/sample" element={<SamplePage />} />
       </Routes>
-      <NavigationBar />
+      {!shouldHideNavBar && <NavigationBar />}
     </div>
   );
 }
