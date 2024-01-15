@@ -9,7 +9,6 @@ function Home() {
     const images = [
       '../slider_images/pic1.jpg',
       '../slider_images/pic2.jpg',
-      '../slider_images/pic3.jpg',
     ];
 
     return (
