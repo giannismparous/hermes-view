@@ -14,13 +14,14 @@ import Projects from "./components/Projects";
 import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
+import Sample3DModel from "./components/Sample3DModel";
 
 function App() {
 
   const location = useLocation();
 
   // Define an array of paths where you want to hide the NavigationBar
-  const pathsWithoutNavBar = ["/sample"];
+  const pathsWithoutNavBar = ["/sample","/3d-model-sample"];
 
   // Check if the current path is in the array of paths without NavBar
   const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname);
@@ -41,6 +42,7 @@ function App() {
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
         <Route path="/sample" element={<SamplePage />} />
+        <Route path="/3d-model-sample" element={<Sample3DModel />} />
       </Routes>
       {!shouldHideNavBar && <NavigationBar />}
     </div>
