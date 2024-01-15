@@ -1,0 +1,13 @@
+#: locale=en
+
+## Media
+
+### Title
+model_021351E5_0EB0_C691_419A_C0E4035CBAE5.label = test
+
+## Tour
+
+### Description
+
+### Title
+tour.name = Untitled 3
