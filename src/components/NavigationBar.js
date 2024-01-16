@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import "../styles/NavigationBar.css";
 import Logo from "./Logo";
 
@@ -20,11 +20,11 @@ function NavigationBar() {
       </ul>
       <div className="social-media-icons">
         {/* Replace '#' with your actual social media profile links */}
-        <a href="https://www.facebook.com/sharer/sharer.php?u=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <FontAwesomeIcon icon={faFacebookF} />
         </a>
-        <a href="https://twitter.com/intent/tweet?url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <FontAwesomeIcon icon={faTwitter} />
+        <a href="https://www.instagram.com/hermesviewvr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <FontAwesomeIcon icon={faInstagram} />
         </a>
         <a href="http://www.linkedin.com/shareArticle?mini=true&url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <FontAwesomeIcon icon={faLinkedinIn} />
