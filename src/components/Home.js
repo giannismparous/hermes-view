@@ -49,7 +49,7 @@ function Home() {
         </div>
         <SamplePage
   redirectToSample={true}
-  style={{ width: "65vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
+  style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
 />
       </section>
       <section className="container animate-on-scroll">
