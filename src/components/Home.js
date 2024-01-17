@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../styles/Home.css";
 import useScrollAnimation from './useScrollAnimation';
 import ImageSlider from "./ImageSlider";
+import SamplePage from "./SamplePage";
 
 function Home() {
   const scrollRef = useScrollAnimation();
@@ -41,6 +42,13 @@ function Home() {
             <img src='../other_images/services.jpg' alt="Services" id="services_img" />
           </div>
         </div>
+      </section>
+      <section className="sample-container animate-on-scroll">
+        <div className="centered-header">
+          <h2>Sample Project</h2>
+        </div>
+        <SamplePage style={{ width:"80vw", height:"40vw",border: "8px solid #8a5a00",borderRadius: "10px"}} />
+        {/* <button onClick={openFullScreen}>Open Full Screen</button> */}
       </section>
       <section className="container animate-on-scroll">
         <div className="centered-header">

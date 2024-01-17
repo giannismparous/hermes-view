@@ -133,6 +133,7 @@ color: #8a5a00;
   margin-top: 40px;
 }
 
+
 @media (max-width: 1083px) {
   img {
     width: 90vw;  /* Ensure the image doesn't exceed its original size */
