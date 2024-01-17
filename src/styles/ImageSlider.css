@@ -7,7 +7,7 @@
 
 .image-container {
   width: 100vw; /* Use a percentage instead of 100vw */
-  height: 100%; /* Adjust the height as needed */
+  height: 30vw; /* Adjust the height as needed */
 }
 
 .image-container img {

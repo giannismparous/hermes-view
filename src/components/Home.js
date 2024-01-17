@@ -47,8 +47,8 @@ function Home() {
         <div className="centered-header">
           <h2>Sample Project</h2>
         </div>
-        <SamplePage style={{ width:"80vw", height:"40vw",border: "8px solid #8a5a00",borderRadius: "10px"}} />
-        {/* <button onClick={openFullScreen}>Open Full Screen</button> */}
+        <SamplePage style={{ width:"60vw", height:"35vw",border: "8px solid #8a5a00",borderRadius: "10px"}} />
+        {/* <p><a href="/contact">Click here</a> for full screen</p> */}
       </section>
       <section className="container animate-on-scroll">
         <div className="centered-header">
