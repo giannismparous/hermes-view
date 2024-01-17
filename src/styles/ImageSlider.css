@@ -1,12 +1,14 @@
 .slide-container {
-  width: 100vw;
-  height: 25vw;
+  width: 100%; /* Use a percentage instead of 100vw */
+  max-width: 100vw; /* Add max-width to ensure responsiveness */
+  height: 25vw; /* You can adjust the height as needed */
   margin: auto;
+  overflow: hidden; /* Hide any potential overflow */
 }
 
 .image-container {
-  width: 100%;
-  height: 100%;
+  width: 100%; /* Use a percentage instead of 100vw */
+  height: 100%; /* Adjust the height as needed */
 }
 
 .image-container img {
