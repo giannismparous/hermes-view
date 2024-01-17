@@ -154,7 +154,7 @@ color: #8a5a00;
   flex: 1;
   margin-top: 40px;
 
-  @media (max-width: 860) {
+  @media (max-width: 860px) {
     img {
       width: 500px;  /* Ensure the image doesn't exceed its original size */
       /* height: auto; */
