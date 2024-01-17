@@ -117,11 +117,6 @@ a {
 color: #8a5a00;
 }
 
-/* #services_img{
-  float: right;
-  width: 290px;
-  height: 290px;
-  } */
 
 .text-content {
   flex: 1;
@@ -141,6 +136,7 @@ color: #8a5a00;
     display: block; /* Remove extra space below the image */
     margin: auto; /* Center the image horizontally */
     padding: auto;
+    image-rendering: optimizeQuality;
   }
 
   .services-content {
@@ -156,6 +152,7 @@ color: #8a5a00;
     display: block; /* Remove extra space below the image */
     margin: auto; /* Center the image horizontally */
     padding: auto;
+    image-rendering: optimizeQuality;
   }
 
   .services-content {
