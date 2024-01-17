@@ -13,7 +13,7 @@ function Home() {
 
     return (
         <div ref={scrollRef} className="home">
-          <ImageSlider images={images}/>
+          {/* <ImageSlider images={images}/>
           <section className="container golden-container animate-on-scroll">
             <h1>Welcome to HermesView</h1>
             <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
@@ -43,7 +43,7 @@ function Home() {
         <h2>Get in Touch</h2>
         </div>
           <p><a href="/contact">Contact us</a> elevate your real estate experience together. Reach out to us today and discover how we can transform your property presentations with our cutting-edge VR tours</p>
-        </section>
+        </section> */}
 
       </div>
   );
