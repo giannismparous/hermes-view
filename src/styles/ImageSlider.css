@@ -2,19 +2,17 @@
   width: 100vw;
   height: 25vw; /* Adjust the height as needed */
   margin: auto;
-  overflow-x: hidden;
+  overflow: hidden
 }
 
 .image-container {
   width: 100vw; /* Use a percentage instead of 100vw */
   height: 100%; /* Adjust the height as needed */
-  pointer-events: none;
 }
 
 .image-container img {
   width: 100%;
   height: 100%;
-  pointer-events: none;
 }
 
 .each-fade {
