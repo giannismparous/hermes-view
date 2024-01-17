@@ -47,8 +47,10 @@ function Home() {
         <div className="centered-header">
           <h2>Sample Project</h2>
         </div>
-        <SamplePage style={{ width:"60vw", height:"35vw",border: "8px solid #8a5a00",borderRadius: "10px"}} />
-        {/* <p><a href="/contact">Click here</a> for full screen</p> */}
+        <SamplePage
+  redirectToSample={true}
+  style={{ width: "65vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
+/>
       </section>
       <section className="container animate-on-scroll">
         <div className="centered-header">
