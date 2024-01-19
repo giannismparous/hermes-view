@@ -1,6 +1,7 @@
 import React from "react";
 import useScrollAnimation from './useScrollAnimation';
 import "../styles/About.css"; // Make sure to create an About.css file with the styles
+import ContactInfo from "./ContactInfo";
 
 function About() {
 
@@ -16,6 +17,7 @@ function About() {
         <p>At the heart of Hermes View lies a commitment to excellence. We understand the nuances of the real estate market and the evolving expectations of modern clients. By harnessing the power of technology, we empower agencies to present properties in their most authentic light, enabling clients to make informed decisions with confidence and clarity.</p>
         <p>Our journey is not just about creating tours; it's about enhancing connections. We believe that every home tells a story, and through our innovative solutions, we aim to narrate these tales in the most captivating manner. With Hermes View by their side, agencies can elevate their offerings, clients can embark on memorable virtual journeys, and the dream of finding the perfect home becomes more accessible than ever before.</p>
       </section>
+      <ContactInfo/>
     </div>
   );
 }

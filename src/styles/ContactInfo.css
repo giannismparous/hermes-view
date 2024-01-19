@@ -1,0 +1,18 @@
+.footer {
+    padding-top: 30px;
+    text-align: center;
+  }
+
+.contact-info {
+    margin-bottom: 10px;
+  }
+  
+  .contact-info ul {
+    list-style-type: disc; /* Use bullets for the list */
+    padding-left: 0; /* Remove default padding */
+  }
+  
+  .contact-info li {
+    margin: 5px 0; /* Add some margin between list items */
+    color: white;
+  }

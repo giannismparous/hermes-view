@@ -3,6 +3,7 @@ import "../styles/Home.css";
 import useScrollAnimation from './useScrollAnimation';
 import ImageSlider from "./ImageSlider";
 import SamplePage from "./SamplePage";
+import ContactInfo from "./ContactInfo";
 
 function Home() {
   const scrollRef = useScrollAnimation();
@@ -58,6 +59,7 @@ function Home() {
         </div>
         <p><a href="/contact">Contact us</a> elevate your real estate experience together. Reach out to us today and discover how we can transform your property presentations with our cutting-edge VR tours</p>
       </section>
+      <ContactInfo/>
     </div>
   );
 }

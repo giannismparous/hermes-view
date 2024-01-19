@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import emailjs from 'emailjs-com';
 import useScrollAnimation from './useScrollAnimation';
 import '../styles/Contact.css';
+import ContactInfo from './ContactInfo';
 
 function Contact() {
   const form = useRef();
@@ -41,6 +42,7 @@ function Contact() {
           <button type="submit">Send Message</button>
         </form>
       </section>
+      <ContactInfo/>
     </div>
   );
 }
