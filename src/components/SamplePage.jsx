@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-function SamplePage({ style, redirectToSample, ...otherProps }) {
+function SamplePage({ style, redirectToSample, modelPath, ...otherProps }) {
   const defaultStyles = {
     position: "relative",
     width: "100vw",
@@ -42,7 +42,7 @@ function SamplePage({ style, redirectToSample, ...otherProps }) {
 
   return (
     <div style={{ ...defaultStyles, ...style }} {...otherProps}>
-      <iframe title="3D Vista Project" src="/samples/sample1/index.htm" style={iframeStyle} allowFullScreen></iframe>
+      <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} allowFullScreen></iframe>
       {/* Clickable overlay */}
       {redirectToSample && <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>}
     </div>
@@ -57,6 +57,7 @@ SamplePage.propTypes = {
 SamplePage.defaultProps = {
   style: {},
   redirectToSample: false, // Default value, won't redirect by default
+  modelPath: "/samples/sample1/index.htm"
 };
 
 export default SamplePage;
