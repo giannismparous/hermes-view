@@ -43,6 +43,8 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
+        {/* kallithea */}
+        <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} /> 
       </Routes>
       {!shouldHideNavBar && <NavigationBar />}
     </div>
