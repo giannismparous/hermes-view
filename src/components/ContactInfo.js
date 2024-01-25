@@ -7,12 +7,18 @@ function ContactInfo() {
       <section className="contact-info">
         <p>Contact us:</p>
         <ul>
-          <li>Phone: +306945660821</li>
-          <li>Phone: +306944470266</li>
-          <li>Phone: +306983652602</li>
+          <li>
+            Phone: <a href="tel:+306945660821">+306945660821</a>
+          </li>
+          <li>
+            Phone: <a href="tel:+306944470266">+306944470266</a>
+          </li>
+          <li>
+            Phone: <a href="tel:+306983652602">+306983652602</a>
+          </li>
         </ul>
       </section>
-      </div>
+    </div>
   );
 }
 
