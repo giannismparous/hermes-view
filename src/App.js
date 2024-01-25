@@ -44,7 +44,8 @@ function App() {
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
         {/* kallithea */}
-        <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} /> 
+        <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} />
+        <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/2/index.htm"/>} /> 
       </Routes>
       {!shouldHideNavBar && <NavigationBar />}
     </div>
