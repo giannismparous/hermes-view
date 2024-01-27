@@ -130,7 +130,7 @@ color: #8a5a00;
 
 
 @media (max-width: 1083px) {
-  img #services_img {
+  img {
     width: 90vw;  /* Ensure the image doesn't exceed its original size */
     /* height: auto; */
     display: block; /* Remove extra space below the image */
@@ -146,7 +146,7 @@ color: #8a5a00;
 }
 
 @media (min-width: 1083px) {
-  img #services_img{
+  img {
     width: 520px;  /* Ensure the image doesn't exceed its original size */
     /* height: auto; */
     display: block; /* Remove extra space below the image */
