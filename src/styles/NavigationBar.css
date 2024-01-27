@@ -1,4 +1,5 @@
 nav {
+  background-color: #181818;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,6 +9,7 @@ nav {
   left: 0; /* Align to the left */
   right: 0; /* Stretch right to fill the full width */
   z-index: 1000; /* Ensure it's above other content */
+  background: linear-gradient(to bottom, #181818, rgba(24, 24, 24, 0));
 }
 
 .nav-bar-items-container {
