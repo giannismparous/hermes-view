@@ -23,7 +23,7 @@ nav {
   display: block;
 
   @media (max-width:750px){
-    height: 80px;
+    height: 60px;
   }
 }
 
@@ -34,7 +34,7 @@ nav {
   right: 0;
 
   @media (max-width:750px){
-    height: 80px;
+    height: 60px;
   }
 
 }
