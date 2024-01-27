@@ -1,82 +1,106 @@
 nav {
-    background-color: #181818;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px; /* Add padding to the nav bar */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    position: fixed; /* Fix position to the top of the window */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0; /* Stretch right to fill the full width */
-    z-index: 1000; /* Ensure it's above other content */
-  }
+  background-color: #181818;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Add padding to the nav bar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: fixed; /* Fix position to the top of the window */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Stretch right to fill the full width */
+  z-index: 1000; /* Ensure it's above other content */
+}
 
-  
-  nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center
-  }
-  
-  nav ul li {
-    margin: 0 10px;
-  }
+.logo-container {
+  z-index: 1002;
+}
 
- 
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: auto; /* Center the list items vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center the list items horizontally */
+  height: 100%; /* Set the height to 100% */
+}
 
-  @media (min-width: 600px) {
-    nav ul li a {
-      color: rgb(255, 255, 255);
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-  }
+.mobile-menu ul li {
+  margin: 10px 0;
+}
 
-  @media (max-width: 600px) {
-    nav ul li a {
-      color: rgb(255, 255, 255);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+.mobile-menu ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Your-Fancy-Font', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a:focus {
+  color: black;
+  font-weight: bold;
+}
+
+.social-media-list {
+  position: absolute;
+  bottom: 0;
+  margin: 20px; /* Add some margin for spacing */
+}
+
+.social-media-list a {
+  margin-right: 20px; /* Increase the spacing between social media icons */
+  font-size: 2.5rem; /* Increase the font size */
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-media-list a:hover,
+.social-media-list a:focus {
+  color: black;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top left, #181818, #8a5a00);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none; /* Add this to prevent clicks on the overlay when it's not visible */
+  transition: opacity 0.5s ease-out; /* Add a transition for a smooth fade effect */
+}
+
+.mobile-menu-overlay.visible {
+  opacity: 1;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  @media (max-width: 450px) {
-    nav ul li a {
-      color: rgb(255, 255, 255);
-      text-decoration: none;
-      font-size: 0.6rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+  to {
+    opacity: 1;
   }
-  
-  nav ul li a:hover,
-  nav ul li a:focus {
-    color: #8a5a00;
-    font-weight: bold;
-  }
-  
-  .social-media-icons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .social-media-icons a {
-    color: rgb(255, 255, 255);
-    margin-left: 15px;
-    font-size: 1.1rem; /* Adjust size to match your nav links */
-    transition: color 0.3s ease;
-  }
-  
-  .social-media-icons a:hover,
-  .social-media-icons a:focus {
-    color: #8a5a00; /* Or any color that fits your design */
-  }
-  
+}
+

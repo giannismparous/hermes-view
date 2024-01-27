@@ -33,6 +33,7 @@ function App() {
 
   return (
     <div style={bodyStyle}>
+      {!shouldHideNavBar && <NavigationBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
@@ -47,7 +48,6 @@ function App() {
         <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} />
         <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/2/index.htm"/>} /> 
       </Routes>
-      {!shouldHideNavBar && <NavigationBar />}
     </div>
   );
 }
