@@ -95,6 +95,7 @@ nav {
   z-index: 1001;
 }
 
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -104,3 +105,6 @@ nav {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
