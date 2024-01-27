@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { gsap } from 'gsap';
 import "../styles/NavigationBar.css";
-import '../styles/Logo.css'; // Import the styles for the Logo
+import '../styles/Logo.css';
 
-const logoImg='../logo/hermes-view-logo.png';
+const menuImg = '../icons/menu.png';
+const hermesviewImg = '../icons/hermes-view.png';
 
 function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,27 +30,39 @@ function NavigationBar() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    // GSAP animation for menu items
+    gsap.from(".text-fade-in", {
+      duration: 0.8,
+      opacity: 0,
+      y: 20,
+      stagger: 0.2, // Stagger the animations for a nice effect
+      ease: "power3.out",
+    });
+  }, [menuOpen]);
+
   return (
     <nav>
-      <div className={`logo-container ${menuOpen ? 'menu-open' : ''}`}>
-        <img src={logoImg} alt="Hermes View Logo" className="logo" onClick={toggleMenu}/>
+      <div className={`nav-bar-items-container ${menuOpen ? 'menu-open' : ''}`}>
+        <img src={menuImg} alt="menu icon" className="menu" onClick={toggleMenu}/>
+        <img src={hermesviewImg} alt="hermes view logo" className="hermesview" />
       </div>
       <div className={`mobile-menu-overlay ${menuOpen ? 'visible' : ''}`} onClick={toggleMenu}></div>
       {menuOpen && (
         <div className="mobile-menu">
           <ul>
-            <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-            <li><Link to="/sample" onClick={toggleMenu}>Sample</Link></li>
-            <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
-            <li><Link to="/contact" onClick={toggleMenu}>Contact Us</Link></li>
+            <li><Link to="/" onClick={toggleMenu} className="text-fade-in">Home</Link></li>
+            <li><Link to="/sample" onClick={toggleMenu} className="text-fade-in">Sample</Link></li>
+            <li><Link to="/about" onClick={toggleMenu} className="text-fade-in">About</Link></li>
+            <li><Link to="/contact" onClick={toggleMenu} className="text-fade-in">Contact Us</Link></li>
             <li className="social-media-list">
-              <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-fade-in">
                 <FontAwesomeIcon icon={faFacebookF}  />
               </a>
-              <a href="https://www.instagram.com/hermes_view/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/hermes_view/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-fade-in">
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
-              <a href="http://www.linkedin.com/shareArticle?mini=true&url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="http://www.linkedin.com/shareArticle?mini=true&url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-fade-in">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </li>

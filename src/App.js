@@ -32,7 +32,7 @@ function App() {
   };
 
   return (
-    <div style={bodyStyle}>
+    <div>
       {!shouldHideNavBar && <NavigationBar />}
       <Routes>
         <Route path="/" element={<Home />} />

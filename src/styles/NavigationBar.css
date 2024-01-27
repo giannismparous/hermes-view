@@ -1,11 +1,8 @@
 nav {
-  background-color: #181818;
-  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Add padding to the nav bar */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px 20px; /* Add padding to the nav bar */
   position: fixed; /* Fix position to the top of the window */
   top: 0; /* Align to the top */
   left: 0; /* Align to the left */
@@ -13,8 +10,33 @@ nav {
   z-index: 1000; /* Ensure it's above other content */
 }
 
-.logo-container {
+.nav-bar-items-container {
   z-index: 1002;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  cursor: pointer;
+  height: 100px; /* Default height for larger screens */
+  width: auto;
+  display: block;
+
+  @media (max-width:750px){
+    height: 80px;
+  }
+}
+
+.hermesview {
+  height: 100px; /* Default height for larger screens */
+  width: auto;
+  position: absolute;
+  right: 0;
+
+  @media (max-width:750px){
+    height: 80px;
+  }
+
 }
 
 .mobile-menu ul {
@@ -103,6 +125,7 @@ nav {
   to {
     opacity: 1;
   }
+  
 }
 
 .no-scroll {
