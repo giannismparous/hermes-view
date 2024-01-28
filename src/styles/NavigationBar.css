@@ -55,7 +55,7 @@ nav {
 @media (max-width:751px){
 
   .hermesview {
-  height: 60px; /* Default height for larger screens */
+  height: 50px; /* Default height for larger screens */
   width: auto;
   position: absolute;
   right: 0;
