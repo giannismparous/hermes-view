@@ -18,25 +18,47 @@ nav {
   justify-content: space-between;
 }
 
-.menu {
-  cursor: pointer;
-  height: 100px; /* Default height for larger screens */
-  width: auto;
-  display: block;
 
-  @media (max-width:750px){
-    height: 20px;
+
+@media (min-width:751px){
+
+  .menu {
+    cursor: pointer;
+    height: 100px; /* Default height for larger screens */
+    width: auto;
+    display: block;
   }
 }
 
-.hermesview {
-  height: 100px; /* Default height for larger screens */
+@media (max-width:750px){
+
+  .menu {
+    cursor: pointer;
+    height: 60px; /* Default height for larger screens */
+    width: auto;
+    display: block;
+  }
+
+}
+
+@media (min-width:751px){
+
+  .hermesview {
+    height: 100px; /* Default height for larger screens */
+    width: auto;
+    position: absolute;
+    right: 0;
+  }
+
+}
+
+@media (max-width:751px){
+
+  .hermesview {
+  height: 60px; /* Default height for larger screens */
   width: auto;
   position: absolute;
   right: 0;
-
-  @media (max-width:750px){
-    height: 60px;
   }
 
 }

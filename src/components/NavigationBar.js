@@ -45,7 +45,7 @@ function NavigationBar() {
     <nav>
       <div className={`nav-bar-items-container ${menuOpen ? 'menu-open' : ''}`}>
         <img src={menuImg} alt="menu icon" className="menu" onClick={toggleMenu}/>
-        {/* <img src={hermesviewImg} alt="hermes view logo" className="hermesview" /> */}
+        <img src={hermesviewImg} alt="hermes view logo" className="hermesview" />
       </div>
       <div className={`mobile-menu-overlay ${menuOpen ? 'visible' : ''}`} onClick={toggleMenu}></div>
       {menuOpen && (
