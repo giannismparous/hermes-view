@@ -57,7 +57,9 @@ function NavigationBar() {
           toggled={menuOpen}
           toggle={toggleMenu} // Use toggle prop to handle click
         />
-        <img src={hermesviewImg} alt="hermes view logo" className="hermesview" />
+        <Link to="/" className="hermesview-link">
+          <img src={hermesviewImg} alt="hermes view logo" className="hermesview" />
+        </Link>
       </div>
       <div className={`mobile-menu-overlay ${menuOpen ? 'visible' : ''}`} onClick={toggleMenu}></div>
       {menuOpen && (
