@@ -160,3 +160,13 @@ color: #8a5a00;
     flex-direction: row;
   }
 }
+
+.text-wrapper p {
+  /* Your styles for paragraphs inside text-wrapper */
+  /* For example: */
+  font-size: 30px;
+  color: white;
+  line-height: 0;
+  margin: 0;
+  /* Add more styles as needed */
+}

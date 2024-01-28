@@ -4,6 +4,9 @@ import useScrollAnimation from './useScrollAnimation';
 import ImageSlider from "./ImageSlider";
 import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
+import gsap from 'gsap';
+import SplitTextJS from "split-text-js";
+import VideoComponent from "./VideoComponent";
 
 function Home() {
   const scrollRef = useScrollAnimation();
@@ -11,10 +14,21 @@ function Home() {
     '../slider_images/pic1.jpg',
     '../slider_images/pic2.jpg',
   ];
+  const titles= gsap.utils.toArray('p');
+  const tl = gsap.timeline();
+
+  titles.forEach(title => {
+    const splitTitle= new SplitTextJS(title);
+    tl
+    .from(splitTitle.chars, {opacity:0, y:80, rotateX:-90, stagger: .02}, "<")
+    .to(splitTitle.chars, {opacity:0, y:-80, rotateX:90, stagger: .02}, "<1")
+
+  });
 
   return (
     <div ref={scrollRef} className="home">
-      <ImageSlider images={images} />
+      {/* <ImageSlider images={images} /> */}
+      <VideoComponent/>
       <section className="container golden-container animate-on-scroll">
         <h1>Welcome to HermesView</h1>
         <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>

@@ -1,0 +1,25 @@
+/* VideoComponent.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Bigelow+Rules&family=Encode+Sans+Condensed:wght@300&family=Ubuntu&display=swap');
+
+.video-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-wrapper {
+  position: absolute;
+  text-align: center;
+  color: #ffffff; /* Set the text color */
+  /* Add more styling as needed */
+}
+
+.text-wrapper p {
+    color: white;
+    font-size: 7rem; /* Set the font size */
+    font-family: 'Bigelow Rules', serif;
+    font-family: 'Encode Sans Condensed', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
