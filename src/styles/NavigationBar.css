@@ -118,7 +118,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top left, #181818, #8a5a00);
+  background: linear-gradient(to top left, #8a5a00, #181818);
   z-index: 1000;
   opacity: 0;
   pointer-events: none; /* Add this to prevent clicks on the overlay when it's not visible */

@@ -5,6 +5,7 @@ import { faFacebookF, faInstagram, faLinkedinIn } from '@fortawesome/free-brands
 import { gsap } from 'gsap';
 import "../styles/NavigationBar.css";
 import '../styles/Logo.css';
+import Hamburger from "hamburger-react";
 
 const menuImg = '../icons/menu.png';
 const hermesviewImg = '../icons/hermes-view.png';
@@ -36,7 +37,7 @@ function NavigationBar() {
       duration: 0.8,
       opacity: 0,
       y: 20,
-      stagger: 0.2, // Stagger the animations for a nice effect
+      stagger: 0.2,
       ease: "power3.out",
     });
   }, [menuOpen]);
@@ -44,7 +45,18 @@ function NavigationBar() {
   return (
     <nav>
       <div className={`nav-bar-items-container ${menuOpen ? 'menu-open' : ''}`}>
-        <img src={menuImg} alt="menu icon" className="menu" onClick={toggleMenu}/>
+        {/* Use the Hamburger component with onClick handler */}
+        <Hamburger
+          label="Show menu"
+          rounded
+          hideOutline={false}
+          direction="left"
+          size={100}
+          color="#8a5a00"
+          duration={0.8}
+          toggled={menuOpen}
+          toggle={toggleMenu} // Use toggle prop to handle click
+        />
         <img src={hermesviewImg} alt="hermes view logo" className="hermesview" />
       </div>
       <div className={`mobile-menu-overlay ${menuOpen ? 'visible' : ''}`} onClick={toggleMenu}></div>
