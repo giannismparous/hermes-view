@@ -21,14 +21,14 @@ function Home() {
     const splitTitle= new SplitTextJS(title);
     tl
     .from(splitTitle.chars, {opacity:0, y:80, rotateX:-90, stagger: .02}, "<")
-    .to(splitTitle.chars, {opacity:0, y:-80, rotateX:90, stagger: .02}, "<1")
+    .to(splitTitle.chars, {opacity:0, y:-80, rotateX:90, stagger: .02}, "<1.5")
 
   });
 
   return (
     <div ref={scrollRef} className="home">
       {/* <ImageSlider images={images} /> */}
-      {/* <VideoComponent/> */}
+      <VideoComponent/>
       <section className="container golden-container animate-on-scroll">
         <h1>Welcome to HermesView</h1>
         <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
