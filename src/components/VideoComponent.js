@@ -24,8 +24,8 @@ function VideoComponent() {
   return (
     <div className="video-container">
       <video autoPlay muted loop width="100%" height="100%">
-        <source src={isSmartphone ? "/videos/showcase-smartphone.mp4" : "/videos/showcase-pc.mp4"} type="video/mp4" />
-      </video>
+      <source src={isSmartphone ? "/hermes-view-large-files/videos/showcase-smartphone.mp4" : "/hermes-view-large-files/videos/showcase-pc.mp4"} type="video/mp4" />
+    </video>
       <div className="text-wrapper">
         <p>HermesView</p>
         <p>The</p>
