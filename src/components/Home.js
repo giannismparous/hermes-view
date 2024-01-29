@@ -44,7 +44,7 @@ function Home() {
           </div>
         </div>
       )}
-      <VideoComponent onVideoReady={handleVideoReady} />
+        {/* <VideoComponent onVideoReady={handleVideoReady} /> */}
       <div style={{ opacity: isVideoReady ? 1 : 0 }}>
       <section className="container golden-container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <h1>Welcome to HermesView</h1>
@@ -81,7 +81,7 @@ function Home() {
         </div>
         <SamplePage
           redirectToSample={true}
-          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto"}}
         />
       </section>
       <section className="container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
