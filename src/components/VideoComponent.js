@@ -39,6 +39,8 @@ function VideoComponent({ onVideoReady }) {
     };
   }, [onVideoReady]);
 
+  const isMobile = window.innerWidth <= 767; // Adjust the breakpoint as needed
+
   return (
     <div className="video-container">
       <video
@@ -49,10 +51,14 @@ function VideoComponent({ onVideoReady }) {
         height="100%"
         onCanPlayThrough={() => {}} // Empty function to prevent ESLint warning
       >
-        <source src="/videos/showcase-pc.mp4" type="video/mp4" />
+        <source
+          src={isMobile ? "/videos/showcase-smartphone.mp4" : "/videos/showcase-pc.mp4"}
+          type="video/mp4"
+        />
       </video>
       <div className="text-wrapper">
-        <p style={{ opacity: videoReady ? 1 : 0 }}>HermesView</p>
+        <p style={{ opacity: videoReady ? 1 : 0 }}>Hermes</p>
+        <p style={{ opacity: videoReady ? 1 : 0 }}>View</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>The</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>Art</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>of</p>
