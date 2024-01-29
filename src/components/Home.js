@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
 import useScrollAnimation from './useScrollAnimation';
 import ImageSlider from "./ImageSlider";
 import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
-import gsap from 'gsap';
-import SplitTextJS from "split-text-js";
 import VideoComponent from "./VideoComponent";
+import {HashLoader} from "react-spinners";
 
 function Home() {
   const scrollRef = useScrollAnimation();
@@ -14,26 +13,44 @@ function Home() {
     '../slider_images/pic1.jpg',
     '../slider_images/pic2.jpg',
   ];
-  const titles= gsap.utils.toArray('p');
-  const tl = gsap.timeline();
 
-  titles.forEach(title => {
-    const splitTitle= new SplitTextJS(title);
-    tl
-    .from(splitTitle.chars, {opacity:0, y:80, rotateX:-90, stagger: .02}, "<")
-    .to(splitTitle.chars, {opacity:0, y:-80, rotateX:90, stagger: .02}, "<1.5")
+  const [isVideoReady, setVideoReady] = useState(false);
 
-  });
+  const handleVideoReady = () => {
+    setVideoReady(true);
+  };
+
+  useEffect(() => {
+    // When component mounts, set overflow to hidden if video is not ready
+    if (!isVideoReady) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = ""; // Reset to default when video is ready
+    }
+
+    // Clean up the effect when the component unmounts
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isVideoReady]);
 
   return (
     <div ref={scrollRef} className="home">
       {/* <ImageSlider images={images} /> */}
-      <VideoComponent/>
-      <section className="container golden-container animate-on-scroll">
+      {!isVideoReady && (
+        <div className="loading-overlay">
+          <div className="loader-container">
+            <HashLoader type="Grid" color="#8a5a00" size={80}/>
+          </div>
+        </div>
+      )}
+      <VideoComponent onVideoReady={handleVideoReady} />
+      <div style={{ opacity: isVideoReady ? 1 : 0 }}>
+      <section className="container golden-container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <h1>Welcome to HermesView</h1>
         <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
       </section>
-      <section className="container services animate-on-scroll">
+      <section className="container services animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">
           <h2>Our Services</h2>
         </div>
@@ -58,22 +75,23 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="sample-container animate-on-scroll">
+      <section className="sample-container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">
           <h2>Sample Project</h2>
         </div>
         <SamplePage
-  redirectToSample={true}
-  style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
-/>
+          redirectToSample={true}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px" }}
+        />
       </section>
-      <section className="container animate-on-scroll">
+      <section className="container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">
           <h2>Get in Touch</h2>
         </div>
         <p><a href="/contact">Contact us</a> elevate your real estate experience together. Reach out to us today and discover how we can transform your property presentations with our cutting-edge VR tours</p>
       </section>
-      <ContactInfo/>
+      </div>
+      <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
     </div>
   );
 }
