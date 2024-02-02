@@ -20,7 +20,7 @@ function App() {
 
   const location = useLocation();
 
-  const pathsWithoutNavBar = ["/sample", "/3d-model-sample"];
+  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample"];
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
@@ -44,9 +44,11 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
+        <Route path="/360-video-sample" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/360_video_sample/index.htm"/>} />
         {/* kallithea */}
         <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} />
         <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/2/index.htm"/>} /> 
+        
       </Routes>
     </div>
   );
