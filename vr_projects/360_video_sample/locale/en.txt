@@ -1,0 +1,20 @@
+#: locale=en
+
+## Media
+
+### Title
+panorama_65A685F9_692B_540D_41B4_21C33B8C75E1.label = panorama
+video_6711128B_693D_4C0D_41D5_DF55A1C7B783.label = panorama (VR2 Edit 1)
+
+### Video
+videolevel_66D8A054_692B_4C1B_41D3_EA841D23AC1B.url = media/video_6711128B_693D_4C0D_41D5_DF55A1C7B783_en.mp4
+videolevel_66D8A054_692B_4C1B_41D3_EA841D23AC1B.posterURL = media/video_6711128B_693D_4C0D_41D5_DF55A1C7B783_poster_en.jpg
+
+### Video Subtitles
+
+## Tour
+
+### Description
+
+### Title
+tour.name = Untitled 5
