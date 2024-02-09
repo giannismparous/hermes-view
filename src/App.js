@@ -15,6 +15,7 @@ import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
 import Sample3DModel from "./components/Sample3DModel";
+import Reserve from "./components/Reserve";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/reserve" element={<Reserve />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* <Route path="/projects" element={<Projects />} /> */}

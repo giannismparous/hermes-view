@@ -6,8 +6,23 @@ import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
+import { addCollectionAndDocuments, signInWithGooglePopup } from "./firebase.utils";
+import reservations_data from "./reservations";
 
 function Home() {
+
+  const logGoogleUser = async() => {
+    const response = await signInWithGooglePopup();
+    console.log(response);
+  }
+
+  const addToDb = async() => {
+    reservations_data.forEach(element => {
+      const response = addCollectionAndDocuments("sample-restaurant", element);
+      console.log(response);
+    });
+  }
+
   const scrollRef = useScrollAnimation();
   const images = [
     '../slider_images/pic1.jpg',
@@ -92,6 +107,8 @@ function Home() {
       </section>
       </div>
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
+      {/* <button onClick={logGoogleUser}>LOGIN</button>
+      <button onClick={addToDb}>ADD</button> */}
     </div>
   );
 }

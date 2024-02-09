@@ -1,0 +1,65 @@
+.calendar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  button {
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .calendar-button-red {
+    background-color: #ff7f7f;
+  }
+  
+  .calendar-button-green {
+    background-color: #7fff7f;
+  }
+  
+  .grayed-out {
+    background-color: #cccccc; /* Gray color for grayed-out buttons */
+  }
+  
+  button:hover:not(.grayed-out) {
+    filter: brightness(70%);
+  }
+  
+  .confirmation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999; /* Ensure it's above other content */
+  }
+  
+  .confirmation-popup p {
+    color: black;
+    margin-bottom: 15px;
+  }
+  
+  .confirmation-popup button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .confirmation-popup button:hover {
+    filter: brightness(90%);
+  }
+  
+  .confirmation-popup div {
+    text-align: right;
+  }
