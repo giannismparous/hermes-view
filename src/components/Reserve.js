@@ -63,8 +63,11 @@ const Reserve = () => {
 
   const handleClick = async () => {
     const availableTables = await fetchTablesAvailability(0, 2);
-    const eventName = 'ReservationTimeSelected';
-    window.parent.postMessage({ eventName, availableTables }, '*');
+    const data = {
+      eventName: 'ReservationTimeSelected',
+      greenTables: availableTables
+  };
+    window.parent.postMessage(data, '*');
 };
 
   return (
