@@ -61,6 +61,11 @@ const Reserve = () => {
     setShowConfirmation(false);
   };
 
+  const handleClick = () => {
+    // Send message to parent window (3D Vista tour)
+    window.parent.postMessage('ButtonClicked', '*');
+};
+
   return (
     <div>
       <h1>Reserve Page</h1>
@@ -87,6 +92,7 @@ const Reserve = () => {
           </div>
         </div>
       )}
+      <button onClick={handleClick}>CONNECTION WITH 3D VISTA</button>
     </div>
   );
 };
