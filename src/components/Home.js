@@ -6,7 +6,7 @@ import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
-import { addCollectionAndDocuments, signInWithGooglePopup } from "./firebase.utils";
+import { addCollectionAndDocuments, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
 import reservations_data from "./reservations";
 
 function Home() {
@@ -109,6 +109,7 @@ function Home() {
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button>
       <button onClick={addToDb}>ADD</button> */}
+      <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button>
     </div>
   );
 }

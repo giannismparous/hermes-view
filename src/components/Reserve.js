@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTablesData } from './firebase.utils';
+import { fetchTablesAvailability, fetchTablesData } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
 
 const maxIndexForward = 6;
@@ -61,9 +61,10 @@ const Reserve = () => {
     setShowConfirmation(false);
   };
 
-  const handleClick = () => {
-    // Send message to parent window (3D Vista tour)
-    window.parent.postMessage('ButtonClicked', '*');
+  const handleClick = async () => {
+    const availableTables = await fetchTablesAvailability(0, 2);
+    const eventName = 'ReservationTimeSelected';
+    window.parent.postMessage({ eventName, availableTables }, '*');
 };
 
   return (
@@ -92,7 +93,7 @@ const Reserve = () => {
           </div>
         </div>
       )}
-      <button onClick={handleClick}>CONNECTION WITH 3D VISTA</button>
+      <button onClick={handleClick}>Check Tables</button>
     </div>
   );
 };

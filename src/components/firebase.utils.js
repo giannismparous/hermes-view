@@ -131,3 +131,38 @@ export const fetchTablesData = async () => {
 
   return tablesData;
 };
+
+export const fetchTablesAvailability = async (startIndex, endIndex) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  
+  const availableTables=[];
+
+
+  for (let i = 1; i <= 10; i++) {
+    const tableRef = doc(sampleRestaurantRef, `table${i}`);
+    // Fetch the table document
+    const tableDoc = await getDoc(tableRef);
+    let available=true;
+    if (tableDoc.exists()) {
+
+      const schedules = tableDoc.data().schedules.slice(startIndex,endIndex);
+      console.log(schedules);
+
+      for (let j=0;j<schedules.length;j++){
+        if (schedules[j].name!==null){
+          available=false;
+          break;
+        }
+      }
+
+      if (available){
+        availableTables.push(i);
+      } 
+
+    } else {
+      console.log(`Table ${i} does not exist.`);
+    }
+  }
+  console.log(availableTables);
+};
