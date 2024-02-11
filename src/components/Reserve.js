@@ -52,23 +52,21 @@ const Reserve = () => {
 
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
-      // Perform booking action
-      // For now, let's just display a confirmation message
-      alert('Booking confirmed!');
+      handleTablesFetch();
     }
     // Reset states
     setChoseReservationDate(false);
     setShowConfirmation(false);
   };
 
-  const handleClick = async () => {
-    fetchTablesAvailability(0, 2)
-      .then(availableTables => {
+  const handleTablesFetch = async () => {
+    fetchTablesAvailability(clickedIndex, maxIndex)
+      .then(inavailableTables => {
         const data = {
           eventName: 'ReservationTimeSelected',
-          greenTables: availableTables
+          redTables: inavailableTables
         };
-        console.log(availableTables);
+        console.log(inavailableTables);
         window.parent.postMessage(data, '*');
       })
       .catch(error => {
@@ -96,14 +94,13 @@ const Reserve = () => {
       </div>
       {showConfirmation && (
         <div className="confirmation-popup">
-          <p>Are you sure you want to book?</p>
+          <p>Are you sure you want to look for tables for these dates?</p>
           <div>
             <button onClick={() => handleConfirmation(true)}>Yes</button>
             <button onClick={() => handleConfirmation(false)}>No</button>
           </div>
         </div>
       )}
-      <button onClick={handleClick}>Check Tables</button>
     </div>
   );
 };
