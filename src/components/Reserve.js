@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTablesAvailability, fetchTablesData } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
+import { HashLoader } from 'react-spinners';
 
 const maxIndexForward = 6;
 
@@ -11,11 +12,13 @@ const Reserve = () => {
   const [choosingReservationDate, setChoosingReservationDate] = useState(false);
   const [choseReservationDate, setChoseReservationDate] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [tablesFetched, setTablesFetched] = useState(false); // State to track whether tables are fetched
 
   useEffect(() => {
     const fetchTables = async () => {
       const tablesData = await fetchTablesData();
       setTables(tablesData);
+      setTablesFetched(true);
     };
 
     fetchTables();
@@ -77,7 +80,13 @@ const Reserve = () => {
 
   return (
     <div>
-      <h1>Reserve Page</h1>
+      {!tablesFetched && (
+        <div className="loading-overlay">
+          <div className="loader-container">
+            <HashLoader type="Grid" color="#8a5a00" size={80}/>
+          </div>
+        </div>
+      )}
       <div className="calendar-buttons">
         {tables.map((table, index) => (
           <button
