@@ -68,6 +68,7 @@ const Reserve = () => {
           eventName: 'ReservationTimeSelected',
           greenTables: availableTables
         };
+        console.log(availableTables);
         window.parent.postMessage(data, '*');
       })
       .catch(error => {

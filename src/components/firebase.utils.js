@@ -164,5 +164,8 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
       console.log(`Table ${i} does not exist.`);
     }
   }
+
   console.log(availableTables);
+
+  return availableTables;
 };
