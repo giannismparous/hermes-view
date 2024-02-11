@@ -62,29 +62,19 @@ const Reserve = () => {
   };
 
   const handleClick = async () => {
-    try {
-        // Fetch tables availability
-        const availableTables = await fetchTablesAvailability(0, 2);
-
-        // Check if availableTables is received
-        if (availableTables !== undefined && availableTables !== null) {
-            // If availableTables is received, construct the message and send it
-            const data = {
-                eventName: 'ReservationTimeSelected',
-                greenTables: availableTables
-            };
-            window.parent.postMessage(data, '*');
-        } else {
-            // If availableTables is not received, handle the error or simply return
-            console.error('Failed to fetch tables availability.');
-            // You can also throw an error here if you want to handle it in the caller function
-            // throw new Error('Failed to fetch tables availability.');
-        }
-    } catch (error) {
+    fetchTablesAvailability(0, 2)
+      .then(availableTables => {
+        const data = {
+          eventName: 'ReservationTimeSelected',
+          greenTables: availableTables
+        };
+        window.parent.postMessage(data, '*');
+      })
+      .catch(error => {
         console.error('Error fetching tables availability:', error);
-        // You can handle the error further if needed
-    }
-};
+        // Handle error if needed
+      });
+  };
 
   return (
     <div>
