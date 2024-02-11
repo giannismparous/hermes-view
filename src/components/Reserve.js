@@ -10,7 +10,6 @@ const Reserve = () => {
   const [clickedIndex, setClickedIndex] = useState(null);
   const [maxIndex, setMaxIndex] = useState(null);
   const [choosingReservationDate, setChoosingReservationDate] = useState(false);
-  const [choseReservationDate, setChoseReservationDate] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [tablesFetched, setTablesFetched] = useState(false); // State to track whether tables are fetched
 
@@ -30,7 +29,6 @@ const Reserve = () => {
         setChoosingReservationDate(!choosingReservationDate);
       } else {
         setMaxIndex(index);
-        setChoseReservationDate(true);
         setShowConfirmation(true); // Show confirmation popup
       }
     } else {
@@ -57,8 +55,9 @@ const Reserve = () => {
     if (confirmed) {
       handleTablesFetch();
     }
-    // Reset states
-    setChoseReservationDate(false);
+    else {
+      setChoosingReservationDate(false);
+    }
     setShowConfirmation(false);
   };
 
