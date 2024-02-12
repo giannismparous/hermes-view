@@ -17,6 +17,7 @@ import {
   collection,
   writeBatch,
   getDocs,
+  updateDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -132,6 +133,24 @@ export const fetchTablesData = async () => {
   return tablesData;
 };
 
+export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  
+  const tableRef = doc(sampleRestaurantRef, "table"+tableNumber);
+  const tableDoc = await getDoc(tableRef);
+
+  if (tableDoc.exists()) {
+    return [tableDoc.data().schedules[startIndex].time,tableDoc.data().schedules[endIndex].time];
+  } else {
+    console.log(`Table ${tableNumber} does not exist.`);
+  }
+
+  // console.log(availableTables);
+
+  return;
+};
+
 export const fetchTablesAvailability = async (startIndex, endIndex) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
@@ -165,3 +184,37 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
 
   return inavailableTables;
 };
+
+export const updateTableSchedules = async (startIndex, endIndex, name, tableNumber) => {
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
+  try {
+    // Fetch the table document
+    const tableDoc = await getDoc(tableRef);
+
+    if (tableDoc.exists()) {
+      const tableData = tableDoc.data();
+      const schedules = tableData.schedules;
+      for (let i = startIndex; i <= endIndex; i++) {
+        console.log("test");
+        if (schedules[i]) {
+          schedules[i].name = name;
+          console.log(name);
+        }
+      }
+
+      // Update the schedules field in the Firestore document
+      await updateDoc(tableRef, {
+        [`schedules`]: schedules
+      });
+
+      
+      console.log(`Schedule updated for table ${tableNumber} from index ${startIndex} to index ${endIndex}`);
+    } else {
+      console.log(`Table ${tableNumber} does not exist.`);
+    }
+  } catch (error) {
+    console.error("Error updating schedule:", error);
+  }
+};
+

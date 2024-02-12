@@ -1,0 +1,42 @@
+.reservation-details {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .reservation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set height to the viewport height */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Add margin top for spacing */
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .yes-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .no-button {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .confirmation-text {
+    text-align: center;
+  }

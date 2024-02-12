@@ -16,16 +16,17 @@ import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
 import Sample3DModel from "./components/Sample3DModel";
 import Reserve from "./components/Reserve";
+import ReserveTable from "./components/ReserveTable";
 
 function App() {
 
   const location = useLocation();
 
-  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/reserve"];
+  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample"];
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
-  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/");
+  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve/");
 
   // Dynamic styling for body's padding-top
   const bodyStyle = {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
         <Route path="/reserve" element={<Reserve />} />
+        <Route path="/reserve/:restaurantName/:tableNumber/:startScheduleIndex/:endScheduleIndex" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* <Route path="/projects" element={<Projects />} /> */}

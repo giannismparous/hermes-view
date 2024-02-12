@@ -66,7 +66,9 @@ const Reserve = () => {
       .then(inavailableTables => {
         const data = {
           eventName: 'ReservationTimeSelected',
-          redTables: inavailableTables
+          redTables: inavailableTables,
+          startIndex: clickedIndex,
+          endIndex: maxIndex
         };
         console.log(inavailableTables);
         window.parent.postMessage(data, '*');
@@ -104,8 +106,8 @@ const Reserve = () => {
         <div className="confirmation-popup">
           <p>Are you sure you want to look for tables for these dates?</p>
           <div>
-            <button onClick={() => handleConfirmation(true)}>Yes</button>
-            <button onClick={() => handleConfirmation(false)}>No</button>
+            <button onClick={() => handleConfirmation(true)} disabled>Yes</button>
+            <button onClick={() => handleConfirmation(false)} disabled>No</button>
           </div>
         </div>
       )}
