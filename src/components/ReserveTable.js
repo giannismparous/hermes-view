@@ -43,6 +43,13 @@ const ReserveTable = () => {
         }
     };
 
+    const handleNoClick = () => {
+        const data = {
+            eventName: 'BookingReservationDeclined',
+          };
+          window.parent.postMessage(data, '*');
+    };
+
     const handleNameChange = (event) => {
         setUserName(event.target.value);
     };
@@ -64,7 +71,7 @@ const ReserveTable = () => {
                         <p className="confirmation-text">Are you sure you want to reserve?</p>
                         <div className="button-container">
                             <button className="yes-button" onClick={handleYesClick} disabled={userName.trim() === ""}>Yes</button>
-                            <button className="no-button">No</button>
+                            <button className="no-button" onClick={handleNoClick}>No</button>
                         </div>
                     </>
                 )}
