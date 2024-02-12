@@ -26,7 +26,7 @@ function App() {
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
-  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve/");
+  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve");
 
   // Dynamic styling for body's padding-top
   const bodyStyle = {
