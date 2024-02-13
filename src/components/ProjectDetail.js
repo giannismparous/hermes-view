@@ -31,7 +31,7 @@ import '../styles/ProjectDetail.css';
 
 function ProjectDetail() {
   const { projectId } = useParams();
-  const modelPath = `/vr_projects/${projectId}/index.htm`; // Construct the model path based on the project ID
+  const modelPath = `https://giannismparous.github.io/vr_${projectId}/`; // Construct the model path based on the project ID
 
   return (
     <SamplePage

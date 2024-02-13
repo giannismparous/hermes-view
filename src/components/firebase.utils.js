@@ -31,6 +31,7 @@ const firebaseConfig = {
   };
 
 const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -38,7 +39,6 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () =>
@@ -133,6 +133,18 @@ export const fetchTablesData = async () => {
   return tablesData;
 };
 
+export const fetchReservationsData = async (tableNumber) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const tableRef = doc(sampleRestaurantRef, "table"+tableNumber);
+  const tableDoc = await getDoc(tableRef);
+  if (tableDoc.exists()) {
+    return tableDoc.data();
+  } else {
+    console.log(`Table ${tableNumber} does not exist.`);
+  }
+};
+
 export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
@@ -218,3 +230,13 @@ export const updateTableSchedules = async (startIndex, endIndex, name, tableNumb
   }
 };
 
+export const attemptLogin = async (username,password) => {
+  try {
+    await signInWithEmailAndPassword(auth,username, password);
+    console.log('Logged in successfully!');
+    return true;
+  } catch (error) {
+    console.error('Error logging in:', error.message);
+    return false;
+  }
+};

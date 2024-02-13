@@ -1,0 +1,40 @@
+.reservations-container {
+    margin: 20px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.reservations {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.reservation {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+.reservation h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.reservation p {
+    font-size: 16px;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Style for schedule name */
+.reservation p span {
+    color: #007bff; /* Change this to your desired color */
+    font-weight: bold;
+}

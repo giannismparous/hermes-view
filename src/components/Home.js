@@ -7,7 +7,7 @@ import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
 import { addCollectionAndDocuments, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
-import reservations_data from "./reservations";
+import reservations_data from "./reservations_data";
 
 function Home() {
 

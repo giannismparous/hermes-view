@@ -11,12 +11,14 @@ import ProductDetail from './components/ProductDetail';
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import Reservations from "./components/Reservations";
 import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
 import Sample3DModel from "./components/Sample3DModel";
 import Reserve from "./components/Reserve";
 import ReserveTable from "./components/ReserveTable";
+import Login from "./components/Login";
 
 function App() {
 
@@ -39,7 +41,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/sample" element={<SamplePage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />
+        <Route path="/sample_restaurant/reservations" element={<Reservations />} />
         <Route path="/reserve/:restaurantName/:tableNumber/:startScheduleIndex/:endScheduleIndex" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
@@ -50,10 +55,9 @@ function App() {
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
         <Route path="/360-video-sample" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/360_video_sample/index.htm"/>} />
         {/* kallithea */}
-        <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} />
-        <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/2/index.htm"/>} /> 
-        <Route path="/projects/8hfk1021do01" element={<SamplePage redirectToSample={false} modelPath="https://drive.google.com/drive/u/0/folders/1BoPQBa2or0RCkcPMAKgG8scWJBj38Nm6"/>} /> 
-        
+        <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_1/"/>} />
+        <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_2/"/>} /> 
+        <Route path="/projects/8hfk1021do01" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_3/"/>} /> 
       </Routes>
     </div>
   );
