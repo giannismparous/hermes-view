@@ -52,6 +52,7 @@ function App() {
         {/* kallithea */}
         <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/1/index.htm"/>} />
         <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/2/index.htm"/>} /> 
+        <Route path="/projects/8hfk1021do01" element={<SamplePage redirectToSample={false} modelPath="https://drive.google.com/drive/u/0/folders/1BoPQBa2or0RCkcPMAKgG8scWJBj38Nm6"/>} /> 
         
       </Routes>
     </div>
