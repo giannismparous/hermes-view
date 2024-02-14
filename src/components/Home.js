@@ -108,7 +108,7 @@ function Home() {
       </div>
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      <button onClick={addToDb}>ADD</button>
+      {/* <button onClick={addToDb}>ADD</button> */}
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>
   );
