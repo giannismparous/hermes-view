@@ -145,6 +145,18 @@ export const fetchReservationsData = async (tableNumber) => {
   }
 };
 
+export const fetchSchedulesTimes = async () => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const schedulesRef = doc(sampleRestaurantRef, "tableundefined");
+  const schedulesDoc = await getDoc(schedulesRef);
+  if (schedulesDoc.exists()) {
+    return schedulesDoc.data().times;
+  } else {
+    console.log(`Schedules does not exist.`);
+  }
+};
+
 export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');

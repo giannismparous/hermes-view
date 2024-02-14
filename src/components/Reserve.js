@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTablesAvailability, fetchTablesData } from './firebase.utils';
+import {fetchSchedulesTimes, fetchTablesAvailability } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
 import { HashLoader } from 'react-spinners';
 
 const maxIndexForward = 6;
 
 const Reserve = () => {
-  const [tables, setTables] = useState([]);
+  const [times, setTimes] = useState([]);
   const [clickedIndex, setClickedIndex] = useState(null);
   const [maxIndex, setMaxIndex] = useState(null);
   const [choosingReservationDate, setChoosingReservationDate] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [tablesFetched, setTablesFetched] = useState(false); // State to track whether tables are fetched
+  const [timesFetched, setTimesFetched] = useState(false); // State to track whether tables are fetched
 
   useEffect(() => {
-    const fetchTables = async () => {
-      const tablesData = await fetchTablesData();
-      setTables(tablesData);
-      setTablesFetched(true);
+    const handleFetchTimes = async () => {
+      const fetchedTimes = await fetchSchedulesTimes();
+      setTimes(fetchedTimes);
+      setTimesFetched(true);
     };
 
-    fetchTables();
+    handleFetchTimes();
   }, []);
 
   const handleButtonClick = (index) => {
@@ -32,14 +32,14 @@ const Reserve = () => {
         setShowConfirmation(true); // Show confirmation popup
       }
     } else {
-      if (tables[index].name !== null) {
+      if (times[index].inavailable === true) {
         alert("Can't book this date");
         return;
       }
       let num = 0;
       for (let i = index + 1; i < index + maxIndexForward; i++) {
-        const table = tables[i];
-        if (table.name === null) {
+        const time = times[i];
+        if (time.inavailable === undefined) {
           num = num + 1;
         } else {
           break; // Exit the loop if table.name is not null
@@ -81,7 +81,7 @@ const Reserve = () => {
 
   return (
     <div>
-      {!tablesFetched && (
+      {!timesFetched && (
         <div className="loading-overlay">
           <div className="loader-container">
             <HashLoader type="Grid" color="#8a5a00" size={80}/>
@@ -89,16 +89,16 @@ const Reserve = () => {
         </div>
       )}
       <div className="calendar-buttons">
-        {tables.map((table, index) => (
+        {times.map((time, index) => (
           <button
-            key={table.id}
+            key={time.id}
             className={`
-              ${table.name === null ? 'calendar-button-green' : 'calendar-button-red'}
+              ${time.inavailable === undefined ? 'calendar-button-green' : 'calendar-button-red'}
               ${choosingReservationDate && clickedIndex !== null && (index < clickedIndex || index > maxIndex) && 'grayed-out'}
             `}
             onClick={() => handleButtonClick(index)}
           >
-            {table.time}
+            {time.time}
           </button>
         ))}
       </div>

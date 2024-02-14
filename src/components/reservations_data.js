@@ -560,7 +560,8 @@ const reservations_data =
                 },
                 {
                     id:17,
-                    time: "04:00" 
+                    time: "04:00",
+                    inavailable: true
                 },
                 {
                     id: 18,
