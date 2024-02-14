@@ -33,7 +33,7 @@ const ReserveTable = () => {
     const handleYesClick = async () => {
         try {
             // Call updateTableSchedule with the appropriate parameters
-            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName, tableNumber);
+            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,"TEL", tableNumber);
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);

@@ -161,11 +161,11 @@ export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) =>
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   
-  const tableRef = doc(sampleRestaurantRef, "table"+tableNumber);
+  const tableRef = doc(sampleRestaurantRef, "tableundefined");
   const tableDoc = await getDoc(tableRef);
 
   if (tableDoc.exists()) {
-    return [tableDoc.data().schedules[startIndex].time,tableDoc.data().schedules[endIndex].time];
+    return [tableDoc.data().times[startIndex].time,tableDoc.data().times[endIndex].time];
   } else {
     console.log(`Table ${tableNumber} does not exist.`);
   }
@@ -208,27 +208,26 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
   return inavailableTables;
 };
 
-export const updateTableSchedules = async (startIndex, endIndex, name, tableNumber) => {
+export const updateTableSchedules = async (startIndex, endIndex, name, phone, tableNumber) => {
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
   try {
-    // Fetch the table document
+    
     const tableDoc = await getDoc(tableRef);
 
     if (tableDoc.exists()) {
       const tableData = tableDoc.data();
-      const schedules = tableData.schedules;
-      for (let i = startIndex; i <= endIndex; i++) {
-        console.log("test");
-        if (schedules[i]) {
-          schedules[i].name = name;
-          console.log(name);
-        }
-      }
+      const reservations = tableData.reservations;
+      reservations.push({
+        name,
+        phone,
+        startIndex,
+        endIndex
+      });
 
       // Update the schedules field in the Firestore document
       await updateDoc(tableRef, {
-        [`schedules`]: schedules
+        [`reservations`]: reservations
       });
 
       
