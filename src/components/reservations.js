@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/Reservations.css'; // Import your CSS file
-import { fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils'; // Assuming fetchReservationsData function is correctly implemented
+import { cancelReservationByTableNumber, fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils'; // Assuming fetchReservationsData function is correctly implemented
 import { HashLoader } from 'react-spinners';
 
 const Reservations = () => {
@@ -48,6 +48,7 @@ const Reservations = () => {
             }
             setTables(reservationsData);
             setLoading(false);
+            console.log(reservationsData);
         };
     
         if (times.length > 0) {
@@ -55,11 +56,16 @@ const Reservations = () => {
         }
     }, [times]);
 
+    const handleCancelReservation = async (reservationId, tableNumber) => {
+        await cancelReservationByTableNumber(reservationId, tableNumber);
+        window.location.reload();
+      };
+
     return (
         <div className="reservations-container">
             {loading ? (
                 <div className="loading-spinner">
-                    <HashLoader color={'#8a5a00;'} loading={loading} size={50} />
+                    <HashLoader type="Grid" color="#8a5a00" size={80}/>
                 </div>
             ) : (
                 <div className="reservations">
@@ -67,7 +73,20 @@ const Reservations = () => {
                         <div key={index} className="reservation">
                             <h2>Table {table.id}</h2>
                             {table.reservations.map((reservation, idx) => (
-                                <p key={idx}>{reservation.startTime}-{reservation.endTime}, {reservation.name}</p>
+                                <div key={idx} className="reservation-details">
+                                    <p><span>Start Time:</span> {reservation.startTime}</p>
+                                    <p><span>End Time:</span> {reservation.endTime}</p>
+                                    <p><span>Name:</span> {reservation.name}</p>
+                                    <p><span>Phone:</span> {reservation.phone}</p>
+                                    <p><span>ID:</span> {reservation.reservation_id}</p>
+                                    {reservation.canceled !== undefined ? (
+                                        <p key={idx}>
+                                            <span>Canceled:</span> {reservation.canceled.toString()}
+                                        </p>
+                                    ) : (
+                                        <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, table.id)}>Cancel</button>
+                                    )}
+                                </div>
                             ))}
                         </div>
                     ))}

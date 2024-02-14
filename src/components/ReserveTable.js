@@ -61,7 +61,7 @@ const ReserveTable = () => {
     
     return (
         <div className="reservation-container">
-            <div className="reservation-details">
+            <div className=".reservation-details-reserve-table">
                 {!reservationTimesFetched && !bookedReservation && <HashLoader type="Grid" color="#8a5a00" size={80}/>}
                 {reservationTimesFetched && !bookedReservation && (
                     <>
@@ -70,11 +70,11 @@ const ReserveTable = () => {
                         <p>Reservation Time: {`${startTime} - ${endTime}`}</p>
                         <p>Table Number: {tableNumber}</p>
                         <p>
-                            <label htmlFor="userName">Your Name:</label>
+                            <label htmlFor="userName">Full Name:</label>
                             <input type="text" id="userName" value={userName} onChange={handleNameChange} />
                         </p>
                         <p>
-                            <label htmlFor="userPhone">Your Name:</label>
+                            <label htmlFor="userPhone">Phone Number:</label>
                             <input type="text" id="userPhone" value={userPhone} onChange={handlePhoneChange} />
                         </p>
                         <p className="confirmation-text">Are you sure you want to reserve?</p>

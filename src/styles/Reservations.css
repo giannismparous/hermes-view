@@ -6,7 +6,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
 }
 
 .reservations {
@@ -37,4 +36,10 @@
 .reservation p span {
     color: #007bff; /* Change this to your desired color */
     font-weight: bold;
+}
+
+.reservation-details {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px; /* Add margin between reservation details */
 }

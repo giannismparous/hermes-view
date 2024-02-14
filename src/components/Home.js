@@ -5,7 +5,7 @@ import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
-import { addCollectionAndDocuments, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
+import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
 import reservations_data from "./reservations_data";
 
 function Home() {
@@ -22,6 +22,19 @@ function Home() {
       console.log(response);
     }
   }
+
+  const removeFromDb = async () => {
+    try {
+      // Assuming the reservation ID is known and provided here
+      const reservationId = 2;
+      const tableNumber = 6;
+      
+      await cancelReservationByTableNumber(reservationId, tableNumber);
+      console.log(`Reservation with id: ${reservationId} was canceled for table ${tableNumber}`);
+    } catch (error) {
+      console.error("Error encountered while removing reservation", error);
+    }
+  };
 
   const scrollRef = useScrollAnimation();
   const images = [
@@ -109,6 +122,7 @@ function Home() {
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
       {/* <button onClick={addToDb}>ADD</button> */}
+      <button onClick={removeFromDb}>REMOVE</button>
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>
   );
