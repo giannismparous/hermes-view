@@ -35,9 +35,9 @@ const Reservations = () => {
                 <div className="reservations">
                     {reservations.map((reservation, index) => (
                         <div key={index} className="reservation">
-                            <h2>{reservation.title}</h2>
+                            <h2>Table {reservation.id}</h2>
                             {reservation.schedules.map((schedule, idx) => (
-                                schedule.name !== null && <p key={idx}>{schedule.time}, {schedule.name}</p>
+                                schedule.name && <p key={idx}>{schedule.time}, {schedule.name}</p>
                             ))}
                         </div>
                     ))}

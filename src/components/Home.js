@@ -17,10 +17,11 @@ function Home() {
   }
 
   const addToDb = async() => {
-    reservations_data.forEach(element => {
-      const response = addCollectionAndDocuments("sample-restaurant", element);
+
+    for (let i=0;i<reservations_data.length;i++){
+      const response = addCollectionAndDocuments("sample-restaurant", reservations_data[i]);
       console.log(response);
-    });
+    }
   }
 
   const scrollRef = useScrollAnimation();
@@ -108,7 +109,7 @@ function Home() {
       </div>
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      <button onClick={addToDb}>ADD</button>
+      {/* <button onClick={addToDb}>ADD</button> */}
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>
   );

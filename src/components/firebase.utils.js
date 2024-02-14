@@ -54,7 +54,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = collection(db, collectionKey);
   
   objectsToAdd.forEach((object) => {
-     const docRef = doc(collectionRef, object.title.toLowerCase());
+     const docRef = doc(collectionRef, "table"+object.id);
      batch.set(docRef, object);
   });
 
@@ -176,16 +176,15 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
     const tableDoc = await getDoc(tableRef);
     if (tableDoc.exists()) {
 
-      const schedules = tableDoc.data().schedules.slice(startIndex,endIndex+1);
+      const reservations = tableDoc.data().reservations;
       // console.log(schedules);
 
-      for (let j=0;j<schedules.length;j++){
-        if (schedules[j].name!==null){
+      for (let j=0;j<reservations.length;j++){
+        if (!((reservations[j].startIndex<startIndex && reservations[j].endIndex<startIndex) || (reservations[j].startIndex>endIndex && reservations[j].endIndex>endIndex))){
           inavailableTables.push(i);
           break;
         }
       }
-
 
     } else {
       console.log(`Table ${i} does not exist.`);
