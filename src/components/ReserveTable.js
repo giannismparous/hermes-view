@@ -11,6 +11,7 @@ const ReserveTable = () => {
     const [reservationTimesFetched, setReservationTimesFetched] = useState();
     const [bookedReservation, setBookedReservation] = useState();
     const [userName, setUserName] = useState('');
+    const [userPhone, setUserPhone] = useState('');
 
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const ReserveTable = () => {
     const handleYesClick = async () => {
         try {
             // Call updateTableSchedule with the appropriate parameters
-            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,"TEL", tableNumber);
+            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,userPhone, tableNumber);
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);
@@ -53,6 +54,10 @@ const ReserveTable = () => {
     const handleNameChange = (event) => {
         setUserName(event.target.value);
     };
+
+    const handlePhoneChange = (event) => {
+        setUserPhone(event.target.value);
+    };
     
     return (
         <div className="reservation-container">
@@ -68,9 +73,13 @@ const ReserveTable = () => {
                             <label htmlFor="userName">Your Name:</label>
                             <input type="text" id="userName" value={userName} onChange={handleNameChange} />
                         </p>
+                        <p>
+                            <label htmlFor="userPhone">Your Name:</label>
+                            <input type="text" id="userPhone" value={userPhone} onChange={handlePhoneChange} />
+                        </p>
                         <p className="confirmation-text">Are you sure you want to reserve?</p>
                         <div className="button-container">
-                            <button className="yes-button" onClick={handleYesClick} disabled={userName.trim() === ""}>Yes</button>
+                            <button className="yes-button" onClick={handleYesClick} disabled={userName.trim() === "" || userPhone.trim() === ""}>Yes</button>
                             <button className="no-button" onClick={handleNoClick}>No</button>
                         </div>
                     </>

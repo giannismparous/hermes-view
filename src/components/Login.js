@@ -14,7 +14,6 @@ const Login = () => {
       const successfulLogin= await attemptLogin(username, password);
       if (successfulLogin){
         navigate("/sample_restaurant/reservations");
-        fetchTablesData();
       }
       // If login is successful, you might want to redirect the user to another page or update UI accordingly
       

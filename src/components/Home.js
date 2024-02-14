@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
 import useScrollAnimation from './useScrollAnimation';
-import ImageSlider from "./ImageSlider";
 import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
@@ -104,12 +103,12 @@ function Home() {
         <div className="centered-header">
           <h2>Get in Touch</h2>
         </div>
-        <p><a href="/contact">Contact us</a> elevate your real estate experience together. Reach out to us today and discover how we can transform your property presentations with our cutting-edge VR tours</p>
+        <p><a href="/contact">Contact us</a> to elevate your real estate experience together. Reach out to us today and discover how we can transform your property presentations with our cutting-edge VR tours</p>
       </section>
       </div>
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      {/* <button onClick={addToDb}>ADD</button> */}
+      <button onClick={addToDb}>ADD</button>
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>
   );

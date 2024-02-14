@@ -108,32 +108,49 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
-export const fetchTablesData = async () => {
+// export const fetchTablesData = async () => {
 
-  const restaurantsRef = collection(db, 'restaurants');
-  const sampleRestaurantRef = doc(restaurantsRef, 'sample-restaurant');
-  // Fetch the sample restaurant document
-  const sampleRestaurantDoc = await getDoc(sampleRestaurantRef);
-  if (!sampleRestaurantDoc.exists()) {
-    console.log('Sample restaurant document does not exist');
-    return; // Exit function if document does not exist
+//   const restaurantsRef = collection(db, 'restaurants');
+//   const sampleRestaurantRef = doc(restaurantsRef, 'sample-restaurant');
+//   // Fetch the sample restaurant document
+//   const sampleRestaurantDoc = await getDoc(sampleRestaurantRef);
+//   if (!sampleRestaurantDoc.exists()) {
+//     console.log('Sample restaurant document does not exist');
+//     return; // Exit function if document does not exist
+//   }
+
+//   // Log the data of the sample restaurant document
+//   console.log('Sample Restaurant Data:', sampleRestaurantDoc.data().tables);
+
+//   const tablesData = sampleRestaurantDoc.data().tables;
+
+
+//   // console.log('Tables Data:');
+//   // Object.keys(tablesData).forEach(tableId => {
+//   //   console.log(tablesData[tableId]);
+//   // });
+
+//   return tablesData;
+// };
+
+export const fetchTimeByIndex = async (index) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const schedulesRef = doc(sampleRestaurantRef, "tableundefined");
+  const schedulesDoc = await getDoc(schedulesRef);
+  const times=schedulesDoc.data().times;
+  if (schedulesDoc.exists()) {
+    times.forEach(time => {
+      if (index===time.id){
+        return time.time
+      }
+    });
+  } else {
+    console.log(`Schedules does not exist.`);
   }
-
-  // Log the data of the sample restaurant document
-  console.log('Sample Restaurant Data:', sampleRestaurantDoc.data().tables);
-
-  const tablesData = sampleRestaurantDoc.data().tables;
-
-
-  // console.log('Tables Data:');
-  // Object.keys(tablesData).forEach(tableId => {
-  //   console.log(tablesData[tableId]);
-  // });
-
-  return tablesData;
 };
 
-export const fetchReservationsData = async (tableNumber) => {
+export const fetchTables = async (tableNumber) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   const tableRef = doc(sampleRestaurantRef, "table"+tableNumber);
@@ -209,35 +226,47 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
 };
 
 export const updateTableSchedules = async (startIndex, endIndex, name, phone, tableNumber) => {
+
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const schedulesRef = doc(sampleRestaurantRef, `tableundefined`);
   const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
+
   try {
-    
+
+    const schedulesDoc = await getDoc(schedulesRef);
     const tableDoc = await getDoc(tableRef);
 
-    if (tableDoc.exists()) {
+    if (schedulesDoc.exists() && tableDoc.exists()) {
+
+      const schedulesData = schedulesDoc.data();
+      const currentId = schedulesData.idCounter;
       const tableData = tableDoc.data();
       const reservations = tableData.reservations;
       reservations.push({
         name,
         phone,
         startIndex,
-        endIndex
+        endIndex,
+        reservation_id: currentId
       });
 
-      // Update the schedules field in the Firestore document
+      await updateDoc(schedulesRef, {
+        'idCounter': currentId+1
+      });
+
       await updateDoc(tableRef, {
         [`reservations`]: reservations
       });
 
-      
-      console.log(`Schedule updated for table ${tableNumber} from index ${startIndex} to index ${endIndex}`);
+      console.log(`Schedule updated for table ${tableNumber} from index ${startIndex} to index ${endIndex} with reservation id ${currentId+1}`);
     } else {
-      console.log(`Table ${tableNumber} does not exist.`);
+      console.log(`Schedules or table${tableNumber} does not exist.`);
     }
+
   } catch (error) {
-    console.error("Error updating schedule:", error);
+    console.error("Error schedules or table", error);
   }
+
 };
 
 export const attemptLogin = async (username,password) => {

@@ -492,7 +492,7 @@ const reservations_data =
 [
     [
         {
-            idCounter: 0,
+            idCounter: 2,
             times:[
                 {
                     id:1,
@@ -885,21 +885,21 @@ const reservations_data =
     [
         {
             available: true,
-            id: "1",
+            id: 1,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "2",
+            id: 2,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "3",
+            id: 3,
             reservations: [
                 {
                     name: "Giannis",
@@ -914,49 +914,49 @@ const reservations_data =
     [
         {
             available: true,
-            id: "4",
+            id: 4,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "5",
+            id: 5,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "6",
+            id: 6,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "7",
+            id: 7,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "8",
+            id: 8,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "9",
+            id: 9,
             reservations: []
         }
     ],
     [
         {
             available: true,
-            id: "10",
+            id: 10,
             reservations: []
         }
     ],
