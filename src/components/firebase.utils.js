@@ -313,6 +313,93 @@ export const cancelReservationByTableNumber = async (reservationId, tableNumber)
 
 };
 
+export const finishReservationByTableNumber = async (reservationId, tableNumber) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
+
+  try {
+
+    const tableDoc = await getDoc(tableRef);
+
+    if (tableDoc.exists()) {
+
+      const tableData = tableDoc.data();
+      const reservations = tableData.reservations;
+
+      let reservationIndex = -1;
+      for (let i = 0; i < reservations.length; i++) {
+        if (reservations[i].reservation_id === reservationId) {
+          reservationIndex = i;
+          break;
+        }
+      }
+
+      if (reservationIndex !== -1) {
+        // Update the canceled field of the reservation
+        reservations[reservationIndex].finished = true;
+
+        // Update the document in Firestore
+        await updateDoc(tableRef, { reservations });
+
+        console.log(`Reservation with id: ${reservationId} was canceled for table ${tableNumber}`);
+      } else {
+        console.log(`Reservation with id: ${reservationId} wasn't found for table ${tableNumber}`);
+      }
+
+    } else {
+      console.log(`Table${tableNumber} does not exist.`);
+    }
+
+  } catch (error) {
+    console.error("Error encounter while fetching table doc", error);
+  }
+
+};
+
+export const ghostedReservationByTableNumber = async (reservationId, tableNumber) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
+
+  try {
+
+    const tableDoc = await getDoc(tableRef);
+
+    if (tableDoc.exists()) {
+
+      const tableData = tableDoc.data();
+      const reservations = tableData.reservations;
+
+      let reservationIndex = -1;
+      for (let i = 0; i < reservations.length; i++) {
+        if (reservations[i].reservation_id === reservationId) {
+          reservationIndex = i;
+          break;
+        }
+      }
+
+      if (reservationIndex !== -1) {
+        // Update the canceled field of the reservation
+        reservations[reservationIndex].ghosted = true;
+
+        // Update the document in Firestore
+        await updateDoc(tableRef, { reservations });
+
+        console.log(`Reservation with id: ${reservationId} was canceled for table ${tableNumber}`);
+      } else {
+        console.log(`Reservation with id: ${reservationId} wasn't found for table ${tableNumber}`);
+      }
+
+    } else {
+      console.log(`Table${tableNumber} does not exist.`);
+    }
+
+  } catch (error) {
+    console.error("Error encounter while fetching table doc", error);
+  }
+
+};
 
 export const attemptLogin = async (username,password) => {
   try {
