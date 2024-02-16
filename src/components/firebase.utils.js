@@ -313,7 +313,7 @@ export const cancelReservationByTableNumber = async (reservationId, tableNumber)
 
 };
 
-export const finishReservationByTableNumber = async (reservationId, tableNumber) => {
+export const acceptReservationByTableNumber = async (reservationId, tableNumber) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   const tableRef = doc(sampleRestaurantRef, `table${tableNumber}`);
@@ -337,7 +337,7 @@ export const finishReservationByTableNumber = async (reservationId, tableNumber)
 
       if (reservationIndex !== -1) {
         // Update the canceled field of the reservation
-        reservations[reservationIndex].finished = true;
+        reservations[reservationIndex].accepted = true;
 
         // Update the document in Firestore
         await updateDoc(tableRef, { reservations });

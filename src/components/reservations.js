@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Reservations.css';
-import { cancelReservationByTableNumber, fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils';
+import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils';
 import { HashLoader } from 'react-spinners';
 const sortByImg = '../icons/sort_by.png';
 
@@ -157,6 +157,12 @@ const Reservations = () => {
         setExpandedIdsReservations(Array(idsReservations.length + 1).fill(false));
     }, [idsReservations]);
 
+    const handleAcceptReservation = async (reservationId, tableNumber) => {
+        console.log("NAI");
+        await acceptReservationByTableNumber(reservationId, tableNumber);
+        // window.location.reload();
+    };
+
     const handleCancelReservation = async (reservationId, tableNumber) => {
         await cancelReservationByTableNumber(reservationId, tableNumber);
         window.location.reload();
@@ -296,20 +302,29 @@ const Reservations = () => {
                                     <div className="reservation-details-container">
                                         {table.reservations.map((reservation, idx) => (
                                             <div key={idx} className="reservation-details">
-                                                <p><span>Start Time:</span> {reservation.startTime}</p>
-                                                <p><span>End Time:</span> {reservation.endTime}</p>
                                                 <p><span>Name:</span> {reservation.name}</p>
                                                 <p><span>Phone:</span> {reservation.phone}</p>
+                                                <p><span>Start Time:</span> {reservation.startTime}</p>
+                                                <p><span>End Time:</span> {reservation.endTime}</p>
                                                 <p><span>ID:</span> {reservation.reservation_id}</p>
-                                                {reservation.canceled !== undefined ? (
-                                                    <p key={idx} className='canceled'>
+                                                {reservation.canceled !== undefined && (
+                                                    <p className='canceled'>
                                                         <span>CANCELED</span>
                                                     </p>
-                                                ) : (
-                                                    <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, table.id)}>Cancel</button>
                                                 )}
+                                                {reservation.accepted !== undefined && (
+                                                    <p className='accepted'>
+                                                        <span>ACCEPTED</span>
+                                                    </p>
+                                                )}
+                                                {reservation.accepted === undefined && reservation.canceled ===undefined && 
+                                                    <>
+                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, table.id)}>&#10004;</button>
+                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                    </>
+                                                }
                                             </div>
-                                        ))}
+                                            ))}
                                     </div>
                                 )}
                             </div>
@@ -328,18 +343,27 @@ const Reservations = () => {
                                     <div className="reservation-details-container">
                                         {time.reservations.map((reservation, idx) => (
                                             <div key={idx} className="reservation-details">
-                                                <p><span>End Time:</span> {reservation.endTime}</p>
                                                 <p><span>Name:</span> {reservation.name}</p>
                                                 <p><span>Phone:</span> {reservation.phone}</p>
+                                                <p><span>End Time:</span> {reservation.endTime}</p>
+                                                <p><span>Table:</span> {reservation.tableId}</p>
                                                 <p><span>ID:</span> {reservation.reservation_id}</p>
-                                                <p><span>ID:</span> {reservation.timeId}</p>
-                                                {reservation.canceled !== undefined ? (
-                                                    <p key={idx} className='canceled'>
+                                                {reservation.canceled !== undefined && (
+                                                    <p className='canceled'>
                                                         <span>CANCELED</span>
                                                     </p>
-                                                ) : (
-                                                    <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, time.tableId)}>Cancel</button>
                                                 )}
+                                                {reservation.accepted !== undefined && (
+                                                    <p className='accepted'>
+                                                        <span>ACCEPTED</span>
+                                                    </p>
+                                                )}
+                                                {reservation.accepted === undefined && reservation.canceled ===undefined && 
+                                                    <>
+                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
+                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                    </>
+                                                }
                                             </div>
                                         ))}
                                     </div>
@@ -358,17 +382,27 @@ const Reservations = () => {
                             {expandedNamesReservations[reservation.id] && (
                                 <div className="reservation-details-container">
                                     <div className="reservation-details">
+                                        <p><span>Phone:</span> {reservation.phone}</p>
                                         <p><span>Start Time:</span> {reservation.startTime}</p>
                                         <p><span>End Time:</span> {reservation.endTime}</p>
-                                        <p><span>Phone:</span> {reservation.phone}</p>
+                                        <p><span>Table:</span> {reservation.tableId}</p>
                                         <p><span>ID:</span> {reservation.reservation_id}</p>
-                                        {reservation.canceled !== undefined ? (
+                                        {reservation.canceled !== undefined && (
                                             <p className='canceled'>
                                                 <span>CANCELED</span>
                                             </p>
-                                        ) : (
-                                            <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>Cancel</button>
                                         )}
+                                        {reservation.accepted !== undefined && (
+                                            <p className='accepted'>
+                                                <span>ACCEPTED</span>
+                                            </p>
+                                        )}
+                                        {reservation.accepted === undefined && reservation.canceled ===undefined && 
+                                            <>
+                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
+                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                            </>
+                                        }
                                     </div>
                                 </div>
                             )}
@@ -385,17 +419,27 @@ const Reservations = () => {
                             {expandedIdsReservations[reservation.id] && (
                                 <div className="reservation-details-container">
                                     <div className="reservation-details">
+                                        <p><span>Name:</span> {reservation.name}</p>
+                                        <p><span>Phone:</span> {reservation.phone}</p>
                                         <p><span>Start Time:</span> {reservation.startTime}</p>
                                         <p><span>End Time:</span> {reservation.endTime}</p>
-                                        <p><span>Phone:</span> {reservation.phone}</p>
-                                        <p><span>Name:</span> {reservation.name}</p>
-                                        {reservation.canceled !== undefined ? (
+                                        <p><span>Table:</span> {reservation.tableId}</p>
+                                        {reservation.canceled !== undefined && (
                                             <p className='canceled'>
                                                 <span>CANCELED</span>
                                             </p>
-                                        ) : (
-                                            <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>Cancel</button>
                                         )}
+                                        {reservation.accepted !== undefined && (
+                                            <p className='accepted'>
+                                                <span>ACCEPTED</span>
+                                            </p>
+                                        )}
+                                        {reservation.accepted === undefined && reservation.canceled ===undefined && 
+                                            <>
+                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
+                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                            </>
+                                        }
                                     </div>
                                 </div>
                             )}

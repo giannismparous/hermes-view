@@ -17,8 +17,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
-    width: 300px;
+    margin: 10px 0; /* Adjust margin to create space between reservations */
+    width: 100%; /* Set width to 100% to make each reservation take up full width */
 }
 
 .reservation h2 {
@@ -26,10 +26,17 @@
     margin-bottom: 10px;
 }
 
+.reservation-details-container {
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if they don't fit horizontally */
+}
+
 .reservation-details {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
     margin-top: 10px; /* Add margin between reservation details */
+    margin-right: 20px;
 }
 
 .search-bar-container {
@@ -119,7 +126,16 @@
     display: block;
 }
 
+.cancel-button {
+    background-color: none;
+    color: red;
+}
+
 /* Add styles to show the sort menu when it's open */
 .canceled {
     color: red;
+}
+
+.accepted {
+    color: green;
 }
