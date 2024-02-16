@@ -26,18 +26,6 @@
     margin-bottom: 10px;
 }
 
-.reservation p {
-    font-size: 16px;
-    margin: 5px 0;
-    line-height: 1.4;
-}
-
-/* Style for schedule name */
-.reservation p span {
-    color: #007bff; /* Change this to your desired color */
-    font-weight: bold;
-}
-
 .reservation-details {
     border-top: 1px solid #ccc;
     padding-top: 10px;
@@ -129,4 +117,9 @@
 /* Add styles to show the sort menu when it's open */
 .sort-menu.open {
     display: block;
+}
+
+/* Add styles to show the sort menu when it's open */
+.canceled {
+    color: red;
 }

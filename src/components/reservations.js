@@ -6,12 +6,18 @@ const sortByImg = '../icons/sort_by.png';
 
 const Reservations = () => {
 
-    const [tables, setTables] = useState([]);
-    const [filteredTables, setFilteredTables] = useState([]);
-    const [expandedTables, setExpandedTables] = useState([]);
+    const [tablesReservations, setTablesReservations] = useState([]);
+    const [filteredTablesReservations, setFilteredTablesReservations] = useState([]);
+    const [expandedTablesReservations, setExpandedTablesReservations] = useState([]);
     const [timesReservations, setTimesReservations] = useState([]);
     const [filteredTimesReservations, setFilteredTimesReservations] = useState([]);
     const [expandedTimesReservations, setExpandedTimesReservations] = useState([]);
+    const [namesReservations, setNamesReservations] = useState([]);
+    const [filteredNamesReservations, setFilteredNamesReservations] = useState([]);
+    const [expandedNamesReservations, setExpandedNamesReservations] = useState([]);
+    const [idsReservations, setIdsReservations] = useState([]);
+    const [filteredIdsReservations, setFilteredIdsReservations] = useState([]);
+    const [expandedIdsReservations, setExpandedIdsReservations] = useState([]);
     const [times, setTimes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
@@ -51,11 +57,21 @@ const Reservations = () => {
                         tablesReservationsData[i].reservations[j].endTime = tempEndTime;
                     }
                 }
+                tablesReservationsData[i].reservations.sort((a, b) => {
+                    if (a.startIndex < b.startIndex) {
+                        return -1;
+                    } else if (a.startIndex > b.startIndex) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
             }
-            setTables(tablesReservationsData);
-            setFilteredTables(tablesReservationsData);
             
-           const timesReservationsData=[];
+            setTablesReservations(tablesReservationsData);
+            setFilteredTablesReservations(tablesReservationsData);
+            
+            const timesReservationsData=[];
             for (let i=0;i<times.length;i++){
                 let reservations=[];
                 for (let j=0;j<tablesReservationsData.length;j++){
@@ -72,12 +88,50 @@ const Reservations = () => {
                         }
                     }
                 }
+                reservations.sort((a, b) => {
+                    return a.name.localeCompare(b.name);
+                });
                 timesReservationsData.push({time:times[i].time,timeId:times[i].id,reservations});
             }
 
-            console.log(timesReservationsData);
             setTimesReservations(timesReservationsData);
             setFilteredTimesReservations(timesReservationsData);
+
+            let reservations=[];
+            let counter=1;
+            for (let i = 0; i < tablesReservationsData.length; i++) {
+                for (let j = 0; j < tablesReservationsData[i].reservations.length; j++) {
+                    let reservation={}
+                    reservation.startTime = getTimeByIndex(tablesReservationsData[i].reservations[j].startIndex);
+                    reservation.endTime = getTimeByIndex(tablesReservationsData[i].reservations[j].endIndex);
+                    reservation.tableId=tablesReservationsData[i].id;
+                    reservation.name=tablesReservationsData[i].reservations[j].name;
+                    reservation.phone=tablesReservationsData[i].reservations[j].phone;
+                    reservation.reservationId=tablesReservationsData[i].reservations[j].reservation_id;
+                    reservation.canceled=tablesReservationsData[i].reservations[j].canceled;
+                    reservation.id=counter;
+                    reservations.push(reservation);
+                    counter++;
+                }
+            }
+
+            const namesSortedReservations = [...reservations].sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
+            setNamesReservations(namesSortedReservations);
+            setFilteredNamesReservations(namesSortedReservations);
+            
+            const idsSortedReservations = [...reservations].sort((a, b) => {
+                if (a.reservationId < b.reservationId) {
+                    return -1; 
+                } else if (a.reservationId > b.reservationId) {
+                    return 1; 
+                } else {
+                    return 0; 
+                }
+            });
+            setIdsReservations(idsSortedReservations);
+            setFilteredIdsReservations(idsSortedReservations);
 
             setLoading(false);
         };
@@ -88,12 +142,20 @@ const Reservations = () => {
     }, [times]);
 
     useEffect(() => {
-        setExpandedTables(Array(tables.length + 1).fill(false));
-    }, [tables]);
+        setExpandedTablesReservations(Array(tablesReservations.length + 1).fill(false));
+    }, [tablesReservations]);
 
     useEffect(() => {
         setExpandedTimesReservations(Array(timesReservations.length + 1).fill(false));
     }, [timesReservations]);
+
+    useEffect(() => {
+        setExpandedNamesReservations(Array(namesReservations.length + 1).fill(false));
+    }, [namesReservations]);
+
+    useEffect(() => {
+        setExpandedIdsReservations(Array(idsReservations.length + 1).fill(false));
+    }, [idsReservations]);
 
     const handleCancelReservation = async (reservationId, tableNumber) => {
         await cancelReservationByTableNumber(reservationId, tableNumber);
@@ -101,8 +163,8 @@ const Reservations = () => {
     };
 
     const toggleReservationDetailsByTable = (tableId) => {
-        setExpandedTables(prevExpandedTables => {
-            return prevExpandedTables.map((value, index) => {
+        setExpandedTablesReservations(prevexpandedTablesReservations => {
+            return prevexpandedTablesReservations.map((value, index) => {
                 return index === tableId ? !value : value;
             });
         });
@@ -116,24 +178,65 @@ const Reservations = () => {
         });
     };
 
+    const toggleReservationDetailsByName = (nameId) => {
+        setExpandedNamesReservations(prevExpandedNamesReservations => {
+            return prevExpandedNamesReservations.map((value, index) => {
+                return index === nameId ? !value : value;
+            });
+        });
+    };
+
+    const toggleReservationDetailsByReservationId = (reservationId) => {
+        setExpandedIdsReservations(prevExpandedIdsReservations => {
+            return prevExpandedIdsReservations.map((value, index) => {
+                return index === reservationId ? !value : value;
+            });
+        });
+    };
+
     const handleClearSearch = () => {
         setSearchQuery('');
     };
 
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
-        if (selectedSortOption==1)filterTables(event.target.value);
-        else if (selectedSortOption==2)filterTimesReservations(event.target.value);
+        if (selectedSortOption===1)filterTablesReservations(event.target.value);
+        else if (selectedSortOption===2)filterTimesReservations(event.target.value);
+        else if (selectedSortOption===3)filterNamesReservations(event.target.value);
+        else if (selectedSortOption===4)filterIdsReservations(event.target.value);
     };
 
-    const filterTables = (query) => {
-        const filtered = tables.filter(table => (`Table ${table.id}`).toLowerCase().includes(query.toLowerCase()));
-        setFilteredTables(filtered);
+    const filterTablesReservations = (query) => {
+        const filtered = tablesReservations.map(tableReservation => {
+            const filteredTableReservation = { ...tableReservation };
+            filteredTableReservation.reservations = tableReservation.reservations.filter(reservation => 
+                reservation.name.toLowerCase().includes(query.toLowerCase())
+            );
+            return filteredTableReservation;
+        });
+        setFilteredTablesReservations(filtered);
     };
 
     const filterTimesReservations = (query) => {
-        const filtered = timesReservations.filter(time => (`Time ${time.time}`).toLowerCase().includes(query.toLowerCase()));
+        const filtered = timesReservations.map(timeReservation => {
+            const filteredTimeReservation = { ...timeReservation };
+            filteredTimeReservation.reservations = timeReservation.reservations.filter(reservation => 
+                reservation.name.toLowerCase().includes(query.toLowerCase())
+            );
+            return filteredTimeReservation;
+        });
         setFilteredTimesReservations(filtered);
+    };
+    
+
+    const filterNamesReservations = (query) => {
+        const filtered = namesReservations.filter(reservation => (`${reservation.name}`).toLowerCase().includes(query.toLowerCase()));
+        setFilteredNamesReservations(filtered);
+    };
+
+    const filterIdsReservations = (query) => {
+        const filtered = idsReservations.filter(reservation => (`${reservation.name}`).toLowerCase().includes(query.toLowerCase()));
+        setFilteredIdsReservations(filtered);
     };
 
     const handleSortByClick = () => {
@@ -180,16 +283,16 @@ const Reservations = () => {
                 </div>
             ) : (
                 <div className="reservations">
-                    {selectedSortOption === 1 && filteredTables.map((table, index) => (
+                    {selectedSortOption === 1 && filteredTablesReservations.map((table, index) => (
                         table.reservations.length !== 0 && (
                             <div key={index} className="reservation">
                                 <div className="table-header">
                                     <h2>Table {table.id}</h2>
                                     <button className="toggle-button" onClick={() => toggleReservationDetailsByTable(table.id)}>
-                                        {expandedTables[table.id] ? '-' : '+'}
+                                        {expandedTablesReservations[table.id] ? '-' : '+'}
                                     </button>
                                 </div>
-                                {expandedTables[table.id] && (
+                                {expandedTablesReservations[table.id] && (
                                     <div className="reservation-details-container">
                                         {table.reservations.map((reservation, idx) => (
                                             <div key={idx} className="reservation-details">
@@ -199,8 +302,8 @@ const Reservations = () => {
                                                 <p><span>Phone:</span> {reservation.phone}</p>
                                                 <p><span>ID:</span> {reservation.reservation_id}</p>
                                                 {reservation.canceled !== undefined ? (
-                                                    <p key={idx}>
-                                                        <span>Canceled:</span> {reservation.canceled.toString()}
+                                                    <p key={idx} className='canceled'>
+                                                        <span>CANCELED</span>
                                                     </p>
                                                 ) : (
                                                     <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, table.id)}>Cancel</button>
@@ -231,8 +334,8 @@ const Reservations = () => {
                                                 <p><span>ID:</span> {reservation.reservation_id}</p>
                                                 <p><span>ID:</span> {reservation.timeId}</p>
                                                 {reservation.canceled !== undefined ? (
-                                                    <p key={idx}>
-                                                        <span>Canceled:</span> {reservation.canceled.toString()}
+                                                    <p key={idx} className='canceled'>
+                                                        <span>CANCELED</span>
                                                     </p>
                                                 ) : (
                                                     <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, time.tableId)}>Cancel</button>
@@ -243,6 +346,60 @@ const Reservations = () => {
                                 )}
                             </div>
                         )
+                    ))}
+                    {selectedSortOption === 3 && filteredNamesReservations.map((reservation, index) => (
+                        <div key={reservation.id} className="reservation">
+                            <div className="table-header">
+                                <h2>Name {reservation.name}</h2>
+                                <button className="toggle-button" onClick={() => toggleReservationDetailsByName(reservation.id)}>
+                                    {expandedNamesReservations[reservation.id] ? '-' : '+'}
+                                </button>
+                            </div>
+                            {expandedNamesReservations[reservation.id] && (
+                                <div className="reservation-details-container">
+                                    <div className="reservation-details">
+                                        <p><span>Start Time:</span> {reservation.startTime}</p>
+                                        <p><span>End Time:</span> {reservation.endTime}</p>
+                                        <p><span>Phone:</span> {reservation.phone}</p>
+                                        <p><span>ID:</span> {reservation.reservation_id}</p>
+                                        {reservation.canceled !== undefined ? (
+                                            <p className='canceled'>
+                                                <span>CANCELED</span>
+                                            </p>
+                                        ) : (
+                                            <button className="cancel-button" style={{ color: 'red' }} onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>Cancel</button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                    {selectedSortOption === 4 && filteredIdsReservations.map((reservation, index) => (
+                        <div key={reservation.id} className="reservation">
+                            <div className="table-header">
+                                <h2>Reservation ID {reservation.reservationId}</h2>
+                                <button className="toggle-button" onClick={() => toggleReservationDetailsByReservationId(reservation.id)}>
+                                    {expandedIdsReservations[reservation.id] ? '-' : '+'}
+                                </button>
+                            </div>
+                            {expandedIdsReservations[reservation.id] && (
+                                <div className="reservation-details-container">
+                                    <div className="reservation-details">
+                                        <p><span>Start Time:</span> {reservation.startTime}</p>
+                                        <p><span>End Time:</span> {reservation.endTime}</p>
+                                        <p><span>Phone:</span> {reservation.phone}</p>
+                                        <p><span>Name:</span> {reservation.name}</p>
+                                        {reservation.canceled !== undefined ? (
+                                            <p className='canceled'>
+                                                <span>CANCELED</span>
+                                            </p>
+                                        ) : (
+                                            <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>Cancel</button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
             )}
