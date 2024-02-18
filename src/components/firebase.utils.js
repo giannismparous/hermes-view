@@ -53,13 +53,27 @@ export const addCollectionAndDocuments = async (
   const batch = writeBatch(db);
   const collectionRef = collection(db, collectionKey);
   
-  objectsToAdd.forEach((object) => {
-     const docRef = doc(collectionRef, "table"+object.id);
-     batch.set(docRef, object);
-  });
+  for (let i=0;i<objectsToAdd.length;i++){
+    let name="";
+    if (i===0){
+      name="data"
+    }
+    else if (i===objectsToAdd.length-1){
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1; // Month is zero-based
+      const day = currentDate.getDate();
+      name = `${year}-${month}-${day}`;
+    }
+    else {
+      name="table"+objectsToAdd[i].id;
+    }
+    const docRef = doc(collectionRef, name);
+    batch.set(docRef, objectsToAdd[i]);
+  }
 
   await batch.commit();
-  console.log('done');
+  console.log('added to db');
 };
 
 export const createUserDocumentFromAuth = async (

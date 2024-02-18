@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
 import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils';
 import { HashLoader } from 'react-spinners';
@@ -22,7 +22,7 @@ const Reservations = () => {
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [sortByMenuOpen, setSortByMenuOpen] = useState(false);
-    const [selectedSortOption, setSelectedSortOption] = useState(1);
+    const [selectedSortOption, setSelectedSortOption] = useState(2);
 
     useEffect(() => {
         const fetchSchedules = async () => {
@@ -108,6 +108,7 @@ const Reservations = () => {
                     reservation.name=tablesReservationsData[i].reservations[j].name;
                     reservation.phone=tablesReservationsData[i].reservations[j].phone;
                     reservation.reservationId=tablesReservationsData[i].reservations[j].reservation_id;
+                    reservation.accepted=tablesReservationsData[i].reservations[j].accepted;
                     reservation.canceled=tablesReservationsData[i].reservations[j].canceled;
                     reservation.id=counter;
                     reservations.push(reservation);
@@ -116,8 +117,16 @@ const Reservations = () => {
             }
 
             const namesSortedReservations = [...reservations].sort((a, b) => {
-                return a.name.localeCompare(b.name);
+                if ((a.accepted===undefined && a.canceled===undefined) && (b.accepted!==undefined || b.canceled!==undefined)){return -1;}
+                else if ((b.accepted===undefined && b.canceled===undefined) && (a.accepted!==undefined || a.canceled!==undefined)){return 1;}
+                if ((a.accepted!==undefined) && (b.canceled!==undefined)){return -1;}
+                else if ((b.accepted!==undefined) && (a.canceled!==undefined)){return 1;}
+                if (a.canceled===undefined && b.canceled!==undefined){return -1;}
+                else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
+                else {return a.name.localeCompare(b.name);}
+                
             });
+
             setNamesReservations(namesSortedReservations);
             setFilteredNamesReservations(namesSortedReservations);
             
@@ -158,9 +167,8 @@ const Reservations = () => {
     }, [idsReservations]);
 
     const handleAcceptReservation = async (reservationId, tableNumber) => {
-        console.log("NAI");
         await acceptReservationByTableNumber(reservationId, tableNumber);
-        // window.location.reload();
+        window.location.reload();
     };
 
     const handleCancelReservation = async (reservationId, tableNumber) => {
@@ -254,6 +262,56 @@ const Reservations = () => {
         setSortByMenuOpen(false);
     };
 
+    const timeRef = useRef(null);
+
+    useEffect(() => {
+        const findNearestTime = () => {
+          const currentTime = new Date();
+          const currentHour = currentTime.getHours();
+          const currentMinute = currentTime.getMinutes();
+          
+          const timeToMinutes = (time) => {
+            const [hour, minute] = time.split(':').map(part => parseInt(part));
+            return hour * 60 + minute;
+          };
+    
+          const futureTimes = timesReservations.filter(time => {
+            if (time.reservations.length===0)return false;
+            const [hour, minute] = time.time.split(':');
+            const timeInMinutes = parseInt(hour) * 60 + parseInt(minute);
+            const currentTimeInMinutes = currentHour * 60 + currentMinute;
+            return timeInMinutes > currentTimeInMinutes;
+          });
+        
+          if (futureTimes.length === 0) {
+            // If there are no future times, return the last time
+            return timesReservations[timesReservations.length - 1].time;
+          }
+
+          let nearestTime = futureTimes[0].time;
+            let minDiff = Math.abs(timeToMinutes(futureTimes[0].time) - (currentHour * 60 + currentMinute));
+            futureTimes.forEach(time => {
+                const diff = Math.abs(timeToMinutes(time.time) - (currentHour * 60 + currentMinute));
+                if (diff < minDiff) {
+                minDiff = diff;
+                nearestTime = time.time;
+                }
+            });
+
+            console.log(nearestTime);
+            return nearestTime;
+        };
+        
+        if(selectedSortOption===2 && timesReservations.length>0){
+            const nearestTime = findNearestTime();
+            const element = document.querySelector(`[data-time='${nearestTime}']`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+      }, [timesReservations,selectedSortOption]);
+
     return (
         <div className="reservations-container">
             <div className="search-bar-container">
@@ -332,7 +390,7 @@ const Reservations = () => {
                     ))}
                     {selectedSortOption === 2 && filteredTimesReservations.map((time, index) => (
                         time.reservations.length !== 0 && (
-                            <div key={index} className="reservation">
+                            <div key={index} ref={timeRef} className="reservation" data-time={time.time}>
                                 <div className="table-header">
                                     <h2>Time {time.time}</h2>
                                     <button className="toggle-button" onClick={() => toggleReservationDetailsByTime(time.timeId)}>
@@ -374,7 +432,8 @@ const Reservations = () => {
                     {selectedSortOption === 3 && filteredNamesReservations.map((reservation, index) => (
                         <div key={reservation.id} className="reservation">
                             <div className="table-header">
-                                <h2>Name {reservation.name}</h2>
+                                <h2>{reservation.name} {reservation.accepted !== undefined && <span className='accepted'>ACCEPTED</span>}{reservation.canceled !== undefined && <span className='canceled'>CANCELED</span>}
+                                </h2>
                                 <button className="toggle-button" onClick={() => toggleReservationDetailsByName(reservation.id)}>
                                     {expandedNamesReservations[reservation.id] ? '-' : '+'}
                                 </button>
@@ -411,7 +470,7 @@ const Reservations = () => {
                     {selectedSortOption === 4 && filteredIdsReservations.map((reservation, index) => (
                         <div key={reservation.id} className="reservation">
                             <div className="table-header">
-                                <h2>Reservation ID {reservation.reservationId}</h2>
+                                <h2>{reservation.reservationId}</h2>
                                 <button className="toggle-button" onClick={() => toggleReservationDetailsByReservationId(reservation.id)}>
                                     {expandedIdsReservations[reservation.id] ? '-' : '+'}
                                 </button>

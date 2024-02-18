@@ -492,7 +492,71 @@ const reservations_data =
 [
     [
         {
-            idCounter: 2,
+            id_counter: 1,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 1,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 2,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 3,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 4,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 5,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 6,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 7,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 8,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 9,
+        }
+    ],
+    [
+        {
+            available: true,
+            id: 10,
+        }
+    ],
+    [
+        {
             times:[
                 {
                     id:1,
@@ -879,87 +943,299 @@ const reservations_data =
                     id: 96,
                     time: "23:45" 
                 },
+            ],
+            reservations_data:[
+                {
+                    name: "ELENA",
+                    phone: "930193",
+                    startIndex:84,
+                    endIndex: 89,
+                    table_id:1,
+                    reservation_id:12,
+                },
+                {
+                    name: "ISAAK",
+                    phone: "8676",
+                    startIndex:10,
+                    endIndex: 12,
+                    table_id:1,
+                    reservation_id:23,
+                },
+                {
+                    name: "AMIR",
+                    phone: "43444",
+                    startIndex:13,
+                    endIndex: 14,
+                    table_id:1,
+                    reservation_id:25,
+                },
+                {
+                    name: "STEFANOS",
+                    phone: "121331",
+                    startIndex:73,
+                    endIndex: 77,
+                    table_id:2,
+                    reservation_id:7,
+                },
+                {
+                    name: "OLGA",
+                    phone: "121331",
+                    startIndex:8,
+                    endIndex: 11,
+                    table_id:2,
+                    reservation_id:20,
+                },
+                {
+                    name: "ADAM",
+                    phone: "67887",
+                    startIndex:14,
+                    endIndex: 15,
+                    table_id:2,
+                    reservation_id:26,
+                },
+                {
+                    name: "ANASTASIA",
+                    phone: "877558",
+                    startIndex:0,
+                    endIndex: 5,
+                    table_id:3,
+                    reservation_id:13,
+                },
+                {
+                    name: "EVA",
+                    phone: "7890",
+                    startIndex:17,
+                    endIndex: 18,
+                    table_id:3,
+                    reservation_id:27,
+                },
+                {
+                    name: "MHTSOS",
+                    phone: "213131",
+                    startIndex:68,
+                    endIndex: 69,
+                    table_id:3,
+                    reservation_id:34,
+                },
+                {
+                    name: "APOSTOLIS",
+                    phone: "7895",
+                    startIndex:45,
+                    endIndex: 49,
+                    table_id:4,
+                    reservation_id:8,
+                },
+                {
+                    name: "ANNA",
+                    phone: "99000",
+                    startIndex:37,
+                    endIndex: 41,
+                    table_id:4,
+                    reservation_id:10,
+                },
+                {
+                    name: "ANTREAS",
+                    phone: "123111",
+                    startIndex:71,
+                    endIndex: 74,
+                    table_id:4,
+                    reservation_id:38,
+                },
+                {
+                    name: "SPIROS",
+                    phone: "6767",
+                    startIndex:57,
+                    endIndex: 60,
+                    table_id: 5,
+                    reservation_id:9,
+                },
+                {
+                    name: "SANDRA",
+                    phone: "00000",
+                    startIndex:5,
+                    endIndex: 8,
+                    table_id: 5,
+                    reservation_id:17,
+                },
+                {
+                    name: "AVRAAM",
+                    phone: "893-1",
+                    startIndex: 9,
+                    endIndex: 11,
+                    table_id: 5,
+                    reservation_id:22,
+                },
+                {
+                    name: "IAKWV",
+                    phone: "99210",
+                    startIndex:12,
+                    endIndex: 13,
+                    table_id: 5,
+                    reservation_id:24,
+                },
+                {
+                    name: "KAIN",
+                    phone: "56745",
+                    startIndex:19,
+                    endIndex: 20,
+                    table_id: 5,
+                    reservation_id:28,
+                },
+                {
+                    name: "KONSTANTINOS",
+                    phone: "0213",
+                    startIndex:66,
+                    endIndex: 67,
+                    table_id: 5,
+                    reservation_id:33,
+                },
+                {
+                    name: "GIANNIS",
+                    phone: "9021",
+                    startIndex:3,
+                    endIndex: 7,
+                    table_id: 6,
+                    reservation_id:2,
+                },
+                {
+                    name: "GIANNIS MPAROUS",
+                    phone: "5621",
+                    startIndex:4,
+                    endIndex: 9,
+                    table_id: 6,
+                    reservation_id:4,
+                },
+                {
+                    name: "MPAMPIS",
+                    phone: "71672",
+                    startIndex:73,
+                    endIndex: 77,
+                    table_id: 6,
+                    reservation_id:6,
+                },
+                {
+                    name: "REBEKA",
+                    phone: "567",
+                    startIndex:59,
+                    endIndex: 62,
+                    table_id: 6,
+                    reservation_id:31,
+                },
+                {
+                    name: "KOKOA",
+                    phone: "8921",
+                    startIndex:4,
+                    endIndex: 6,
+                    table_id: 7,
+                    reservation_id:16,
+                },
+                {
+                    name: "ATHANASIA",
+                    phone: "032134",
+                    startIndex:7,
+                    endIndex: 10,
+                    table_id: 7,
+                    reservation_id:19,
+                },
+                {
+                    name: "LEIA",
+                    phone: "3434343",
+                    startIndex:64,
+                    endIndex: 65,
+                    table_id: 7,
+                    reservation_id:32,
+                },
+                {
+                    name: "GIORGOS",
+                    phone: "88888",
+                    startIndex:2,
+                    endIndex: 7,
+                    table_id: 8,
+                    reservation_id:3,
+                },
+                {
+                    name: "ANTONIS MPAROUS",
+                    phone: "99999",
+                    startIndex: 4,
+                    endIndex: 9,
+                    table_id: 8,
+                    reservation_id:5,
+                },
+                {
+                    name: "KOULA",
+                    phone: "132134",
+                    startIndex: 79,
+                    endIndex: 81,
+                    table_id: 8,
+                    reservation_id: 14,
+                },
+                {
+                    name: "NIKOS",
+                    phone: "555555",
+                    startIndex: 68,
+                    endIndex: 73,
+                    table_id: 8,
+                    reservation_id: 35,
+                },
+                {
+                    name: "ASPASIA",
+                    phone: "3333333",
+                    startIndex: 45,
+                    endIndex: 47,
+                    table_id: 9,
+                    reservation_id: 15,
+                },
+                {
+                    name: "ROULA",
+                    phone: "11111",
+                    startIndex: 6,
+                    endIndex: 9,
+                    table_id: 9,
+                    reservation_id: 18,
+                },
+                {
+                    name: "XRHSTOS",
+                    phone: "77777",
+                    startIndex: 69,
+                    endIndex: 74,
+                    table_id: 9,
+                    reservation_id: 36,
+                },
+                {
+                    name: "SOFIA",
+                    phone: "39999",
+                    startIndex: 28,
+                    endIndex: 31,
+                    table_id: 10,
+                    reservation_id: 11,
+                },
+                {
+                    name: "IWSHF",
+                    phone: "222222",
+                    startIndex: 8,
+                    endIndex: 10,
+                    table_id: 10,
+                    reservation_id: 21,
+                },
+                {
+                    name: "AVEL",
+                    phone: "766767676",
+                    startIndex: 23,
+                    endIndex: 24,
+                    table_id: 10,
+                    reservation_id: 29,
+                },
+                {
+                    name: "GIAXBE",
+                    phone: "11111113",
+                    startIndex: 70,
+                    endIndex: 72,
+                    table_id: 10,
+                    reservation_id: 37,
+                },
             ]
         }
-    ],
-    [
-        {
-            available: true,
-            id: 1,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 2,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 3,
-            reservations: [
-                {
-                    name: "Giannis",
-                    phone: "+306944470266",
-                    startIndex:4,
-                    endIndex:8,
-                    reservation_id: 1
-                }
-        ]
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 4,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 5,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 6,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 7,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 8,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 9,
-            reservations: []
-        }
-    ],
-    [
-        {
-            available: true,
-            id: 10,
-            reservations: []
-        }
-    ],
+    ]
 ]
 
 export default reservations_data;
