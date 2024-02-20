@@ -17,10 +17,8 @@ function Home() {
 
   const addToDb = async() => {
 
-    for (let i=0;i<reservations_data.length;i++){
-      const response = addCollectionAndDocuments("sample-restaurant", reservations_data[i]);
+      const response = addCollectionAndDocuments("sample-restaurant", reservations_data);
       console.log(response);
-    }
   }
 
   const removeFromDb = async () => {

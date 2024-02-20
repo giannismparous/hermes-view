@@ -16,6 +16,7 @@ const Reserve = () => {
   useEffect(() => {
     const handleFetchTimes = async () => {
       const fetchedTimes = await fetchSchedulesTimes();
+      console.log(fetchedTimes);
       setTimes(fetchedTimes);
       setTimesFetched(true);
     };
@@ -63,14 +64,14 @@ const Reserve = () => {
 
   const handleTablesFetch = async () => {
     fetchTablesAvailability(clickedIndex, maxIndex)
-      .then(inavailableTables => {
+      .then(unavailableTables => {
         const data = {
           eventName: 'ReservationTimeSelected',
-          redTables: inavailableTables,
+          redTables: unavailableTables,
           startIndex: clickedIndex,
           endIndex: maxIndex
         };
-        console.log(inavailableTables);
+        console.log(unavailableTables);
         window.parent.postMessage(data, '*');
       })
       .catch(error => {

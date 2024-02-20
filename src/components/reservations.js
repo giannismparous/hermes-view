@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchSchedulesTimes, fetchTables, fetchTimeByIndex } from './firebase.utils';
+import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchReservations, fetchSchedulesTimes, fetchTable} from './firebase.utils';
 import { HashLoader } from 'react-spinners';
 const sortByImg = '../icons/sort_by.png';
 
@@ -45,18 +45,21 @@ const Reservations = () => {
 
             const tablesReservationsData = [];
             for (let i = 1; i <= 10; i++) {
-                const data = await fetchTables(i);
+                const data = await fetchTable(i);
                 tablesReservationsData.push(data);
+                tablesReservationsData[i-1].reservations=[];
             }
-            for (let i = 0; i < tablesReservationsData.length; i++) {
-                for (let j = 0; j < tablesReservationsData[i].reservations.length; j++) {
-                    if (tablesReservationsData[i].reservations[j].endIndex !== undefined) {
-                        const tempStartTime = getTimeByIndex(tablesReservationsData[i].reservations[j].startIndex);
-                        const tempEndTime = getTimeByIndex(tablesReservationsData[i].reservations[j].endIndex);
-                        tablesReservationsData[i].reservations[j].startTime = tempStartTime;
-                        tablesReservationsData[i].reservations[j].endTime = tempEndTime;
-                    }
-                }
+
+            const fetchedReservations=await fetchReservations();
+            for (let i=0;i<fetchedReservations.length;i++){
+                let index=fetchedReservations[i].table_id-1;
+                const { table_id, ...reservationData } = fetchedReservations[i];
+                reservationData.startTime=getTimeByIndex(reservationData.startIndex);
+                reservationData.endTime=getTimeByIndex(reservationData.endIndex);
+                tablesReservationsData[index].reservations.push(reservationData);
+            }
+
+            for (let i=0;i<tablesReservationsData.length;i++){
                 tablesReservationsData[i].reservations.sort((a, b) => {
                     if (a.startIndex < b.startIndex) {
                         return -1;
@@ -82,7 +85,8 @@ const Reservations = () => {
                             reservation.endTime=tablesReservationsData[j].reservations[k].endTime;
                             reservation.name=tablesReservationsData[j].reservations[k].name;
                             reservation.phone=tablesReservationsData[j].reservations[k].phone;
-                            reservation.reservationId=tablesReservationsData[j].reservations[k].reservation_id;
+                            reservation.reservation_id=tablesReservationsData[j].reservations[k].reservation_id;
+                            reservation.accepted=tablesReservationsData[j].reservations[k].accepted;
                             reservation.canceled=tablesReservationsData[j].reservations[k].canceled;
                             reservations.push(reservation);
                         }
@@ -94,6 +98,7 @@ const Reservations = () => {
                 timesReservationsData.push({time:times[i].time,timeId:times[i].id,reservations});
             }
 
+            console.log(timesReservationsData);
             setTimesReservations(timesReservationsData);
             setFilteredTimesReservations(timesReservationsData);
 
@@ -107,7 +112,7 @@ const Reservations = () => {
                     reservation.tableId=tablesReservationsData[i].id;
                     reservation.name=tablesReservationsData[i].reservations[j].name;
                     reservation.phone=tablesReservationsData[i].reservations[j].phone;
-                    reservation.reservationId=tablesReservationsData[i].reservations[j].reservation_id;
+                    reservation.reservation_id=tablesReservationsData[i].reservations[j].reservation_id;
                     reservation.accepted=tablesReservationsData[i].reservations[j].accepted;
                     reservation.canceled=tablesReservationsData[i].reservations[j].canceled;
                     reservation.id=counter;
@@ -131,14 +136,15 @@ const Reservations = () => {
             setFilteredNamesReservations(namesSortedReservations);
             
             const idsSortedReservations = [...reservations].sort((a, b) => {
-                if (a.reservationId < b.reservationId) {
+                if (a.reservation_id < b.reservation_id) {
                     return -1; 
-                } else if (a.reservationId > b.reservationId) {
+                } else if (a.reservation_id > b.reservation_id) {
                     return 1; 
                 } else {
                     return 0; 
                 }
             });
+
             setIdsReservations(idsSortedReservations);
             setFilteredIdsReservations(idsSortedReservations);
 
@@ -166,14 +172,14 @@ const Reservations = () => {
         setExpandedIdsReservations(Array(idsReservations.length + 1).fill(false));
     }, [idsReservations]);
 
-    const handleAcceptReservation = async (reservationId, tableNumber) => {
-        await acceptReservationByTableNumber(reservationId, tableNumber);
-        window.location.reload();
+    const handleAcceptReservation = async (reservationId) => {
+        await acceptReservationByTableNumber(reservationId);
+        // window.location.reload();
     };
 
     const handleCancelReservation = async (reservationId, tableNumber) => {
         await cancelReservationByTableNumber(reservationId, tableNumber);
-        window.location.reload();
+        // window.location.reload();
     };
 
     const toggleReservationDetailsByTable = (tableId) => {
@@ -377,8 +383,8 @@ const Reservations = () => {
                                                 )}
                                                 {reservation.accepted === undefined && reservation.canceled ===undefined && 
                                                     <>
-                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, table.id)}>&#10004;</button>
-                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id)}>&#10004;</button>
+                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
                                                     </>
                                                 }
                                             </div>
@@ -418,8 +424,8 @@ const Reservations = () => {
                                                 )}
                                                 {reservation.accepted === undefined && reservation.canceled ===undefined && 
                                                     <>
-                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
-                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                        <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id)}>&#10004;</button>
+                                                        <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
                                                     </>
                                                 }
                                             </div>
@@ -458,8 +464,8 @@ const Reservations = () => {
                                         )}
                                         {reservation.accepted === undefined && reservation.canceled ===undefined && 
                                             <>
-                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
-                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id)}>&#10004;</button>
+                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
                                             </>
                                         }
                                     </div>
@@ -470,7 +476,7 @@ const Reservations = () => {
                     {selectedSortOption === 4 && filteredIdsReservations.map((reservation, index) => (
                         <div key={reservation.id} className="reservation">
                             <div className="table-header">
-                                <h2>{reservation.reservationId}</h2>
+                                <h2>{reservation.reservation_id}</h2>
                                 <button className="toggle-button" onClick={() => toggleReservationDetailsByReservationId(reservation.id)}>
                                     {expandedIdsReservations[reservation.id] ? '-' : '+'}
                                 </button>
@@ -495,8 +501,8 @@ const Reservations = () => {
                                         )}
                                         {reservation.accepted === undefined && reservation.canceled ===undefined && 
                                             <>
-                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id, reservation.tableId)}>&#10004;</button>
-                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id, reservation.tableId)}>&#10006;</button>
+                                                <button className="accept-button" onClick={() => handleAcceptReservation(reservation.reservation_id)}>&#10004;</button>
+                                                <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
                                             </>
                                         }
                                     </div>

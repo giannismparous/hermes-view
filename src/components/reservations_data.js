@@ -490,73 +490,73 @@
 
 const reservations_data = 
 [
-    [
+    
         {
             id_counter: 1,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 1,
+            capacity: 4,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 2,
+            capacity: 5,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 3,
+            capacity: 2,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 4,
+            capacity: 3,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 5,
+            capacity: 3,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 6,
+            capacity: 4,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 7,
+            capacity: 4,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 8,
+            capacity: 2,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 9,
+            capacity: 3,
         }
-    ],
-    [
+    ,
+    
         {
-            available: true,
             id: 10,
+            capacity: 4,
         }
-    ],
-    [
-        {
+    ,
+    
+        {   unavailable_tables:[6],
             times:[
                 {
                     id:1,
@@ -625,7 +625,7 @@ const reservations_data =
                 {
                     id:17,
                     time: "04:00",
-                    inavailable: true
+                    unavailable: true
                 },
                 {
                     id: 18,
@@ -944,7 +944,7 @@ const reservations_data =
                     time: "23:45" 
                 },
             ],
-            reservations_data:[
+            reservations:[
                 {
                     name: "ELENA",
                     phone: "930193",
@@ -1235,7 +1235,7 @@ const reservations_data =
                 },
             ]
         }
-    ]
+    
 ]
 
 export default reservations_data;
