@@ -275,6 +275,7 @@ export const updateTableSchedules = async (startIndex, endIndex, name, phone, ta
         phone,
         startIndex,
         endIndex,
+        table_id: tableNumber,
         reservation_id: currentId,
       });
 

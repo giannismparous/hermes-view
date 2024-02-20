@@ -492,7 +492,7 @@ const reservations_data =
 [
     
         {
-            id_counter: 1,
+            id_counter: 39,
         }
     ,
     
@@ -945,6 +945,14 @@ const reservations_data =
                 },
             ],
             reservations:[
+                {
+                    name: "CONOR",
+                    phone: "90",
+                    startIndex:0,
+                    endIndex: 3,
+                    table_id:1,
+                    reservation_id:1,
+                },
                 {
                     name: "ELENA",
                     phone: "930193",
