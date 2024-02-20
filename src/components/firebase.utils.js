@@ -275,16 +275,23 @@ export const updateTableSchedules = async (startIndex, endIndex, name, phone, ta
         phone,
         startIndex,
         endIndex,
-        reservation_id: dataDoc.currentId,
+        reservation_id: currentId,
       });
+
+      console.log(reservations);
+      console.log(currentId);
 
       await updateDoc(dataRef, {
         'idCounter': currentId+1
       });
 
+      console.log(currentId);
+
       await updateDoc(currentDateRef, {
         [`reservations`]: reservations
       });
+
+      console.log("TELOS");
 
       console.log(`Current date updated new reservation for table ${tableNumber} from index ${startIndex} to index ${endIndex} with reservation id ${currentId+1}`);
     } else {
