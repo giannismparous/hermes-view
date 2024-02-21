@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
 import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchReservations, fetchSchedulesTimes, fetchTable} from './firebase.utils';
 import { HashLoader } from 'react-spinners';
+import Calendar from './Calendar';
+import Hamburger from 'hamburger-react';
+import CalendarYearly from './CalendarYearly';
 const sortByImg = '../icons/sort_by.png';
+const calendarOpenImg = '../icons/calendar-open.png';
+const calendarClosedImg = '../icons/calendar-closed.png';
 
 const Reservations = () => {
 
@@ -23,6 +28,7 @@ const Reservations = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortByMenuOpen, setSortByMenuOpen] = useState(false);
     const [selectedSortOption, setSelectedSortOption] = useState(2);
+    const [showCalendar, setShowCalendar] = useState(false);
 
     useEffect(() => {
         const fetchSchedules = async () => {
@@ -174,12 +180,12 @@ const Reservations = () => {
 
     const handleAcceptReservation = async (reservationId) => {
         await acceptReservationByTableNumber(reservationId);
-        // window.location.reload();
+        window.location.reload();
     };
 
     const handleCancelReservation = async (reservationId, tableNumber) => {
         await cancelReservationByTableNumber(reservationId, tableNumber);
-        // window.location.reload();
+        window.location.reload();
     };
 
     const toggleReservationDetailsByTable = (tableId) => {
@@ -318,8 +324,16 @@ const Reservations = () => {
         
       }, [timesReservations,selectedSortOption]);
 
+    const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
+    };
+
     return (
         <div className="reservations-container">
+            <button className="calendar-button" onClick={toggleCalendar}>
+                    {!showCalendar && <img src={calendarClosedImg} alt="Calendar Closed Icon" width="25px" color='black'/>}
+                    {showCalendar && <img src={calendarOpenImg} alt="Calendar Open Icon" width="25px"/>}
+                </button>
             <div className="search-bar-container">
                 <div className="search-bar">
                     <input
@@ -347,12 +361,18 @@ const Reservations = () => {
                     )}
                 </div>
             </div>
+            <div className={`calendar-overlay ${showCalendar ? 'visible' : ''}`} onClick={toggleCalendar}></div>
+            {showCalendar && (
+                <div className='calendar'>
+                    <CalendarYearly/>
+                </div>
+            )}
             {loading ? (
                 <div className="loading-spinner">
                     <HashLoader type="Grid" color="#8a5a00" size={80}/>
                 </div>
             ) : (
-                <div className="reservations">
+                !showCalendar && <div className="reservations">
                     {selectedSortOption === 1 && filteredTablesReservations.map((table, index) => (
                         table.reservations.length !== 0 && (
                             <div key={index} className="reservation">

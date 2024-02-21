@@ -1,0 +1,80 @@
+/* Calendar.css */
+.calendar-container {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    padding: 20px; /* Add padding */
+    width: 400px; /* Set width to 400px */
+    height: 400px; /* Set height to 400px */
+    margin: 20px;
+    background: linear-gradient(to top left, #523602, #b97902);
+}
+
+.calendar-header {
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.close-button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+}
+
+.select-box {
+    margin-right: 10px;
+}
+
+
+.day-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent; /* Set default background color */
+    color: black; /* Set default text color */
+}
+
+
+.selected {
+    background-color: white;
+}
+
+.selected-date {
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.calendar-table {
+    margin: 0 auto; /* Center the table horizontally */
+}
+
+
+.calendar-table tbody tr {
+    display: flex; /* Display table rows horizontally */
+}
+
+.calendar-table tbody tr td{
+    font-size: 30px;
+}
+
+.calendar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* align-items: center; Remove this line */
+    overflow: auto;
+}
+
+.day-box:hover {
+    background-color: white; /* Change background color on hover */
+}
