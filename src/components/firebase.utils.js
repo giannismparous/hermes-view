@@ -153,10 +153,10 @@ export const onAuthStateChangedListener = (callback) =>
 //   return tablesData;
 // };
 
-export const fetchTimeByIndex = async (index) => {
+export const fetchTimeByIndex = async (index, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   const currentDateDoc = await getDoc(currentDateRef);
   const times=currentDateDoc.data().times;
   if (currentDateDoc.exists()) {
@@ -167,6 +167,20 @@ export const fetchTimeByIndex = async (index) => {
     });
   } else {
     console.log(`Current date does not exist.`);
+  }
+};
+
+export const dateExists = async (date) => {
+
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+  if (dateDoc.exists()) {
+    console.log(`${date} exists.`);
+    return true;
+  } else {
+    console.log(`${date} does not exist.`);
+    return false;
   }
 };
 
@@ -184,10 +198,10 @@ export const fetchTable = async (tableNumber) => {
   }
 };
 
-export const fetchSchedulesTimes = async () => {
+export const fetchSchedulesTimes = async (date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   const currentDateDoc = await getDoc(currentDateRef);
   if (currentDateDoc.exists()) {
     return currentDateDoc.data().times;
@@ -196,10 +210,10 @@ export const fetchSchedulesTimes = async () => {
   }
 };
 
-export const fetchReservations = async () => {
+export const fetchReservations = async (date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   const currentDateDoc = await getDoc(currentDateRef);
   if (currentDateDoc.exists()) {
     console.log(currentDateDoc.data());
@@ -209,11 +223,11 @@ export const fetchReservations = async () => {
   }
 };
 
-export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) => {
+export const fetchReservationTimes = async (startIndex, endIndex,date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   const currentDateDoc = await getDoc(currentDateRef);
 
   if (currentDateDoc.exists()) {
@@ -227,13 +241,13 @@ export const fetchReservationTimes = async (startIndex, endIndex,tableNumber) =>
   return;
 };
 
-export const fetchTablesAvailability = async (startIndex, endIndex) => {
+export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   
   const unavailableTables=[];
 
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
 
   const currentDateDoc = await getDoc(currentDateRef);
   if (currentDateDoc.exists()) {
@@ -254,10 +268,10 @@ export const fetchTablesAvailability = async (startIndex, endIndex) => {
   return unavailableTables;
 };
 
-export const updateTableSchedules = async (startIndex, endIndex, name, phone, tableNumber) => {
+export const updateTableSchedules = async (startIndex, endIndex, name, phone, tableNumber, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   const dataRef = doc(sampleRestaurantRef, "data");
 
   try {
@@ -305,10 +319,10 @@ export const updateTableSchedules = async (startIndex, endIndex, name, phone, ta
 
 };
 
-export const cancelReservationByTableNumber = async (reservationId) => {
+export const cancelReservationByTableNumber = async (reservationId, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
 
   try {
 
@@ -348,10 +362,10 @@ export const cancelReservationByTableNumber = async (reservationId) => {
 
 };
 
-export const acceptReservationByTableNumber = async (reservationId) => {
+export const acceptReservationByTableNumber = async (reservationId, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, getCurrentDate());
+  const currentDateRef = doc(sampleRestaurantRef, date);
   try {
 
     const currentDateDoc = await getDoc(currentDateRef);

@@ -1,15 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { acceptReservationByTableNumber, cancelReservationByTableNumber, fetchReservations, fetchSchedulesTimes, fetchTable} from './firebase.utils';
+import { acceptReservationByTableNumber, cancelReservationByTableNumber, dateExists, fetchReservations, fetchSchedulesTimes, fetchTable} from './firebase.utils';
 import { HashLoader } from 'react-spinners';
-import Calendar from './Calendar';
-import Hamburger from 'hamburger-react';
 import CalendarYearly from './CalendarYearly';
 const sortByImg = '../icons/sort_by.png';
 const calendarOpenImg = '../icons/calendar-open.png';
 const calendarClosedImg = '../icons/calendar-closed.png';
 
 const Reservations = () => {
+
+    const getCurrentDate = () => {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1; // Month is zero-based
+        const day = currentDate.getDate();
+        return `${day}-${month}-${year}`;
+    }
 
     const [tablesReservations, setTablesReservations] = useState([]);
     const [filteredTablesReservations, setFilteredTablesReservations] = useState([]);
@@ -29,17 +35,47 @@ const Reservations = () => {
     const [sortByMenuOpen, setSortByMenuOpen] = useState(false);
     const [selectedSortOption, setSelectedSortOption] = useState(2);
     const [showCalendar, setShowCalendar] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(getCurrentDate()); // State to store selected date
+    const [selectedDateEmpty, setSelectedDateEmpty] = useState(false); // State to store selected date
+
+    const handleDateSelect = (date) => {
+        console.log("Selected date:" + date);
+        setSelectedDate(date);
+        setShowCalendar(false);
+        setSelectedDateEmpty(false);
+    };
 
     useEffect(() => {
         const fetchSchedules = async () => {
-            const schedules = await fetchSchedulesTimes();
-            setTimes(schedules);
+            setLoading(true); // Set loading to true before fetching schedules
+            const exists = await dateExists(selectedDate);
+            if (exists) {
+                const schedules = await fetchSchedulesTimes(selectedDate);
+                setTimes(schedules);
+            } else {
+                setTablesReservations([]);
+                setFilteredTablesReservations([]);
+                setExpandedTablesReservations([]);
+                setTimesReservations([]);
+                setFilteredTimesReservations([]);
+                setExpandedTimesReservations([]);
+                setNamesReservations([]);
+                setFilteredNamesReservations([]);
+                setExpandedNamesReservations([]);
+                setIdsReservations([]);
+                setFilteredIdsReservations([]);
+                setExpandedIdsReservations([]);
+                setTimes([]);
+                setLoading(false);
+                setSelectedDateEmpty(true);
+            }
         };
     
         fetchSchedules();
-    }, []);
+    }, [selectedDate]);
 
     useEffect(() => {
+
         const getTimeByIndex = (index) => {
             const foundTime = times.find(time => parseInt(time.id) === index);
             if (foundTime) {
@@ -56,7 +92,7 @@ const Reservations = () => {
                 tablesReservationsData[i-1].reservations=[];
             }
 
-            const fetchedReservations=await fetchReservations();
+            const fetchedReservations=await fetchReservations(selectedDate);
             for (let i=0;i<fetchedReservations.length;i++){
                 let index=fetchedReservations[i].table_id-1;
                 const { table_id, ...reservationData } = fetchedReservations[i];
@@ -157,7 +193,7 @@ const Reservations = () => {
             setLoading(false);
         };
     
-        if (times.length > 0) {
+        if (times && times.length > 0) {
             fetchTablesData();
         }
     }, [times]);
@@ -179,12 +215,12 @@ const Reservations = () => {
     }, [idsReservations]);
 
     const handleAcceptReservation = async (reservationId) => {
-        await acceptReservationByTableNumber(reservationId);
+        await acceptReservationByTableNumber(reservationId, selectedDate);
         window.location.reload();
     };
 
-    const handleCancelReservation = async (reservationId, tableNumber) => {
-        await cancelReservationByTableNumber(reservationId, tableNumber);
+    const handleCancelReservation = async (reservationId) => {
+        await cancelReservationByTableNumber(reservationId, selectedDate);
         window.location.reload();
     };
 
@@ -325,7 +361,7 @@ const Reservations = () => {
       }, [timesReservations,selectedSortOption]);
 
     const toggleCalendar = () => {
-    setShowCalendar(!showCalendar);
+        setShowCalendar(!showCalendar);
     };
 
     return (
@@ -364,7 +400,7 @@ const Reservations = () => {
             <div className={`calendar-overlay ${showCalendar ? 'visible' : ''}`} onClick={toggleCalendar}></div>
             {showCalendar && (
                 <div className='calendar'>
-                    <CalendarYearly/>
+                    <CalendarYearly onDateSelect={handleDateSelect} selectedDate={selectedDate}/>
                 </div>
             )}
             {loading ? (
@@ -373,6 +409,9 @@ const Reservations = () => {
                 </div>
             ) : (
                 !showCalendar && <div className="reservations">
+                    {selectedDateEmpty && <div className='no-reservations'>
+                        <h2>No available reservations for this date.</h2>
+                    </div>}
                     {selectedSortOption === 1 && filteredTablesReservations.map((table, index) => (
                         table.reservations.length !== 0 && (
                             <div key={index} className="reservation">

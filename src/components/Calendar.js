@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Calendar.css';
 
-const Calendar = ({ onClose, month, year, day }) => {
+const Calendar = ({ month, year, day, onDateSelect }) => {
+
     const handleDateSelect = (date) => {
-        // onClose(); // Close the calendar after selecting a date
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formattedDate = date.toLocaleDateString('en-GB', options).replace(/\//g, '-');
+        const [selectedDay, selectedMonth, selectedYear] = formattedDate.split('-').map(part => parseInt(part, 10));
+        const formattedDateString = `${selectedDay}-${selectedMonth}-${selectedYear}`;
+        onDateSelect(formattedDateString); // Call onDateSelect function with the selected date
+        console.log(formattedDateString)
     };
+
+    const isSelectedDay = (dayIndex) => {
+        return day === dayIndex;
+    }
 
     const generateDaysArray = () => {
         const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -14,6 +24,11 @@ const Calendar = ({ onClose, month, year, day }) => {
     const isCurrentDay = (currentDay) => {
         return currentDay === day;
     };
+
+    useEffect(() => {
+        console.log('Props updated: day:', day, 'month:', month, 'year:', year);
+    }, [day, month, year]);
+
 
     const monthName = new Date(year, month).toLocaleDateString(undefined, { month: 'long' }); // Get the month name
 
@@ -38,7 +53,7 @@ const Calendar = ({ onClose, month, year, day }) => {
                                 {week.map(day => (
                                     <td
                                         key={day}
-                                        className={`day-box ${isCurrentDay(day) ? 'selected' : ''}`}
+                                        className={`day-box ${isSelectedDay(day) ? 'selected' : ''}`}
                                         onClick={() => handleDateSelect(new Date(year, month, day))}
                                     >
                                         {day}
@@ -60,4 +75,3 @@ const Calendar = ({ onClose, month, year, day }) => {
 };
 
 export default Calendar;
-    
