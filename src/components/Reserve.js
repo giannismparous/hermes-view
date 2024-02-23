@@ -63,7 +63,7 @@ const Reserve = () => {
   };
 
   const handleTablesFetch = async () => {
-    fetchTablesAvailability(clickedIndex, maxIndex)
+    fetchTablesAvailability(clickedIndex, maxIndex, getCurrentDate())
       .then(unavailableTables => {
         const data = {
           eventName: 'ReservationTimeSelected',
