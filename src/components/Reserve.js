@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {fetchSchedulesTimes, fetchTablesAvailability } from './firebase.utils';
+import {fetchSchedulesTimes, fetchTablesAvailability, getCurrentDate } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
 import { HashLoader } from 'react-spinners';
 
@@ -15,7 +15,7 @@ const Reserve = () => {
 
   useEffect(() => {
     const handleFetchTimes = async () => {
-      const fetchedTimes = await fetchSchedulesTimes();
+      const fetchedTimes = await fetchSchedulesTimes(getCurrentDate());
       console.log(fetchedTimes);
       setTimes(fetchedTimes);
       setTimesFetched(true);
