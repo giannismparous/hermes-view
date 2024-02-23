@@ -1,12 +1,13 @@
 // VideoComponent.js
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from 'gsap';
 import SplitTextJS from "split-text-js";
 import "../styles/VideoComponent.css";
 
 function VideoComponent({ onVideoReady }) {
   const [videoReady, setVideoReady] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const titles = gsap.utils.toArray('.text-wrapper p');
@@ -41,6 +42,14 @@ function VideoComponent({ onVideoReady }) {
 
   const isMobile = window.innerWidth <= 767; // Adjust the breakpoint as needed
 
+  const handleVideoClick = () => {
+    if (!videoReady) {
+      // Start the video only if it's ready
+      const video = videoRef.current;
+      video.play();
+    }
+  };
+
   return (
     <div className="video-container">
       <video
@@ -49,7 +58,10 @@ function VideoComponent({ onVideoReady }) {
         loop
         width="100%"
         height="100%"
+        playsInline // Add playsinline attribute
+        ref={videoRef} // Add a ref to the video element
         onCanPlayThrough={() => {}} // Empty function to prevent ESLint warning
+        onClick={handleVideoClick} // Add an onClick handler to start the video on mobile
       >
         <source
           src={isMobile ? "/videos/showcase-smartphone.mp4" : "/videos/showcase-pc.mp4"}
