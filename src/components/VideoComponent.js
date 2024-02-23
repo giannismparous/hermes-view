@@ -12,11 +12,12 @@ function VideoComponent({ onVideoReady }) {
   useEffect(() => {
     const titles = gsap.utils.toArray('.text-wrapper p');
     const tl = gsap.timeline({ repeat: -1 });
-
-    titles.forEach((title) => {
+  
+    titles.forEach((title, index) => {
       const splitTitle = new SplitTextJS(title);
-      tl.from(splitTitle.chars, { opacity: 0, y: 80, rotateX: -90, stagger: 0.02 }, "<")
-        .to(splitTitle.chars, { opacity: 0, y: -80, rotateX: 90, stagger: 0.02 }, "<1.2");
+      tl.from(splitTitle.chars, { opacity: 0, y: 80, rotateX: -90, stagger: 0.07, duration: 1 }, `<0.5`)
+        .to(splitTitle.chars, { opacity: 0, y: -80, rotateX: 90, stagger: 0.07, duration: 1 }, `<2`);
+        // Adjust the duration (in seconds) and stagger delay to control the animation speed and delay between words
     });
 
     const videoElement = document.querySelector('video');
