@@ -74,7 +74,7 @@ function Home() {
       <div style={{ opacity: isVideoReady ? 1 : 0 }}>
       <section className="container golden-container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <h1>Welcome to HermesView</h1>
-        <p>Specialized in delivering unparalleled VR tours tailored for real estate agencies, setting a gold standard in professionalism and expertise. With a proven track record, we bring immersive experiences that redefine property showcasing.</p>
+        <p>Our company leverages its expertise in 360-degree technology to craft captivating brand experiences designed to inform and captivate viewers. Our commitment is to keep our clients at the forefront of immersive experiences. Our range of services includes 360 virtual tours, 360 car interiors, 360 photography as well as spherical photography. </p>
       </section>
       <section className="container services animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">
@@ -101,13 +101,27 @@ function Home() {
           </div>
         </div>
       </section>
+      <div class="image-container-icons">
+        <div class="image-content-icons">
+          <img src="../icons/360.png" alt="360-icon" id="icons" />
+          <p>Experience a space in full immersion with our 360 virtual tour service.</p>
+        </div>
+        <div class="image-content-icons">
+          <img src="../icons/360-video.png" alt="360-icon" id="icons" />
+          <p>A rig for every occasion. 4K – 12K capture with stereo or monoscopic options.</p>
+        </div>
+        <div class="image-content-icons">
+          <img src="../icons/code.png" alt="360-icon" id="icons" />
+          <p>We design, code & deploy each 360 virtual tour bespoke to your requirements.</p>
+        </div>
+      </div>
       <section className="sample-container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">
           <h2>Sample Project</h2>
         </div>
         <SamplePage
           redirectToSample={true}
-          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto"}}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
         />
       </section>
       <section className="container animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>

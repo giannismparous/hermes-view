@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Routes,
   Route,
@@ -19,10 +19,18 @@ import Sample3DModel from "./components/Sample3DModel";
 import Reserve from "./components/Reserve";
 import ReserveTable from "./components/ReserveTable";
 import Login from "./components/Login";
+import ReactGA from 'react-ga';
 
 function App() {
 
+
+  ReactGA.initialize('G-333MCPYNT7');
+
   const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
 
   const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations"];
 

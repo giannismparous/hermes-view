@@ -183,3 +183,30 @@ color: #8a5a00;
   align-items: center;
   z-index: 9999; /* Set a high z-index to ensure it's above other elements */
 }
+
+.image-content-icons img {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+}
+
+.image-container-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the images horizontally */
+  align-items: center;
+  gap: 50px; /* Add space between the images */
+  margin-bottom: 40px;
+}
+
+.image-content-icons {
+  margin-right: 0; /* Remove right margin */
+  border-radius: 10px;
+  width: 400px;
+  height: 250px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Gold shadow */
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center; /* Center text horizontally */
+}

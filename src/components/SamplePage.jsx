@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
@@ -36,11 +36,19 @@ function SamplePage({ style, redirectToSample, modelPath, ...otherProps }) {
   };
 
   return (
-    <div style={{ ...style }} {...otherProps}>
+    <Fragment>
+      {redirectToSample && <div {...otherProps}>
+      <iframe title="3D Vista Project" src={modelPath} style={style} sandbox="allow-scripts allow-same-origin allow-top-navigation" allowFullScreen></iframe>
+      {/* Clickable overlay */}
+      {redirectToSample && <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>}
+      </div>}
+      {!redirectToSample && <div style={{ ...style }} {...otherProps}>
       <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} sandbox="allow-scripts allow-same-origin allow-top-navigation" allowFullScreen></iframe>
       {/* Clickable overlay */}
       {redirectToSample && <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>}
-    </div>
+      </div>}
+    </Fragment>
+    
   );
 }
 
