@@ -43,11 +43,14 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
         navigate("/projects/1");
         console.log("Redirecting to /projects/1");
       } else if (sampleId === 3) {
-        navigate("/projects/3");
-        console.log("Redirecting to /projects/3");
-      } else if (sampleId === 4) {
         navigate("/projects/2");
         console.log("Redirecting to /projects/2");
+      } else if (sampleId === 4) {
+        navigate("/projects/3");
+        console.log("Redirecting to /projects/3");
+      } else if (sampleId === 5) {
+        navigate("/3d-model-sample");
+        console.log("Redirecting to /3d-model-sample");
       }
     }
   };
