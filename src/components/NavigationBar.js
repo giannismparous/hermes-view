@@ -66,7 +66,7 @@ function NavigationBar() {
         <div className="mobile-menu">
           <ul>
             <li><Link to="/" onClick={toggleMenu} className="text-fade-in">Home</Link></li>
-            <li><Link to="/sample" onClick={toggleMenu} className="text-fade-in">Sample</Link></li>
+            <li><Link to="/samples" onClick={toggleMenu} className="text-fade-in">Samples</Link></li>
             <li><Link to="/about" onClick={toggleMenu} className="text-fade-in">About</Link></li>
             <li><Link to="/contact" onClick={toggleMenu} className="text-fade-in">Contact Us</Link></li>
             <li className="social-media-list">

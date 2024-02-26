@@ -20,6 +20,7 @@ import Reserve from "./components/Reserve";
 import ReserveTable from "./components/ReserveTable";
 import Login from "./components/Login";
 import ReactGA from 'react-ga';
+import Samples from "./components/Samples";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/samples" element={<Samples />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />

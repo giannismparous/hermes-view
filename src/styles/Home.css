@@ -117,12 +117,6 @@ a {
 color: #8a5a00;
 }
 
-
-.text-content {
-  flex: 1;
-  margin-right: 20px;
-}
-
 .image-content {
   flex: 1;
   margin-top: 40px;
@@ -209,4 +203,21 @@ color: #8a5a00;
   padding-left: 20px;
   padding-right: 20px;
   text-align: center; /* Center text horizontally */
+}
+
+@keyframes floatAnimation {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.image-content-icons:hover {
+  animation: floatAnimation 1s infinite; /* 1s duration, infinite loop */
+}
+
+.question-title strong{
+  font-size: 1.5em;
+}
+
+.question-container {
+  margin-top: 50px;
 }
