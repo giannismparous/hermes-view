@@ -6,15 +6,9 @@ import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
 import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
-import ReactGA from 'react-ga4';
 import reservations_data from "./reservations_data";
 
 function Home() {
-
-  ReactGA.send({
-    hitType:"pageview",
-    page: window.location.pathname,
-  });
 
   const logGoogleUser = async() => {
     const response = await signInWithGooglePopup();
