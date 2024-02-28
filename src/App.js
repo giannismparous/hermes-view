@@ -19,13 +19,12 @@ import Sample3DModel from "./components/Sample3DModel";
 import Reserve from "./components/Reserve";
 import ReserveTable from "./components/ReserveTable";
 import Login from "./components/Login";
-import ReactGA from 'react-ga4';
+import TagManager from 'react-gtm-module';
 import Samples from "./components/Samples";
 
 function App() {
 
-
-  ReactGA.initialize('G-333MCPYNT7');
+  TagManager.initialize({ gtmId: 'GTM-KDRHXVW7' });
 
   const location = useLocation();
 
