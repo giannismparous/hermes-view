@@ -26,7 +26,6 @@ function App() {
 
 
   ReactGA.initialize('G-333MCPYNT7');
-  ReactGA.debug();
 
   const location = useLocation();
 
