@@ -29,10 +29,6 @@ function App() {
 
   const location = useLocation();
 
-  useEffect(() => {
-    ReactGA.pageview(location.pathname + location.search);
-  }, [location]);
-
   const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations"];
 
   // Check if the current path is in the array of paths without NavBar

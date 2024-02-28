@@ -60,7 +60,6 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
       {redirectToSample && (
         <div style={{ ...containerStyle, ...style }} {...otherProps}>
           <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} sandbox="allow-scripts allow-same-origin allow-top-navigation" allowFullScreen></iframe>
-          {/* Clickable overlay */}
           <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>
         </div>
       )}

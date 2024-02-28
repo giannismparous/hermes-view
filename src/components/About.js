@@ -9,7 +9,7 @@ function About() {
 
   return (
     <div className="about" ref={scrollRef}>
-      <section className='container golden-container animate-on-scroll about'>
+      <section className='container golden-container animate-on-scroll about-container'>
         <h1>About Us</h1>
       </section>
       <section className="container animate-on-scroll">
