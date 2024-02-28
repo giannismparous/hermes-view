@@ -11,9 +11,10 @@ import reservations_data from "./reservations_data";
 
 function Home() {
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+  ReactGA.send({
+    hitType:"pageview",
+    page: window.location.pathname,
+  });
 
   const logGoogleUser = async() => {
     const response = await signInWithGooglePopup();
