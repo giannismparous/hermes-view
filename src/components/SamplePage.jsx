@@ -36,22 +36,29 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
   const handleOverlayClick = () => {
     // Redirect to "/sample" only if redirectToSample is true
     if (redirectToSample) {
-      if (sampleId === 1) {
-        navigate("/sample");
-        console.log("Redirecting to /sample");
-      } else if (sampleId === 2) {
-        navigate("/projects/1");
-        console.log("Redirecting to /projects/1");
-      } else if (sampleId === 3) {
-        navigate("/projects/2");
-        console.log("Redirecting to /projects/2");
-      } else if (sampleId === 4) {
-        navigate("/projects/3");
-        console.log("Redirecting to /projects/3");
-      } else if (sampleId === 5) {
-        navigate("/3d-model-sample");
-        console.log("Redirecting to /3d-model-sample");
+      let redirectUrl = "";
+      switch (sampleId) {
+        case 1:
+          redirectUrl = "/sample";
+          break;
+        case 2:
+          redirectUrl = "/projects/1";
+          break;
+        case 3:
+          redirectUrl = "/projects/2";
+          break;
+        case 4:
+          redirectUrl = "/projects/3";
+          break;
+        case 5:
+          redirectUrl = "/3d-model-sample";
+          break;
+        default:
+          redirectUrl = "/";
+          break;
       }
+      console.log("Redirecting to", redirectUrl);
+      window.open(redirectUrl, "_blank"); // Open in a new tab
     }
   };
 
