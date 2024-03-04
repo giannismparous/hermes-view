@@ -1,30 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import {fetchSchedulesTimes, fetchTablesAvailability, getCurrentDate } from './firebase.utils';
+import {fetchDatesAvailability, fetchSchedulesTimes, fetchTablesAvailability, getCurrentDate, getDateRange } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
 import { HashLoader } from 'react-spinners';
 
 const maxIndexForward = 6;
 
 const Reserve = () => {
+  const [dates,setDates] = useState([]);
   const [times, setTimes] = useState([]);
   const [clickedIndex, setClickedIndex] = useState(null);
   const [maxIndex, setMaxIndex] = useState(null);
   const [choosingReservationDate, setChoosingReservationDate] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [timesFetched, setTimesFetched] = useState(false); // State to track whether tables are fetched
+  const [selectedDate, setSelectedDate] = useState(false);
+  const [dateSelected, setDateSelected] = useState("");
+  const [datesFetched, setDatesFetched] = useState(false);
+  const [timesFetched, setTimesFetched] = useState(false); 
 
   useEffect(() => {
-    const handleFetchTimes = async () => {
-      const fetchedTimes = await fetchSchedulesTimes(getCurrentDate());
-      console.log(fetchedTimes);
-      setTimes(fetchedTimes);
-      setTimesFetched(true);
+    const handleFetchDatesAvailability = async (date, num) => {
+      try {
+        const tempDates = getDateRange(num).map(date => ({ date }));
+        const datesAvailability = await fetchDatesAvailability(date, num);
+        const updatedDates = tempDates.map((tempDate, index) => ({
+          ...tempDate,
+          unavailable: !datesAvailability[index]
+        }));
+        console.log(updatedDates);
+        setDates(updatedDates);
+        setDatesFetched(true);
+      } catch (error) {
+        console.error('Error fetching dates availability:', error);
+      }
     };
 
-    handleFetchTimes();
+    const tempDates = getDateRange(10).map(date => ({ date }));
+    handleFetchDatesAvailability(tempDates[0].date,tempDates.length);
   }, []);
 
-  const handleButtonClick = (index) => {
+  useEffect(() => {
+    if (dateSelected) {
+      const handleFetchTimes = async () => {
+        const fetchedTimes = await fetchSchedulesTimes(dateSelected);
+        setTimes(fetchedTimes);
+        setTimesFetched(true);
+      };
+  
+      handleFetchTimes();
+    }
+  }, [dateSelected]);
+
+  const handleButtonClickDate = (index) => {
+    setDateSelected(dates[index].date);
+    setSelectedDate(true);
+  };
+  
+
+  const handleButtonClickTime = (index) => {
     if (choosingReservationDate) {
       if (index < clickedIndex || index > maxIndex) {
         setChoosingReservationDate(!choosingReservationDate);
@@ -33,14 +65,14 @@ const Reserve = () => {
         setShowConfirmation(true); // Show confirmation popup
       }
     } else {
-      if (times[index].inavailable === true) {
+      if (times[index].unavailable === true) {
         alert("Can't book this date");
         return;
       }
       let num = 0;
       for (let i = index + 1; i < index + maxIndexForward; i++) {
         const time = times[i];
-        if (time.inavailable === undefined) {
+        if (time.unavailable === undefined) {
           num = num + 1;
         } else {
           break; // Exit the loop if table.name is not null
@@ -82,7 +114,7 @@ const Reserve = () => {
 
   return (
     <div>
-      {!timesFetched && (
+      {(!timesFetched && selectedDate) || (!datesFetched) && (
         <div className="loading-overlay">
           <div className="loader-container">
             <HashLoader type="Grid" color="#8a5a00" size={80}/>
@@ -90,14 +122,26 @@ const Reserve = () => {
         </div>
       )}
       <div className="calendar-buttons">
-        {times.map((time, index) => (
+        {!selectedDate && dates.map((date, index) => (
+          <button
+            key={index}
+            className={`
+              ${date.unavailable ? 'calendar-button-green' : 'calendar-button-red'}
+              ${choosingReservationDate && clickedIndex !== null && (index < clickedIndex || index > maxIndex) && 'grayed-out'}
+            `}
+            onClick={() => handleButtonClickDate(index)}
+          >
+            {date.date}
+          </button>
+        ))}
+        {selectedDate && times.map((time, index) => (
           <button
             key={time.id}
             className={`
-              ${time.inavailable === undefined ? 'calendar-button-green' : 'calendar-button-red'}
+              ${time.unavailable === undefined ? 'calendar-button-green' : 'calendar-button-red'}
               ${choosingReservationDate && clickedIndex !== null && (index < clickedIndex || index > maxIndex) && 'grayed-out'}
             `}
-            onClick={() => handleButtonClick(index)}
+            onClick={() => handleButtonClickTime(index)}
           >
             {time.time}
           </button>

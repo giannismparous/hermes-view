@@ -5,7 +5,7 @@ import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
-import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup } from "./firebase.utils";
+import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup, updateDateAvailability } from "./firebase.utils";
 import reservations_data from "./reservations_data";
 
 function Home() {
@@ -15,11 +15,21 @@ function Home() {
     console.log(response);
   }
 
+  const addDateAvailabilityToDb = async() => {
+
+    const response = updateDateAvailability("sample-restaurant");
+}
+
   const addToDb = async() => {
 
-      const response = addCollectionAndDocuments("sample-restaurant", reservations_data);
+      const response = addCollectionAndDocuments("sample-restaurant", reservations_data,1);
       console.log(response);
   }
+
+  const add10DaysToDb = async() => {
+
+    const response = addCollectionAndDocuments("sample-restaurant", reservations_data,10);
+}
 
   const removeFromDb = async () => {
     try {
@@ -102,16 +112,16 @@ function Home() {
           </div>
         </div>
       </section>
-      <div class="image-container-icons">
-        <div class="image-content-icons">
+      <div className="image-container-icons">
+        <div className="image-content-icons">
           <img src="../icons/360.png" alt="360-icon" id="icons" />
           <p>Experience a space in full immersion with our 360 virtual tour service.</p>
         </div>
-        <div class="image-content-icons">
+        <div className="image-content-icons">
           <img src="../icons/360-video.png" alt="360-icon" id="icons" />
           <p>A rig for every occasion. 4K – 12K capture with stereo or monoscopic options.</p>
         </div>
-        <div class="image-content-icons">
+        <div className="image-content-icons">
           <img src="../icons/code.png" alt="360-icon" id="icons" />
           <p>We design, code & deploy each 360 virtual tour bespoke to your requirements.</p>
         </div>
@@ -172,6 +182,8 @@ function Home() {
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
       {/* <button onClick={addToDb}>ADD</button> */}
+      {/* <button onClick={add10DaysToDb}>ADD</button> */}
+      {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
       {/* <button onClick={removeFromDb}>REMOVE</button> */}
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>

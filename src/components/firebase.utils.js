@@ -45,9 +45,67 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
+export const updateDateAvailability = async (collectionKey) => {
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, collectionKey);
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
+  // Function to get all dates of the year
+  const getAllDatesOfYear = (year) => {
+    const dates = [];
+    for (let month = 0; month < 12; month++) {
+      for (let day = 1; day <= new Date(year, month + 1, 0).getDate(); day++) {
+        dates.push(`${day}-${month + 1}-${year}`);
+      }
+    }
+    return dates;
+  };
+
+  const allDatesOfYear = getAllDatesOfYear(currentYear);
+
+  const docRef = doc(collectionRef, "data");
+
+  // Fetch the current "data" document to maintain "id_counter"
+  const docSnapshot = await getDoc(docRef);
+  let idCounter = 0;
+  if (docSnapshot.exists()) {
+    idCounter = docSnapshot.data().id_counter || 0;
+  }
+
+  const tempDates = allDatesOfYear.map((date, index) => {
+    const unavailable = Math.random() < 0.5 ? true : undefined; // Randomly set unavailable to true or keep it undefined
+    if (unavailable){
+      return {
+        id: index + 1, // Increment id_counter for each date
+        date: date,
+        unavailable: unavailable
+      };
+    }
+    else {
+      return {
+        id: index + 1, // Increment id_counter for each date
+        date: date,
+      };
+    }
+  });
+
+  // Update "data" document with new "dates" array and updated "id_counter"
+  batch.set(docRef, {
+    dates: tempDates,
+    id_counter: idCounter + allDatesOfYear.length // Increment id_counter
+  });
+
+  await batch.commit();
+  console.log('Added dates availability to the database');
+};
+
+
 export const addCollectionAndDocuments = async (
   collectionKey,
-  objectsToAdd
+  objectsToAdd,
+  num
 ) => {
   const batch = writeBatch(db);
   const collectionRef = collection(db, collectionKey);
@@ -74,6 +132,54 @@ export const addCollectionAndDocuments = async (
   console.log('added to db');
 };
 
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd,
+//   num
+// ) => {
+//   const batch = writeBatch(db);
+//   const collectionRef = collection(db, collectionKey);
+
+//   console.log("objectsToAdd length:", objectsToAdd.length);
+
+//   const currentDate = new Date();
+//   for (let i = 0; i < num; i++) {
+//     const date = new Date(currentDate); // Create a new date object for each iteration
+//     date.setDate(date.getDate() + i); // Add 'i' days to the current date
+
+//     console.log("Processing date:", date);
+
+//     const dateString = formatDate(date); // Format the date string
+
+//     const docRef = doc(collectionRef, dateString);
+//     for (let j = 0; j < objectsToAdd.length; j++) {
+//       console.log("i:", j);
+//       let docRef; // Declare docRef outside the if-else blocks
+
+//       if (j === 0) {
+//           docRef = doc(collectionRef, "data");
+//       } else if (j === objectsToAdd.length - 1) {
+          
+//           docRef = doc(collectionRef, getCurrentDate());
+//       } else {
+//           docRef = doc(collectionRef,"table" + objectsToAdd[j].id);
+//       }
+
+//       batch.set(docRef, objectsToAdd[j]);
+//   }
+//   }
+
+//   await batch.commit();  
+//   console.log('added to db');
+// };
+
+export const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // Month is zero-based
+  const day = date.getDate();
+  return `${day}-${month}-${year}`;
+}
+
 export const getCurrentDate = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -81,6 +187,21 @@ export const getCurrentDate = () => {
   const day = currentDate.getDate();
   return `${day}-${month}-${year}`;
 }
+
+export const getDateRange = (num) => {
+  const currentDate = new Date();
+  const dates = [];
+
+  for (let i = 0; i <= num; i++) {
+    const date = new Date(currentDate.getTime() + i * 24 * 60 * 60 * 1000);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Month is zero-based
+    const day = date.getDate();
+    dates.push(`${day}-${month}-${year}`);
+  }
+
+  return dates;
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -153,13 +274,45 @@ export const onAuthStateChangedListener = (callback) =>
 //   return tablesData;
 // };
 
+export const fetchDatesAvailability = async (date, num) => {
+  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const dataRef = doc(sampleRestaurantRef, "data");
+  const dataDoc = await getDoc(dataRef);
+  if (dataDoc.exists()) {
+    const data = dataDoc.data();
+    let currentIndex=0;
+    if (data && data.dates && Array.isArray(data.dates)) {
+      const availability = [];
+      for (let i = 0; i < data.dates.length; i++) {
+        if (date===data.dates[i].date){
+          currentIndex=i;
+          break;
+        }
+      }
+      for (let i = currentIndex; i < currentIndex+num; i++) {
+        if (data.dates[i].unavailable===undefined){
+          availability.push(true);
+        }
+        else {
+          availability.push(false);
+        }
+      }
+      return availability;
+    } else {
+      console.log('Dates array is missing or not an array.');
+    }
+  } else {
+    console.log(`Current date does not exist.`);
+  }
+};
+
 export const fetchTimeByIndex = async (index, date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   const currentDateRef = doc(sampleRestaurantRef, date);
   const currentDateDoc = await getDoc(currentDateRef);
-  const times=currentDateDoc.data().times;
   if (currentDateDoc.exists()) {
+    const times=currentDateDoc.data().times;
     times.forEach(time => {
       if (index===time.id){
         return time.time
