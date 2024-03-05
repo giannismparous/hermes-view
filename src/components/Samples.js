@@ -15,7 +15,7 @@ function Samples() {
             style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
             />
         </div>
-        <div className="sample-container">
+        {/* <div className="sample-container">
             <div className="centered-header">
                 <h2>Sample 2</h2>
             </div>
@@ -23,7 +23,7 @@ function Samples() {
             redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_3/"} sampleId={4}
             style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
             />
-        </div>
+        </div> */}
         <div className="sample-container">
             <div className="centered-header">
                 <h2>Sample 3</h2>
