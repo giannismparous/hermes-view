@@ -1,11 +1,17 @@
 import React from "react";
 import SamplePage from "./SamplePage";
 import "../styles/Samples.css";
+import { Helmet } from "react-helmet-async";
 
 function Samples() {
 
   return (
     <div className="samples">
+        <Helmet>
+            <title>Samples - HermesView</title>  
+            <meta name="description" content="Check out our sample projects."/>
+            <link rel="canonical" href="/samples"/>
+        </Helmet>
         <div className="sample-container" style={{ marginTop: "50px" }}>
             <div className="centered-header">
                 <h2>Sample 1</h2>

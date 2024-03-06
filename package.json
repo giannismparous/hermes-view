@@ -17,10 +17,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-gtm-module": "^2.0.11",
+    "react-helmet-async": "^2.0.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.3.0",
+    "react-snap": "^1.23.0",
     "react-spinners": "^0.13.8",
     "split-text-js": "^1.0.3",
     "web-vitals": "^2.1.4"

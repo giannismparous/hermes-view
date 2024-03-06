@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {fetchDatesAvailability, fetchSchedulesTimes, fetchTablesAvailability, getCurrentDate, getDateRange } from './firebase.utils';
 import '../styles/Reserve.css'; // Import CSS file for styling
 import { HashLoader } from 'react-spinners';
+import { Helmet } from 'react-helmet-async';
 
 const maxIndexForward = 6;
 
@@ -114,6 +115,12 @@ const Reserve = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home - HermesView</title>  
+        <meta name="description" content="Make a reservation."/>
+        <link rel="canonical" href="/reserve"/>
+        <meta name='robots' content='noindex'/>
+      </Helmet>
       {(!timesFetched && selectedDate) || (!datesFetched) && (
         <div className="loading-overlay">
           <div className="loader-container">

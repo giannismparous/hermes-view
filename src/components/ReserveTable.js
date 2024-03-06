@@ -61,6 +61,8 @@ const ReserveTable = () => {
     
     return (
         <div className="reservation-container">
+            <meta name="description" content="Reserve a table now."/>
+            <meta name='robots' content='noindex'/>
             <div className=".reservation-details-reserve-table">
                 {!reservationTimesFetched && !bookedReservation && <HashLoader type="Grid" color="#8a5a00" size={80}/>}
                 {reservationTimesFetched && !bookedReservation && (

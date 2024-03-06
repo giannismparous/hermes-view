@@ -3,6 +3,7 @@ import emailjs from 'emailjs-com';
 import useScrollAnimation from './useScrollAnimation';
 import '../styles/Contact.css';
 import ContactInfo from './ContactInfo';
+import { Helmet } from 'react-helmet-async';
 
 function Contact() {
   const form = useRef();
@@ -25,6 +26,12 @@ function Contact() {
 
   return (
     <div className="contact" ref={scrollRef}>
+      <Helmet>
+        <title>Contact - HermesView</title>  
+        <meta name="description" content="Reach out to us.
+          Fill out the form below (Name, Email, Message)"/>
+        <link rel="canonical" href="/contact"/>
+      </Helmet>
       <section className="contact-container container animate-on-scroll">
         <h1>Reach out to us</h1>
         <p>Fill out the form below:</p>

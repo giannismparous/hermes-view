@@ -24,6 +24,9 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <meta name="description" content="Login"/>
+      <link rel="canonical" href="/login"/>
+      <meta name='robots' content='noindex'/>
       <h2>Login</h2>
       <input
         className="login-input"

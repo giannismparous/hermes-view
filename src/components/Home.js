@@ -7,6 +7,7 @@ import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
 import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup, updateDateAvailability } from "./firebase.utils";
 import reservations_data from "./reservations_data";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
 
@@ -72,6 +73,11 @@ function Home() {
 
   return (
     <div ref={scrollRef} className="home">
+      <Helmet>
+        <title>Home - HermesView</title>  
+        <meta name="description" content="Welcome. Our company leverages its expertise in 360-degree technology. Our range of services includes 360 virtual tours, panoramic photography and reel making."/>
+        <link rel="canonical" href="/"/>
+      </Helmet>
       {/* <ImageSlider images={images} /> */}
       {!isVideoReady && (
         <div className="loading-overlay">

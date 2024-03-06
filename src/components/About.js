@@ -2,6 +2,7 @@ import React from "react";
 import useScrollAnimation from './useScrollAnimation';
 import "../styles/About.css"; // Make sure to create an About.css file with the styles
 import ContactInfo from "./ContactInfo";
+import { Helmet } from "react-helmet-async";
 
 function About() {
 
@@ -9,6 +10,12 @@ function About() {
 
   return (
     <div className="about" ref={scrollRef}>
+      <Helmet>
+        <title>About - HermesView</title>  
+        <meta name="description" content="About Us:
+          HermesView emerged with a visionary goal, to revolutionize the real estate landscape in Greece by simplifying the house-hunting experience."/>
+        <link rel="canonical" href="/about"/>
+      </Helmet>
       <section className='container golden-container animate-on-scroll about-container'>
         <h1>About Us</h1>
       </section>
