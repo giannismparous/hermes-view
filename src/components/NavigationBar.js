@@ -8,7 +8,7 @@ import '../styles/Logo.css';
 import Hamburger from "hamburger-react";
 
 const menuImg = '../icons/menu.png';
-const hermesviewImg = '../icons/hermes-view.png';
+const hermesviewImg = '../icons/hermes-view-logo.png';
 
 function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
