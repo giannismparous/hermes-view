@@ -58,7 +58,7 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
-        <Route path="/360-video-sample" element={<SamplePage redirectToSample={false} modelPath="/vr_projects/360_video_sample/index.htm"/>} />
+        <Route path="/360-video-sample" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_360_video/"/>} />
         {/* kallithea */}
         <Route path="/projects/7c3c451ec900" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_1/"/>} />
         <Route path="/projects/fdcdd856841f" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_2/"/>} /> 

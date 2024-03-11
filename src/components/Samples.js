@@ -32,7 +32,7 @@ function Samples() {
         </div> */}
         <div className="sample-container">
             <div className="centered-header">
-                <h2>Sample 3</h2>
+                <h2>Sample 2</h2>
             </div>
             <SamplePage
             redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_2/"} sampleId={3}
