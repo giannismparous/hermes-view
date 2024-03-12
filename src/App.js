@@ -65,6 +65,7 @@ function App() {
         <Route path="/projects/8hfk1021do01" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_3/"/>} /> 
         <Route path="/projects/3bbkl3189ytp" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_3_sample/"/>} />
         <Route path="/projects/zhj0lwnc31og" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_4/"/>} /> 
+        <Route path="/projects/fb66u81wtrg9" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_5/"/>} /> 
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
       </Routes>
     </div>
