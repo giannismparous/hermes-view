@@ -22,6 +22,7 @@ const Reserve = () => {
     const handleFetchDatesAvailability = async (date, num) => {
       try {
         const tempDates = getDateRange(num).map(date => ({ date }));
+        console.log(tempDates);
         const datesAvailability = await fetchDatesAvailability(date, num);
         const updatedDates = tempDates.map((tempDate, index) => ({
           ...tempDate,
@@ -36,7 +37,8 @@ const Reserve = () => {
     };
 
     const tempDates = getDateRange(10).map(date => ({ date }));
-    handleFetchDatesAvailability(tempDates[0].date,tempDates.length);
+    // handleFetchDatesAvailability(tempDates[0].date,tempDates.length);
+    handleFetchDatesAvailability(tempDates[0].date,0);
   }, []);
 
   useEffect(() => {
@@ -133,7 +135,7 @@ const Reserve = () => {
           <button
             key={index}
             className={`
-              ${date.unavailable ? 'calendar-button-green' : 'calendar-button-red'}
+              ${date.unavailable ? 'calendar-button-green' : 'calendar-button-green'}
               ${choosingReservationDate && clickedIndex !== null && (index < clickedIndex || index > maxIndex) && 'grayed-out'}
             `}
             onClick={() => handleButtonClickDate(index)}

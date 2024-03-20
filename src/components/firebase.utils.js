@@ -278,32 +278,37 @@ export const fetchDatesAvailability = async (date, num) => {
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   const dataRef = doc(sampleRestaurantRef, "data");
   const dataDoc = await getDoc(dataRef);
-  if (dataDoc.exists()) {
-    const data = dataDoc.data();
-    let currentIndex=0;
-    if (data && data.dates && Array.isArray(data.dates)) {
-      const availability = [];
-      for (let i = 0; i < data.dates.length; i++) {
-        if (date===data.dates[i].date){
-          currentIndex=i;
-          break;
-        }
-      }
-      for (let i = currentIndex; i < currentIndex+num; i++) {
-        if (data.dates[i].unavailable===undefined){
-          availability.push(true);
-        }
-        else {
-          availability.push(false);
-        }
-      }
-      return availability;
-    } else {
-      console.log('Dates array is missing or not an array.');
-    }
-  } else {
-    console.log(`Current date does not exist.`);
-  }
+  // if (dataDoc.exists()) {
+  //   const data = dataDoc.data();
+  //   console.log(data);
+  //   let currentIndex=0;
+  //   if (data && data.dates && Array.isArray(data.dates)) {
+  //     const availability = [];
+  //     for (let i = 0; i < data.dates.length; i++) {
+  //       if (date===data.dates[i].date){
+  //         currentIndex=i;
+  //         break;
+  //       }
+  //     }
+  //     for (let i = currentIndex; i < currentIndex+num; i++) {
+  //       if (data.dates[i].unavailable===undefined){
+  //         availability.push(true);
+  //       }
+  //       else {
+  //         availability.push(false);
+  //       }
+  //     }
+  //     console.log(dataDoc);
+  //     return availability;
+  //   } else {
+  //     console.log('Dates array is missing or not an array.');
+  //   }
+    const availability=[];
+    availability.push(true);
+    return availability;
+  // } else {
+  //   console.log(`Current date does not exist.`);
+  // }
 };
 
 export const fetchTimeByIndex = async (index, date) => {

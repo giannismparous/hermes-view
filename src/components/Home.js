@@ -187,7 +187,7 @@ function Home() {
       </div>
       <ContactInfo style={{ opacity: isVideoReady ? 1 : 0 }}/>
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      {/* <button onClick={addToDb}>ADD</button> */}
+      <button onClick={addToDb}>ADD</button>
       {/* <button onClick={add10DaysToDb}>ADD</button> */}
       {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
       {/* <button onClick={removeFromDb}>REMOVE</button> */}
