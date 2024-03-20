@@ -52,7 +52,7 @@ function NavigationBar() {
           hideOutline={false}
           direction="left"
           size={100}
-          color="#49add4"
+          color="#8a5a00"
           duration={0.8}
           toggled={menuOpen}
           toggle={toggleMenu} // Use toggle prop to handle click

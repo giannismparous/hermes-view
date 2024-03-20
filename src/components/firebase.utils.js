@@ -385,7 +385,8 @@ export const fetchReservationTimes = async (startIndex, endIndex,date) => {
 
   const sampleRestaurantRef = collection(db, 'sample-restaurant');
   
-  const currentDateRef = doc(sampleRestaurantRef, date);
+  // const currentDateRef = doc(sampleRestaurantRef, date);
+  const currentDateRef = doc(sampleRestaurantRef, "data");
   const currentDateDoc = await getDoc(currentDateRef);
 
   if (currentDateDoc.exists()) {
