@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/ReserveTable.css'; // Import your CSS file
-import { fetchReservationTimes, updateTableSchedules } from './firebase.utils';
+import { fetchReservationTimes, getCurrentDate, updateTableSchedules } from './firebase.utils';
 import { HashLoader } from 'react-spinners';
 
 const ReserveTable = () => {
@@ -34,7 +34,7 @@ const ReserveTable = () => {
     const handleYesClick = async () => {
         try {
             // Call updateTableSchedule with the appropriate parameters
-            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,userPhone, tableNumber);
+            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,userPhone, tableNumber,getCurrentDate());
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);
