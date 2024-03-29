@@ -7,15 +7,15 @@
 }
   
   /* This class will center your content and add padding */
-  .container {
+  /* .container {
     padding: 20px;
-    margin-left: auto; /* Ensures margin is auto-applied on the left */
-    margin-right: auto; /* Ensures margin is auto-applied on the right */
-    max-width: 1200px; /* Adjust this value to control the width of the container */
-    border-radius: 8px; /* Slightly rounded corners for a modern look */
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 1200px; 
+    border-radius: 8px; 
     margin-top: 20px;
     margin-bottom: 20px;
-  }
+  } */
 
   /* Apply the container class to each section */
 .products-main{

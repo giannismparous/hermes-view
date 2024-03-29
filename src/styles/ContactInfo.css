@@ -1,18 +1,54 @@
 .footer {
     padding-top: 30px;
+    padding-bottom: 30px;
     text-align: center;
+    background-color: #EFEFEF;
+    width: 100%;
   }
 
 .contact-info {
-    margin-bottom: 10px;
+  margin: 0;
+  }
+
+  .contact-info h2{
+    color: rgb(0, 9, 128);
+    font-size: 60px;
+  }
+
+  @media screen and (max-width: 320px) {
+    .contact-info h2 {
+      font-size: 35px;
+    }
+  }
+
+  .contact-info h2::after{
+    background-color: transparent;
   }
   
   .contact-info ul {
-    list-style-type: disc; /* Use bullets for the list */
     padding-left: 0; /* Remove default padding */
+    margin: 0;
+  }
+
+  .contact-info p {
+    margin: 0;
+    font-size: 25px;
+    margin-top: 20px;
   }
   
   .contact-info li {
     margin: 5px 0; /* Add some margin between list items */
     color: white;
+    font-size: 25px;
   }
+
+  .contact-info li a{
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 320px) {
+    .contact-info li a{
+      font-size: 20px;
+    }
+  }
+  

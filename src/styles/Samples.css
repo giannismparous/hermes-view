@@ -1,5 +1,49 @@
 .samples {
     display: flex;
     flex-direction: column;
+}
+
+.samples .invis-container{
+    height: 600px;
+}
+
+.sample-display-container {
+    padding-top: 100px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
     gap: 50px;
+}
+
+.samples h2 {
+    color: rgb(0, 9, 128);
+    font-size: 70px;
+}
+
+@media screen and (max-width: 350px) {
+    .samples h2 {
+      font-size: 35px;
+    }
+  }
+
+.samples .heading {
+    color: rgb(0, 9, 128);
+}
+
+.samples h2::after {
+    background-color: transparent;
+}
+
+.samples .sample-display-container .centered {
+    text-align: center;
+}
+
+.centered {
+    width: 100%;
+}
+
+.helper-container {
+    text-align: center;
+    background-color: white;
+    padding-top: 50px;
 }

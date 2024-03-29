@@ -6,56 +6,73 @@ import SplitTextJS from "split-text-js";
 import "../styles/VideoComponent.css";
 
 function VideoComponent({ onVideoReady }) {
+
   const [videoReady, setVideoReady] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const videoRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  useEffect(() => {
-    const titles = gsap.utils.toArray('.text-wrapper p');
-    const tl = gsap.timeline({ repeat: -1 });
+  const playIcon = "../icons/play_button.png"
+
+  // useEffect(() => {
+  //   const titles = gsap.utils.toArray('.text-wrapper p');
+  //   const tl = gsap.timeline({ repeat: -1 });
   
-    titles.forEach((title, index) => {
-      const splitTitle = new SplitTextJS(title);
-      tl.from(splitTitle.chars, { opacity: 0, y: 80, rotateX: -90, stagger: 0.07, duration: 1 }, `<0.5`)
-        .to(splitTitle.chars, { opacity: 0, y: -80, rotateX: 90, stagger: 0.07, duration: 1 }, `<2`);
-        // Adjust the duration (in seconds) and stagger delay to control the animation speed and delay between words
-    });
+  //   titles.forEach((title, index) => {
+  //     const splitTitle = new SplitTextJS(title);
+  //     tl.from(splitTitle.chars, { opacity: 0, y: 80, rotateX: -90, stagger: 0.07, duration: 1 }, `<0.5`)
+  //       .to(splitTitle.chars, { opacity: 0, y: -80, rotateX: 90, stagger: 0.07, duration: 1 }, `<2`);
+  //       // Adjust the duration (in seconds) and stagger delay to control the animation speed and delay between words
+  //   });
 
-    const videoElement = document.querySelector('video');
+  //   const videoElement = document.querySelector('video');
 
-    const handleVideoReady = () => {
-      setVideoReady(true);
-      onVideoReady(); // Callback to notify the parent component
-    };
+  //   const handleVideoReady = () => {
+  //     setVideoReady(true);
+  //     onVideoReady(); // Callback to notify the parent component
+  //   };
 
-    if (videoElement.readyState >= 3) {
-      // If video is already ready, trigger the callback immediately
-      handleVideoReady();
-    } else {
-      // Otherwise, add event listener for when the video is ready
-      videoElement.addEventListener('canplaythrough', handleVideoReady);
-    }
+  //   if (videoElement.readyState >= 3) {
+  //     // If video is already ready, trigger the callback immediately
+  //     handleVideoReady();
+  //   } else {
+  //     // Otherwise, add event listener for when the video is ready
+  //     videoElement.addEventListener('canplaythrough', handleVideoReady);
+  //   }
 
-    return () => {
-      tl.kill();
-      videoElement.removeEventListener('canplaythrough', handleVideoReady);
-    };
-  }, [onVideoReady]);
+  //   return () => {
+  //     tl.kill();
+  //     videoElement.removeEventListener('canplaythrough', handleVideoReady);
+  //   };
+  // }, [onVideoReady]);
 
   const isMobile = window.innerWidth <= 767; // Adjust the breakpoint as needed
 
   const handleVideoClick = () => {
-    if (!videoReady) {
+    const video = videoRef.current;
+    const button = buttonRef.current;
+
+    if (!videoPlaying) {
       // Start the video only if it's ready
-      const video = videoRef.current;
       video.play();
+      setVideoPlaying(true);
+      // Fade out the button
+      gsap.to(button, { opacity: 0, duration: 0.5, onComplete: () => {
+        button.style.display = "none";
+      }});
+    } else {
+      // Pause the video if it's playing
+      video.pause();
+      setVideoPlaying(false);
+      // Fade in the button
+      button.style.display = "block";
+      gsap.to(button, { opacity: 1, duration: 0.5 });
     }
   };
 
   return (
     <div className="video-container">
       <video
-        autoPlay
-        muted
         loop
         width="100%"
         height="100%"
@@ -65,11 +82,14 @@ function VideoComponent({ onVideoReady }) {
         onClick={handleVideoClick} // Add an onClick handler to start the video on mobile
       >
         <source
-          src={isMobile ? "/videos/showcase-smartphone.mp4" : "/videos/showcase-pc.mp4"}
+          src={isMobile ? "/videos/GOOGLE_EARTH_VR_Edited.mp4" : "/videos/GOOGLE_EARTH_VR_Edited.mp4"}
           type="video/mp4"
         />
       </video>
-      <div className="text-wrapper">
+      <div ref={buttonRef} className="icon-container" onClick={handleVideoClick}>
+        <img src={playIcon} alt="Play icon" /> {/* Use the play icon */}
+      </div>
+      {/* <div className="text-wrapper">
         <p style={{ opacity: videoReady ? 1 : 0 }}>Hermes</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>View</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>The</p>
@@ -77,7 +97,7 @@ function VideoComponent({ onVideoReady }) {
         <p style={{ opacity: videoReady ? 1 : 0 }}>of</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>Virtual</p>
         <p style={{ opacity: videoReady ? 1 : 0 }}>Tours</p>
-      </div>
+      </div> */}
     </div>
   );
 }

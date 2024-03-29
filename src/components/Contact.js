@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import emailjs from 'emailjs-com';
 import useScrollAnimation from './useScrollAnimation';
 import '../styles/Contact.css';
@@ -25,7 +25,8 @@ function Contact() {
   const scrollRef = useScrollAnimation();
 
   return (
-    <div className="contact" ref={scrollRef}>
+    <Fragment>
+      <div className="contact" ref={scrollRef}>
       <Helmet>
         <title>Contact - HermesView</title>  
         <meta name="description" content="Reach out to us.
@@ -49,8 +50,9 @@ function Contact() {
           <button type="submit">Send Message</button>
         </form>
       </section>
-      <ContactInfo/>
     </div>
+      <ContactInfo/>
+    </Fragment>
   );
 }
 

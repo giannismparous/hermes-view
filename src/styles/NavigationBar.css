@@ -1,21 +1,20 @@
-nav {
-  background-color: #181818;
+ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px; /* Add padding to the nav bar */
-  position: fixed; /* Fix position to the top of the window */
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
-  right: 0; /* Stretch right to fill the full width */
-  z-index: 1000; /* Ensure it's above other content */
-  background: linear-gradient(to bottom, #181818, rgba(24, 24, 24, 0));
+  padding: 20px 20px; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 1000; 
 }
 
 .nav-bar-items-container {
   z-index: 1002;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 
@@ -24,7 +23,7 @@ nav {
 
   .menu {
     cursor: pointer;
-    height: 100px; /* Default height for larger screens */
+    height: 100px; 
     width: auto;
     display: block;
   }
@@ -34,7 +33,7 @@ nav {
 
   .menu {
     cursor: pointer;
-    height: 60px; /* Default height for larger screens */
+    height: 60px; 
     width: auto;
     display: block;
   }
@@ -44,7 +43,7 @@ nav {
 @media (min-width:751px){
 
   .hermesview {
-    height: 100px; /* Default height for larger screens */
+    height: 100px; 
     width: auto;
     position: absolute;
     right: 0;
@@ -55,7 +54,7 @@ nav {
 @media (max-width:751px){
 
   .hermesview {
-  height: 50px; /* Default height for larger screens */
+  height: 50px;
   width: auto;
   position: absolute;
   right: 0;
@@ -66,12 +65,12 @@ nav {
 .mobile-menu ul {
   list-style: none;
   padding: 0;
-  margin: auto; /* Center the list items vertically */
+  margin: auto; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center the list items horizontally */
-  height: 100%; /* Set the height to 100% */
+  justify-content: center; 
+  height: 100%; 
 }
 
 .mobile-menu ul li {
@@ -93,15 +92,15 @@ nav {
   font-weight: bold;
 }
 
-.social-media-list {
+/* .social-media-list {
   position: absolute;
   bottom: 0;
-  margin: 20px; /* Add some margin for spacing */
+  margin: 20px; 
 }
 
 .social-media-list a {
-  margin-right: 20px; /* Increase the spacing between social media icons */
-  font-size: 2.5rem; /* Increase the font size */
+  margin-right: 20px; 
+  font-size: 2.5rem; 
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -110,19 +109,19 @@ nav {
 .social-media-list a:hover,
 .social-media-list a:focus {
   color: black;
-}
+} */
 
 .mobile-menu-overlay {
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top left, #8a5a00, #181818);
+  background: linear-gradient(to top left, rgb(0,9,128), white);
   z-index: 1000;
   opacity: 0;
-  pointer-events: none; /* Add this to prevent clicks on the overlay when it's not visible */
-  transition: opacity 0.5s ease-out; /* Add a transition for a smooth fade effect */
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;  */
 }
 
 .mobile-menu-overlay.visible {
@@ -154,4 +153,157 @@ nav {
 
 .no-scroll {
   overflow: hidden;
+} 
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  transition: background-color 0.5s ease;
+}
+
+.logo {
+  width:150px;
+  height:40px;
+  padding-left: 150px;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .nav-links li {
+    font-size: 15px;
+  }
+}
+
+.nav-links li a{
+  margin-right: 20px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.social-media-list {
+  display: flex;
+  margin-left: 400px;
+  padding-right: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  .social-media-list {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+  }
+}
+
+.social-media-list a {
+  margin-right: 10px;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.active .hamburger:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.active .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.active .hamburger:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.logo-container a:hover img {
+  filter: brightness(0.8); /* Change the brightness on hover */
+}
+
+.nav-links li a:hover,
+.social-media-list a:hover {
+  color: rgb(0, 9, 128); /* Change color on hover */
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links-deactivated {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px; /* Adjust this value to ensure the menu starts from the top */
+    left: 0;
+    width: 100%;
+    background-color: rgb(23, 20, 38);
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 998;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-links-activated {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding-top: 10px;
+    top: 0px; /* Adjust this value to ensure the menu starts from the top */
+    left: 0;
+    width: 100%;
+    background-color: rgb(23, 20, 38);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 998; 
+    transition: transform 0.3s ease;
+    margin: 0;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+.white {
+  color: white;
+}
+
+.colored {
+  color: rgba(0,9,128);
+}
+
+.hermesview-link {
+  top: -100px;
 }

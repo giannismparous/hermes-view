@@ -21,6 +21,7 @@ import ReserveTable from "./components/ReserveTable";
 import Login from "./components/Login";
 import TagManager from 'react-gtm-module';
 import Samples from "./components/Samples";
+import Services from "./components/Services";
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
         {/* <Route path="/products/:productId" element={<ProductDetail />} /> */}
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/3d-model-sample" element={<Sample3DModel />} />
         <Route path="/360-video-sample" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_360_video/"/>} />
         {/* kallithea */}

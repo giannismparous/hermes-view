@@ -1,3 +1,40 @@
+.about {
+}
+
+.about h1{
+    text-align: center;
+    font-size: 70px;
+    color: rgb(0,9,128);
+    margin: 0;
+    margin-bottom: 100px;
+}
+
+@media screen and (max-width: 350px) {
+    .about h1 {
+      font-size: 35px;
+    }
+  }
+
+.about p{
+    font-size: 30px;
+}
+
 .about-container {
-    margin-top: 80px;
+    padding-top: 200px;
+    background-color: white;
+    margin-bottom: 0;
 }  
+
+.about-info-container {
+    background-color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 100px;
+}
+
+@media screen and (max-width: 350px) {
+    .about-info-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+  }

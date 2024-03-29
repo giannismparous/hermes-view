@@ -1,5 +1,17 @@
 body {
+  /* background-color: #181818; */
+  margin: 0;
+  padding: 0;
+  /* Apply background image to the body */
+  background-image: url('../assets/background-blue.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Ensure the background stays fixed */
+  /* Center the background image horizontally and vertically */
+  background-position: center;
+  /* Specify a fallback background color */
   background-color: #181818;
+  font-family: "Josefin Sans", sans-serif;
 }  
 
 
@@ -7,25 +19,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* This will center the children horizontally */
-  font-family: 'Arial', sans-serif;
-  color: #ffffff;
+  /* color: #ffffff; */
+  color: rgb(0,9,128);
   line-height: 1.6;
-}
-  
-.container {
-  padding: 20px;
-  margin-left: auto; 
-  margin-right: auto; 
-  max-width: 1200px; 
-  border-radius: 8px; 
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .golden-container {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-color: #8a5a00;
-  border-style: solid;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+  /* border-color: #8a5a00; */
+  /* border-style: solid; */
 }
 
 .centered-header{
@@ -33,29 +38,32 @@ body {
 }
 
 p {
-  color: #ffffff;
+  /* color: #ffffff; */
+  color:rgb(0,9,128);
   font-size: 1.1rem;
   margin: 1em 0;
   text-rendering: optimizeSpeed;
 }
   
-h1 {
-  color: rgb(255, 255, 255);
+test h1 {
+  /* color: rgb(255, 255, 255); */
+  color:rgb(0,9,128);
   font-size: 2.5rem;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   position: relative; /* Needed for absolute positioning of the pseudo-element */
   display: inline-block; /* Ensures the line is only as wide as the text */
-  margin-bottom: 1em; /* Space below the heading */
+  margin-bottom: 1em; 
   
 }
 
-h1::after {
+test h1::after {
   content: '';
   display: block;
   width: 50px; /* Width of the decorative line */
   height: 5px; /* Increased thickness of the line */
-  background-color: #8a5a00; /* Color of the line */
+  /* background-color: #8a5a00;  */
+  background-color:rgb(0,9,128);
   position: absolute;
   left: 0;
   bottom: -6px; /* Adjusted for the new thickness */
@@ -63,7 +71,8 @@ h1::after {
 }
 
 h2 {
-  color: #ffffff;
+  /* color: #ffffff; */
+  color:rgb(0,9,128);
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
@@ -78,7 +87,8 @@ h2::after {
   display: block;
   width: 100%; /* Width of the decorative line */
   height: 5px; /* Increased thickness of the line */
-  background-color: #8a5a00;
+  /* background-color: #8a5a00; */
+  background-color: rgb(0,9,128);
   position: absolute;
   left: 0;
   bottom: -6px; /* Adjusted for the new thickness */
@@ -98,7 +108,8 @@ ul li {
 
 .dashed-list li::before {
   content: "— "; /* Keep the dash here */
-  color: #8a5a00;
+  /* color: #8a5a00; */
+  color: rgb(0,9,128);
   /* ... other styles ... */
 }
 
@@ -114,7 +125,8 @@ transform: translateY(0);
 }
 
 a {
-color: #8a5a00;
+/* color: #8a5a00; */
+color: rgb(0,9,128);
 }
 
 .image-content {
@@ -159,7 +171,8 @@ color: #8a5a00;
   /* Your styles for paragraphs inside text-wrapper */
   /* For example: */
   font-size: 30px;
-  color: white;
+  /* color: white; */
+  color: rgb(0,9,128);
   line-height: 0;
   margin: 0;
   /* Add more styles as needed */
@@ -199,7 +212,8 @@ color: #8a5a00;
   border-radius: 10px;
   width: 400px;
   height: 250px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Gold shadow */
+  /* box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);  */
+  box-shadow: 0 0 10px rgb(0,9,128);
   padding-left: 20px;
   padding-right: 20px;
   text-align: center; /* Center text horizontally */
@@ -214,10 +228,447 @@ color: #8a5a00;
   animation: floatAnimation 1s infinite; /* 1s duration, infinite loop */
 }
 
-.question-title strong{
-  font-size: 1.5em;
+.custom-font-1 p{
+  font-size: 30px;
 }
 
+.custom-font-2 {
+  /* margin-top: 100px; */
+  /* margin-bottom: 100px; */
+}
+
+.custom-font-2 p{
+  font-size: 30px;
+  color: rgb(194,125,106);
+}
+
+.custom-font-3 {
+  padding-top: 60px;
+}
+
+
+.custom-font-4 h2{
+  font-size: 30px;
+}
+
+.custom-font-4 p, li{
+  color: white;
+}
+
+.custom-font-4 h2::after{
+  background-color: transparent;
+}
+
+.custom-font-5 {
+  font-size: 30px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.container-1 {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #EFEFEF;
+}
+
+.container-1 p{
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-bottom: 0;
+}
+
+
+@media screen and (min-width: 700px) {
+  .container-1 p {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+.container-2 {
+  width: 100%;
+  background-color: rgb(0,9,128);
+  color: white;
+  /* margin-top: 150px; */
+}
+
+.container-2 p, h2{
+  color: white;
+}
+
+.container-2 h2{
+  color: white;
+  font-size: 50px;
+}
+
+.container-2 h1{
+  margin-top: 0;
+  font-size: 70px;
+}
+
+@media screen and (max-width: 320px) {
+  .container-2 h1 {
+    font-size: 40px;
+  }
+}
+
+
+.container-2 h2::after{
+  background-color: transparent;
+}
+
+.container-3 {
+  width: 100%;
+  background-color: rgb(33,33,33);
+}
+
+.container-4 {
+  background-color: rgb(0,9,128);
+  color: white;
+  /* margin-top: 150px; */
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+@media screen and (max-width: 350px) {
+  .container-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.container-4 p, h2{
+  color: white;
+}
+
+.container-4 h2{
+  color: white;
+  font-size: 70px;
+}
+
+.container-4 h2::after{
+  background-color: transparent;
+}
+
+.sample-container {
+  background-color: white;
+  padding-bottom: 100px;
+}
+
+.sample-container h2 {
+  color: rgb(0,9,128);
+  font-size: 70px;
+}
+
+@media screen and (max-width: 320px) {
+  .sample-container h2 {
+    font-size: 40px;
+  }
+}
+
+.sample-container h2::after {
+  background-color: transparent;
+}
+
+.invis-container {
+  height: 400px;
+}
+
+.hermes {
+  /* color: rgb(255, 255, 255); */
+  color:rgb(0,9,128);
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+  display: inline-block; /* Ensures the line is only as wide as the text */
+  margin-left: 100px;
+}
+
+@media screen and (max-width: 295px) {
+  .hermes {
+    margin-left: 0px;
+  }
+}
+
+.hermes::after {
+  content: '';
+  display: block;
+  width: 50px; /* Width of the decorative line */
+  height: 5px; /* Increased thickness of the line */
+  /* background-color: #8a5a00;  */
+  background-color:rgb(0,9,128);
+  position: absolute;
+  left: 0;
+  bottom: 40px; /* Adjusted for the new thickness */
+  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+}
+
+.view-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view {
+  color: rgb(0, 9, 128);
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  /* margin-bottom: 1em; */
+  position: relative; /* Add position relative */
+  margin-right: 100px;
+}
+
+@media screen and (max-width: 295px) {
+  .view {
+    margin-left: 0px;
+  }
+}
+
+.view::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 5px;
+  background-color: rgb(0, 9, 128);
+  position: absolute;
+  bottom: 40px; /* Adjusted for the new thickness */
+  right: 0; /* Position it at the left edge of the container */
+  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+}
+
+.our-services {
+  background-color: rgb(0, 9, 128);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  text-align: center;
+  position: relative; /* Add position relative */
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-bottom: 0;
+}
+
+.text-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+/* Media query for screens with a width lower than 835px */
+@media screen and (max-width: 835px) {
+  .text-content {
+    grid-template-columns: 1fr; /* Change to one column */
+  }
+}
+
+
 .question-container {
-  margin-top: 50px;
+  padding: 10px;
+}
+
+.question-title {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 100px;
+}
+
+/* Media query for screens with a width lower than 870px */
+@media screen and (max-width: 1080px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Change to one column */
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+}
+
+.text-column {
+  padding-top: 120px;
+}
+
+.form-column {
+  background-color: rgb(255, 255, 255);
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 350px) {
+  .form-column {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.form-column h2 {
+  color: rgb(0, 9, 128);
+}
+
+.form-column h2::after {
+  background-color: transparent;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: calc(100% - 16px); /* Adjust the width to fit your design */
+  border: none;
+  border-bottom: 1px solid #ccc; /* Add a bottom border */
+  padding: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s; /* Add transition effect */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-bottom-color: transparent; /* Remove the bottom border on focus */
+}
+
+button {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #007bff; /* Change button color */
+  color: #fff; /* Change button text color */
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(0, 9, 128); /* Change button color on hover */
+}
+
+
+
+@media screen and (min-width: 1400px) {
+  .sample-display-container > *:nth-child(even) {
+    margin-left: auto; /* Push even elements to the right */
+    text-align: right; /* Align text to the right for even elements */
+  }
+
+  .sample-display-container > *:nth-child(odd) {
+    text-align: left; /* Align text to the left for odd elements */
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .sample-display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left initially */
+    padding-left: 0; /* Add padding to the container */
+    padding-right: 0; /* Add padding to the container */
+  }
+}
+
+.sample-item {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 300px; /* Initial gap value */
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1640px) {
+  .sample-item {
+    gap: 200px; /* Adjusted gap value for smaller screens */
+  }
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1400px) {
+  .sample-item {
+    grid-template-columns: auto; /* Adjusted gap value for smaller screens */
+  }
+}
+
+.container-iphone {
+  margin-left: 300px;
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1640px) {
+  .container-iphone {
+    margin-left: 200px; /* Adjusted gap value for smaller screens */
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .container-iphone {
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.container-ipad {
+  margin-right: 100px;
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1640px) {
+  .container-ipad {
+    margin-right: 200px; /* Adjusted gap value for smaller screens */
+  }
+  
+}
+
+@media screen and (max-width: 1400px) {
+  .container-ipad {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .container-imac {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.container-iphone, .container-imac, .container-ipad {
+  margin-bottom: 100px;
+}
+
+.heading {
+  font-size: 3rem; /* Increased font size */
+  text-align: center;
+}
+
+.line {
+  width: 50px;
+  height: 5px;
+  background-color: rgb(0, 9, 128);
+  border-radius: 2.5px;
+  margin-top: 10px;
+}
+
+.animated-paragraph {
+  font-size: 30px; /* Adjust the font size to your preference */
+  text-align: center;
+}
+
+.sample-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  padding-left: 10px;
+  padding-right: 10px;
 }

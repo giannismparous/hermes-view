@@ -1,7 +1,8 @@
 /* Apply the container class to each section */
 .projects-main{
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-color: #8a5a00;
+  /* border-color: #8a5a00; */
+  border-color: rgb(0,9,128);
   border-style: solid;
 }
 
