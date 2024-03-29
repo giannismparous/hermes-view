@@ -172,7 +172,7 @@ const AnimatedParagraph = ({ children, className }) => {
         <div className="centered-header">
           <h2>Projects</h2>
         </div>
-        {!isMobile && <div className="sample-display-container">
+        <div className="sample-display-container">
           <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
             <div className="sample-info">
@@ -182,12 +182,13 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
           </div>
           <div className="sample-item">
+            {isMobile && <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"} />}
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
               <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
               <Link to="/projects/5" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"} />
+            {!isMobile && <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"} />}
           </div>
           <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_4/"} device={"imac"} />
@@ -198,12 +199,13 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
           </div>
           <div className="sample-item">
+            {isMobile && <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />}
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
               <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
               <Link to="/sample" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-            <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
+            {!isMobile && <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />}
           </div>
         <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
@@ -213,8 +215,8 @@ const AnimatedParagraph = ({ children, className }) => {
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
-        </div>}
-        {isMobile && <div className="sample-display-container">
+        </div>
+        {/* {isMobile && <div className="sample-display-container">
           <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
@@ -255,7 +257,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div>
-        </div>}
+        </div>} */}
       </section>
         <div className="invis-container"/>
         <section className="questions container-4">
