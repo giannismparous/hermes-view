@@ -127,14 +127,14 @@ return (
         </h2>
       </div>
       <div className="sample-display-container">
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/1"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
               <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
               <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div>
+          </div> */}
           {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
