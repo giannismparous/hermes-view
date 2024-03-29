@@ -127,14 +127,14 @@ return (
         </h2>
       </div>
       <div className="sample-display-container">
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/1"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
               <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
               <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div>
+          </div> */}
           <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
@@ -143,14 +143,14 @@ return (
             </div>
             <SampleDisplay modelPath={"/projects/5"} device={"ipad"} />
           </div>
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/4"} device={"imac"} />
             <div className="sample-info">
               <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
               <AnimatedParagraph>An alternative cafe bistro in the area of Dafne. Take a look at its baroque design and festive atmosphere.</AnimatedParagraph>
               <Link to="/projects/4" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div>
+          </div> */}
           {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
@@ -167,14 +167,14 @@ return (
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div> */}
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Black And White Fitness</AnimatedHeading>
               <AnimatedParagraph>Fan of fitness lifestyle? This gym offers anything you'll ever need, from pilates to TRX to weight lifting.</AnimatedParagraph>
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/projects/2"} device={"imac"} />
-        </div>
+        </div> */}
       </div>
       <ContactInfo/>
     </div>
