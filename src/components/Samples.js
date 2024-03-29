@@ -143,22 +143,22 @@ return (
             </div>
             <SampleDisplay modelPath={"/projects/5"} device={"ipad"} />
           </div> */}
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/4"} device={"imac"} />
             <div className="sample-info">
               <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
               <AnimatedParagraph>An alternative cafe bistro in the area of Dafne. Take a look at its baroque design and festive atmosphere.</AnimatedParagraph>
               <Link to="/projects/4" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div>
-          {/* <div className="sample-item">
+          </div> */}
+          <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
               <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
               <Link to="/sample" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
-          </div> */}
+          </div>
           {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/3"} device={"iphone"} />
             <div className="sample-info">
