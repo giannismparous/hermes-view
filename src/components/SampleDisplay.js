@@ -98,16 +98,26 @@ function SampleDisplay({ device, modelPath }) {
     height: "400px",
   };
 
-  const [iframeSrc, setIframeSrc] = useState("");
+ const [iframeSrc, setIframeSrc] = useState("");
 
-    useEffect(() => {
-        // Load iframe content with a timeout
-        const timeoutId = setTimeout(() => {
-            setIframeSrc(modelPath); // Set iframe src after the timeout
-        }, 10000); // Timeout duration in milliseconds (adjust as needed)
+  useEffect(() => {
+      // Preload iframe content
+      const preloadIframeContent = () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = modelPath;
+          iframe.style.display = "none"; // Hide the iframe
+          document.body.appendChild(iframe);
 
-        return () => clearTimeout(timeoutId); // Clear timeout on component unmount
-    }, [modelPath]);
+          // Set iframe src after a short delay to ensure preload
+          setTimeout(() => {
+              setIframeSrc(modelPath);
+              document.body.removeChild(iframe); // Remove the preload iframe
+          }, 1000); // Adjust the delay as needed
+      };
+
+      preloadIframeContent();
+
+  }, [modelPath]);
 
   return (
     <Fragment>
