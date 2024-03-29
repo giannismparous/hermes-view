@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { useMediaQuery } from 'react-responsive'; // Import media query hook
 
 function SampleDisplay({ device, modelPath }) {
@@ -97,61 +97,41 @@ function SampleDisplay({ device, modelPath }) {
     width: "250px",
     height: "400px",
   };
-
- const [iframeSrc, setIframeSrc] = useState("");
-
-  useEffect(() => {
-      // Preload iframe content
-      const preloadIframeContent = () => {
-          const iframe = document.createElement("iframe");
-          iframe.src = modelPath;
-          iframe.style.display = "none"; // Hide the iframe
-          document.body.appendChild(iframe);
-
-          // Set iframe src after a short delay to ensure preload
-          setTimeout(() => {
-              setIframeSrc(modelPath);
-              document.body.removeChild(iframe); // Remove the preload iframe
-          }, 1000); // Adjust the delay as needed
-      };
-
-      preloadIframeContent();
-
-  }, [modelPath]);
+  
 
   return (
     <Fragment>
         {!isMobile && <>
         {device==="iphone" && <div className="container-iphone" style={iphoneContainer}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
             <img src="../other_images/iphone.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         }
         {device==="ipad" && <div className="container-ipad" style={ipadContainer}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
             <img src="../other_images/ipad.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
         {device==="imac" && <div className="container-imac" style={imacContainer}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
             <img src="../other_images/imac.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
         </>
         }
-        {isMobile && !isMobile2 && <>
+        {/* {isMobile && !isMobile2 && <>
         {device==="iphone" && <div className="container-iphone" style={iphoneContainer2}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
             <img src="../other_images/iphone.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         }
         {device==="ipad" && <div className="container-ipad" style={ipadContainer2}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
             <img src="../other_images/ipad.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
         {device==="imac" && <div className="container-imac" style={imacContainer2}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
             <img src="../other_images/imac.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
@@ -159,22 +139,22 @@ function SampleDisplay({ device, modelPath }) {
         }
         {isMobile2 && <>
         {device==="iphone" && <div className="container-iphone" style={iphoneContainer3}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
             <img src="../other_images/iphone.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         }
         {device==="ipad" && <div className="container-ipad" style={ipadContainer3}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle2}></iframe>
             <img src="../other_images/ipad.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
         {device==="imac" && <div className="container-imac" style={imacContainer3}>
-            <iframe src={iframeSrc} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
+            <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle3}></iframe>
             <img src="../other_images/imac.png" alt="Iphone Layout" className="background-image" style={imageStyle}/>
             </div>
         } 
         </>
-        }
+        } */}
     </Fragment>
   );
 }
