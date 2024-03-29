@@ -151,22 +151,22 @@ return (
               <Link to="/projects/4" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
               <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
               <Link to="/sample" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
-          </div>
-          <div className="sample-item">
+          </div> */}
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"/projects/3"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
               <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options.</AnimatedParagraph>
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div>
+          </div> */}
           <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Black And White Fitness</AnimatedHeading>
