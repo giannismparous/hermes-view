@@ -169,7 +169,7 @@ const AnimatedParagraph = ({ children, className }) => {
         <Services/>
       </section>
       <section className="sample-container" >
-        <div className="centered-header">
+        {/* <div className="centered-header">
           <h2>Projects</h2>
         </div>
         {!isMobile && <div className="sample-display-container">
@@ -255,7 +255,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div>
-        </div>}
+        </div>} */}
       </section>
         <div className="invis-container"/>
         <section className="questions container-4">
