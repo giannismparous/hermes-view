@@ -1,23 +1,8 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { useMediaQuery } from 'react-responsive'; // Import media query hook
 
 function SampleDisplay({ device, modelPath }) {
   
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
-    useEffect(() => {
-        const iframe = document.createElement('iframe');
-        iframe.src = modelPath;
-        iframe.style.display = 'none'; // Hide the iframe
-        iframe.onload = () => setIframeLoaded(true); // Set iframeLoaded to true when iframe is loaded
-        document.body.appendChild(iframe);
-
-        return () => {
-            // Clean up the iframe when component unmounts
-            document.body.removeChild(iframe);
-        };
-    }, [modelPath]);
-
     const isMobile = useMediaQuery({ maxWidth: 768 });
     const isMobile2 = useMediaQuery({ maxWidth: 420});
 
@@ -116,8 +101,6 @@ function SampleDisplay({ device, modelPath }) {
 
   return (
     <Fragment>
-      {iframeLoaded && (
-        <>
         {!isMobile && <>
         {device==="iphone" && <div className="container-iphone" style={iphoneContainer}>
             <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
@@ -171,7 +154,7 @@ function SampleDisplay({ device, modelPath }) {
             </div>
         } 
         </>
-        }</>)}
+        }
     </Fragment>
   );
 }
