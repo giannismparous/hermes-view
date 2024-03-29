@@ -135,22 +135,22 @@ return (
               <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div> */}
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
               <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
               <Link to="/projects/5" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/projects/5"} device={"ipad"} />
-          </div>
-          {/* <div className="sample-item">
+          </div> */}
+          <div className="sample-item">
             <SampleDisplay modelPath={"/projects/4"} device={"imac"} />
             <div className="sample-info">
               <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
               <AnimatedParagraph>An alternative cafe bistro in the area of Dafne. Take a look at its baroque design and festive atmosphere.</AnimatedParagraph>
               <Link to="/projects/4" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-          </div> */}
+          </div>
           {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
