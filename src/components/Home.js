@@ -216,15 +216,15 @@ const AnimatedParagraph = ({ children, className }) => {
         </div>} */}
         {
         // isMobile && 
-        <div className="sample-display-container">
-          <div className="sample-item">
-            <div className="sample-info">
-              <AnimatedHeading>Kallithea Property</AnimatedHeading>
-              <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
-              <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
-            </div>
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
-          </div>
+        // <div className="sample-display-container">
+        //   <div className="sample-item">
+        //     <div className="sample-info">
+        //       <AnimatedHeading>Kallithea Property</AnimatedHeading>
+        //       <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
+        //       <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
+        //     </div>
+        //     <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
+        //   </div>
           {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
