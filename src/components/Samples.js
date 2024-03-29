@@ -127,7 +127,7 @@ return (
         </h2>
       </div>
       <div className="sample-display-container">
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
@@ -174,7 +174,7 @@ return (
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_2/"} device={"imac"} />
-        </div>
+        </div> */}
       </div>
       <ContactInfo/>
     </div>
