@@ -169,7 +169,7 @@ const AnimatedParagraph = ({ children, className }) => {
         <Services/>
       </section>
       <section className="sample-container" >
-        {/* <div className="centered-header">
+        <div className="centered-header">
           <h2>Projects</h2>
         </div>
         {!isMobile && <div className="sample-display-container">
@@ -214,7 +214,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
           </div>
         </div>}
-        {isMobile && <div className="sample-display-container">
+        {/* {isMobile && <div className="sample-display-container">
           <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
