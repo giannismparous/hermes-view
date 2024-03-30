@@ -241,14 +241,14 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_4/"} device={"imac"} />
           </div> */}
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
               <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
               <Link to="/sample" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
-          </div>
+          </div> */}
         {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
@@ -257,6 +257,30 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div> */}
+          <SamplePage
+          redirectToSample={true}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
+          <SamplePage
+          redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_1/"}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
+          <SamplePage
+          redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_2/"}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
+          <SamplePage
+          redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_3/"}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
+          <SamplePage
+          redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_4/"}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
+          <SamplePage
+          redirectToSample={true} modelPath={"https://giannismparous.github.io/vr_5/"}
+          style={{ width: "70vw", height: "35vw", border: "8px solid #8a5a00", borderRadius: "10px", margin: "auto", outline: "none"}}
+          />
         </div>}
       </section>
         <div className="invis-container"/>
