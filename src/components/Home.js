@@ -172,7 +172,7 @@ const AnimatedParagraph = ({ children, className }) => {
         <div className="centered-header">
           <h2>Projects</h2>
         </div>
-        {/* {!isMobile && <div className="sample-display-container">
+        {!isMobile && <div className="sample-display-container">
           <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
             <div className="sample-info">
@@ -213,9 +213,8 @@ const AnimatedParagraph = ({ children, className }) => {
               <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
-        </div>} */}
-        {
-        // isMobile && 
+        </div>}
+        {isMobile && 
         <div className="sample-display-container">
           <div className="sample-item">
             <div className="sample-info">

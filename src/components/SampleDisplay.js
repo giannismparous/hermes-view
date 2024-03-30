@@ -65,7 +65,7 @@ function SampleDisplay({ device, modelPath }) {
   const iphoneContainer2 = {
     position: "relative",
     width: "200px",
-    height: "500px",
+    height: "400px",
   };
 
   const ipadContainer2 = {
@@ -83,7 +83,7 @@ function SampleDisplay({ device, modelPath }) {
   const iphoneContainer3 = {
     position: "relative",
     width: "200px",
-    height: "500px",
+    height: "400px",
   };
 
   const ipadContainer3 = {
@@ -95,7 +95,7 @@ function SampleDisplay({ device, modelPath }) {
   const imacContainer3 = {
     position: "relative",
     width: "250px",
-    height: "400px",
+    height: "350px",
   };
 
   return (

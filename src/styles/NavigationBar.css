@@ -128,6 +128,7 @@
   opacity: 1;
 }
 
+
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -264,7 +265,7 @@
     top: 80px; /* Adjust this value to ensure the menu starts from the top */
     left: 0;
     width: 100%;
-    background-color: rgb(23, 20, 38);
+    /* background-color: rgb(23, 20, 38); */
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 998;
