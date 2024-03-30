@@ -222,12 +222,12 @@ return (
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div>
           <div className="sample-item">
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_2/"} device={"imac"} />
             <div className="sample-info">
               <AnimatedHeading>Black And White Fitness</AnimatedHeading>
               <AnimatedParagraph>Fan of fitness lifestyle? This gym offers anything you'll ever need, from pilates to TRX to weight lifting.</AnimatedParagraph>
               <Link to="/projects/2" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
+            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_2/"} device={"imac"} />
           </div>
         </div>}
         
