@@ -678,3 +678,11 @@ button:hover {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.view-more-projects{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  font-size: 30px;
+}

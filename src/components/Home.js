@@ -205,7 +205,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
           </div>
-        <div className="sample-item">
+          <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
@@ -248,7 +248,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
           </div>
-        <div className="sample-item">
+          <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
               <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options.</AnimatedParagraph>
@@ -257,6 +257,9 @@ const AnimatedParagraph = ({ children, className }) => {
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div>
         </div>}
+        <div className="view-more-projects">
+          <Link to="/samples"className="view-more-projects" style={{ color: 'rgb(194,125,106)' }}>View More</Link>
+        </div>
       </section>
         <div className="invis-container"/>
         <section className="questions container-4">
