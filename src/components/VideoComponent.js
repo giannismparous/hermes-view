@@ -82,7 +82,7 @@ function VideoComponent({ onVideoReady }) {
         onClick={handleVideoClick} // Add an onClick handler to start the video on mobile
       >
         <source
-          src={isMobile ? "/videos/GOOGLE_EARTH_VR_Edited_Compressed.mp4" : "/videos/GOOGLE_EARTH_VR_Edited_Compressed.mp4"}
+          src={isMobile ? "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4" : "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4"}
           type="video/mp4"
         />
       </video>
