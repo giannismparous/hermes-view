@@ -80,6 +80,7 @@ function VideoComponent({ onVideoReady }) {
         ref={videoRef} // Add a ref to the video element
         onCanPlayThrough={() => {}} // Empty function to prevent ESLint warning
         onClick={handleVideoClick} // Add an onClick handler to start the video on mobile
+        poster="../other_images/video_thumbnail.jpg"
       >
         <source
           src={isMobile ? "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4" : "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4"}
