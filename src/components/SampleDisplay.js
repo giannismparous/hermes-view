@@ -97,7 +97,6 @@ function SampleDisplay({ device, modelPath }) {
     width: "250px",
     height: "400px",
   };
-  
 
   return (
     <Fragment>
