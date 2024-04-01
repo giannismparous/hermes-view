@@ -171,13 +171,18 @@
 }
 
 .logo {
-  width:150px;
+  width:170px;
   height:40px;
-  padding-left: 150px;
+  padding-left: 50px;
 }
 
 .nav-links {
   list-style-type: none;
+  display: flex;
+  padding-right: 100px;
+}
+
+.nav-links-text {
   display: flex;
 }
 
@@ -202,8 +207,6 @@
 
 .social-media-list {
   display: flex;
-  margin-left: 400px;
-  padding-right: 300px;
 }
 
 @media screen and (max-width: 768px) {

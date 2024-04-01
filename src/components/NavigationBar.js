@@ -94,10 +94,12 @@ const NavigationBar = () => {
         <div className={`mobile-menu-overlay ${menuOpen ? 'visible' : ''}`} onClick={toggleMenu}></div>
       )}
       <ul className={`nav-links ${menuOpen ? 'nav-links-activated' : 'nav-links-deactivated'}`}>
-        <li><Link to="/" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Home</Link></li>
-        <li><Link to="/samples" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Samples</Link></li>
-        <li><Link to="/about" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>About</Link></li>
-        <li><Link to="/contact" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Contact Us</Link></li>
+        <div className='nav-links-text'>
+          <li><Link to="/" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Home</Link></li>
+          <li><Link to="/samples" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Samples</Link></li>
+          <li><Link to="/about" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>About</Link></li>
+          <li><Link to="/contact" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Contact Us</Link></li>
+        </div>
         <li className="social-media-list">
           <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>
             <FontAwesomeIcon icon={faFacebookF}  size='lg'/>
