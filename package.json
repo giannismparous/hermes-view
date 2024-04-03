@@ -45,7 +45,7 @@
   },
   "reactSnap": {
     "skipThirdPartyRequests": true,
-    "puppeteer": { "timeout": 120000 },
+    "puppeteer": { "timeout": 1200000 },
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"]
     },
   "eslintConfig": {

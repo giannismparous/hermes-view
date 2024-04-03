@@ -15,6 +15,9 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import infoDoc from "./dbData";
+import configurationDoc from "./dbConfiguration";
+import dateDoc from "./dbDate";
 
 function Home() {
 
@@ -36,10 +39,16 @@ function Home() {
       console.log(response);
   }
 
-  const add10DaysToDb = async() => {
+  const addDocumentToDb = async(doc, name) => {
 
-    const response = addCollectionAndDocuments("sample-restaurant", reservations_data,10);
+    const response = addCollectionAndDocuments(name, doc);
+    console.log(response);
 }
+
+//   const add10DaysToDb = async() => {
+
+//     const response = addCollectionAndDocuments("sample-restaurant", reservations_data,10);
+// }
 
   const removeFromDb = async () => {
     try {
@@ -116,7 +125,7 @@ const AnimatedParagraph = ({ children, className }) => {
     <div ref={scrollRef} className="home">
       <Helmet>
         <title>Home - HermesView</title>  
-        <meta name="description" content="Welcome. Our company leverages its expertise in 360-degree technology. Our range of services includes 360 virtual tours, panoramic photography and reel making."/>
+        <meta name="description" content="Welcome. Our company leverages its expertise in 360-degree technology. Our range of services includes 360 virtual reality tours, panoramic photography and reel making."/>
         <link rel="canonical" href="/"/>
       </Helmet>
       {/* <Parallax pages={3}>
@@ -271,13 +280,13 @@ const AnimatedParagraph = ({ children, className }) => {
               <div class="question-title">
                 <strong>Excellent value</strong>
               </div>
-              <p>We offer multiple pricing plans that fit each client's needs perfectly while offering the optimal value. Our commitment to superb quality ensures that our 360 virtual tours will look fresh and new for years to come, making them a highly cost-effective choice.</p>
+              <p>We offer multiple pricing plans that fit each client's needs perfectly while offering the optimal value. Our commitment to superb quality ensures that our 360 virtual reality tours will look fresh and new for years to come, making them a highly cost-effective choice.</p>
             </div>
             <div class="question-container">
               <div class="question-title">
                 <strong>Technical know-how</strong>
               </div>
-              <p>Maintaining exceptional photographic quality doesn’t entail technical compromise. We consistently lead in technical advancements to ensure optimal delivery for your virtual tours. Our custom interfaces offer captivating, cross-platform user experiences, drawing viewers in. Additionally, our tours are meticulously crafted to deliver seamless performance across mobile devices.</p>
+              <p>Maintaining exceptional photographic quality doesn’t entail technical compromise. We consistently lead in technical advancements to ensure optimal delivery for your virtual reality tours. Our custom interfaces offer captivating, cross-platform user experiences, drawing viewers in. Additionally, our tours are meticulously crafted to deliver seamless performance across mobile devices.</p>
             </div>
             <div class="question-container">
               <div class="question-title">
@@ -289,7 +298,7 @@ const AnimatedParagraph = ({ children, className }) => {
               <div class="question-title">
                 <strong>Smooth project management</strong>
               </div>
-              <p>We strive to ensure that every virtual tour shoot is as hassle-free as possible for our clients, employing efficient project management from the initial commission to final delivery. Our team is readily available to assist at any point, ensuring that the shoot, production, and delivery proceed smoothly according to plan while also remaining responsive to any potential changes, ready to adapt swiftly to ensure a seamless process from start to finish.</p>
+              <p>We strive to ensure that every virtual reality tour shoot is as hassle-free as possible for our clients, employing efficient project management from the initial commission to final delivery. Our team is readily available to assist at any point, ensuring that the shoot, production, and delivery proceed smoothly according to plan while also remaining responsive to any potential changes, ready to adapt swiftly to ensure a seamless process from start to finish.</p>
             </div>
             <div class="question-container">
               <div class="question-title">
@@ -347,6 +356,9 @@ const AnimatedParagraph = ({ children, className }) => {
       <ContactInfo /> 
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
       {/* <button onClick={addToDb}>ADD</button> */}
+      {/* <button onClick={() => addDocumentToDb(infoDoc, "info")}>Update Info Document</button>
+      <button onClick={() => addDocumentToDb(configurationDoc, "configuration")}>Update Configuration Document</button>
+      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button> */}
       {/* <button onClick={add10DaysToDb}>ADD</button> */}
       {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
       {/* <button onClick={removeFromDb}>REMOVE</button> */}

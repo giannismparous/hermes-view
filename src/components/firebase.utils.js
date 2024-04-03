@@ -132,6 +132,36 @@ export const addCollectionAndDocuments = async (
   console.log('added to db');
 };
 
+export const addCollectionAndDocumentsToDatabase = async (
+  collectionKey,
+  objectsToAdd,
+  num
+) => {
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, collectionKey);
+
+  console.log("objectsToAdd length:", objectsToAdd.length);
+
+  for (let i = 0; i < objectsToAdd.length; i++) {
+      console.log("i:", i);
+      let docRef; // Declare docRef outside the if-else blocks
+
+      if (i === 0) {
+          docRef = doc(collectionRef, "data");
+      } else if (i === objectsToAdd.length - 1) {
+          
+          docRef = doc(collectionRef, getCurrentDate());
+      } else {
+          docRef = doc(collectionRef,"table" + objectsToAdd[i].id);
+      }
+
+      batch.set(docRef, objectsToAdd[i]);
+  }
+
+  await batch.commit();  
+  console.log('added to db');
+};
+
 // export const addCollectionAndDocuments = async (
 //   collectionKey,
 //   objectsToAdd,
