@@ -356,9 +356,9 @@ const AnimatedParagraph = ({ children, className }) => {
       <ContactInfo /> 
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
       {/* <button onClick={addToDb}>ADD</button> */}
-      <button onClick={() => addDocumentToDb("sample-restaurant", "info", infoDoc)}>Update Info Document</button>
+      {/* <button onClick={() => addDocumentToDb("sample-restaurant", "info", infoDoc)}>Update Info Document</button>
       <button onClick={() => addDocumentToDb(configurationDoc, "configuration")}>Update Configuration Document</button>
-      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button>
+      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button> */}
       {/* <button onClick={add10DaysToDb}>ADD</button>
       {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
       {/* <button onClick={removeFromDb}>REMOVE</button> */}
