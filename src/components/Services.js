@@ -17,8 +17,8 @@ const Services = () => {
         { title: 'Social Media Marketing', description: `Boost your brands social media presence with our tailored content.Let us craft engaging content that drives results for your brand.`, icon_path: '../icons/social-white.png' },
         // { title: 'Search Engine Optimization', description: 'Make your venture appear to even more audience. Organic viewers will find you without a problem.', icon_path: '../icons/seo-white.png' },
         // { title: 'Code Integration', description: 'Highly customisable features in every VR tour we offer. We have a solution to any of your problems. Imagination is the limit.', icon_path: '../icons/code-white.png' },
-        { title: 'Website Creation', description: `Establish your online presence effortlessly with our website creation services. We specialize in crafting stunning websites customized to your brand, whether you're highlighting a portfolio or selling products online.`, icon_path: '../icons/social-white.png' },
-        { title: 'Performance', description: `Fuel your online success with our cross-platform ad performance service. Maximize ROI on Google, Meta, LinkedIn, and TikTok Ads. Let's elevate your brand's reach together!`, icon_path: '../icons/code-white.png' },
+        { title: 'Website Creation', description: `Establish your online presence effortlessly with our website creation services. We specialize in crafting stunning websites customized to your brand, whether you're highlighting a portfolio or selling products online.`, icon_path: '../icons/website-white.png' },
+        { title: 'Performance', description: `Fuel your online success with our cross-platform ad performance service. Maximize ROI on Google, Meta, LinkedIn, and TikTok Ads. Let's elevate your brand's reach together!`, icon_path: '../icons/performance-white.png' },
 
     ];
 

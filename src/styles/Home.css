@@ -313,9 +313,9 @@ color: rgb(0,9,128);
   font-size: 70px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 580px) {
   .container-2 h1 {
-    font-size: 40px;
+    font-size: 50px;
   }
 }
 
@@ -334,14 +334,23 @@ color: rgb(0,9,128);
   color: white;
   /* margin-top: 150px; */
   padding-bottom: 50px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
   .container-4 {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .container-4 {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
   }
 }
 
@@ -352,6 +361,12 @@ color: rgb(0,9,128);
 .container-4 h2{
   color: white;
   font-size: 70px;
+}
+
+@media screen and (max-width: 580px) {
+  .container-4 h2{
+    font-size: 50px;
+  }
 }
 
 .container-4 h2::after{
@@ -368,9 +383,9 @@ color: rgb(0,9,128);
   font-size: 70px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 580px) {
   .sample-container h2 {
-    font-size: 40px;
+    font-size: 50px;
   }
 }
 
@@ -382,6 +397,11 @@ color: rgb(0,9,128);
   height: 400px;
 }
 
+.hermes-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .hermes {
   /* color: rgb(255, 255, 255); */
   color:rgb(0,9,128);
@@ -390,13 +410,7 @@ color: rgb(0,9,128);
   text-rendering: optimizeLegibility;
   position: relative; /* Needed for absolute positioning of the pseudo-element */
   display: inline-block; /* Ensures the line is only as wide as the text */
-  margin-left: 100px;
-}
-
-@media screen and (max-width: 295px) {
-  .hermes {
-    margin-left: 0px;
-  }
+  margin-left: 200px;
 }
 
 .hermes::after {
@@ -412,6 +426,22 @@ color: rgb(0,9,128);
   border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
 }
 
+@media screen and (max-width: 730px) {
+  .hermes {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .hermes-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hermes::after {
+    left: 27%
+  }
+}
+
 .view-container {
   display: flex;
   justify-content: flex-end;
@@ -424,13 +454,7 @@ color: rgb(0,9,128);
   text-rendering: optimizeLegibility;
   /* margin-bottom: 1em; */
   position: relative; /* Add position relative */
-  margin-right: 100px;
-}
-
-@media screen and (max-width: 295px) {
-  .view {
-    margin-left: 0px;
-  }
+  margin-right: 200px;
 }
 
 .view::after {
@@ -443,6 +467,22 @@ color: rgb(0,9,128);
   bottom: 40px; /* Adjusted for the new thickness */
   right: 0; /* Position it at the left edge of the container */
   border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+}
+
+@media screen and (max-width: 730px) {
+  .view {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .view-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .view::after {
+    right: 35%; /* Position it at the left edge of the container */
+  }
 }
 
 .our-services {
@@ -587,15 +627,9 @@ button:hover {
 .sample-item {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 300px; /* Initial gap value */
+  gap: 100px; /* Initial gap value */
 }
 
-/* Media query for screens with a width lower than 1060px */
-@media screen and (max-width: 1640px) {
-  .sample-item {
-    gap: 200px; /* Adjusted gap value for smaller screens */
-  }
-}
 
 /* Media query for screens with a width lower than 1060px */
 @media screen and (max-width: 1400px) {
@@ -675,8 +709,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center content vertically */
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .view-more-projects{

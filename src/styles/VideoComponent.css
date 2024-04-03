@@ -34,3 +34,17 @@
   width: 150px;
   height: 150px;
 }
+
+@media screen and (max-width: 800px) {
+  .icon-container img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .icon-container img {
+    width: 60px;
+    height: 60px;
+  }
+}

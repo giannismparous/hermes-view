@@ -162,7 +162,7 @@ const AnimatedParagraph = ({ children, className }) => {
       <VideoComponent onVideoReady={handleVideoReady} />
       {/* <div style={{ opacity: isVideoReady ? 1 : 0 }}> */}
       <section className="custom-font-1 container-1">
-        <div className="hermes">
+        <div className="hermes hermes-container">
           <AnimatedHeading>Hermes</AnimatedHeading>
         </div>
         <p>The messenger of the gods, known for his speed and ability to travel between realms</p>
