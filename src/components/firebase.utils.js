@@ -132,15 +132,14 @@ export const addCollectionAndDocuments = async (
   console.log('added to db');
 };
 
-export const addCollectionAndDocumentsToDatabase = async (
+export const addDocumentToDatabase = async (
+  docToAdd,
   collectionKey,
-  objectsToAdd,
-  num
+  objectsToAdd
 ) => {
   const batch = writeBatch(db);
   const collectionRef = collection(db, collectionKey);
 
-  console.log("objectsToAdd length:", objectsToAdd.length);
 
   for (let i = 0; i < objectsToAdd.length; i++) {
       console.log("i:", i);
@@ -157,6 +156,7 @@ export const addCollectionAndDocumentsToDatabase = async (
 
       batch.set(docRef, objectsToAdd[i]);
   }
+  
 
   await batch.commit();  
   console.log('added to db');

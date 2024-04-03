@@ -375,7 +375,7 @@ color: rgb(0,9,128);
 
 .sample-container {
   background-color: white;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 .sample-container h2 {
@@ -627,13 +627,14 @@ button:hover {
 .sample-item {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 100px; /* Initial gap value */
+  gap: 0px; /* Initial gap value */
 }
 
 
 /* Media query for screens with a width lower than 1060px */
 @media screen and (max-width: 1400px) {
   .sample-item {
+    width: 100%;
     grid-template-columns: auto; /* Adjusted gap value for smaller screens */
   }
 }
@@ -684,7 +685,6 @@ button:hover {
 }
 
 .container-iphone, .container-imac, .container-ipad {
-  margin-bottom: 100px;
 }
 
 .heading {
@@ -713,10 +713,18 @@ button:hover {
   padding-right: 50px;
 }
 
+
+@media screen and (max-width: 1400px) {
+  .sample-info {
+    padding-bottom: 50px;
+  }
+}
+
 .view-more-projects{
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   text-decoration: none;
   font-size: 30px;
+  padding-top: 50px;
 }

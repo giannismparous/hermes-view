@@ -39,9 +39,9 @@ function Home() {
       console.log(response);
   }
 
-  const addDocumentToDb = async(doc, name) => {
+  const addDocumentToDb = async(collectionKey, document, documentName) => {
 
-    const response = addCollectionAndDocuments(name, doc);
+    const response = addCollectionAndDocuments(collectionKey,documentName, document);
     console.log(response);
 }
 
@@ -186,7 +186,7 @@ const AnimatedParagraph = ({ children, className }) => {
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
-              <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
+              <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea. It was recently renovated and it's semi-furnished.</AnimatedParagraph>
               <Link to="/projects/1" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
@@ -356,10 +356,10 @@ const AnimatedParagraph = ({ children, className }) => {
       <ContactInfo /> 
       {/* <button onClick={logGoogleUser}>LOGIN</button> */}
       {/* <button onClick={addToDb}>ADD</button> */}
-      {/* <button onClick={() => addDocumentToDb(infoDoc, "info")}>Update Info Document</button>
+      <button onClick={() => addDocumentToDb("sample-restaurant", "info", infoDoc)}>Update Info Document</button>
       <button onClick={() => addDocumentToDb(configurationDoc, "configuration")}>Update Configuration Document</button>
-      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button> */}
-      {/* <button onClick={add10DaysToDb}>ADD</button> */}
+      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button>
+      {/* <button onClick={add10DaysToDb}>ADD</button>
       {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
       {/* <button onClick={removeFromDb}>REMOVE</button> */}
       {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}

@@ -46,14 +46,14 @@ function SampleDisplay({ device, modelPath }) {
 
   const iphoneContainer = {
     position: "relative",
-    width: "400px",
-    height: "750px",
+    width: "350px",
+    height: "650px",
   };
 
   const ipadContainer = {
     position: "relative",
-    width: "700px",
-    height: "900px",
+    width: "500px",
+    height: "650px",
   };
 
   const imacContainer = {

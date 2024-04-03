@@ -8,11 +8,10 @@
 }
 
 .sample-display-container {
-    padding-top: 100px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 0px;
 }
 
 .samples h2 {
