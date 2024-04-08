@@ -387,7 +387,8 @@ const infoDoc = {
     ],
     unavailable_days:[
         "3-4-2024", 
-        "5-4-2024"
+        "5-4-2024",
+        "9-4-2024"
     ],
     tables: [
         {
@@ -449,7 +450,8 @@ const infoDoc = {
         }
     ],
     reservation_id_counter:0,
-    order_id_counter:0
+    order_id_counter:0,
+    numberOfDaysToShowToCustomers: 14
 }
 
 export default infoDoc;

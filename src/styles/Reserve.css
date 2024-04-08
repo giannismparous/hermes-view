@@ -64,3 +64,38 @@
   .confirmation-popup div {
     text-align: right;
   }
+
+/* 
+
+*/
+
+.reserve-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.reserve-container h2{
+  
+  color: rgb(0, 9, 128);
+}
+
+.reserve-container h2::after{
+  background-color: transparent;
+}
+
+.reserve-container button {
+  width: 185px;
+  background-color: #d0d0d0;
+  color: rgb(0, 9, 128);
+  font-size: 24px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  /* border: 2px solid #007bff;  */
+  padding: 20px;
+  font-family: "Josefin Sans", sans-serif;
+}

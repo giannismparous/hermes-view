@@ -643,6 +643,27 @@ export const fetchInfo = async (collectionKey) => {
 
 };
 
+export const fetchInfoForCustomer = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+  if (infoDoc.exists()) {
+    console.log(`Info returned to client:`);
+    const infoReturned=[];
+    infoReturned[0]=infoDoc.data().reservation_times;
+    infoReturned[1]=infoDoc.data().unavailable_days;
+    infoReturned[2]=infoDoc.data().tables;
+    infoReturned[3]=infoDoc.data().numberOfDaysToShowToCustomers;
+    console.log(infoDoc.data());
+    return infoReturned;
+  } else {
+    console.log(`Info doc does not exist.`);
+    return false;
+  }
+
+};
+
 export const fetchDateInfo = async (collectionKey,date) => {
 
   const sampleRestaurantRef = collection(db, collectionKey);
@@ -760,6 +781,29 @@ export const fetchDateInfo = async (collectionKey,date) => {
     dateInfoToReturn[8] = [...orders];
 
     console.log(dateInfoToReturn);
+
+    return dateInfoToReturn;
+  } else {
+    console.log(`Info doc does not exist.`);
+    return false;
+  }
+
+};
+
+export const fetchDateInfoForCustomer = async (collectionKey,date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, date);
+  const infoDoc = await getDoc(infoRef);
+  const dateInfoToReturn = [];
+
+  if (infoDoc.exists()) {
+
+    console.log(`Date doc received for customer and being adjusted:`);
+    
+    dateInfoToReturn[0]=infoDoc.data().unavailable_times_indexes;
+    dateInfoToReturn[1]=infoDoc.data().unavailable_tables;
+    dateInfoToReturn[2]=infoDoc.data().unavailable_tables_times_indexes;
 
     return dateInfoToReturn;
   } else {

@@ -124,12 +124,16 @@ const dateDoc = {
     ],
     unavailable_times_indexes: [
         {
-            start_time_index:70,
-            end_time_index:80
+            start_time_index:91,
+            end_time_index:96
         },
         {
-            start_time_index:84,
-            end_time_index: 88
+            start_time_index:66,
+            end_time_index: 80
+        },
+        {
+            start_time_index:1,
+            end_time_index:40
         }
     ],
     unavailable_tables: [2,6],
@@ -156,7 +160,7 @@ const dateDoc = {
                 },
             ]
         },
-    ]
+    ],
 }
 
 export default dateDoc;
