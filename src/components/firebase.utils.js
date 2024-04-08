@@ -800,14 +800,14 @@ export const fetchDateInfoForCustomer = async (collectionKey,date) => {
   if (infoDoc.exists()) {
 
     console.log(`Date doc received for customer and being adjusted:`);
-    
+
     dateInfoToReturn[0]=infoDoc.data().unavailable_times_indexes;
     dateInfoToReturn[1]=infoDoc.data().unavailable_tables;
     dateInfoToReturn[2]=infoDoc.data().unavailable_tables_times_indexes;
 
     return dateInfoToReturn;
   } else {
-    console.log(`Info doc does not exist.`);
+      console.log(`Date doc does not exist.`);
     return false;
   }
 

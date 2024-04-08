@@ -75,6 +75,11 @@ const Reserve = () => {
 
         const response = await fetchDateInfoForCustomer(collectionKey,date);
 
+        if (!response){
+          setTimesMap([]);
+          return;
+        }
+
         setLoading(true); 
         setUnavailableTimesIndexes(response[0]);
         
@@ -145,6 +150,7 @@ const Reserve = () => {
                     </div>}
                     {choosingTime && <div className='reserve-container'>
                       <h2>Choose time:</h2>
+                      {timesMap.length===0 && <h2>No available reservation times for this date.</h2>}
                       {Object.entries(timesMap).map(([key, value]) => (
                       <button key={key}>
                         {value}
