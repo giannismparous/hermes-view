@@ -1,5 +1,16 @@
 .about {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
+    background-image: url('../assets/background-blue.jpg');
 }
+
+@media (max-width: 500px) {
+    .about {
+      background-image: url('../assets/background-blue-smartphone.jpg');
+    }
+  }
 
 .about h1{
     text-align: center;

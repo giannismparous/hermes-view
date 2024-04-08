@@ -9,16 +9,6 @@ const dateDoc = {
             table_id: 8,
             reservation_id: 14,
             completed: true,
-            order: [
-                {
-                    menu_item_id: 1,
-                    quantity: 2
-                },
-                {
-                    menu_item_id: 3,
-                    quantity: 1
-                }
-            ]
         },
         {
             name: "NIKOS",
@@ -35,6 +25,7 @@ const dateDoc = {
             end_time_index: 47,
             table_id: 9,
             reservation_id: 15,
+            completed: true
         },
         {
             name: "ROULA",
@@ -59,6 +50,7 @@ const dateDoc = {
             end_time_index: 31,
             table_id: 10,
             reservation_id: 11,
+            completed:true
         },
         {
             name: "IWSHF",
@@ -86,7 +78,51 @@ const dateDoc = {
             reservation_id: 37,
         },
     ],
-    unavailable_times: [
+    orders: [
+        {
+            reservation_id: 14,
+            order_id:1,
+            order_items:[
+                {
+                    menu_item_id: 2,
+                    quantity: 3
+                },
+                {
+                    menu_item_id: 3,
+                    quantity: 1
+                }
+            ]
+        },
+        {
+            reservation_id: 15,
+            order_id:2,
+            order_items:[
+                {
+                    menu_item_id: 1,
+                    quantity: 5
+                },
+                {
+                    menu_item_id: 3,
+                    quantity: 2
+                }
+            ]
+        },
+        {
+            reservation_id: 11,
+            order_id:3,
+            order_items:[
+                {
+                    menu_item_id: 1,
+                    quantity: 2
+                },
+                {
+                    menu_item_id: 3,
+                    quantity: 1
+                }
+            ]
+        }
+    ],
+    unavailable_times_indexes: [
         {
             start_time_index:70,
             end_time_index:80
@@ -97,7 +133,7 @@ const dateDoc = {
         }
     ],
     unavailable_tables: [2,6],
-    unavailable_table_times: [
+    unavailable_tables_times_indexes: [
         {
             table_id: 4,
             times_indexes: [

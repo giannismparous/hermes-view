@@ -3,24 +3,16 @@ body {
   margin: 0;
   padding: 0;
   /* Apply background image to the body */
-  background-image: url('../assets/background-blue.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* Ensure the background stays fixed */
-  /* Center the background image horizontally and vertically */
-  background-position: center;
   /* Specify a fallback background color */
-  background-color: #181818;
   font-family: "Josefin Sans", sans-serif;
 }  
 
-@media (max-width: 500px) {
-  body {
-    background-image: url('../assets/background-blue-smartphone.jpg');
-  }
-}
-
 .home {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-position: center;
+  background-image: url('../assets/background-blue.jpg');
   display: flex;
   flex-direction: column;
   align-items: center; /* This will center the children horizontally */
@@ -30,6 +22,12 @@ body {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+}
+
+@media (max-width: 500px) {
+  .home {
+    background-image: url('../assets/background-blue-smartphone.jpg');
+  }
 }
 
 .golden-container {

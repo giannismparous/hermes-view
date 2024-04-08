@@ -5,7 +5,6 @@ import SamplePage from "./SamplePage";
 import ContactInfo from "./ContactInfo";
 import VideoComponent from "./VideoComponent";
 import {HashLoader} from "react-spinners";
-import { addCollectionAndDocuments, cancelReservationByTableNumber, fetchTablesAvailability, signInWithGooglePopup, updateDateAvailability } from "./firebase.utils";
 import reservations_data from "./reservations_data";
 import { Helmet } from "react-helmet-async";
 import Services from "./Services";
@@ -15,53 +14,36 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import infoDoc from "./dbData";
-import configurationDoc from "./dbConfiguration";
-import dateDoc from "./dbDate";
 
 function Home() {
 
   const isMobile = useMediaQuery({ maxWidth: 1400 }); // Check if screen width is <= 768px
 
-  const logGoogleUser = async() => {
-    const response = await signInWithGooglePopup();
-    console.log(response);
-  }
+  // const logGoogleUser = async() => {
+  //   const response = await signInWithGooglePopup();
+  //   console.log(response);
+  // }
 
-  const addDateAvailabilityToDb = async() => {
+//   const addDateAvailabilityToDb = async() => {
 
-    const response = updateDateAvailability("sample-restaurant");
-}
+//     const response = updateDateAvailability("sample-restaurant");
+// }
 
-  const addToDb = async() => {
+  // const addToDb = async() => {
 
-      const response = addCollectionAndDocuments("sample-restaurant", reservations_data,1);
-      console.log(response);
-  }
+  //     const response = addCollectionAndDocuments("sample-restaurant", reservations_data,1);
+  //     console.log(response);
+  // }
 
-  const addDocumentToDb = async(collectionKey, document, documentName) => {
+  
 
-    const response = addCollectionAndDocuments(collectionKey,documentName, document);
-    console.log(response);
-}
 
 //   const add10DaysToDb = async() => {
 
 //     const response = addCollectionAndDocuments("sample-restaurant", reservations_data,10);
 // }
 
-  const removeFromDb = async () => {
-    try {
-      // Assuming the reservation ID is known and provided here
-      const reservationId = 2;
-      const tableNumber = 6;
-      
-      await cancelReservationByTableNumber(reservationId, tableNumber);
-      console.log(`Reservation with id: ${reservationId} was canceled for table ${tableNumber}`);
-    } catch (error) {
-      console.error("Error encountered while removing reservation", error);
-    }
-  };
+  
 
   const scrollRef = useScrollAnimation();
   const images = [
@@ -354,20 +336,18 @@ const AnimatedParagraph = ({ children, className }) => {
           </div>
         </section>
       <ContactInfo /> 
-      {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      {/* <button onClick={addToDb}>ADD</button> */}
-      {/* <button onClick={() => addDocumentToDb("sample-restaurant", "info", infoDoc)}>Update Info Document</button>
-      <button onClick={() => addDocumentToDb(configurationDoc, "configuration")}>Update Configuration Document</button>
-      <button onClick={() => addDocumentToDb(dateDoc)}>Add today's document</button> */}
-      {/* <button onClick={add10DaysToDb}>ADD</button>
-      {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
-      {/* <button onClick={removeFromDb}>REMOVE</button> */}
-      {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
     </div>
   );
 }
 
 export default Home;
+
+      {/* <button onClick={logGoogleUser}>LOGIN</button> */}
+      {/* <button onClick={addToDb}>ADD</button> */}
+      {/* <button onClick={add10DaysToDb}>ADD</button>
+      {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
+      {/* <button onClick={removeFromDb}>REMOVE</button> */}
+      {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
 
 {/* <section className="container services animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
         <div className="centered-header">

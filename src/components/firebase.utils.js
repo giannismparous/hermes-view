@@ -16,7 +16,8 @@ import {
   setDoc,
   collection,
   writeBatch,
-  updateDoc
+  updateDoc,
+  addDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -133,33 +134,22 @@ export const addCollectionAndDocuments = async (
 };
 
 export const addDocumentToDatabase = async (
-  docToAdd,
   collectionKey,
-  objectsToAdd
+  documentName,
+  documentToAdd
 ) => {
-  const batch = writeBatch(db);
-  const collectionRef = collection(db, collectionKey);
-
-
-  for (let i = 0; i < objectsToAdd.length; i++) {
-      console.log("i:", i);
-      let docRef; // Declare docRef outside the if-else blocks
-
-      if (i === 0) {
-          docRef = doc(collectionRef, "data");
-      } else if (i === objectsToAdd.length - 1) {
-          
-          docRef = doc(collectionRef, getCurrentDate());
-      } else {
-          docRef = doc(collectionRef,"table" + objectsToAdd[i].id);
-      }
-
-      batch.set(docRef, objectsToAdd[i]);
+  try {
+    const batch = writeBatch(db);
+    const collectionRef = collection(db, collectionKey);
+    const docRef = doc(collectionRef, documentName);
+    batch.set(docRef, documentToAdd);
+    await batch.commit();
+    console.log(`Added ${documentName} to db`);
+    return docRef; // Return the reference to the added document if needed
+  } catch (error) {
+    console.error("Error adding document to database: ", error);
+    throw error;
   }
-  
-
-  await batch.commit();  
-  console.log('added to db');
 };
 
 // export const addCollectionAndDocuments = async (
@@ -202,6 +192,7 @@ export const addDocumentToDatabase = async (
 //   await batch.commit();  
 //   console.log('added to db');
 // };
+
 
 export const formatDate = (date) => {
   const year = date.getFullYear();
@@ -304,63 +295,326 @@ export const onAuthStateChangedListener = (callback) =>
 //   return tablesData;
 // };
 
-export const fetchDatesAvailability = async (date, num) => {
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const dataRef = doc(sampleRestaurantRef, "data");
-  const dataDoc = await getDoc(dataRef);
-  // if (dataDoc.exists()) {
-  //   const data = dataDoc.data();
-  //   console.log(data);
-  //   let currentIndex=0;
-  //   if (data && data.dates && Array.isArray(data.dates)) {
-  //     const availability = [];
-  //     for (let i = 0; i < data.dates.length; i++) {
-  //       if (date===data.dates[i].date){
-  //         currentIndex=i;
-  //         break;
-  //       }
-  //     }
-  //     for (let i = currentIndex; i < currentIndex+num; i++) {
-  //       if (data.dates[i].unavailable===undefined){
-  //         availability.push(true);
-  //       }
-  //       else {
-  //         availability.push(false);
-  //       }
-  //     }
-  //     console.log(dataDoc);
-  //     return availability;
-  //   } else {
-  //     console.log('Dates array is missing or not an array.');
-  //   }
-    const availability=[];
-    availability.push(true);
-    return availability;
-  // } else {
-  //   console.log(`Current date does not exist.`);
-  // }
-};
+// Returns true if date in collection "collectionKey" is available to reserve
 
-export const fetchTimeByIndex = async (index, date) => {
+export const fetchMenu = async (collectionKey) => {
 
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, date);
-  const currentDateDoc = await getDoc(currentDateRef);
-  if (currentDateDoc.exists()) {
-    const times=currentDateDoc.data().times;
-    times.forEach(time => {
-      if (index===time.id){
-        return time.time
-      }
-    });
-  } else {
-    console.log(`Current date does not exist.`);
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const menu = infoDoc.data().menu;
+    console.log("Menu:");
+    console.log(menu);
+    return  menu;
   }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
 };
 
-export const dateExists = async (date) => {
+export const fetchOrderIdCounter = async (collectionKey) => {
 
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const orderIdCounter = infoDoc.data().order_id_counter;
+    console.log("Order ID counter:");
+    console.log(orderIdCounter);
+    return  orderIdCounter;
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchReservationIdCounter = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const reservationIdCounter = infoDoc.data().reservation_id_counter;
+    console.log("Reservation ID counter:");
+    console.log(reservationIdCounter);
+    return  reservationIdCounter;
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchTables = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const tables = infoDoc.data().tables;
+    console.log("Tables:");
+    console.log(tables);
+    return  tables;
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchReservationTimes = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const reservation_times = infoDoc.data().reservation_times;
+    console.log("Reservation times:");
+    console.log(reservation_times);
+    return  reservation_times;
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchDateAvailability = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const unavailable_days = infoDoc.data().unavailable_days;
+    console.log("Unavailable days:");
+    console.log(unavailable_days);
+    console.log(`Fetched date ${date} availability: ${(!unavailable_days.includes(date))}`);
+    return  !unavailable_days.includes(date);
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchDatesAvailability = async (collectionKey, dates) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()){
+    const unavailable_days = infoDoc.data().unavailable_days;
+    const availability = [];
+    dates.forEach(date => {
+      availability.push(!unavailable_days.includes(date));
+    });
+    console.log("Unavailable days:");
+    console.log(unavailable_days);
+    console.log(`Fetched dates availability:`);
+    console.log(dates);
+    return  availability;
+  }
+
+  console.log(`Error while fetching info doc.`);
+  
+  return null;
+
+};
+
+export const fetchTimeByIndex = async (collectionKey, index) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()) {
+    const reservation_times = infoDoc.data().reservation_times;
+
+    for (const reservation_time of reservation_times) {
+      if (index === reservation_time.id) {
+        console.log(`Index: ${index}, Time: ${reservation_time.time}`);
+        return reservation_time.time; // Return the value directly
+      }
+    }
+
+    console.log(`Time not found for index ${index}`);
+    return null; // Return null if the index is not found
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null in case of error
+  }
+
+};
+
+export const fetchTimesByIndexes = async (collectionKey, indexes) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()) {
+    const reservation_times = infoDoc.data().reservation_times;
+    const timesOfIndexes = [];
+
+    for (const index of indexes) {
+      let found = false;
+
+      for (const time of reservation_times) {
+        if (index === time.id) {
+          timesOfIndexes.push(time.time);
+          found = true;
+          break; // Stop looping through times once a match is found
+        }
+      }
+
+      if (!found) {
+        timesOfIndexes.push(undefined);
+        console.log(`Time not found for index ${index}`);
+      }
+    }
+
+    console.log("Indexes:");
+    console.log(indexes);
+    console.log("Times found:");
+    console.log(timesOfIndexes);
+
+    return timesOfIndexes;
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const fetchUnavailableTimesIndexesOfDate = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+
+  if (dateDoc.exists()) {
+
+    const unavailable_times_indexes = dateDoc.data().unavailable_times_indexes;
+
+    console.log(`Unavailable times indexes pairs of date ${date}:`);
+    console.log(unavailable_times_indexes);
+
+    return unavailable_times_indexes;
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const fetchUnavailableTablesOfDate = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+
+  if (dateDoc.exists()) {
+
+    const unavailable_tables = dateDoc.data().unavailable_tables;
+
+    console.log(`Unavailable tables of date ${date}:`);
+    console.log(unavailable_tables);
+
+    return unavailable_tables;
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const fetchUnavailableTablesTimesIndexesOfDate = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+
+  if (dateDoc.exists()) {
+
+    const unavailable_tables_times_indexes = dateDoc.data().unavailable_tables_times_indexes;
+
+    console.log(`Unavailable tables times indexes of date ${date}:`);
+    console.log(unavailable_tables_times_indexes);
+
+    return unavailable_tables_times_indexes;
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const fetchReservationsOfDate = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+
+  if (dateDoc.exists()) {
+
+    const reservations = dateDoc.data().reservations;
+
+    console.log(`Reservations of date ${date}:`);
+    console.log(reservations);
+
+    return reservations;
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const fetchOrdersOfDate = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+
+  if (dateDoc.exists()) {
+
+    const orders = dateDoc.data().orders;
+
+    console.log(`Orders of date ${date}:`);
+    console.log(orders);
+
+    return orders;
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const dateExists = async (collectionKey, date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
   const dateRef = doc(sampleRestaurantRef, date);
   const dateDoc = await getDoc(dateRef);
   if (dateDoc.exists()) {
@@ -370,6 +624,149 @@ export const dateExists = async (date) => {
     console.log(`${date} does not exist.`);
     return false;
   }
+  
+};
+
+export const fetchInfo = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+  if (infoDoc.exists()) {
+    console.log(`Info doc returned:`);
+    console.log(infoDoc.data());
+    return infoDoc.data();
+  } else {
+    console.log(`Info doc does not exist.`);
+    return false;
+  }
+
+};
+
+export const fetchDateInfo = async (collectionKey,date) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, date);
+  const infoDoc = await getDoc(infoRef);
+  const dateInfoToReturn = [];
+
+  if (infoDoc.exists()) {
+
+    console.log(`Date doc received and being adjusted:`);
+    dateInfoToReturn[0]=infoDoc.data().unavailable_times_indexes;
+    dateInfoToReturn[1]=infoDoc.data().unavailable_tables;
+    dateInfoToReturn[2]=infoDoc.data().unavailable_tables_times_indexes;
+
+    const reservations=infoDoc.data().reservations;
+
+    dateInfoToReturn[3] = [...reservations];
+
+    reservations.sort((a, b) => {
+      if (a.start_time_index < b.start_time_index) {
+          return -1;
+      } else if (a.start_time_index > b.start_time_index) {
+          return 1;
+      } else {
+          return 0;
+      }
+    });
+
+    reservations.sort((a, b) => {
+      
+      if ((a.accepted===undefined && a.canceled===undefined) && (b.accepted!==undefined || b.canceled!==undefined)){return -1;}
+      else if ((b.accepted===undefined && b.canceled===undefined) && (a.accepted!==undefined || a.canceled!==undefined)){return 1;}
+      if ((a.accepted!==undefined) && (b.canceled!==undefined)){return -1;}
+      else if ((b.accepted!==undefined) && (a.canceled!==undefined)){return 1;}
+      if (a.canceled===undefined && b.canceled!==undefined){return -1;}
+      else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
+      else {return a.name.localeCompare(b.name);}
+      
+    });
+
+    const reservationsByStartTimeIndex = {};
+    // Group reservations by table_id
+    reservations.forEach(reservation => {
+      const { start_time_index, ...rest } = reservation;
+      if (!reservationsByStartTimeIndex[start_time_index]) {
+        reservationsByStartTimeIndex[start_time_index] = { start_time_index: start_time_index, reservations: [] };
+      }
+      reservationsByStartTimeIndex[start_time_index].reservations.push({ ...rest });
+    });
+
+    // Convert the object to an array of reservations grouped by table_id
+    const reservationsGroupedByStartTimeIndex = Object.values(reservationsByStartTimeIndex);
+
+    console.log("Start time index reservations:");
+    console.log(reservationsGroupedByStartTimeIndex);
+
+    dateInfoToReturn[4] = [...reservationsGroupedByStartTimeIndex];
+
+    reservations.sort((a, b) => {
+      if ((a.completed===undefined && a.canceled===undefined) && (b.completed!==undefined || b.canceled!==undefined)){return -1;}
+      else if ((b.completed===undefined && b.canceled===undefined) && (a.completed!==undefined || a.canceled!==undefined)){return 1;}
+      if ((a.completed!==undefined) && (b.canceled!==undefined)){return -1;}
+      else if ((b.completed!==undefined) && (a.canceled!==undefined)){return 1;}
+      if (a.canceled===undefined && b.canceled!==undefined){return -1;}
+      else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
+      else {return a.name.localeCompare(b.name);}
+      
+    });
+
+    dateInfoToReturn[5] = [...reservations];
+
+    // reservations.sort((a, b) => {
+    //   if (a.table_id < b.table_id) {
+    //     return -1;
+    // } else if (a.table_id > b.table_id) {
+    //     return 1;
+    // } else {
+    //     return 0;
+    // }
+    // });
+
+    const reservationsByTableId = {};
+
+    // Group reservations by table_id
+    reservations.forEach(reservation => {
+        const { table_id, ...rest } = reservation;
+        if (!reservationsByTableId[table_id]) {
+            reservationsByTableId[table_id] = { id: table_id, reservations: [] };
+        }
+        reservationsByTableId[table_id].reservations.push({ ...rest });
+    });
+
+    // Convert the object to an array of reservations grouped by table_id
+    const reservationsGroupedByTableId = Object.values(reservationsByTableId);
+
+    console.log("Table reservations:");
+    console.log(reservationsGroupedByTableId);
+
+    dateInfoToReturn[6] = [...reservationsGroupedByTableId];
+
+    const orders=infoDoc.data().orders;
+
+    dateInfoToReturn[7] = [...orders];
+
+    orders.sort((a, b) => {
+      if (a.reservation_id < b.reservation_id) {
+          return -1;
+      } else if (a.reservation_id > b.reservation_id) {
+          return 1;
+      } else {
+          return 0;
+      }
+    });
+
+    dateInfoToReturn[8] = [...orders];
+
+    console.log(dateInfoToReturn);
+
+    return dateInfoToReturn;
+  } else {
+    console.log(`Info doc does not exist.`);
+    return false;
+  }
+
 };
 
 // Fetches table data given the table number
@@ -409,26 +806,25 @@ export const fetchReservations = async (date) => {
   } else {
     console.log(`Current date does not exist.`);
   }
-};
-
-export const fetchReservationTimes = async (startIndex, endIndex,date) => {
-
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
   
-  // const currentDateRef = doc(sampleRestaurantRef, date);
-  const currentDateRef = doc(sampleRestaurantRef, "data");
-  const currentDateDoc = await getDoc(currentDateRef);
-
-  if (currentDateDoc.exists()) {
-    return [currentDateDoc.data().times[startIndex].time,currentDateDoc.data().times[endIndex].time];
-  } else {
-    console.log(`CurrentDate does not exist.`);
-  }
-
-  // console.log(availableTables);
-
-  return;
 };
+
+// export const fetchReservationTimes = async (startIndex, endIndex,date) => {
+
+//   const sampleRestaurantRef = collection(db, 'sample-restaurant');
+  
+//   const currentDateRef = doc(sampleRestaurantRef, "data");
+//   const currentDateDoc = await getDoc(currentDateRef);
+
+//   if (currentDateDoc.exists()) {
+//     return [currentDateDoc.data().times[startIndex].time,currentDateDoc.data().times[endIndex].time];
+//   } else {
+//     console.log(`CurrentDate does not exist.`);
+//   }
+
+
+//   return;
+// };
 
 export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
 
@@ -508,20 +904,18 @@ export const updateTableSchedules = async (startIndex, endIndex, name, phone, ta
 
 };
 
-export const cancelReservationByTableNumber = async (reservationId, date) => {
+export const cancelReservationByTableNumber = async (collectionKey, reservationId, date) => {
 
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, date);
 
-  try {
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
 
-    const currentDateDoc = await getDoc(currentDateRef);
+  if (dateDoc.exists()) {
 
-    if (currentDateDoc.exists()) {
+    const reservations = dateDoc.data().reservations;
 
-      const reservations = currentDateDoc.data().reservations;
-
-      let reservationIndex = -1;
+    let reservationIndex = -1;
       for (let i = 0; i < reservations.length; i++) {
         if (reservations[i].reservation_id === reservationId) {
           reservationIndex = i;
@@ -529,41 +923,35 @@ export const cancelReservationByTableNumber = async (reservationId, date) => {
         }
       }
 
-      if (reservationIndex !== -1) {
-        // Update the canceled field of the reservation
-        reservations[reservationIndex].canceled = true;
+    if (reservationIndex !== -1) {
 
-        // Update the document in Firestore
-        await updateDoc(currentDateRef, { reservations });
+      reservations[reservationIndex].canceled = true;
+      await updateDoc(dateRef, { reservations });
+      console.log(`Reservation with id: ${reservationId} was canceled.`);
 
-        console.log(`Reservation with id: ${reservationId} was canceled.`);
-      } else {
-        console.log(`Reservation with id: ${reservationId} wasn't found.`);
-      }
-
-    } else {
-      console.log(`Current date does not exist.`);
+    }
+    else {
+      console.log(`Reservation with id: ${reservationId} wasn't found.`);
     }
 
-  } catch (error) {
-    console.error("Error encounter while fetching current date doc", error);
+  } else {
+    console.log(`Error while fetching date doc`);
+    return null; // Return null or handle the error case appropriately
   }
 
 };
 
-export const acceptReservationByTableNumber = async (reservationId, date) => {
+export const completeReservationByTableNumber = async (collectionKey, reservationId, date) => {
 
-  const sampleRestaurantRef = collection(db, 'sample-restaurant');
-  const currentDateRef = doc(sampleRestaurantRef, date);
-  try {
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
 
-    const currentDateDoc = await getDoc(currentDateRef);
+  if (dateDoc.exists()) {
 
-    if (currentDateDoc.exists()) {
+    const reservations = dateDoc.data().reservations;
 
-      const reservations = currentDateDoc.data().reservations;
-
-      let reservationIndex = -1;
+    let reservationIndex = -1;
       for (let i = 0; i < reservations.length; i++) {
         if (reservations[i].reservation_id === reservationId) {
           reservationIndex = i;
@@ -571,23 +959,20 @@ export const acceptReservationByTableNumber = async (reservationId, date) => {
         }
       }
 
-      if (reservationIndex !== -1) {
-        // Update the canceled field of the reservation
-        reservations[reservationIndex].accepted = true;
+    if (reservationIndex !== -1) {
 
-        await updateDoc(currentDateRef, { reservations });
+      reservations[reservationIndex].completed = true;
+      await updateDoc(dateRef, { reservations });
+      console.log(`Reservation with id: ${reservationId} was completed.`);
 
-        console.log(`Reservation with id: ${reservationId} was accepted.`);
-      } else {
-        console.log(`Reservation with id: ${reservationId} wasn't found.`);
-      }
-
-    } else {
-      console.log(`Current date does not exist.`);
+    }
+    else {
+      console.log(`Reservation with id: ${reservationId} wasn't found.`);
     }
 
-  } catch (error) {
-    console.error("Error encounter while fetching current date doc", error);
+  } else {
+    console.log(`Error while fetching date doc`);
+    return null; // Return null or handle the error case appropriately
   }
 
 };

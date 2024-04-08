@@ -17,4 +17,9 @@
 
 .calendar-yearly-container h2 {
     margin-top: 10px;
+    color: white;
+}
+
+.calendar-yearly-container h2::after {
+    background-color: transparent;
 }

@@ -22,6 +22,7 @@ import Login from "./components/Login";
 import TagManager from 'react-gtm-module';
 import Samples from "./components/Samples";
 import Services from "./components/Services";
+import Debug from "./components/Debug";
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
 
   const location = useLocation();
 
-  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations"];
+  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations","/debug"];
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
@@ -46,6 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/debug" element={<Debug />} />
         <Route path="/samples" element={<Samples />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/login" element={<Login />} />

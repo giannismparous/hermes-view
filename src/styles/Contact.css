@@ -1,8 +1,19 @@
 .contact {
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: white;
   height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-position: center;
+  background-image: url('../assets/background-blue.jpg');
+}
+
+
+@media (max-width: 500px) {
+  .contact {
+    background-image: url('../assets/background-blue-smartphone.jpg');
+  }
 }
 
 .contact-container {

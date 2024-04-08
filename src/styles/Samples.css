@@ -1,7 +1,18 @@
 .samples {
     display: flex;
     flex-direction: column;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
+    background-image: url('../assets/background-blue.jpg');
 }
+
+@media (max-width: 500px) {
+    .samples {
+      background-image: url('../assets/background-blue-smartphone.jpg');
+    }
+  }
 
 .samples .invis-container{
     height: 600px;
@@ -12,6 +23,7 @@
     display: flex;
     flex-direction: column;
     gap: 0px;
+    padding-bottom: 30px;
 }
 
 .samples h2 {

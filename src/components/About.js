@@ -17,20 +17,20 @@ function About() {
         <link rel="canonical" href="/about"/>
       </Helmet>
       <div className="about" ref={scrollRef}>
-      <div className="about-info-container">
-        <section className='container golden-container animate-on-scroll about-container'>
-          <h1>About Us</h1>
-        </section>
-        <section className="container ">
-        <p>Welcome to HermesView: Where Reality Meets Innovation</p>
-        <p>We're not your average virtual reality tour company – we're here to redefine how you experience the world around you.</p>
-        <p>Picture this: immersive VR tours that aren't just passive views, but interactive adventures. With clickable features, 360-degree videos, and even virtual guides chatting with you as you explore, we're taking virtual tours to a whole new level.</p>
-        <p>But that's not all. We're also your go-to team for digital marketing magic. From crafting killer social media content to building sleek websites and running ads on all the hottest platforms – Google, Facebook, LinkedIn, TikTok – we've got your back.</p>
-        <p>At HermesView, we're all about pushing boundaries and making the impossible, possible. Join us on this journey and let's make some digital dreams a reality. Ready to dive in? Let's chat!</p>
-        </section>
+        <div className="about-info-container">
+          <section className='container golden-container animate-on-scroll about-container'>
+            <h1>About Us</h1>
+          </section>
+          <section className="container ">
+          <p>Welcome to HermesView: Where Reality Meets Innovation</p>
+          <p>We're not your average virtual reality tour company – we're here to redefine how you experience the world around you.</p>
+          <p>Picture this: immersive VR tours that aren't just passive views, but interactive adventures. With clickable features, 360-degree videos, and even virtual guides chatting with you as you explore, we're taking virtual tours to a whole new level.</p>
+          <p>But that's not all. We're also your go-to team for digital marketing magic. From crafting killer social media content to building sleek websites and running ads on all the hottest platforms – Google, Facebook, LinkedIn, TikTok – we've got your back.</p>
+          <p>At HermesView, we're all about pushing boundaries and making the impossible, possible. Join us on this journey and let's make some digital dreams a reality. Ready to dive in? Let's chat!</p>
+          </section>
+          </div>
         </div>
-      </div>
-      <ContactInfo/>
+        <ContactInfo/>
     </Fragment>
   );
 }
