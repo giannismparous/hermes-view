@@ -74,7 +74,7 @@ const Reserve = () => {
 
     setChoosingTime(false);
     setChoosingCapacity(true);
-    setSelectedTimeIndex(timeIndex);
+    setSelectedTimeIndex(parseInt(timeIndex));
     
   };
 
@@ -199,7 +199,7 @@ const Reserve = () => {
   const [choosingCapacity, setChoosingCapacity] = useState(false);
   const [unavailableTimesIndexes, setUnavailableTimesIndexes] = useState([]);
   const [selectedDate,setSelectedDate] = useState("");
-  const [selectedTimeIndex,setSelectedTimeIndex] = useState("");
+  const [selectedTimeIndex,setSelectedTimeIndex] = useState(0);
   const [selectedCapacity,setSelectedCapacity] = useState(1);
   const [maxReservationDurationIndexNumber,setMaxReservationDurationIndexNumber] = useState(7);
   const [unavailableTables,setUnavailableTables] = useState([]);
