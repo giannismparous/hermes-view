@@ -89,6 +89,7 @@ const Reserve = () => {
     const redTables = [...unavailableTables];
 
     for (const tableId in tablesCapacityMap) {
+      if (redTables.includes(tableId))continue;
       if (tablesCapacityMap.hasOwnProperty(tableId)) {
           const capacity = tablesCapacityMap[tableId];
           if (capacity < selectedCapacity) {
@@ -96,8 +97,6 @@ const Reserve = () => {
           }
       }
   }
-
-    console.log(redTables)
 
     for (const table of unavailableTablesTimesIndexes) {
       if (redTables.includes(table.table_id))continue;
@@ -128,7 +127,7 @@ const Reserve = () => {
 
     const data = {
               eventName: 'ReservationTimeSelected',
-              redTables: unavailableTables,
+              redTables: redTables,
               startIndex: selectedTimeIndex,
               endIndex: selectedTimeIndex+maxReservationDurationIndexNumber
             };
