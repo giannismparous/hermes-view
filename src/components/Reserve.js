@@ -44,7 +44,7 @@ const Reserve = () => {
           setTablesCapacityMap(response[2]);
           setDaysToShow(getNextDays(response[3]).filter(date => !response[1].includes(date)));
           setMaxCapacity(response[4]);
-          setMaxReservationDurationIndexNumber(response[5]);
+          setMaxReservationDurationIndexNumber(parseInt(response[5]));
           setLoading(false);
 
         }

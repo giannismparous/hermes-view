@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/ReserveTable.css'; // Import your CSS file
 import { fetchReservationTimes, getCurrentDate, updateTableSchedules } from './firebase.utils';
-import { HashLoader } from 'react-spinners';
+import { ClockLoader } from 'react-spinners';
 
 const ReserveTable = () => {
 
@@ -66,7 +66,7 @@ const ReserveTable = () => {
             <meta name="description" content="Reserve a table now."/>
             <meta name='robots' content='noindex'/>
             <div className=".reservation-details-reserve-table">
-                {!reservationTimesFetched && !bookedReservation && <HashLoader type="Grid" color="#8a5a00" size={80}/>}
+                {!reservationTimesFetched && !bookedReservation && <ClockLoader type="Grid" color="#007bff" size={80}/>}
                 {reservationTimesFetched && !bookedReservation && (
                     <>
                         <h2>Reservation Details</h2>
