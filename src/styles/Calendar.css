@@ -40,7 +40,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: transparent; /* Set default background color */
+    /* background-color: transparent;  */
     color: black; /* Set default text color */
 }
 
@@ -105,7 +105,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        background-color: transparent; /* Set default background color */
+        /* background-color: transparent;  */
         color: black; /* Set default text color */
     }
 }

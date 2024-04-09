@@ -27,8 +27,7 @@ const Reserve = () => {
 
     const getInfoFromServer = async (collectionKey) => {
         
-      try 
-        {
+      try {
 
           const response = await fetchInfoForCustomer(collectionKey);
 
@@ -42,8 +41,10 @@ const Reserve = () => {
 
           setTimesMap(reservationsTimesMap);
           setUnavailableDays(response[1]);
-          setTables(response[2]);
+          setTablesCapacityMap(response[2]);
           setDaysToShow(getNextDays(response[3]).filter(date => !response[1].includes(date)));
+          setMaxCapacity(response[4]);
+          setMaxReservationDurationIndexNumber(response[5]);
           setLoading(false);
 
         }
@@ -61,11 +62,79 @@ const Reserve = () => {
     
   }, []);
 
-  const handleDateButtonClickDate = (date) => {
+  const handleDateButtonClick = (date) => {
 
     setChoosingTime(true);
+    setSelectedDate(date);
     getDateInfoFromServer('sample-restaurant', date);
     
+  };
+
+  const handleTimeButtonClick = (timeIndex) => {
+
+    setChoosingTime(false);
+    setChoosingCapacity(true);
+    setSelectedTimeIndex(timeIndex);
+    
+  };
+
+  const handleCapacityButtonClick = (capacity) => {
+
+    setSelectedCapacity(capacity);
+
+  };
+
+  const handleOkButtonClick = () => {
+
+    const redTables = [...unavailableTables];
+
+    for (const tableId in tablesCapacityMap) {
+      if (tablesCapacityMap.hasOwnProperty(tableId)) {
+          const capacity = tablesCapacityMap[tableId];
+          if (capacity < selectedCapacity) {
+            redTables.push(parseInt(tableId));
+          }
+      }
+  }
+
+    console.log(redTables)
+
+    for (const table of unavailableTablesTimesIndexes) {
+      if (redTables.includes(table.table_id))continue;
+      let isAvailable = true;
+      for (const timeIndex of table.times_indexes) {
+          if (selectedTimeIndex >= timeIndex.start_time_index && selectedTimeIndex <= timeIndex.end_time_index) {
+              isAvailable = false;
+              break;
+          }
+      }
+      if (!isAvailable) {
+        redTables.push(table.table_id);
+      }
+    }
+
+    for (const reservation of reservations) {
+      if (redTables.includes(reservation.table_id) || reservation.canceled===true || reservation.completed===true ){
+        continue;
+      }
+      if (selectedTimeIndex >= reservation.start_time_index - maxReservationDurationIndexNumber && selectedTimeIndex <= reservation.end_time_index + maxReservationDurationIndexNumber) {
+          redTables.push(reservation.table_id);
+      }
+
+    }
+
+    console.log("Red tables:")
+    console.log(redTables);
+
+    const data = {
+              eventName: 'ReservationTimeSelected',
+              redTables: unavailableTables,
+              startIndex: selectedTimeIndex,
+              endIndex: selectedTimeIndex+maxReservationDurationIndexNumber
+            };
+            
+    window.parent.postMessage(data, '*');
+
   };
 
   const getDateInfoFromServer = async (collectionKey,date) => {
@@ -107,6 +176,9 @@ const Reserve = () => {
         }
 
         setTimesMap(filteredMap);
+        setUnavailableTables(response[1]);
+        setUnavailableTablesTimesIndexes(response[2]);
+        setReservations(response[3]);
         setLoading(false);
 
       }
@@ -120,11 +192,20 @@ const Reserve = () => {
   
   const [timesMap, setTimesMap] = useState([]);
   const [unavailableDays, setUnavailableDays] = useState([]);
-  const [tables, setTables] = useState([]);
+  const [tablesCapacityMap, setTablesCapacityMap] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daysToShow,setDaysToShow] = useState(0);
   const [choosingTime, setChoosingTime] = useState(false);
+  const [maxCapacity, setMaxCapacity] = useState(false);
+  const [choosingCapacity, setChoosingCapacity] = useState(false);
   const [unavailableTimesIndexes, setUnavailableTimesIndexes] = useState([]);
+  const [selectedDate,setSelectedDate] = useState("");
+  const [selectedTimeIndex,setSelectedTimeIndex] = useState("");
+  const [selectedCapacity,setSelectedCapacity] = useState(1);
+  const [maxReservationDurationIndexNumber,setMaxReservationDurationIndexNumber] = useState(7);
+  const [unavailableTables,setUnavailableTables] = useState([]);
+  const [unavailableTablesTimesIndexes,setUnavailableTablesTimesIndexes] = useState([]);
+  const [reservations,setReservations] = useState([]);
   
   return (
     <div>
@@ -140,22 +221,37 @@ const Reserve = () => {
                   </div>
                 ) : (
                   <>
-                    {!choosingTime && <div className='reserve-container'>
+                    {!choosingTime && !choosingCapacity && <div className='reserve-container'>
                       <h2>Choose a day:</h2>
                       {daysToShow.map((day, index) => (
-                        <button key={index} onClick={() => handleDateButtonClickDate(day)}>
+                        <button key={index} onClick={() => handleDateButtonClick(day)}>
                           {day}
                         </button>
                       ))}
                     </div>}
-                    {choosingTime && <div className='reserve-container'>
+                    {choosingTime && !choosingCapacity && <div className='reserve-container'>
                       <h2>Choose time:</h2>
                       {timesMap.length===0 && <h2>No available reservation times for this date.</h2>}
                       {Object.entries(timesMap).map(([key, value]) => (
-                      <button key={key}>
+                      <button key={key} onClick={() => handleTimeButtonClick(key)}>
                         {value}
                       </button>
                     ))}
+                    </div>}
+                    {!choosingTime && choosingCapacity && <div className='reserve-container'>
+                      <h2>Choose capacity:</h2>
+                      {maxCapacity === 0 ? (
+                        <h2>No available options.</h2>
+                      ) : (
+                        <select className='select-capacity-dropdown' onChange={(e) => handleCapacityButtonClick(e.target.value)}>
+                          {[...Array(maxCapacity).keys()].map((num) => (
+                            <option key={num + 1} value={num + 1}>
+                              {num + 1}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                      <button className='ok-button' onClick={() => handleOkButtonClick()}>OK</button>
                     </div>}
                   </>
               )}

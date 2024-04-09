@@ -99,3 +99,11 @@
   padding: 20px;
   font-family: "Josefin Sans", sans-serif;
 }
+
+.select-capacity-dropdown {
+  width: 100px;
+  font-size: 24px;
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+  margin-bottom: 50px;
+}

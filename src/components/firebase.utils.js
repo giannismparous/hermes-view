@@ -653,8 +653,17 @@ export const fetchInfoForCustomer = async (collectionKey) => {
     const infoReturned=[];
     infoReturned[0]=infoDoc.data().reservation_times;
     infoReturned[1]=infoDoc.data().unavailable_days;
-    infoReturned[2]=infoDoc.data().tables;
+    
+    const tablesCapacityMap = {};
+
+    for (const table of infoDoc.data().tables) {
+        tablesCapacityMap[table.id] = table.capacity;
+    }
+    infoReturned[2]=tablesCapacityMap;
+
     infoReturned[3]=infoDoc.data().numberOfDaysToShowToCustomers;
+    infoReturned[4]=infoDoc.data().maxCapacity;
+    infoReturned[5]=infoDoc.data().maxReservationDurationIndexNumber;
     console.log(infoDoc.data());
     return infoReturned;
   } else {
@@ -804,6 +813,7 @@ export const fetchDateInfoForCustomer = async (collectionKey,date) => {
     dateInfoToReturn[0]=infoDoc.data().unavailable_times_indexes;
     dateInfoToReturn[1]=infoDoc.data().unavailable_tables;
     dateInfoToReturn[2]=infoDoc.data().unavailable_tables_times_indexes;
+    dateInfoToReturn[3]=infoDoc.data().reservations;
 
     return dateInfoToReturn;
   } else {
@@ -935,7 +945,6 @@ export const updateTableSchedules = async (startIndex, endIndex, name, phone, ta
         [`reservations`]: reservations
       });
 
-      console.log("TELOS");
 
       console.log(`Current date updated new reservation for table ${tableNumber} from index ${startIndex} to index ${endIndex} with reservation id ${currentId+1}`);
     } else {

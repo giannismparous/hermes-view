@@ -5,7 +5,8 @@ import { fetchReservationTimes, getCurrentDate, updateTableSchedules } from './f
 import { HashLoader } from 'react-spinners';
 
 const ReserveTable = () => {
-    const { restaurantName, startScheduleIndex, endScheduleIndex, tableNumber } = useParams();
+
+    const {restaurantName, startScheduleIndex, endScheduleIndex, tableNumber } = useParams();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [reservationTimesFetched, setReservationTimesFetched] = useState();
@@ -13,18 +14,19 @@ const ReserveTable = () => {
     const [userName, setUserName] = useState('');
     const [userPhone, setUserPhone] = useState('');
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
+
                 const times = await fetchReservationTimes(startScheduleIndex, endScheduleIndex, tableNumber);
-                // Update the state with fetched reservation times
                 setStartTime(times[0]);
                 setEndTime(times[1]);
                 setReservationTimesFetched(true);
+
             } catch (error) {
+
                 console.error('Error fetching reservation times:', error);
-                // Handle error here
+                
             }
         };
 

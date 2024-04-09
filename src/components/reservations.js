@@ -588,7 +588,7 @@ const Reservations = () => {
                             <div key={index} className="reservation">
                                 <div className="table-header">
                                     <h2>{reservation.reservation_id}</h2>
-                                    <button className="toggle-button" onClick={() => toggleReservationDetailsByReservationId(index)}>
+                                    <button className={`toggle-button ${reservation.canceled !== undefined ? 'canceled' : ''} ${reservation.completed !== undefined ? 'completed' : ''}`}  onClick={() => toggleReservationDetailsByReservationId(index)}>
                                         {expandedIdsReservations[index] ? '-' : '+'}
                                     </button>
                                 </div>
