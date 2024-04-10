@@ -823,7 +823,7 @@ export const fetchDateInfoForCustomer = async (collectionKey,date) => {
 
 };
 
-export const fetchReservationTimesMapForCustomer = async (collectionKey) => {
+export const fetchInfoForTableReservation = async (collectionKey) => {
 
   const sampleRestaurantRef = collection(db, collectionKey);
   const infoRef = doc(sampleRestaurantRef, "info");
@@ -832,19 +832,25 @@ export const fetchReservationTimesMapForCustomer = async (collectionKey) => {
   if (infoDoc.exists()) {
     console.log(`TimesMap returned to client:`);
 
+    const infoToReturn = [];
+
     const timesMap = {};
 
     for (const time of infoDoc.data().reservation_times) {
-      timesMap[time.id] = timesMap.time;
+      timesMap[time.id] = time.time;
     }
 
-    return timesMap;
+
+    infoToReturn[0]=timesMap;
+    infoToReturn[1]=infoDoc.data().name;
+
+    return infoToReturn;
     
   } else {
 
     console.log(`Info doc does not exist.`);
     return false;
-    
+
   }
 
 };
@@ -931,6 +937,63 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
   // console.log(availableTables);
 
   return unavailableTables;
+};
+
+export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, firstName, lastName, phone, email, notes) => {
+
+  
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const infoRef = doc(sampleRestaurantRef, "info");
+
+  try {
+
+    const dateDoc = await getDoc(dateRef);
+    const infoDoc = await getDoc(infoRef);
+
+    if (dateDoc.exists() && infoDoc.exists()) {
+
+      const reservations = dateDoc.data().reservations;
+      const currentId = infoDoc.data().reservation_id_counter+1;
+
+
+      reservations.push({
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        email: email,
+        notes: notes,
+        table_id: tableNumber,
+        reservation_id: currentId,
+      });
+
+      console.log(infoDoc.data());
+
+      await updateDoc(infoRef, {
+        'reservation_id_counter': currentId
+      });
+
+      console.log(dateRef);
+      console.log(reservations);
+
+      await updateDoc(dateRef, {
+        'reservations': reservations
+      });
+
+      console.log(infoDoc.data());
+
+
+      console.log(`Added new reservation for table ${tableNumber} from index ${startIndex} to index ${endIndex} on ${date} with reservation id ${currentId+1}`);
+    } else {
+      console.log(`Date or info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error current date or data", error);
+
+  }
+
 };
 
 export const updateTableSchedules = async (startIndex, endIndex, name, phone, tableNumber, date) => {

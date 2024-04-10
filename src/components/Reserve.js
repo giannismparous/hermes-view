@@ -128,6 +128,7 @@ const Reserve = () => {
     const data = {
               eventName: 'ReservationTimeSelected',
               redTables: redTables,
+              date: selectedDate,
               startIndex: selectedTimeIndex,
               endIndex: selectedTimeIndex+maxReservationDurationIndexNumber
             };

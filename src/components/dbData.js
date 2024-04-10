@@ -448,11 +448,12 @@ const infoDoc = {
             price: 9
         }
     ],
-    reservation_id_counter:0,
+    reservation_id_counter:50,
     order_id_counter:0,
     numberOfDaysToShowToCustomers: 14,
     maxCapacity: 7,
     maxReservationDurationIndexNumber: 7,
+    name: "Mantania"
 }
 
 export default infoDoc;

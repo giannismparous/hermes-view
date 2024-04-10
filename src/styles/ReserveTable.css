@@ -1,7 +1,13 @@
 .reservation-details-reserve-table {
     width: 400px;
+    height: 450px;
     margin: 0 auto;
     padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .reservation-details-reserve-table input{
     border: 1px solid #ccc;
     border-radius: 5px;
   }
@@ -43,4 +49,30 @@
     text-align: center;
   }
 
-  
+  .reservation-details-reserve-table h2{
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .names-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .names-container input{
+    width: 107px;
+  }
+
+  .info-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .info-container input{
+    width: 100%;
+  }
+
+  .notes-container input{
+    width: 100%;
+  }
