@@ -939,7 +939,7 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
   return unavailableTables;
 };
 
-export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, firstName, lastName, phone, email, notes) => {
+export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes) => {
 
   
   const sampleRestaurantRef = collection(db, collectionKey);
@@ -958,8 +958,7 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
 
 
       reservations.push({
-        first_name: firstName,
-        last_name: lastName,
+        name: fullName,
         phone: phone,
         email: email,
         notes: notes,
@@ -967,7 +966,6 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
         reservation_id: currentId,
       });
 
-      console.log(infoDoc.data());
 
       await updateDoc(infoRef, {
         'reservation_id_counter': currentId
@@ -979,9 +977,6 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
       await updateDoc(dateRef, {
         'reservations': reservations
       });
-
-      console.log(infoDoc.data());
-
 
       console.log(`Added new reservation for table ${tableNumber} from index ${startIndex} to index ${endIndex} on ${date} with reservation id ${currentId+1}`);
     } else {

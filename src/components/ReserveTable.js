@@ -12,8 +12,7 @@ const ReserveTable = () => {
     const [name, setName] = useState("");
     const [reservationTimesFetched, setReservationTimesFetched] = useState();
     const [bookedReservation, setBookedReservation] = useState();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [firstName, setFullName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [notes, setNotes] = useState('');
@@ -47,7 +46,7 @@ const ReserveTable = () => {
             console.log(reservationStartTimeIndex)
             console.log(reservationEndTimeIndex)
             // Call updateTableSchedule with the appropriate parameters
-            await addNewReservation(collectionKey, reservationDate, parseInt(reservationStartTimeIndex), parseInt(reservationEndTimeIndex), parseInt(tableNumber), firstName, lastName, phone, email, notes);
+            await addNewReservation(collectionKey, reservationDate, parseInt(reservationStartTimeIndex), parseInt(reservationEndTimeIndex), parseInt(tableNumber), fullName, phone, email, notes);
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);
@@ -64,12 +63,8 @@ const ReserveTable = () => {
           window.parent.postMessage(data, '*');
     };
 
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value);
-    };
-
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value);
+    const handleFullNameChange = (event) => {
+        setFullName(event.target.value);
     };
 
     const handlePhoneChange = (event) => {
@@ -100,10 +95,8 @@ const ReserveTable = () => {
                         <p>Reservation Time: {`${startTime} - ${endTime}`}</p>
                         <p>Table Number: {tableNumber}</p>
                         <p className='names-container'>
-                            <label htmlFor="firstName">First Name:</label>
-                            <input type="text" id="firstName" className='name-input' value={firstName} onChange={handleFirstNameChange} />
-                            <label htmlFor="lastName">Last Name:</label>
-                            <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} />
+                            <label htmlFor="fullName">Full Name:</label>
+                            <input type="text" id="fullName" className='name-input' value={fullName} onChange={handleFullNameChange} />
                         </p>
                         <p className='info-container'>
                             <label htmlFor="userPhone">Phone:</label>
