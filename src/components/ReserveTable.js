@@ -89,7 +89,10 @@ const ReserveTable = () => {
             <meta name="description" content="Reserve a table now."/>
             <meta name='robots' content='noindex'/>
             <div className="reservation-details-reserve-table">
-                {!reservationTimesFetched && !bookedReservation && <ClockLoader type="Grid" color="#007bff" size={80}/>}
+                {!reservationTimesFetched && !bookedReservation && 
+                <div className='loading-container'>
+                    <ClockLoader type="Grid" color="#007bff" size={80} />
+                </div>}
                 {reservationTimesFetched && !bookedReservation && (
                     <>
                         <h2>Reservation Details</h2>
