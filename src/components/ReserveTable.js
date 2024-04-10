@@ -12,7 +12,7 @@ const ReserveTable = () => {
     const [name, setName] = useState("");
     const [reservationTimesFetched, setReservationTimesFetched] = useState();
     const [bookedReservation, setBookedReservation] = useState();
-    const [firstName, setFullName] = useState('');
+    const [fullName, setFullName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [notes, setNotes] = useState('');
@@ -110,7 +110,7 @@ const ReserveTable = () => {
                         </p>
                         <p className="confirmation-text">Are you sure you want to reserve?</p>
                         <div className="button-container">
-                            <button className="yes-button" onClick={handleYesClick} disabled={firstName.trim() === "" || lastName.trim() === "" || (phone.trim() === "" && email.trim() === "")}>Yes</button>
+                            <button className="yes-button" onClick={handleYesClick} disabled={fullName.trim() === "" || (phone.trim() === "" && email.trim() === "")}>Yes</button>
                             <button className="no-button" onClick={handleNoClick}>No</button>
                         </div>
                     </>
