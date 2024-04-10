@@ -962,6 +962,8 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
         phone: phone,
         email: email,
         notes: notes,
+        start_time_index: startIndex,
+        end_time_index: endIndex,
         table_id: tableNumber,
         reservation_id: currentId,
       });
