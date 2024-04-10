@@ -15,10 +15,11 @@ const ReserveTable = () => {
     const [userPhone, setUserPhone] = useState('');
 
     useEffect(() => {
+
         const fetchData = async (collectionKey) => {
             try {
 
-                const timesMap = await fetchReservationTimesMapForCustomer(reservationStartTimeIndex, reservationEndTimeIndex, tableNumber);
+                const timesMap = await fetchReservationTimesMapForCustomer(collectionKey);
                 setStartTime(timesMap[reservationStartTimeIndex]);
                 setEndTime(timesMap[reservationEndTimeIndex]);
                 setReservationTimesFetched(true);
