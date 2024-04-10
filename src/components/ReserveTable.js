@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/ReserveTable.css'; // Import your CSS file
-import { fetchReservationTimes, getCurrentDate, updateTableSchedules } from './firebase.utils';
+import { fetchReservationTimes, fetchReservationTimesMapForCustomer, getCurrentDate, updateTableSchedules } from './firebase.utils';
 import { ClockLoader } from 'react-spinners';
 
 const ReserveTable = () => {
 
-    const {restaurantName, startScheduleIndex, endScheduleIndex, tableNumber } = useParams();
+    const {restaurantName, reservationStartTimeIndex, reservationEndTimeIndex, tableNumber } = useParams();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [reservationTimesFetched, setReservationTimesFetched] = useState();
@@ -15,12 +15,12 @@ const ReserveTable = () => {
     const [userPhone, setUserPhone] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (collectionKey) => {
             try {
 
-                const times = await fetchReservationTimes(startScheduleIndex, endScheduleIndex, tableNumber);
-                setStartTime(times[0]);
-                setEndTime(times[1]);
+                const timesMap = await fetchReservationTimesMapForCustomer(reservationStartTimeIndex, reservationEndTimeIndex, tableNumber);
+                setStartTime(timesMap[reservationStartTimeIndex]);
+                setEndTime(timesMap[reservationEndTimeIndex]);
                 setReservationTimesFetched(true);
 
             } catch (error) {
@@ -30,13 +30,14 @@ const ReserveTable = () => {
             }
         };
 
-        fetchData(); // Fetch reservation times when component mounts
-    }, [startScheduleIndex, endScheduleIndex, tableNumber]); // Run effect when these parameters change
+        const collectionKey = 'sample-restaurant';
+        fetchData(collectionKey); // Fetch reservation times when component mounts
+    }, [reservationStartTimeIndex, reservationEndTimeIndex, tableNumber]); // Run effect when these parameters change
 
     const handleYesClick = async () => {
         try {
             // Call updateTableSchedule with the appropriate parameters
-            await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,userPhone, tableNumber,getCurrentDate());
+            // await updateTableSchedules(parseInt(startScheduleIndex), parseInt(endScheduleIndex), userName,userPhone, tableNumber,getCurrentDate());
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);

@@ -823,6 +823,32 @@ export const fetchDateInfoForCustomer = async (collectionKey,date) => {
 
 };
 
+export const fetchReservationTimesMapForCustomer = async (collectionKey) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()) {
+    console.log(`TimesMap returned to client:`);
+
+    const timesMap = {};
+
+    for (const time of infoDoc.data().reservation_times) {
+      timesMap[time.id] = timesMap.time;
+    }
+
+    return timesMap;
+    
+  } else {
+
+    console.log(`Info doc does not exist.`);
+    return false;
+    
+  }
+
+};
+
 // Fetches table data given the table number
 
 export const fetchTable = async (tableNumber) => {
