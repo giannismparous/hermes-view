@@ -27,6 +27,10 @@ body {
 @media (max-width: 500px) {
   .home {
     background-image: url('../assets/background-blue-smartphone.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
   }
 }
 
