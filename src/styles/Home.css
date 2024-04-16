@@ -8,11 +8,10 @@ body {
 }  
 
 .home {
-  background-size: cover; /* Cover the entire width while maintaining aspect ratio */
   background-repeat: no-repeat;
   background-attachment: fixed; 
   background-position: center;
-  background-image: url('../assets/background-blue.jpg');
+  background-image: url('../assets/bg-iphone.jpg');
   display: flex;
   flex-direction: column;
   align-items: center; /* This will center the children horizontally */
@@ -22,6 +21,7 @@ body {
   font-weight: 500;
   font-style: normal;
   width: 100vw; /* Set width to 100% of the viewport width */
+  height: 100vh; /* Set width to 100% of the viewport width */
 }
 /* 
 @media (max-width: 500px) {
