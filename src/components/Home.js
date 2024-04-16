@@ -205,7 +205,7 @@ const AnimatedParagraph = ({ children, className }) => {
         </div>}
         {isMobile && 
         <div className="sample-display-container">
-          {/* <div className="sample-item">
+          <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
               <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
@@ -213,7 +213,7 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
           </div>
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
               <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
