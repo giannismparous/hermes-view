@@ -1,0 +1,13 @@
+.sample-display {
+    opacity: 0; /* Initially hide the SampleDisplay */
+    animation: fadeInAnimation 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; /* Apply animation */
+  }
+  
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

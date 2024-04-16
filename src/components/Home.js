@@ -219,7 +219,7 @@ const AnimatedParagraph = ({ children, className }) => {
               <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
               <Link to="/projects/5" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"} />
+            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"}/>
           </div>
           <div className="sample-item">
             <div className="sample-info">

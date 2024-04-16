@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useMediaQuery } from 'react-responsive'; // Import media query hook
+import "../styles/SampleDisplay.css";
 
 function SampleDisplay({ device, modelPath }) {
   
@@ -99,7 +100,7 @@ function SampleDisplay({ device, modelPath }) {
   };
 
   return (
-    <Fragment>
+    <div className="sample-display animate-on-scroll">
         {!isMobile && <>
         {device==="iphone" && <div className="container-iphone" style={iphoneContainer}>
             <iframe src={modelPath} title="Iphone VR Experience" className="iframe" style={iframeStyle1}></iframe>
@@ -154,7 +155,7 @@ function SampleDisplay({ device, modelPath }) {
         } 
         </>
         }
-    </Fragment>
+    </div>
   );
 }
 
