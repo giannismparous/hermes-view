@@ -24,15 +24,15 @@ body {
   font-style: normal;
 }
 
-/* @media (max-width: 500px) {
+@media (max-width: 500px) {
   .home {
-    background: url(../assets/background-blue-smartphone.jpg);
+    background: url(../assets/background-blue-smartphone-upscaled.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center;
   }
-} */
+}
 
 .golden-container {
   /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
