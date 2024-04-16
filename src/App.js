@@ -50,7 +50,6 @@ function App() {
         {/* <Route path="/products" element={<Products />} /> */}
         <Route path="/debug" element={<Debug />} />
         <Route path="/samples" element={<Samples />} />
-        <Route path="/sample" element={<SamplePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/sample_restaurant/reservations" element={<Reservations />} />
