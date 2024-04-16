@@ -22,8 +22,8 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 0px;
-    padding-bottom: 30px;
+    gap: 20px;
+    padding-bottom: 50px;
 }
 
 .samples h2 {

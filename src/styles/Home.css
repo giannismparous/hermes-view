@@ -8,9 +8,8 @@ body {
 }  
 
 .home {
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
   background-position: center;
   background-image: url('../assets/background-blue.jpg');
   display: flex;
@@ -630,6 +629,24 @@ button:hover {
   display: grid;
   grid-template-columns: auto auto;
   gap: 0px; /* Initial gap value */
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1650px) {
+  .sample-item {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+/* Media query for screens with a width lower than 1060px */
+@media screen and (max-width: 1500px) {
+  .sample-item {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
 
@@ -638,6 +655,8 @@ button:hover {
   .sample-item {
     width: 100%;
     grid-template-columns: auto; /* Adjusted gap value for smaller screens */
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
