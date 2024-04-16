@@ -8,7 +8,7 @@ body {
 }  
 
 .home {
-  background-size: 100% 100%;
+  background-size: cover; /* Cover the entire width while maintaining aspect ratio */
   background-repeat: no-repeat;
   background-attachment: fixed; 
   background-position: center;
@@ -16,12 +16,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* This will center the children horizontally */
-  /* color: #ffffff; */
   color: rgb(0,9,128);
   line-height: 1.6;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  width: 100vw; /* Set width to 100% of the viewport width */
 }
 /* 
 @media (max-width: 500px) {
