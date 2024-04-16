@@ -342,8 +342,8 @@ color: rgb(0,9,128);
 
 @media screen and (max-width: 400px) {
   .container-4 {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 }

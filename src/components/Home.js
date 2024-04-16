@@ -51,8 +51,6 @@ function Home() {
     '../slider_images/pic2.jpg',
   ];
 
-  const olympusIMG = '../assets/background-blue.jpg';
-
   const [isVideoReady, setVideoReady] = useState(true);
 
   const handleVideoReady = () => {
