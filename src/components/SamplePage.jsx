@@ -71,9 +71,9 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
         </div>
       )}
       {!redirectToSample && (
-        // <div style={{ ...containerStyle, ...style }} {...otherProps}>
+        <div style={{ ...containerStyle, ...style }} {...otherProps}>
           <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} sandbox="allow-scripts allow-same-origin allow-top-navigation allow-popups allow-popups-to-escape-sandbox" allowFullScreen></iframe>
-        // </div>
+        </div>
       )}
     </Fragment>
   );
