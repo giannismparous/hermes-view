@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.96345742.css",
-    "main.js": "/static/js/main.6d27f2a3.js",
+    "main.js": "/static/js/main.00410bea.js",
     "static/js/787.6ec3084c.chunk.js": "/static/js/787.6ec3084c.chunk.js",
     "static/media/background-blue.jpg": "/static/media/background-blue.36a1914e2bbbc2a41eb5.jpg",
     "static/media/background-blue-smartphone.jpg": "/static/media/background-blue-smartphone.d4fffeb127f453a37412.jpg",
     "index.html": "/index.html",
     "main.96345742.css.map": "/static/css/main.96345742.css.map",
-    "main.6d27f2a3.js.map": "/static/js/main.6d27f2a3.js.map",
+    "main.00410bea.js.map": "/static/js/main.00410bea.js.map",
     "787.6ec3084c.chunk.js.map": "/static/js/787.6ec3084c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.96345742.css",
-    "static/js/main.6d27f2a3.js"
+    "static/js/main.00410bea.js"
   ]
 }
