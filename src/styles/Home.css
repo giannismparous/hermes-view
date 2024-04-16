@@ -34,12 +34,6 @@ body {
   }
 } */
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
-  body {
-      background-image: url(../assets/background-blue-smartphone.jpg);
-  }
-}
-
 .golden-container {
   /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
   /* border-color: #8a5a00; */

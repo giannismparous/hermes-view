@@ -205,7 +205,7 @@ const AnimatedParagraph = ({ children, className }) => {
         </div>}
         {isMobile && 
         <div className="sample-display-container">
-          <div className="sample-item">
+          {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Kallithea Property</AnimatedHeading>
               <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
@@ -228,7 +228,7 @@ const AnimatedParagraph = ({ children, className }) => {
               <Link to="/projects/4" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_4/"} device={"imac"} />
-          </div>
+          </div> */}
           {/* <div className="sample-item">
             <div className="sample-info">
               <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
