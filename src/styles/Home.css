@@ -8,6 +8,11 @@ body {
 }  
 
 .home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  height: 100vh;
+    -webkit-box-align: center;
+      -ms-flex-align: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,6 +27,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  
 }
 
 @supports (-webkit-touch-callout: none) {
