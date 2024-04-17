@@ -123,7 +123,7 @@ return (
     //       </div>
     // </div>
     <div className="samples">
-      <div className="invis-container"></div>
+      {/* <div className="invis-container"></div> */}
       <div className="helper-container">
         <h2>
           Samples
