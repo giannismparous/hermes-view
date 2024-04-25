@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/DropdownMenu.css';
 
 const ordersOpenImg = '../icons/orders-blue-open.png';
@@ -8,7 +8,7 @@ const reservationsClosedImg = '../icons/reservation-blue.png';
 const dotsClosedImg = '../icons/dots-blue.png';
 const dotsOpenImg = '../icons/dots-open.png'; 
 
-function DropdownMenu({ changeMode, currentMode }) {
+function DropdownMenu({ changeMode, currentMode}) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
 
@@ -22,8 +22,23 @@ function DropdownMenu({ changeMode, currentMode }) {
     changeMode(mode); // Call changeMode function passed from parent component
   };
 
+  const [isScrollAtTop, setIsScrollAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the scroll position is at the top
+      const atTop = window.scrollY === 0;
+      setIsScrollAtTop(atTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={`dropdown ${isOpen ? 'open' : 'closed'}`}>
+    <div className={`dropdown ${isOpen ? 'open' : 'closed'} ${isScrollAtTop ? '' : 'hidden'}`}>
       <button className={`dots-button ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
         <img src={isOpen ? dotsOpenImg : dotsClosedImg} alt="Dots Icon" />
       </button>

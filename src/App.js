@@ -24,6 +24,7 @@ import Samples from "./components/Samples";
 import Services from "./components/Services";
 import Debug from "./components/Debug";
 import ServiceComponent from "./components/ServiceComponent";
+import Order from "./components/Order";
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
-  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve");
+  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve") || location.pathname.startsWith("/order");
 
   // Dynamic styling for body's padding-top
   const bodyStyle = {
@@ -56,6 +57,9 @@ function App() {
         <Route path="/reserve/:collectionKey/:reservationDate/:reservationStartTimeIndex/:reservationEndTimeIndex/:tableNumber" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+
+        <Route path="/order/:collectionKey/:selectedDate/:reservationId" element={<Order/>} />
+
         {/* <Route path="/projects" element={<Projects />} /> */}
         {/* <Route path="/products/:productId" element={<ProductDetail />} /> */}
         <Route path="/projects/:projectId" element={<ProjectDetail />} />

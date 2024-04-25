@@ -1,16 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { acceptReservationByTableNumber, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, fetchReservations, fetchSchedulesTimes, fetchTable} from './firebase.utils';
+import { cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation} from './firebase.utils';
 import { ClockLoader } from 'react-spinners';
 import CalendarYearly from './CalendarYearly';
-import DropdownMenu from './DropdownMenu';
+import { Link } from 'react-router-dom';
+import DropdownMenu from './DropdownMenu'
+
 const sortByImg = '../icons/sort_by.png';
 const calendarOpenImg = '../icons/calendar-open-blue.png';
 const calendarClosedImg = '../icons/calendar-closed-blue.png';
-// const ordersOpenImg = '../icons/orders-blue-open.png';
-// const ordersClosedImg = '../icons/orders-blue.png';
-// const reservationsOpenImg = '../icons/reservation-open-blue.png';
-// const reservationsClosedImg = '../icons/reservation-blue.png';
+const reservationsClosedImg = '../icons/reservation-blue.png'
+const reservationsOpenImg = '../icons/reservation-open-blue.png'
+const ordersClosedImg = '../icons/orders-blue.png'
+const ordersOpenImg = '../icons/orders-blue-open.png'
+
+const states = [
+    { id: 1, imgSrc: "../icons/late_state.png", title: "Late" },
+    { id: 2, imgSrc: "../icons/waitlist_state.png", title: "Waitlist" },
+    { id: 3, imgSrc: "../icons/pending_state.png", title: "Pending" },
+    { id: 4, imgSrc: "../icons/arrived_state.png", title: "Arrived" },
+    { id: 5, imgSrc: "../icons/ordered_state.png", title: "Ordered" },
+    { id: 6, imgSrc: "../icons/paid_state.png", title: "Paid" },
+    { id: 7, imgSrc: "../icons/canceled_state.png", title: "Canceled" },
+  ];
 
 const Reservations = () => {
 
@@ -43,8 +55,10 @@ const Reservations = () => {
 
                 const menuItemsMap = {};
 
-                response.menu.forEach(item => {
-                    menuItemsMap[item.id] = { name: item.name, price: item.price };
+                response.menu.forEach(category => {
+                    category.items.forEach(item => {
+                        menuItemsMap[item.id] = { name: item.name, price: item.price, category: category.category };
+                    });
                 });
 
                 setMenuMap(menuItemsMap);
@@ -119,6 +133,27 @@ const Reservations = () => {
     const [selectedDate, setSelectedDate] = useState(getCurrentDate()); // State to store selected date
     const [selectedDateEmpty, setSelectedDateEmpty] = useState(false); // State to store selected date
     const [mode, setMode] = useState(1);
+    const [currentReservation, setCurrentReservation] = useState();
+
+    const [showPopup, setShowPopup] = useState(false);
+
+    // Function to toggle popup visibility
+    const toggleStatePopup = (currentReservation) => {
+
+        setShowPopup(!showPopup);
+        setCurrentReservation(currentReservation);
+
+    };
+
+    const updateReservationState = async (state) => {
+
+        currentReservation.state = state;
+
+        const response = await updateReservation(collectionKey, selectedDate, currentReservation);
+        console.log(response);
+        toggleStatePopup(currentReservation);
+
+    };
 
     const handleDateSelect = (date) => {
         console.log("Selected date:" + date);
@@ -173,27 +208,27 @@ const Reservations = () => {
     }, [selectedDate]);
 
     useEffect(() => {
-        setExpandedTablesReservations(Array(tablesReservations.length).fill(false));
+        setExpandedTablesReservations(Array(tablesReservations.length).fill(true));
     }, [tablesReservations]);
 
     useEffect(() => {
-        setExpandedTimesReservations(Array(timesReservations.length).fill(false));
+        setExpandedTimesReservations(Array(timesReservations.length).fill(true));
     }, [timesReservations]);
 
     useEffect(() => {
-        setExpandedNamesReservations(Array(namesReservations.length).fill(false));
+        setExpandedNamesReservations(Array(namesReservations.length).fill(true));
     }, [namesReservations]);
 
     useEffect(() => {
-        setExpandedIdsReservations(Array(idsReservations.length).fill(false));
+        setExpandedIdsReservations(Array(idsReservations.length).fill(true));
     }, [idsReservations]);
 
     useEffect(() => {
-        setExpandedIdsOrders(Array(idsOrders.length).fill(false));
+        setExpandedIdsOrders(Array(idsOrders.length).fill(true));
     }, [idsOrders]);
 
     useEffect(() => {
-        setExpandedReservationsOrders(Array(reservationsOrders.length).fill(false));
+        setExpandedReservationsOrders(Array(reservationsOrders.length).fill(true));
     }, [reservationsOrders]);
 
     const handleCompleteReservation = async (reservationId) => {
@@ -380,23 +415,30 @@ const Reservations = () => {
         return total;
     };
 
+    const [isScrollAtTop, setIsScrollAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the scroll position is at the top
+      const atTop = window.scrollY === 0;
+      setIsScrollAtTop(atTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
     return (
         <div className='reservations-page'>
             <DropdownMenu changeMode={changeMode} currentMode={mode} />
             <div className="reservations-container">
-                <button className="calendar-button" onClick={toggleCalendar}>
+                <button className={`calendar-button ${isScrollAtTop ? '' : 'hidden'}`} onClick={toggleCalendar}>
                     {!showCalendar && <img src={calendarClosedImg} alt="Calendar Hidden Icon" width="25px" color='black'/>}
                     {showCalendar && <img src={calendarOpenImg} alt="Calendar Shown Icon" width="25px"/>}
                 </button>
-                {/* <button className="reservations-button" onClick={() => changeMode(1)}>
-                    {mode!==1 && <img src={reservationsClosedImg} alt="Reservations Hidden Icon" width="25px" color='black'/>}
-                    {mode===1 && <img src={reservationsOpenImg} alt="Reservations Shown Icon" width="25px"/>}
-                </button>
-                <button className="orders-button" onClick={() => changeMode(2)}>
-                    {mode!==2 && <img src={ordersClosedImg} alt="Orders Hidden Icon" width="25px" color='black'/>}
-                    {mode===2 && <img src={ordersOpenImg} alt="Orders Shown Icon" width="25px"/>}
-                </button> */}
-                <div className="search-bar-container">
+                <div className={`search-bar-container ${isScrollAtTop ? '' : 'hidden'}`}>
                     <div className="search-bar">
                         <input
                             type="text"
@@ -440,18 +482,32 @@ const Reservations = () => {
                         <ClockLoader type="Grid" color="#007bff" size={80}/>
                     </div>
                 ) : (
+                    
                     !showCalendar && <div className="reservations">
+                        {showPopup && (
+                            <div className="popup-window" onClick={() => toggleStatePopup(null)}>
+                                <div className='popup-window-items' onClick={(e) => e.stopPropagation()}>
+                                {states.map(state => (
+                                    <div key={state.id} className='popup-window-item' onClick={() => updateReservationState(state.id)}>
+                                        <img className='state-img' src={state.imgSrc} alt={state.title} />
+                                        <p className='state-title'>{state.title}</p>
+                                    </div>
+                                ))}
+                                </div>
+                            </div>
+                        )}
                         {selectedDateEmpty && <div className='no-reservations'>
                             <h2>No available reservations for this date.</h2>
                         </div>}
                         {!selectedDateEmpty && mode === 1 && (
                             <div className='sort-label'>
-                                <h2>
+                                <h2>{selectedDate}</h2>
+                                {/* <h2>
                                     {selectedSortOption === 1 && 'Reservations sorted by table'}
                                     {selectedSortOption === 2 && 'Reservations sorted by time'}
                                     {selectedSortOption === 3 && 'Reservations sorted by name'}
                                     {selectedSortOption === 4 && 'Reservations sorted by reservation ID'}
-                                </h2>
+                                </h2> */}
                             </div>
                         )}
                         {!selectedDateEmpty && mode === 2 && (
@@ -475,27 +531,46 @@ const Reservations = () => {
                                         <div className="reservation-details-container">
                                             {table.reservations.map((reservation, idx) => (
                                                 <div key={idx} className="reservation-details">
-                                                    <p><span>Name:</span> {reservation.name}</p>
-                                                    <p><span>Phone:</span> {reservation.phone}</p>
-                                                    <p><span>Start Time:</span> {timesMap[reservation.start_time_index]}</p>
-                                                    <p><span>End Time:</span> {timesMap[reservation.end_time_index]}</p>
-                                                    <p><span>ID:</span> {reservation.reservation_id}</p>
-                                                    {reservation.canceled !== undefined && (
-                                                        <p className='canceled-text'>
-                                                            <span>CANCELED</span>
-                                                        </p>
-                                                    )}
-                                                    {reservation.completed !== undefined && (
-                                                        <p className='completed-text'>
-                                                            <span>COMPLETED</span>
-                                                        </p>
-                                                    )}
-                                                    {reservation.completed === undefined && reservation.canceled ===undefined && (
-                                                        <div className='action-buttons'>
-                                                            <button className="accept-button" onClick={() => handleCompleteReservation(reservation.reservation_id)}>&#10004;</button>
-                                                            <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
+                                                    <div className='reservation-info'>
+                                                        <div className='reservation-state-info' onClick={() => {
+                                                            reservation.table_id = table.id;
+                                                            toggleStatePopup(reservation);}}>
+                                                            {states.map(state => (
+                                                                reservation.state === state.id && (
+                                                                    <div key={state.id} className='popup-window-item'>
+                                                                    <img className='state-img' src={state.imgSrc} alt={state.title} />
+                                                                    <p className='state-title'>{state.title}</p>
+                                                                    </div>
+                                                                )
+                                                            ))}
                                                         </div>
-                                                    )}
+                                                        <div className='reservation-customer-info'>
+                                                            <p><span>Name:</span> {reservation.name}</p>
+                                                            <div className='reservation-info-details'>
+                                                                <div className='reservation-info-details-row'>
+                                                                    <img className='reservation-info-button' src="../icons/clock.png" alt="Phone Number" /> {timesMap[reservation.start_time_index]}                                                                     <img className='reservation-info-button' src="../icons/people.png" alt="Phone Number" />  {reservation.people} <img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />  {table.id}
+                                                                </div>
+                                                                <div className='reservation-info-details-row'>
+                                                                    <img className='reservation-info-button' src="../icons/phone.png" alt="Phone Number" /> {reservation.phone}
+                                                                    {reservation.smokes !== undefined && <img className='reservation-info-button' src="../icons/smoker.png" alt="Waitlist" />}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='reservation-order'>
+                                                        {(reservation.state === 4) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                        {(reservation.state === 5) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_more_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                    </div>           
                                                 </div>
                                                 ))}
                                         </div>
@@ -516,27 +591,47 @@ const Reservations = () => {
                                         <div className="reservation-details-container">
                                             {time.reservations.map((reservation, idx) => (
                                                 <div key={idx} className="reservation-details">
-                                                    <p><span>Name:</span> {reservation.name}</p>
-                                                    <p><span>Phone:</span> {reservation.phone}</p>
-                                                    <p><span>End Time:</span> {timesMap[reservation.end_time_index]}</p>
-                                                    <p><span>Table:</span> {reservation.tableId}</p>
-                                                    <p><span>ID:</span> {reservation.reservation_id}</p>
-                                                    {reservation.canceled !== undefined && (
-                                                        <p className='canceled-text'>
-                                                            <span>CANCELED</span>
-                                                        </p>
-                                                    )}
-                                                    {reservation.completed !== undefined && (
-                                                        <p className='completed-text'>
-                                                            <span>COMPLETED</span>
-                                                        </p>
-                                                    )}
-                                                    {reservation.completed === undefined && reservation.canceled ===undefined && (
-                                                        <div className='action-buttons'>
-                                                            <button className="accept-button" onClick={() => handleCompleteReservation(reservation.reservation_id)}>&#10004;</button>
-                                                            <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
+                                                    <div className='reservation-info'>
+                                                        <div className='reservation-state-info' onClick={() => {
+                                                            reservation.start_time_index = time.start_time_index;
+                                                            toggleStatePopup(reservation);}}>
+                                                            {states.map(state => (
+                                                                reservation.state === state.id && (
+                                                                    <div key={state.id} className='popup-window-item'>
+                                                                    <img className='state-img' src={state.imgSrc} alt={state.title} />
+                                                                    <p className='state-title'>{state.title}</p>
+                                                                    </div>
+                                                                )
+                                                            ))}
                                                         </div>
-                                                    )}
+                                                        <div className='reservation-customer-info'>
+                                                            <p><span>Name:</span> {reservation.name}</p>
+                                                            <div className='reservation-info-details'>
+                                                                <div className='reservation-info-details-row'>
+                                                                    <img className='reservation-info-button' src="../icons/clock.png" alt="Phone Number" /> {timesMap[time.start_time_index]}         
+                                                                    <img className='reservation-info-button' src="../icons/people.png" alt="Phone Number" />  {reservation.people} <img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />  {reservation.table_id}
+                                                                </div>
+                                                                <div className='reservation-info-details-row'>
+                                                                    <img className='reservation-info-button' src="../icons/phone.png" alt="Phone Number" /> {reservation.phone}
+                                                                    {reservation.smokes !== undefined && <img className='reservation-info-button' src="../icons/smoker.png" alt="Waitlist" />}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='reservation-order'>
+                                                        {(reservation.state === 4) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                        {(reservation.state === 5) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_more_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                    </div>     
                                                 </div>
                                             ))}
                                         </div>
@@ -546,39 +641,58 @@ const Reservations = () => {
                         ))}
                         {selectedSortOption === 3 && filteredNamesReservations.map((reservation, index) => (
                             <div key={index} className="reservation">
-                                <div className="table-header">
+                                {/* <div className="table-header">
                                     <h2>{reservation.name}</h2>
                                     <button 
-                                        className={`toggle-button ${reservation.canceled !== undefined ? 'canceled' : ''} ${reservation.completed !== undefined ? 'completed' : ''}`} 
+                                        className={`toggle-button ${reservation.state === 7 ? 'canceled' : ''} ${reservation.state === 6 ? 'completed' : ''}`} 
                                         onClick={() => toggleReservationDetailsByName(index)}
                                     >
                                         {expandedNamesReservations[index] ? '-' : '+'}
                                     </button>
-                                </div>
+                                </div> */}
                                 {expandedNamesReservations[index] && (
                                     <div className="reservation-details-container">
                                         <div className="reservation-details">
-                                            <p><span>Phone:</span> {reservation.phone}</p>
-                                            <p><span>Start Time:</span> {timesMap[reservation.start_time_index]}</p>
-                                            <p><span>End Time:</span> {timesMap[reservation.end_time_index]}</p>
-                                            <p><span>Table:</span> {reservation.table_id}</p>
-                                            <p><span>ID:</span> {reservation.reservation_id}</p>
-                                            {reservation.canceled !== undefined && (
-                                                <p className='canceled-text'>
-                                                    <span>CANCELED</span>
-                                                </p>
-                                            )}
-                                            {reservation.completed !== undefined && (
-                                                <p className='completed-text'>
-                                                    <span>COMPLETED</span>
-                                                </p>
-                                            )}
-                                            {reservation.completed === undefined && reservation.canceled ===undefined && (
-                                                <div className='action-buttons'>
-                                                    <button className="accept-button" onClick={() => handleCompleteReservation(reservation.reservation_id)}>&#10004;</button>
-                                                    <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
-                                                </div>
-                                            )}
+                                        <div className='reservation-info'>
+                                                    <div className='reservation-state-info' onClick={() => {
+                                                        toggleStatePopup(reservation);}}>
+                                                        {states.map(state => (
+                                                            reservation.state === state.id && (
+                                                                <div key={state.id} className='popup-window-item'>
+                                                                <img className='state-img' src={state.imgSrc} alt={state.title} />
+                                                                <p className='state-title'>{state.title}</p>
+                                                                </div>
+                                                            )
+                                                        ))}
+                                                    </div>
+                                                    <div className='reservation-customer-info'>
+                                                        <p><span>Name:</span> {reservation.name}</p>
+                                                        <div className='reservation-info-details'>
+                                                            <div className='reservation-info-details-row'>
+                                                                <img className='reservation-info-button' src="../icons/clock.png" alt="Phone Number" /> {timesMap[reservation.start_time_index]}         
+                                                                <img className='reservation-info-button' src="../icons/people.png" alt="Phone Number" />  {reservation.people} <img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />  {reservation.table_id}
+                                                            </div>
+                                                            <div className='reservation-info-details-row'>
+                                                                <img className='reservation-info-button' src="../icons/phone.png" alt="Phone Number" /> {reservation.phone}
+                                                                {reservation.smokes !== undefined && <img className='reservation-info-button' src="../icons/smoker.png" alt="Waitlist" />}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div className='reservation-order'>
+                                                        {(reservation.state === 4) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                        {(reservation.state === 5) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_more_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                    </div>   
                                         </div>
                                     </div>
                                 )}
@@ -587,35 +701,54 @@ const Reservations = () => {
                         {selectedSortOption === 4 && filteredIdsReservations.map((reservation, index) => (
                             <div key={index} className="reservation">
                                 <div className="table-header">
-                                    <h2>{reservation.reservation_id}</h2>
-                                    <button className={`toggle-button ${reservation.canceled !== undefined ? 'canceled' : ''} ${reservation.completed !== undefined ? 'completed' : ''}`}  onClick={() => toggleReservationDetailsByReservationId(index)}>
+                                    {/* <h2>{reservation.reservation_id}</h2>
+                                    <button className={`toggle-button ${reservation.state === 7 ? 'canceled' : ''} ${reservation.state === 6 ? 'completed' : ''}`}  onClick={() => toggleReservationDetailsByReservationId(index)}>
                                         {expandedIdsReservations[index] ? '-' : '+'}
-                                    </button>
+                                    </button> */}
                                 </div>
                                 {expandedIdsReservations[index] && (
                                     <div className="reservation-details-container">
                                         <div className="reservation-details">
-                                            <p><span>Name:</span> {reservation.name}</p>
-                                            <p><span>Phone:</span> {reservation.phone}</p>
-                                            <p><span>Start Time:</span> {timesMap[reservation.start_time_index]}</p>
-                                            <p><span>End Time:</span> {timesMap[reservation.end_time_index]}</p>
-                                            <p><span>Table:</span> {reservation.tableId}</p>
-                                            {reservation.canceled !== undefined && (
-                                                <p className='canceled-text'>
-                                                    <span>CANCELED</span>
-                                                </p>
-                                            )}
-                                            {reservation.completed !== undefined && (
-                                                <p className='completed-text'>
-                                                    <span>COMPLETED</span>
-                                                </p>
-                                            )}
-                                            {reservation.completed === undefined && reservation.canceled ===undefined && (
-                                                <div className='action-buttons'>
-                                                    <button className="accept-button" onClick={() => handleCompleteReservation(reservation.reservation_id)}>&#10004;</button>
-                                                    <button className="cancel-button" onClick={() => handleCancelReservation(reservation.reservation_id)}>&#10006;</button>
-                                                </div>
-                                            )}
+                                        <div className='reservation-info'>
+                                                    <div className='reservation-state-info' onClick={() => {
+                                                        toggleStatePopup(reservation);}}>
+                                                        {states.map(state => (
+                                                            reservation.state === state.id && (
+                                                                <div key={state.id} className='popup-window-item'>
+                                                                <img className='state-img' src={state.imgSrc} alt={state.title} />
+                                                                <p className='state-title'>{state.title}</p>
+                                                                </div>
+                                                            )
+                                                        ))}
+                                                    </div>
+                                                    <div className='reservation-customer-info'>
+                                                        <p><span>Name:</span> {reservation.name}</p>
+                                                        <div className='reservation-info-details'>
+                                                            <div className='reservation-info-details-row'>
+                                                                <img className='reservation-info-button' src="../icons/clock.png" alt="Phone Number" /> {timesMap[reservation.start_time_index]}         
+                                                                <img className='reservation-info-button' src="../icons/people.png" alt="Phone Number" />  {reservation.people} <img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />  {reservation.table_id}
+                                                            </div>
+                                                            <div className='reservation-info-details-row'>
+                                                                <img className='reservation-info-button' src="../icons/phone.png" alt="Phone Number" /> {reservation.phone}
+                                                                {reservation.smokes !== undefined && <img className='reservation-info-button' src="../icons/smoker.png" alt="Waitlist" />}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div className='reservation-order'>
+                                                        {(reservation.state === 4) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                        {(reservation.state === 5) && (
+                                                            <Link to={`/order/${collectionKey}/${selectedDate}/${reservation.reservation_id}`}>
+                                                                <img className='state-img' src="../icons/order_more_button.png" alt="Order" />
+                                                                <p className='state-title'>Order </p>
+                                                            </Link>
+                                                        )}
+                                                    </div>   
                                         </div>
                                     </div>
                                 )}
@@ -623,22 +756,33 @@ const Reservations = () => {
                         ))}
                         {selectedSortOption === 5 && filteredIdsOrders.map((order, index) => (
                             <div key={index} className="reservation">
-                                <div className="table-header">
-                                    <h2>{order.order_id}</h2>
-                                    <button className="toggle-button" onClick={() => toggleOrderDetailsByOrderId(index)}>
-                                        {expandedIdsOrders[index] ? '-' : '+'}
-                                    </button>
-                                </div>
                                 {expandedIdsOrders[index] && (
-                                    <div className="reservation-details-container">
-                                        <div className="reservation-details">
-                                            <p><span>Reservation ID:</span> {order.reservation_id}</p>
-                                            <p><span>Menu Items:</span></p>
-                                            <ul>
-                                                {order.order_items.map((item, i) => (
-                                                    <li key={i}>&#8226; {menuMap[item.menu_item_id].name} x {item.quantity} : {item.quantity*menuMap[item.menu_item_id].price}€</li>
-                                                ))}
-                                            </ul>
+                                    <div className="order-details-container">
+                                        <div className="order-details">
+                                            <p>
+                                            {idsReservations.map((reservation) => {
+                                                if (reservation.reservation_id === order.reservation_id) {
+                                                    return (
+                                                        <div key={reservation.reservation_id} className='order-reservation-info'>
+                                                            <span>Order: {order.order_id}</span>
+                                                            <span>Name: {reservation.name}</span>
+                                                            <div className='order-table-number'>
+                                                                Table: {reservation.table_id}<img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
+                                            </p>
+                                            <div className='order-items'>
+                                                <p><span>Menu Items:</span></p>
+                                                <ul>
+                                                    {order.order_items.map((item, i) => (
+                                                        <li key={i}>&#8226; {menuMap[item.menu_item_id].name} x {item.quantity} : {item.quantity*menuMap[item.menu_item_id].price}€</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                             <p><span>Total:</span> {calculateTotal(order.order_items)}€</p>
                                         </div>
                                     </div>
@@ -647,22 +791,33 @@ const Reservations = () => {
                         ))}
                         {selectedSortOption === 6 && filteredReservationsOrders.map((order, index) => (
                             <div key={index} className="reservation">
-                                <div className="table-header">
-                                    <h2>{order.reservation_id}</h2>
-                                    <button className="toggle-button" onClick={() => toggleOrderDetailsByReservationId(index)}>
-                                        {expandedReservationsOrders[index] ? '-' : '+'}
-                                    </button>
-                                </div>
                                 {expandedReservationsOrders[index] && (
-                                    <div className="reservation-details-container">
-                                        <div className="reservation-details">
-                                            <p><span>Order ID:</span> {order.order_id}</p>
-                                            <p><span>Menu Items:</span></p>
-                                            <ul>
-                                                {order.order_items.map((item, i) => (
-                                                    <li key={i}>&#8226; {menuMap[item.menu_item_id].name} x {item.quantity} : {item.quantity*menuMap[item.menu_item_id].price}€</li>
-                                                ))}
-                                            </ul>
+                                    <div className="order-details-container">
+                                        <div className="order-details">
+                                        <p>
+                                            {idsReservations.map((reservation) => {
+                                                if (reservation.reservation_id === order.reservation_id) {
+                                                    return (
+                                                        <div key={reservation.reservation_id} className='order-reservation-info'>
+                                                            <span>Reservation: {order.reservation_id}</span>
+                                                            <span>Name: {reservation.name}</span>
+                                                            <div className='order-table-number'>
+                                                                Table: {reservation.table_id}<img className='reservation-info-button' src="../icons/table.png" alt="Table Number" />
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
+                                            </p>
+                                            <div className='order-items'>
+                                                <p><span>Menu Items:</span></p>
+                                                <ul>
+                                                    {order.order_items.map((item, i) => (
+                                                        <li key={i}>&#8226; {menuMap[item.menu_item_id].name} x {item.quantity} : {item.quantity*menuMap[item.menu_item_id].price}€</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                             <p><span>Total:</span> {calculateTotal(order.order_items)}€</p>
                                         </div>
                                     </div>

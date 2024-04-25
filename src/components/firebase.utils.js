@@ -21,14 +21,14 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBw9Y6LVcqeKJQhx56QjZFbPhFvb29_6Mg",
-    authDomain: "reservation-system-43d03.firebaseapp.com",
-    projectId: "reservation-system-43d03",
-    storageBucket: "reservation-system-43d03.appspot.com",
-    messagingSenderId: "526682468950",
-    appId: "1:526682468950:web:5fa1f6c6e04fc111dc41f7",
-    measurementId: "G-9RN13Z2JPE"
-  };
+  apiKey: "AIzaSyCpJrgrWJGr3Aym0GpgAGw0jF13c2RJMLg",
+  authDomain: "easyres-f8f31.firebaseapp.com",
+  projectId: "easyres-f8f31",
+  storageBucket: "easyres-f8f31.appspot.com",
+  messagingSenderId: "277039971232",
+  appId: "1:277039971232:web:26a07f1a2c8cfaf5bfc2c5",
+  measurementId: "G-WQWRFTP4J1"
+};
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
@@ -300,7 +300,7 @@ export const onAuthStateChangedListener = (callback) =>
 export const fetchMenu = async (collectionKey) => {
 
   const sampleRestaurantRef = collection(db, collectionKey);
-  const infoRef = doc(sampleRestaurantRef,"info");
+  const infoRef = doc(sampleRestaurantRef, "info");
   const infoDoc = await getDoc(infoRef);
 
   if (infoDoc.exists()){
@@ -313,6 +313,147 @@ export const fetchMenu = async (collectionKey) => {
   console.log(`Error while fetching info doc.`);
   
   return null;
+
+};
+
+export const fetchOrder = async (collectionKey, date, reservation_id) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+  
+  if (dateDoc.exists()) {
+
+    const orders = dateDoc.data().orders;
+
+    const order = orders.find(order => order.reservation_id === reservation_id);
+
+    if (order===undefined){
+      return {reservation_id:reservation_id,order_items:[]};
+    }
+    
+    return order; // Return the found order or null if not found
+
+  } else {
+    console.log(`Error while fetching info doc`);
+    return null; // Return null or handle the error case appropriately
+  }
+
+};
+
+export const updateReservation = async (collectionKey, date, reservation) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+  
+  if (dateDoc.exists()) {
+    const reservations = dateDoc.data().reservations;
+
+    // Check if an order with the same reservation_id already exists
+    const existingReservationIndex = reservations.findIndex(res => res.reservation_id === reservation.reservation_id);
+
+    if (existingReservationIndex !== -1) {
+        // Update the existing order
+        reservations[existingReservationIndex] = reservation;
+    } else {
+        // Add the new order to the orders array with the appropriate reservation id
+
+        const infoRef = doc(sampleRestaurantRef, "info");
+        const infoDoc = await getDoc(infoRef);
+
+        if (infoDoc.exists()){
+
+          let reservation_id_counter=infoDoc.data().reservation_id_counter+1;
+          reservation.reservation_id = reservation_id_counter;
+          reservation.state=3;
+          reservations.push(reservation);
+
+          // Update the document with the modified orders array
+          await updateDoc(dateRef, { reservations: reservations });
+
+          //Update order id counter
+          await updateDoc(infoRef, {reservation_id_counter: reservation_id_counter});
+
+        }
+        else {
+          console.log("Info doc doesn't exist (updating order)");
+          return "Error updating order."
+        }
+
+        reservations.push(reservation);
+    }
+
+    // Update the document with the modified orders array
+    await updateDoc(dateRef, { reservations: reservations });
+
+    return "Reservation updated succesfully";
+
+  } else {
+      console.log(`Document does not exist for date: ${date}`);
+      return null; // Handle the error case appropriately
+  }
+
+};
+
+export const updateOrder = async (collectionKey, date, order) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const dateRef = doc(sampleRestaurantRef, date);
+  const dateDoc = await getDoc(dateRef);
+  
+  if (dateDoc.exists()) {
+    const orders = dateDoc.data().orders;
+
+    // Check if an order with the same reservation_id already exists
+    const existingOrderIndex = orders.findIndex(ord => ord.reservation_id === order.reservation_id);
+
+    if (existingOrderIndex !== -1) {
+        // Update the existing order
+        orders[existingOrderIndex] = order;
+        // Update the document with the modified orders array
+      await updateDoc(dateRef, { orders: orders });
+    } else {
+
+        // Add the new order to the orders array with appropriate order id
+
+        const infoRef = doc(sampleRestaurantRef, "info");
+        const infoDoc = await getDoc(infoRef);
+
+        if (infoDoc.exists()){
+
+          let order_id_counter=infoDoc.data().order_id_counter+1;
+          order.order_id = order_id_counter;
+          orders.push(order);
+
+          const reservations=dateDoc.data().reservations;
+          const existingReservationIndex = reservations.findIndex(res => res.reservation_id === order.reservation_id);
+          reservations[existingReservationIndex].state=5;
+
+          // Update the document with the modified orders array
+          await updateDoc(dateRef, { orders: orders });
+
+          // Update the document with the modified orders array
+          await updateDoc(dateRef, { reservations: reservations });
+
+          //Update order id counter
+          await updateDoc(infoRef, {order_id_counter: order_id_counter});
+
+        }
+        else {
+          console.log("Info doc doesn't exist (updating order)");
+          return "Error updating order."
+        }
+
+        
+    }
+
+    return "Order updated succesfully";
+
+} else {
+    console.log(`Document does not exist for date: ${date}`);
+    return null; // Handle the error case appropriately
+}
 
 };
 
@@ -701,18 +842,6 @@ export const fetchDateInfo = async (collectionKey,date) => {
       }
     });
 
-    reservations.sort((a, b) => {
-      
-      if ((a.accepted===undefined && a.canceled===undefined) && (b.accepted!==undefined || b.canceled!==undefined)){return -1;}
-      else if ((b.accepted===undefined && b.canceled===undefined) && (a.accepted!==undefined || a.canceled!==undefined)){return 1;}
-      if ((a.accepted!==undefined) && (b.canceled!==undefined)){return -1;}
-      else if ((b.accepted!==undefined) && (a.canceled!==undefined)){return 1;}
-      if (a.canceled===undefined && b.canceled!==undefined){return -1;}
-      else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
-      else {return a.name.localeCompare(b.name);}
-      
-    });
-
     const reservationsByStartTimeIndex = {};
     // Group reservations by table_id
     reservations.forEach(reservation => {
@@ -731,28 +860,29 @@ export const fetchDateInfo = async (collectionKey,date) => {
 
     dateInfoToReturn[4] = [...reservationsGroupedByStartTimeIndex];
 
-    reservations.sort((a, b) => {
-      if ((a.completed===undefined && a.canceled===undefined) && (b.completed!==undefined || b.canceled!==undefined)){return -1;}
-      else if ((b.completed===undefined && b.canceled===undefined) && (a.completed!==undefined || a.canceled!==undefined)){return 1;}
-      if ((a.completed!==undefined) && (b.canceled!==undefined)){return -1;}
-      else if ((b.completed!==undefined) && (a.canceled!==undefined)){return 1;}
-      if (a.canceled===undefined && b.canceled!==undefined){return -1;}
-      else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
-      else {return a.name.localeCompare(b.name);}
-      
-    });
-
-    dateInfoToReturn[5] = [...reservations];
+    reservations.sort((a, b) => a.name.localeCompare(b.name));
 
     // reservations.sort((a, b) => {
-    //   if (a.table_id < b.table_id) {
-    //     return -1;
-    // } else if (a.table_id > b.table_id) {
-    //     return 1;
-    // } else {
-    //     return 0;
-    // }
+    //   if (a.state === 6 && b.state !== 6) {
+    //     return 1; // a should come after b
+    //   }
+    //   if (a.state !== 6 && b.state === 6) {
+    //     return -1; // a should come before b
+    //   }
+    //   return a.state - b.state; // otherwise, sort normally
     // });
+    
+    // reservations.sort((a, b) => {
+    //   if (a.state === 7 && b.state !== 7) {
+    //     return 1; // a should come after b
+    //   }
+    //   if (a.state !== 7 && b.state === 7) {
+    //     return -1; // a should come before b
+    //   }
+    //   return a.state - b.state; // otherwise, sort normally
+    // });
+
+    dateInfoToReturn[5] = [...reservations];
 
     const reservationsByTableId = {};
 
@@ -767,6 +897,10 @@ export const fetchDateInfo = async (collectionKey,date) => {
 
     // Convert the object to an array of reservations grouped by table_id
     const reservationsGroupedByTableId = Object.values(reservationsByTableId);
+
+    reservationsGroupedByTableId.forEach(table => {
+      table.reservations.sort((a, b) => a.state - b.state);
+    });
 
     console.log("Table reservations:");
     console.log(reservationsGroupedByTableId);
@@ -927,7 +1061,7 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
       if (unavailableTables.includes(reservations[i].table_id)){
         continue;
       }
-      if (reservations[i].canceled===undefined && !((reservations[i].startIndex<startIndex && reservations[i].endIndex<startIndex) || (reservations[i].startIndex>endIndex && reservations[i].endIndex>endIndex))){
+      if (reservations[i].state!==7 && !((reservations[i].startIndex<startIndex && reservations[i].endIndex<startIndex) || (reservations[i].startIndex>endIndex && reservations[i].endIndex>endIndex))){
         unavailableTables.push(reservations[i].table_id);
       }
     }
@@ -1064,7 +1198,7 @@ export const cancelReservationByTableNumber = async (collectionKey, reservationI
 
     if (reservationIndex !== -1) {
 
-      reservations[reservationIndex].canceled = true;
+      reservations[reservationIndex].state = 7;
       await updateDoc(dateRef, { reservations });
       console.log(`Reservation with id: ${reservationId} was canceled.`);
 
@@ -1100,7 +1234,7 @@ export const completeReservationByTableNumber = async (collectionKey, reservatio
 
     if (reservationIndex !== -1) {
 
-      reservations[reservationIndex].completed = true;
+      reservations[reservationIndex].state = 6;
       await updateDoc(dateRef, { reservations });
       console.log(`Reservation with id: ${reservationId} was completed.`);
 
