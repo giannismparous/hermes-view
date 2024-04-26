@@ -367,6 +367,10 @@ export const updateReservation = async (collectionKey, date, reservation) => {
           let reservation_id_counter=infoDoc.data().reservation_id_counter+1;
           reservation.reservation_id = reservation_id_counter;
           reservation.state=3;
+
+          console.log("TEST");
+          console.log(reservation);
+          
           reservations.push(reservation);
 
           // Update the document with the modified orders array
