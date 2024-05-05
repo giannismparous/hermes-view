@@ -689,9 +689,9 @@ const Reservations = () => {
                                         Table ID:
                                         <input 
                                             type="number" 
-                                            name="tableIdForReservation" 
+                                            name="tableId" 
                                             placeholder="Table ID" 
-                                            value={tableIdForReservation} 
+                                            value={tableId} 
                                             onChange={handleInputChange} 
                                         />
                                     </label>
@@ -700,8 +700,8 @@ const Reservations = () => {
                                         <input type="number" name="capacity" placeholder="Capacity" value={capacity} onChange={handleInputChange} />
                                     </label>
                                     <label>
-                                        <input type="checkbox" name="smokeFriendly" checked={smokeFriendly} onChange={handleSmokeFriendlyCheckboxChange} />
                                         Smoke Friendly
+                                        <input type="checkbox" name="smokeFriendly" checked={smokeFriendly} onChange={handleSmokeFriendlyCheckboxChange} />
                                     </label>
                                     <button className='popup-add-table-button' onClick={() => addNewTableToServer()}>Add Table</button>
                                 </div>

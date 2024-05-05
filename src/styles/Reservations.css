@@ -781,7 +781,7 @@ margin: 0;
 .table-popup-window-container {
     position: fixed;
     width: 600px;
-    background-color: rgba(158, 151, 151); /* Semi-transparent black background */
+    background-color: white; /* Semi-transparent black background */
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -804,7 +804,7 @@ margin: 0;
 .popup-add-table-button {
     width: auto; /* Adjust width as needed */
     height: 50px; /* Adjust height as needed */
-    border-radius: 30%; /* Makes the button round */
+    border-radius: 30px; /* Makes the button round */
     background-color: #007bff; /* Add your desired background color */
     /* Add any other styles you need */
 }
@@ -858,13 +858,18 @@ margin: 0;
 .reservation-popup-window-container {
     position: fixed;
     width: 600px;
-    background-color: rgba(158, 151, 151); /* Semi-transparent black background */
+    background-color: white; /* Semi-transparent black background */
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 50px 0;
+}
+
+.reservation-popup-window-container input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .reservation-popup-window-container input[type="number"] {
@@ -881,4 +886,22 @@ margin: 0;
 
 .reservation-popup-window-container input[type="email"] {
     width: 100px;
+}
+
+.reservation-popup-window-container h2::after{
+    background-color: #000980;
+}
+
+.reservation-popup-window-container label{
+    margin: 1em 0;
+    color: #000980;
+}
+
+.table-popup-window-container h2::after{
+    background-color: #000980;
+}
+
+.table-popup-window-container label{
+    margin: 1em 0;
+    color: #000980;
 }
