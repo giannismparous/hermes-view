@@ -6,7 +6,7 @@ import { ClockLoader } from 'react-spinners';
 
 const ReserveTable = () => {
 
-    const {collectionKey, reservationDate, reservationStartTimeIndex, reservationEndTimeIndex, tableNumber } = useParams();
+    const {collectionKey, reservationDate, reservationStartTimeIndex, reservationEndTimeIndex, tableNumber, people } = useParams();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [name, setName] = useState("");
@@ -46,7 +46,7 @@ const ReserveTable = () => {
             console.log(reservationStartTimeIndex)
             console.log(reservationEndTimeIndex)
             // Call updateTableSchedule with the appropriate parameters
-            await addNewReservation(collectionKey, reservationDate, parseInt(reservationStartTimeIndex), parseInt(reservationEndTimeIndex), parseInt(tableNumber), fullName, phone, email, notes);
+            await addNewReservation(collectionKey, reservationDate, parseInt(reservationStartTimeIndex), parseInt(reservationEndTimeIndex), parseInt(tableNumber), fullName, phone, email, notes, parseInt(people));
             // Optionally, you can redirect the user to a confirmation page or do other actions upon successful reservation
             console.log('Table reserved successfully!');
             setBookedReservation(true);
