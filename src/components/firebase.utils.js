@@ -1174,6 +1174,28 @@ export const addNewTable = async (collectionKey, id, capacity, smokeFriendly) =>
 
 };
 
+export const updateUnavailableDays = async (collectionKey,unavailableDays) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+  const infoDoc = await getDoc(infoRef);
+  console.log(infoDoc);
+  if (infoDoc.exists()) {
+
+    await updateDoc(infoRef, {
+      'unavailable_days': unavailableDays
+    });
+
+    console.log(`Updated unavailable days`);
+    return unavailableDays;
+  } 
+  else {
+    console.log(`Date doc does not exist.`);
+    return false;
+  }
+
+};
+
 export const updateUnavailableTables = async (collectionKey,date,unavailableTableId) => {
 
   const sampleRestaurantRef = collection(db, collectionKey);

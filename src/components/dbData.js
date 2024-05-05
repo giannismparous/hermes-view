@@ -388,6 +388,7 @@ const infoDoc = {
     unavailable_days:[
         "3-4-2024", 
         "5-4-2024",
+        "2-1-2024"
     ],
     tables: [
         {

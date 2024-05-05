@@ -458,7 +458,39 @@ margin-top: 0px;
 /* Add any additional styling as needed */
 }
 
+.edit-button {
+    background-color: transparent; /* Set the background color to transparent */
+    border: none;
+    z-index: 2000;
+    position: fixed;
+    width: auto;
+    padding: 0;
+    margin-top: 18px;
+    margin-left: 90px;
+    /* Add any additional styling as needed */
+}
+
+.save-button {
+    background-color: transparent; /* Set the background color to transparent */
+    border: none;
+    z-index: 2000;
+    position: fixed;
+    width: auto;
+    padding: 0;
+    margin-top: 15px;
+    margin-left: 150px;
+    /* Add any additional styling as needed */
+    }
+
 .calendar-button:hover{
+    background-color: transparent;
+}
+
+.edit-button:hover{
+    background-color: transparent;
+}
+
+.save-button:hover{
     background-color: transparent;
 }
 
@@ -466,6 +498,18 @@ margin-top: 0px;
 width: 80px ;
 margin: 0;
 /* Add any additional styling as needed */
+}
+
+.edit-button img {
+    width: 45px ;
+    margin: 0;
+    /* Add any additional styling as needed */
+}
+
+.save-button img {
+    width: 50px ;
+    margin: 0;
+    /* Add any additional styling as needed */
 }
 
 .no-reservations {
@@ -904,4 +948,9 @@ margin: 0;
 .table-popup-window-container label{
     margin: 1em 0;
     color: #000980;
+}
+
+.edit-open {
+    background-color: white;
+    border-radius: 100px;
 }

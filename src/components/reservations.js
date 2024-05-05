@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { addNewReservation, addNewTable, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation, updateUnavailableTables} from './firebase.utils';
+import { addNewReservation, addNewTable, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation, updateUnavailableDays, updateUnavailableTables} from './firebase.utils';
 import { ClockLoader } from 'react-spinners';
 import CalendarYearly from './CalendarYearly';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,9 @@ import DropdownMenu from './DropdownMenu'
 const sortByImg = '../icons/sort_by.png';
 const calendarOpenImg = '../icons/calendar-open-blue.png';
 const calendarClosedImg = '../icons/calendar-closed-blue.png';
+const editOpenImg = '../icons/edit-open.png';
+const editClosedImg = '../icons/edit.png';
+const saveImg = '../icons/save.png';
 
 const states = [
     { id: 1, imgSrc: "../icons/late_state.png", title: "Late" },
@@ -60,6 +63,9 @@ const Reservations = () => {
 
                 setMenuMap(menuItemsMap);
 
+                setUnavailableDays(response.unavailable_days);
+                setMergedUnavailableDays(response.unavailable_days);
+
             } catch (error) {
                 console.error("Error checking document: ", error);
             }
@@ -104,6 +110,8 @@ const Reservations = () => {
     const [info, setInfo] = useState();
     const [maxReservationDurationIndexNumber, setMaxReservationDurationIndexNumber] = useState(0);
     const [tables,setTables] = useState([]);
+    const [unavailableDays,setUnavailableDays] = useState([]);
+    const [mergedUnavailableDays,setMergedUnavailableDays] = useState([]);
     const [unavailableTables, setUnavailableTables] = useState([]);
     const [tablesReservations, setTablesReservations] = useState([]);
     const [filteredTablesReservations, setFilteredTablesReservations] = useState([]);
@@ -151,6 +159,8 @@ const Reservations = () => {
     const [email, setEmail] = useState('');
     const [notes, setNotes] = useState('');
     const [smokes, setSmokes] = useState(false);
+
+    const [showEditOpen, setShowEditOpen] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -260,6 +270,31 @@ const Reservations = () => {
         console.log(response);
 
         toggleAddReservationPopup(!showAddReservationPopup);
+
+    };
+
+    const updateUnavailableDaysToServer = async () => {
+
+        // console.log("New reservation");
+        // console.log("Selected date:");
+        // console.log(selectedDate);
+        // console.log("Table id:");
+        // console.log(tableIdForReservation);
+        // console.log("Time:");
+        // console.log(time);
+        // console.log("Full name:");
+        // console.log(fullName);
+        // console.log("Email:");
+        // console.log(email);
+        // console.log("Phone:");
+        // console.log(phone);
+        // console.log("Notes:");
+        // console.log(notes);
+        // console.log("Smokes:");
+        // console.log(smokes);
+
+        const response = await updateUnavailableDays(collectionKey, mergedUnavailableDays);
+        console.log(response);
 
     };
 
@@ -553,6 +588,10 @@ const Reservations = () => {
 
 };
 
+    const updateMergedUnavailableDays = (updatedUnavailableDays) => {
+        setMergedUnavailableDays(updatedUnavailableDays);
+    };
+
     return (
         <div className='reservations-page'>
             <DropdownMenu changeMode={changeMode} currentMode={mode} />
@@ -561,6 +600,16 @@ const Reservations = () => {
                     {!showCalendar && <img src={calendarClosedImg} alt="Calendar Hidden Icon" width="25px" color='black'/>}
                     {showCalendar && <img src={calendarOpenImg} alt="Calendar Shown Icon" width="25px"/>}
                 </button>
+                {showCalendar && (
+                    <>
+                    <button className={`edit-button ${isScrollAtTop ? '' : 'hidden'}`} onClick={() => setShowEditOpen(prevState => !prevState)}>
+                        <img src={showEditOpen ? editOpenImg : editClosedImg} className={showEditOpen ? 'edit-open' : ''} alt="Edit Icon" width="25px" color='black'/>
+                    </button>
+                    {showEditOpen && <button className={`save-button ${isScrollAtTop ? '' : 'hidden'}`} onClick={() => updateUnavailableDaysToServer()}>
+                        <img src={saveImg} className={showEditOpen ? 'save-open' : ''} alt="Save Icon" width="25px" color='black'/>
+                    </button>}
+                    </>
+                )}
                 <div className={`search-bar-container ${isScrollAtTop ? '' : 'hidden'}`}>
                     <div className="search-bar">
                         <input
@@ -597,7 +646,7 @@ const Reservations = () => {
                 <div className={`calendar-overlay ${showCalendar ? 'visible' : ''}`} onClick={toggleCalendar}></div>
                 {showCalendar && (
                     <div className='calendar'>
-                        <CalendarYearly onDateSelect={handleDateSelect} selectedDate={selectedDate}/>
+                        <CalendarYearly onDateSelect={handleDateSelect} selectedDate={selectedDate} showEditOpen={showEditOpen} unavailableDays={unavailableDays} setUnavailableDays={updateMergedUnavailableDays}/>
                     </div>
                 )}
                 {loading ? (
@@ -607,6 +656,9 @@ const Reservations = () => {
                 ) : (
                     
                     !showCalendar && <div className="reservations">
+                        <div className='sort-label'>
+                            <h2>{selectedDate}</h2>
+                        </div>
                         {showStatePopup && (
                             <div className="state-popup-window" onClick={() => toggleStatePopup(null)}>
                                 <div className='state-popup-window-items' onClick={(e) => e.stopPropagation()}>
@@ -712,7 +764,6 @@ const Reservations = () => {
                         </div>}
                         {!selectedDateEmpty && mode === 1 && (
                             <div className='sort-label'>
-                                <h2>{selectedDate}</h2>
                                 {/* <h2>
                                     {selectedSortOption === 1 && 'Reservations sorted by table'}
                                     {selectedSortOption === 2 && 'Reservations sorted by time'}
