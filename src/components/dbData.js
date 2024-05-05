@@ -392,43 +392,54 @@ const infoDoc = {
     tables: [
         {
             id: 1,
-            capacity: 4
+            capacity: 4,
+            smokeFriendly: true
         },
         {
             id: 2,
-            capacity: 3
+            capacity: 3,
+            smokeFriendly: true
         },
         {
             id: 3,
-            capacity: 2
+            capacity: 2,
+            smokeFriendly: true
         },
         {
             id: 4,
-            capacity: 2
+            capacity: 2,
+            smokeFriendly: false
         },
         {
             id: 5,
-            capacity: 4
+            capacity: 4,
+            smokeFriendly: false
         },
         {
             id: 6,
-            capacity: 6
+            capacity: 6,
+            smokeFriendly: true
         },
         {
             id: 7,
-            capacity: 4
+            capacity: 4,
+            smokeFriendly: true
         },
         {
             id: 8,
-            capacity: 3
+            capacity: 3,
+            smokeFriendly: false
         },
         {
             id: 9,
-            capacity: 7
+            capacity: 7,
+            smokeFriendly: true
         },
         {
             id: 10,
-            capacity: 5
+            capacity: 5,
+            smokeFriendly: false
+
         },
     ],
     menu: [

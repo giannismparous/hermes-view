@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation} from './firebase.utils';
+import { addNewReservation, addNewTable, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation, updateUnavailableTables} from './firebase.utils';
 import { ClockLoader } from 'react-spinners';
 import CalendarYearly from './CalendarYearly';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,6 @@ import DropdownMenu from './DropdownMenu'
 const sortByImg = '../icons/sort_by.png';
 const calendarOpenImg = '../icons/calendar-open-blue.png';
 const calendarClosedImg = '../icons/calendar-closed-blue.png';
-const reservationsClosedImg = '../icons/reservation-blue.png'
-const reservationsOpenImg = '../icons/reservation-open-blue.png'
-const ordersClosedImg = '../icons/orders-blue.png'
-const ordersOpenImg = '../icons/orders-blue-open.png'
 
 const states = [
     { id: 1, imgSrc: "../icons/late_state.png", title: "Late" },
@@ -45,6 +41,7 @@ const Reservations = () => {
                 console.log(response);
 
                 setInfo(response);
+                setTables(response.tables);
 
                 const reservationsTimesMap = {};
                 response.reservation_times.forEach(item => {
@@ -105,6 +102,9 @@ const Reservations = () => {
 
     const [collectionKey, setCollectionKey] = useState("sample-restaurant");
     const [info, setInfo] = useState();
+    const [maxReservationDurationIndexNumber, setMaxReservationDurationIndexNumber] = useState(0);
+    const [tables,setTables] = useState([]);
+    const [unavailableTables, setUnavailableTables] = useState([]);
     const [tablesReservations, setTablesReservations] = useState([]);
     const [filteredTablesReservations, setFilteredTablesReservations] = useState([]);
     const [expandedTablesReservations, setExpandedTablesReservations] = useState([]);
@@ -135,13 +135,72 @@ const Reservations = () => {
     const [mode, setMode] = useState(1);
     const [currentReservation, setCurrentReservation] = useState();
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [showStatePopup, setShowStatePopup] = useState(false);
+    const [showAddTablePopup, setShowAddTablePopup] = useState(false);
+    const [showAddReservationPopup, setShowAddReservationPopup] = useState(false);
+
+    //for add new table
+    const [tableId, setTableId] = useState('');
+    const [capacity, setCapacity] = useState('');
+    const [smokeFriendly, setSmokeFriendly] = useState(false);
+    const [tableIdForReservation, setTableIdForReservation] = useState('');
+    const [time, setTime] = useState('');
+    const [people, setPeople] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [notes, setNotes] = useState('');
+    const [smokes, setSmokes] = useState(false);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        if (name === 'tableId') {
+            if (value>=0)setTableId(value);
+        } else if (name === 'capacity') {
+            if (value>=0)setCapacity(value);
+        } else if (name === 'tableIdForReservation') {
+            if (value>=0)setTableIdForReservation(value);
+        } else if (name === 'time') {
+            setTime(value);
+        } else if (name === 'people') {
+            if (value>=0)setPeople(value);
+        } 
+        else if (name === 'fullName') {
+            setFullName(value);
+        } else if (name === 'phone') {
+            setPhone(value);
+        } else if (name === 'email') {
+            setEmail(value);
+        } else if (name === 'notes') {
+            setNotes(value);
+        }
+    };
+
+    const handleSmokeFriendlyCheckboxChange = () => {
+        setSmokeFriendly(!smokeFriendly);
+    };
+
+    const handleSmokesCheckboxChange = () => {
+        setSmokes(!smokes);
+    };
 
     // Function to toggle popup visibility
     const toggleStatePopup = (currentReservation) => {
 
-        setShowPopup(!showPopup);
+        setShowStatePopup(!showStatePopup);
         setCurrentReservation(currentReservation);
+
+    };
+
+    const toggleAddReservationPopup = () => {
+
+        setShowAddReservationPopup(!showAddReservationPopup);
+
+    };
+
+    const toggleAddTablePopup = () => {
+
+        setShowAddTablePopup(!showAddTablePopup);
 
     };
 
@@ -152,6 +211,55 @@ const Reservations = () => {
         const response = await updateReservation(collectionKey, selectedDate, currentReservation);
         console.log(response);
         toggleStatePopup(currentReservation);
+
+    };
+
+    const addNewTableToServer = async () => {
+
+        if (tableId==="" || capacity===""){
+            console.log("Table ID and Capacity should be filled");
+        }
+        else {
+            const response = await addNewTable(collectionKey, parseInt(tableId), parseInt(capacity), smokeFriendly);
+            console.log(response);
+            const existingTableIndex = tables.findIndex(table => table.id === tableId);
+
+            if (existingTableIndex !== -1) {
+                // If table exists, update its details
+                tables[existingTableIndex] = { id: tableId, capacity: parseInt(capacity), smokeFriendly };
+            } else {
+                // If table doesn't exist, add a new table
+                tables.push({ id: parseInt(tableId), capacity: parseInt(capacity), smokeFriendly });
+            }
+            toggleAddTablePopup(!showAddTablePopup);
+        }
+
+    };
+
+    const addNewReservationToServer = async () => {
+
+        // console.log("New reservation");
+        // console.log("Selected date:");
+        // console.log(selectedDate);
+        // console.log("Table id:");
+        // console.log(tableIdForReservation);
+        // console.log("Time:");
+        // console.log(time);
+        // console.log("Full name:");
+        // console.log(fullName);
+        // console.log("Email:");
+        // console.log(email);
+        // console.log("Phone:");
+        // console.log(phone);
+        // console.log("Notes:");
+        // console.log(notes);
+        // console.log("Smokes:");
+        // console.log(smokes);
+
+        const response = await addNewReservation(collectionKey, selectedDate, parseInt(time), parseInt(time+maxReservationDurationIndexNumber), parseInt(tableIdForReservation), fullName, phone, email, notes, parseInt(people));
+        console.log(response);
+
+        toggleAddReservationPopup(!showAddReservationPopup);
 
     };
 
@@ -174,6 +282,7 @@ const Reservations = () => {
                 console.log("Response:");
                 console.log(response);
 
+                setUnavailableTables(response[1]);
                 setIdsReservations(response[3]);
                 setFilteredIdsReservations(response[3]);
                 setTimesReservations(response[4]);
@@ -182,7 +291,7 @@ const Reservations = () => {
                 setFilteredNamesReservations(response[5]);
                 setTablesReservations(response[6]);
                 setFilteredTablesReservations(response[6]);
-                console.log(response[6])
+                setMaxReservationDurationIndexNumber(response[9]);
                 setLoading(false);
             } else {
                 setTablesReservations([]);
@@ -405,6 +514,7 @@ const Reservations = () => {
         setMode(mode);
         if (mode === 1) setSelectedSortOption(1);
         else if (mode === 2) setSelectedSortOption(5);
+        else if (mode === 3) setSelectedSortOption(7);
       };
 
     const calculateTotal = (orderItems) => {
@@ -429,6 +539,19 @@ const Reservations = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleToggleAvailability = async (tableId) => {
+
+    const response= await updateUnavailableTables(collectionKey,selectedDate,tableId);
+    console.log(response);
+
+    if (unavailableTables.includes(tableId)) {
+        setUnavailableTables(prevUnavailableTables => prevUnavailableTables.filter(id => id !== tableId));
+    } else {
+        setUnavailableTables(prevUnavailableTables => [...prevUnavailableTables, tableId]);
+    }
+
+};
 
     return (
         <div className='reservations-page'>
@@ -484,15 +607,103 @@ const Reservations = () => {
                 ) : (
                     
                     !showCalendar && <div className="reservations">
-                        {showPopup && (
-                            <div className="popup-window" onClick={() => toggleStatePopup(null)}>
-                                <div className='popup-window-items' onClick={(e) => e.stopPropagation()}>
+                        {showStatePopup && (
+                            <div className="state-popup-window" onClick={() => toggleStatePopup(null)}>
+                                <div className='state-popup-window-items' onClick={(e) => e.stopPropagation()}>
                                 {states.map(state => (
-                                    <div key={state.id} className='popup-window-item' onClick={() => updateReservationState(state.id)}>
+                                    <div key={state.id} className='state-popup-window-item' onClick={() => updateReservationState(state.id)}>
                                         <img className='state-img' src={state.imgSrc} alt={state.title} />
                                         <p className='state-title'>{state.title}</p>
                                     </div>
                                 ))}
+                                </div>
+                            </div>
+                        )}
+                        {showAddReservationPopup && (
+                            <div className="reservation-popup-window" onClick={() => toggleAddReservationPopup(null)}>
+                                <div className='reservation-popup-window-container' onClick={(e) => e.stopPropagation()}>
+                                    <h2>Add New Reservation</h2>
+                                    <label>
+                                        Table ID:
+                                        <input 
+                                            type="number" 
+                                            name="tableIdForReservation" 
+                                            placeholder="Table ID" 
+                                            value={tableIdForReservation} 
+                                            onChange={handleInputChange} 
+                                        />
+                                    </label>
+                                    <label>
+                                        Time:
+                                        <select 
+                                            name="time" 
+                                            value={time} 
+                                            onChange={handleInputChange}
+                                        >
+                                            {Object.entries(timesMap).map(([timeId, timeString]) => (
+                                                <option key={timeId} value={timeId}>
+                                                    {timeString}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
+                                    <label>
+                                        Number of people:
+                                        <input 
+                                            type="number" 
+                                            name="people" 
+                                            placeholder="People" 
+                                            value={people} 
+                                            onChange={handleInputChange} 
+                                        />
+                                    </label>
+                                    <label>
+                                        Full Name:
+                                        <input type="text" name="fullName" placeholder="Full Name" value={fullName} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        Phone:
+                                        <input type="tel" name="phone" placeholder="Phone" value={phone} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        Email:
+                                        <input type="email" name="email" placeholder="Email" value={email} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        Notes:
+                                        <input type="text" name="notes" placeholder="Notes" value={notes} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="smokes" checked={smokes} onChange={handleSmokesCheckboxChange} />
+                                        Smokes
+                                    </label>
+                                    <button className='popup-add-table-button' onClick={() => addNewReservationToServer()}>Add Reservation</button>
+                                </div>
+                            </div>
+                        )}
+                        {showAddTablePopup && (
+                            <div className="table-popup-window" onClick={() => toggleAddTablePopup(null)}>
+                                <div className='table-popup-window-container' onClick={(e) => e.stopPropagation()}>
+                                    <h2>Add New Table</h2>
+                                    <label>
+                                        Table ID:
+                                        <input 
+                                            type="number" 
+                                            name="tableIdForReservation" 
+                                            placeholder="Table ID" 
+                                            value={tableIdForReservation} 
+                                            onChange={handleInputChange} 
+                                        />
+                                    </label>
+                                    <label>
+                                        Capacity:
+                                        <input type="number" name="capacity" placeholder="Capacity" value={capacity} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="smokeFriendly" checked={smokeFriendly} onChange={handleSmokeFriendlyCheckboxChange} />
+                                        Smoke Friendly
+                                    </label>
+                                    <button className='popup-add-table-button' onClick={() => addNewTableToServer()}>Add Table</button>
                                 </div>
                             </div>
                         )}
@@ -824,6 +1035,37 @@ const Reservations = () => {
                                 )}
                             </div>
                         ))}
+                        {selectedSortOption === 7 && tables.map((table, index) => (
+                            <div key={index} className="table">
+                                <div className="table-header">
+                                    <h2>Table {table.id}</h2>
+                                    <img 
+                                        className={unavailableTables.includes(table.id) ? 'unavailable-img' : 'available-img'} 
+                                        src={unavailableTables.includes(table.id) ? "../icons/unavailable.png" : "../icons/available.png"} 
+                                        alt={unavailableTables.includes(table.id) ? "Unavailable" : "Available"} 
+                                        onClick={() => handleToggleAvailability(table.id)} 
+                                    />
+                                </div>
+                                <div className="table-details-container">
+                                    <div className="table-details">
+                                        <p>Capacity: {table.capacity}</p>
+                                        <p>Smoke Friendly: {Boolean(table.smokeFriendly).toString()}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {mode===1 && 
+                            <div className='add-reservation-container' onClick={() => {
+                                toggleAddReservationPopup();}}>
+                                <button className="add-reservation-button">+</button>
+                            </div>
+                        }
+                        {mode===3 && 
+                            <div className='add-table-container' onClick={() => {
+                                toggleAddTablePopup();}}>
+                                <button className="add-table-button">+</button>
+                            </div>
+                        }
                     </div>
                 )}
             </div>

@@ -5,6 +5,8 @@ const ordersOpenImg = '../icons/orders-blue-open.png';
 const ordersClosedImg = '../icons/orders-blue.png';
 const reservationsOpenImg = '../icons/reservation-open-blue.png';
 const reservationsClosedImg = '../icons/reservation-blue.png';
+const tablesOpenImg = '../icons/tables-blue-open.png';
+const tablesClosedImg = '../icons/tables-blue.png';
 const dotsClosedImg = '../icons/dots-blue.png';
 const dotsOpenImg = '../icons/dots-open.png'; 
 
@@ -49,6 +51,9 @@ function DropdownMenu({ changeMode, currentMode}) {
           </button>
           <button className={`orders-button ${activeButton === 'orders' || currentMode === 2 ? 'active' : ''}`} onClick={() => handleButtonClick('orders', 2)}>
             <img src={activeButton === 'orders' || currentMode === 2 ? ordersOpenImg : ordersClosedImg} alt="Orders Icon" width="25px" color='black' />
+          </button>
+          <button className={`tables-button ${activeButton === 'tables' || currentMode === 3 ? 'active' : ''}`} onClick={() => handleButtonClick('tables', 3)}>
+            <img src={activeButton === 'tables' || currentMode === 3 ? tablesOpenImg : tablesClosedImg} alt="Tables Icon" width="25px" color='black' />
           </button>
         </>
       )}

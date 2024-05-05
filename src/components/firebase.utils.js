@@ -924,6 +924,8 @@ export const fetchDateInfo = async (collectionKey,date) => {
 
     dateInfoToReturn[8] = [...orders];
 
+    dateInfoToReturn[9]=infoDoc.data().maxReservationDurationIndexNumber;
+
     console.log(dateInfoToReturn);
 
     return dateInfoToReturn;
@@ -1074,7 +1076,7 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
   return unavailableTables;
 };
 
-export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes) => {
+export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes, people) => {
 
   
   const sampleRestaurantRef = collection(db, collectionKey);
@@ -1101,6 +1103,7 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
         end_time_index: endIndex,
         table_id: tableNumber,
         reservation_id: currentId,
+        people: people,
         state: 3
       });
 
@@ -1125,6 +1128,75 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
 
     console.error("Error current date or data", error);
 
+  }
+
+};
+
+export const addNewTable = async (collectionKey, id, capacity, smokeFriendly) => {
+
+  
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+
+  try {
+
+    const infoDoc = await getDoc(infoRef);
+
+    if (infoDoc.exists()) {
+
+      const tables = infoDoc.data().tables;
+
+      const existingTableIndex = tables.findIndex(table => table.id === id);
+
+            if (existingTableIndex !== -1) {
+                // If table exists, update its details
+                tables[existingTableIndex] = { id, capacity, smokeFriendly };
+            } else {
+                // If table doesn't exist, add a new table
+                tables.push({ id, capacity, smokeFriendly });
+            }
+
+            // Update tables array in Firestore
+            await updateDoc(infoRef, { tables });
+
+      console.log(`Added new table with id: ${id}, capacity: ${capacity}, smokeFriendly ${smokeFriendly}`);
+      
+    } else {
+      console.log(`Info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error data", error);
+
+  }
+
+};
+
+export const updateUnavailableTables = async (collectionKey,date,unavailableTableId) => {
+
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, date);
+  const infoDoc = await getDoc(infoRef);
+
+  if (infoDoc.exists()) {
+
+    const unavailableTables=infoDoc.data().unavailable_tables;
+
+    const updatedUnavailableTables = unavailableTables.includes(unavailableTableId)
+  ? unavailableTables.filter(id => id !== unavailableTableId)
+  : [...unavailableTables, unavailableTableId];
+
+    await updateDoc(infoRef, {
+      'unavailable_tables': updatedUnavailableTables
+    });
+
+    console.log(`Updated unavailable tables`);
+    return updatedUnavailableTables;
+  } 
+  else {
+    console.log(`Date doc does not exist.`);
+    return false;
   }
 
 };
