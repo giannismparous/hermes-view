@@ -256,7 +256,7 @@ const Reservations = () => {
         // console.log("Smokes:");
         // console.log(smokes);
 
-        const response = await addNewReservation(collectionKey, selectedDate, parseInt(time), parseInt(time+maxReservationDurationIndexNumber), parseInt(tableIdForReservation), fullName, phone, email, notes, parseInt(people));
+        const response = await addNewReservation(collectionKey, selectedDate, parseInt(time), parseInt(time+maxReservationDurationIndexNumber), parseInt(tableIdForReservation), fullName, phone, email, notes, parseInt(people), smokes);
         console.log(response);
 
         toggleAddReservationPopup(!showAddReservationPopup);

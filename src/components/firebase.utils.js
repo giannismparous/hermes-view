@@ -1076,7 +1076,7 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
   return unavailableTables;
 };
 
-export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes, people) => {
+export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes, people,smokes) => {
 
   
   const sampleRestaurantRef = collection(db, collectionKey);
@@ -1104,6 +1104,7 @@ export const addNewReservation = async (collectionKey, date, startIndex, endInde
         table_id: tableNumber,
         reservation_id: currentId,
         people: people,
+        smokes: smokes,
         state: 3
       });
 
