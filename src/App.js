@@ -54,7 +54,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/sample_restaurant/reservations" element={<Reservations />} />
-        <Route path="/reserve/:collectionKey/:reservationDate/:reservationStartTimeIndex/:reservationEndTimeIndex/:tableNumber" element={<ReserveTable/>} />
+        <Route path="/reserve/:collectionKey/:reservationDate/:reservationStartTimeIndex/:reservationEndTimeIndex/:people/:tableNumber" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
 

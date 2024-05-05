@@ -131,7 +131,8 @@ const Reserve = () => {
               collectionKey: "sample-restaurant",
               date: selectedDate,
               startIndex: selectedTimeIndex,
-              endIndex: selectedTimeIndex+maxReservationDurationIndexNumber
+              endIndex: selectedTimeIndex+maxReservationDurationIndexNumber,
+              people: selectedCapacity
             };
             
     window.parent.postMessage(data, '*');
