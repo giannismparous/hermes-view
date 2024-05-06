@@ -9,6 +9,10 @@ const tablesOpenImg = '../icons/tables-blue-open.png';
 const tablesClosedImg = '../icons/tables-blue.png';
 const dotsClosedImg = '../icons/dots-blue.png';
 const dotsOpenImg = '../icons/dots-open.png'; 
+const menuOpenImg = '../icons/menu-open.png';
+const menuClosedImg = '../icons/menu-closed.png';
+const settingsOpenImg = '../icons/settings-open.png';
+const settingsClosedImg = '../icons/settings-closed.png';
 
 function DropdownMenu({ changeMode, currentMode}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +58,12 @@ function DropdownMenu({ changeMode, currentMode}) {
           </button>
           <button className={`tables-button ${activeButton === 'tables' || currentMode === 3 ? 'active' : ''}`} onClick={() => handleButtonClick('tables', 3)}>
             <img src={activeButton === 'tables' || currentMode === 3 ? tablesOpenImg : tablesClosedImg} alt="Tables Icon" width="25px" color='black' />
+          </button>
+          <button className={`menu-button ${activeButton === 'menu' || currentMode === 4 ? 'active' : ''}`} onClick={() => handleButtonClick('menu', 4)}>
+            <img src={activeButton === 'menu' || currentMode === 4 ? menuOpenImg : menuClosedImg} alt="Menu Icon" width="25px" color='black' />
+          </button>
+          <button className={`settings-button ${activeButton === 'settings' || currentMode === 5 ? 'active' : ''}`} onClick={() => handleButtonClick('settings', 5)}>
+            <img src={activeButton === 'settings' || currentMode === 5 ? settingsOpenImg : settingsClosedImg} alt="Settings Icon" width="25px" color='black' />
           </button>
         </>
       )}

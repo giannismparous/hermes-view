@@ -954,3 +954,124 @@ margin: 0;
     background-color: white;
     border-radius: 100px;
 }
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.menu-container p{
+    font-size: 40px;
+    color: rgb(0, 9, 128);
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.add-menu-item-button {
+    width: 50px; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    border-radius: 50%; /* Makes the button round */
+    background-color: #007bff; /* Add your desired background color */
+    /* Add any other styles you need */
+}
+
+.add-menu-item-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50px;
+}
+
+.menu-item-popup-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 2000;
+}
+
+.menu-item-popup-window-container {
+    position: fixed;
+    width: 600px;
+    background-color: white; /* Semi-transparent black background */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    gap: 10px;
+}
+
+.menu-item-popup-window-container input[type="number"] {
+    width: 70px;
+}
+
+.menu-item-popup-window-container input[type="text"] {
+    width: 100px;
+}
+
+.popup-add-menu-item-button {
+    width: auto; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    border-radius: 30px; /* Makes the button round */
+    background-color: #007bff; /* Add your desired background color */
+    /* Add any other styles you need */
+}
+
+.menu-item-popup-window-container input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.menu-header h2 {
+    font-size: 40px;
+}
+
+.menu-category-section{
+    text-align: center;
+}
+
+.menu-category-section h2 {
+    font-size: 35px;
+    margin: 0;
+}
+
+.settings-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-container input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.save-settings-button {
+    width: auto; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    border-radius: 30px; /* Makes the button round */
+    background-color: #007bff; /* Add your desired background color */
+    /* Add any other styles you need */
+}
+

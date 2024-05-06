@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Reservations.css';
-import { addNewReservation, addNewTable, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation, updateUnavailableDays, updateUnavailableTables} from './firebase.utils';
+import { addNewMenuItem, addNewReservation, addNewTable, cancelReservationByTableNumber, completeReservationByTableNumber, dateExists, fetchDateInfo, fetchInfo, updateReservation, updateRestaurantInfo, updateUnavailableDays, updateUnavailableTables} from './firebase.utils';
 import { ClockLoader } from 'react-spinners';
 import CalendarYearly from './CalendarYearly';
 import { Link } from 'react-router-dom';
@@ -54,17 +54,25 @@ const Reservations = () => {
                 setTimesMap(reservationsTimesMap);
 
                 const menuItemsMap = {};
+                // Keep track of unique category names
+                const uniqueCategoriesSet = new Set();
 
                 response.menu.forEach(category => {
                     category.items.forEach(item => {
                         menuItemsMap[item.id] = { name: item.name, price: item.price, category: category.category };
+                        uniqueCategoriesSet.add(category.category); // Add category name to set
                     });
                 });
 
                 setMenuMap(menuItemsMap);
+                setUniqueCategories(Array.from(uniqueCategoriesSet)); 
 
                 setUnavailableDays(response.unavailable_days);
                 setMergedUnavailableDays(response.unavailable_days);
+
+                setRestaurantName(response.name);
+                setReservationDuration(response.maxReservationDurationIndexNumber);
+                setNumberOfDaysAvailableForBooking(response.numberOfDaysToShowToCustomers);
 
             } catch (error) {
                 console.error("Error checking document: ", error);
@@ -142,10 +150,12 @@ const Reservations = () => {
     const [selectedDateEmpty, setSelectedDateEmpty] = useState(false); // State to store selected date
     const [mode, setMode] = useState(1);
     const [currentReservation, setCurrentReservation] = useState();
+    const [uniqueCategories, setUniqueCategories] = useState([]);
 
     const [showStatePopup, setShowStatePopup] = useState(false);
     const [showAddTablePopup, setShowAddTablePopup] = useState(false);
     const [showAddReservationPopup, setShowAddReservationPopup] = useState(false);
+    const [showAddMenuItemPopup, setShowAddMenuItemPopup] = useState(false);
 
     //for add new table
     const [tableId, setTableId] = useState('');
@@ -159,6 +169,13 @@ const Reservations = () => {
     const [email, setEmail] = useState('');
     const [notes, setNotes] = useState('');
     const [smokes, setSmokes] = useState(false);
+    const [itemCategory, setItemCategory] = useState('');
+    const [itemId, setItemId] = useState('');
+    const [itemName, setItemName] = useState('');
+    const [itemPrice, setItemPrice] = useState('');
+    const [restaurantName, setRestaurantName] = useState('');
+    const [reservationDuration, setReservationDuration] = useState('');
+    const [numberOfDaysAvailableForBooking, setNumberOfDaysAvailableForBooking] = useState('');
 
     const [showEditOpen, setShowEditOpen] = useState(false);
 
@@ -183,6 +200,20 @@ const Reservations = () => {
             setEmail(value);
         } else if (name === 'notes') {
             setNotes(value);
+        } else if (name === 'itemCategory') {
+            setItemCategory(value);
+        } else if (name === 'itemName') {
+            setItemName(value);
+        } else if (name === 'itemId') {
+            if (value>=0)setItemId(value);
+        } else if (name === 'itemPrice') {
+            if (value>=0)setItemPrice(value);
+        } else if (name === 'restaurantName') {
+            setRestaurantName(value);
+        } else if (name === 'reservationDuration') {
+            if (value>=1)setReservationDuration(value);
+        } else if (name === 'numberOfDaysAvailableForBooking') {
+            if (value>=0)setNumberOfDaysAvailableForBooking(value);
         }
     };
 
@@ -211,6 +242,12 @@ const Reservations = () => {
     const toggleAddTablePopup = () => {
 
         setShowAddTablePopup(!showAddTablePopup);
+
+    };
+
+    const toggleAddMenuItemPopup = () => {
+
+        setShowAddMenuItemPopup(!showAddMenuItemPopup);
 
     };
 
@@ -270,6 +307,22 @@ const Reservations = () => {
         console.log(response);
 
         toggleAddReservationPopup(!showAddReservationPopup);
+
+    };
+
+    const addNewMenuItemToServer = async () => {
+
+        const response = await addNewMenuItem(collectionKey, itemCategory, parseInt(itemId), itemName, parseInt(itemPrice));
+        console.log(response);
+
+        toggleAddMenuItemPopup(!showAddReservationPopup);
+
+    };
+
+    const updateSettingsToServer = async () => {
+
+        const response = await updateRestaurantInfo(collectionKey, restaurantName, parseInt(reservationDuration), parseInt(numberOfDaysAvailableForBooking));
+        console.log(response);
 
     };
 
@@ -550,6 +603,8 @@ const Reservations = () => {
         if (mode === 1) setSelectedSortOption(1);
         else if (mode === 2) setSelectedSortOption(5);
         else if (mode === 3) setSelectedSortOption(7);
+        else if (mode === 4) setSelectedSortOption(8);
+        else if (mode === 5) setSelectedSortOption(9);
       };
 
     const calculateTotal = (orderItems) => {
@@ -656,9 +711,9 @@ const Reservations = () => {
                 ) : (
                     
                     !showCalendar && <div className="reservations">
-                        <div className='sort-label'>
+                        {mode<=2 && <div className='sort-label'>
                             <h2>{selectedDate}</h2>
-                        </div>
+                        </div>}
                         {showStatePopup && (
                             <div className="state-popup-window" onClick={() => toggleStatePopup(null)}>
                                 <div className='state-popup-window-items' onClick={(e) => e.stopPropagation()}>
@@ -756,6 +811,36 @@ const Reservations = () => {
                                         <input type="checkbox" name="smokeFriendly" checked={smokeFriendly} onChange={handleSmokeFriendlyCheckboxChange} />
                                     </label>
                                     <button className='popup-add-table-button' onClick={() => addNewTableToServer()}>Add Table</button>
+                                </div>
+                            </div>
+                        )}
+                        {showAddMenuItemPopup && (
+                            <div className="menu-item-popup-window" onClick={() => toggleAddMenuItemPopup(null)}>
+                                <div className='menu-item-popup-window-container' onClick={(e) => e.stopPropagation()}>
+                                    <h2>Add Menu Item</h2>
+                                    <label>
+                                        Category:
+                                        <input type="text" name="itemCategory" placeholder="Item Category" value={itemCategory} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        ID:
+                                        <input 
+                                            type="number" 
+                                            name="itemId" 
+                                            placeholder="Item ID" 
+                                            value={itemId} 
+                                            onChange={handleInputChange} 
+                                        />
+                                    </label>
+                                    <label>
+                                        Label:
+                                        <input type="text" name="itemName" placeholder="Item Name" value={itemName} onChange={handleInputChange} />
+                                    </label>
+                                    <label>
+                                        Price:
+                                        <input type="number" name="itemPrice" placeholder="Price" value={itemPrice} onChange={handleInputChange} />
+                                    </label>
+                                    <button className='popup-add-menu-item-button' onClick={() => addNewMenuItemToServer()}>Add Item</button>
                                 </div>
                             </div>
                         )}
@@ -1105,6 +1190,73 @@ const Reservations = () => {
                                 </div>
                             </div>
                         ))}
+                        {selectedSortOption === 8 && menuMap && (
+                            <div className='menu-container'>
+                                <div className="menu-header">
+                                    <h2>Restaurant Menu</h2>
+                                </div>
+                                {uniqueCategories.map((category, index) => (
+                                    <div key={index} className="menu-category-section">
+                                        <h2>{category}</h2>
+                                        <ul>
+                                            {Object.entries(menuMap).map(([itemId, item]) =>  (
+                                                // Check if the item belongs to the current category
+                                                item.category === category && (
+                                                    <div key={itemId} className="menu-item">
+                                                        <p>ID: {item && itemId}</p>
+                                                        <p>Name: {item && item.name}</p>
+                                                        <p>Price: {item && item.price}€</p>
+                                                    </div>
+                                                )
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        {selectedSortOption === 9 && <div className='settings-container'>
+                            <div className="settings-header">
+                                <h2>Settings</h2>
+                            </div>
+                            <div className='settings-fields'>
+                                <label>
+                                    Restaurant Name:
+                                    <input 
+                                        type="text" 
+                                        name="restaurantName" 
+                                        placeholder="Restaurant Name" 
+                                        value={restaurantName} 
+                                        onChange={handleInputChange} 
+                                    />
+                                </label>
+                                <label>
+                                    Reservation duration:
+                                    <select 
+                                        name="reservationDuration" 
+                                        value={reservationDuration} 
+                                        onChange={handleInputChange}
+                                    >
+                                        {Object.entries(timesMap).slice(1, 21).map(([timeId, timeString]) => (
+                                            <option key={timeId} value={timeId}>
+                                                {timeString}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <label>
+                                Number of days available for booking:
+                                    <input 
+                                        type="number" 
+                                        name="numberOfDaysAvailableForBooking" 
+                                        placeholder="Number of days" 
+                                        value={numberOfDaysAvailableForBooking} 
+                                        onChange={handleInputChange} 
+                                    />
+                                </label>
+                            </div>
+                            <button className="save-settings-button" onClick={() => updateSettingsToServer()}>Save Settings</button>
+                        </div>
+                        }
                         {mode===1 && 
                             <div className='add-reservation-container' onClick={() => {
                                 toggleAddReservationPopup();}}>
@@ -1117,6 +1269,12 @@ const Reservations = () => {
                                 <button className="add-table-button">+</button>
                             </div>
                         }
+                        {mode===4 && 
+                            <div className='add-menu-item-container' onClick={() => {
+                                toggleAddMenuItemPopup();}}>
+                                <button className="add-menu-item-button">+</button>
+                            </div>
+                        }
                     </div>
                 )}
             </div>
@@ -1125,157 +1283,3 @@ const Reservations = () => {
 };
 
 export default Reservations;
-
-
-// useEffect(() => {
-    //     const fetchSchedules = async () => {
-    //         setLoading(true); // Set loading to true before fetching schedules
-    //         const exists = await dateExists(selectedDate);
-    //         if (exists) {
-    //             const schedules = await fetchSchedulesTimes(selectedDate);
-    //             setTimes(schedules);
-    //         } else {
-    //             setTablesReservations([]);
-    //             setFilteredTablesReservations([]);
-    //             setExpandedTablesReservations([]);
-    //             setTimesReservations([]);
-    //             setFilteredTimesReservations([]);
-    //             setExpandedTimesReservations([]);
-    //             setNamesReservations([]);
-    //             setFilteredNamesReservations([]);
-    //             setExpandedNamesReservations([]);
-    //             setIdsReservations([]);
-    //             setFilteredIdsReservations([]);
-    //             setExpandedIdsReservations([]);
-    //             setTimes([]);
-    //             setLoading(false);
-    //             setSelectedDateEmpty(true);
-    //         }
-    //     };
-    
-    //     fetchSchedules();
-    // }, [selectedDate]);
-
-    // useEffect(() => {
-
-    //     const getTimeByIndex = (index) => {
-    //         const foundTime = times.find(time => parseInt(time.id) === index);
-    //         if (foundTime) {
-    //             return foundTime.time;
-    //         }
-    //     };
-
-    //     const fetchTablesData = async () => {
-
-    //         const tablesReservationsData = [];
-    //         for (let i = 1; i <= 10; i++) {
-    //             const data = await fetchTable(i);
-    //             tablesReservationsData.push(data);
-    //             tablesReservationsData[i-1].reservations=[];
-    //         }
-
-    //         const fetchedReservations=await fetchReservations(selectedDate);
-    //         for (let i=0;i<fetchedReservations.length;i++){
-    //             let index=fetchedReservations[i].table_id-1;
-    //             const { table_id, ...reservationData } = fetchedReservations[i];
-    //             reservationData.startTime=getTimeByIndex(reservationData.startIndex);
-    //             reservationData.endTime=getTimeByIndex(reservationData.endIndex);
-    //             tablesReservationsData[index].reservations.push(reservationData);
-    //         }
-
-    //         for (let i=0;i<tablesReservationsData.length;i++){
-    //             tablesReservationsData[i].reservations.sort((a, b) => {
-    //                 if (a.startIndex < b.startIndex) {
-    //                     return -1;
-    //                 } else if (a.startIndex > b.startIndex) {
-    //                     return 1;
-    //                 } else {
-    //                     return 0;
-    //                 }
-    //             });
-    //         }
-            
-    //         setTablesReservations(tablesReservationsData);
-    //         setFilteredTablesReservations(tablesReservationsData);
-            
-    //         const timesReservationsData=[];
-    //         for (let i=0;i<times.length;i++){
-    //             let reservations=[];
-    //             for (let j=0;j<tablesReservationsData.length;j++){
-    //                 for (let k=0;k<tablesReservationsData[j].reservations.length;k++){
-    //                     if (times[i].id===tablesReservationsData[j].reservations[k].startIndex){
-    //                         let reservation={};
-    //                         reservation.tableId=tablesReservationsData[j].id;
-    //                         reservation.endTime=tablesReservationsData[j].reservations[k].endTime;
-    //                         reservation.name=tablesReservationsData[j].reservations[k].name;
-    //                         reservation.phone=tablesReservationsData[j].reservations[k].phone;
-    //                         reservation.reservation_id=tablesReservationsData[j].reservations[k].reservation_id;
-    //                         reservation.accepted=tablesReservationsData[j].reservations[k].accepted;
-    //                         reservation.canceled=tablesReservationsData[j].reservations[k].canceled;
-    //                         reservations.push(reservation);
-    //                     }
-    //                 }
-    //             }
-    //             reservations.sort((a, b) => {
-    //                 return a.name.localeCompare(b.name);
-    //             });
-    //             timesReservationsData.push({time:times[i].time,timeId:times[i].id,reservations});
-    //         }
-
-    //         console.log(timesReservationsData);
-    //         setTimesReservations(timesReservationsData);
-    //         setFilteredTimesReservations(timesReservationsData);
-
-    //         let reservations=[];
-    //         let counter=1;
-    //         for (let i = 0; i < tablesReservationsData.length; i++) {
-    //             for (let j = 0; j < tablesReservationsData[i].reservations.length; j++) {
-    //                 let reservation={}
-    //                 reservation.startTime = getTimeByIndex(tablesReservationsData[i].reservations[j].startIndex);
-    //                 reservation.endTime = getTimeByIndex(tablesReservationsData[i].reservations[j].endIndex);
-    //                 reservation.tableId=tablesReservationsData[i].id;
-    //                 reservation.name=tablesReservationsData[i].reservations[j].name;
-    //                 reservation.phone=tablesReservationsData[i].reservations[j].phone;
-    //                 reservation.reservation_id=tablesReservationsData[i].reservations[j].reservation_id;
-    //                 reservation.accepted=tablesReservationsData[i].reservations[j].accepted;
-    //                 reservation.canceled=tablesReservationsData[i].reservations[j].canceled;
-    //                 reservation.id=counter;
-    //                 reservations.push(reservation);
-    //                 counter++;
-    //             }
-    //         }
-
-    //         const namesSortedReservations = [...reservations].sort((a, b) => {
-    //             if ((a.accepted===undefined && a.canceled===undefined) && (b.accepted!==undefined || b.canceled!==undefined)){return -1;}
-    //             else if ((b.accepted===undefined && b.canceled===undefined) && (a.accepted!==undefined || a.canceled!==undefined)){return 1;}
-    //             if ((a.accepted!==undefined) && (b.canceled!==undefined)){return -1;}
-    //             else if ((b.accepted!==undefined) && (a.canceled!==undefined)){return 1;}
-    //             if (a.canceled===undefined && b.canceled!==undefined){return -1;}
-    //             else if (a.canceled!==undefined && b.canceled===undefined){return 1;}
-    //             else {return a.name.localeCompare(b.name);}
-                
-    //         });
-
-    //         setNamesReservations(namesSortedReservations);
-    //         setFilteredNamesReservations(namesSortedReservations);
-            
-    //         const idsSortedReservations = [...reservations].sort((a, b) => {
-    //             if (a.reservation_id < b.reservation_id) {
-    //                 return -1; 
-    //             } else if (a.reservation_id > b.reservation_id) {
-    //                 return 1; 
-    //             } else {
-    //                 return 0; 
-    //             }
-    //         });
-
-    //         setIdsReservations(idsSortedReservations);
-    //         setFilteredIdsReservations(idsSortedReservations);
-
-    //         setLoading(false);
-    //     };
-    
-    //     if (times && times.length > 0) {
-    //         fetchTablesData();
-    //     }
-    // }, [times]);

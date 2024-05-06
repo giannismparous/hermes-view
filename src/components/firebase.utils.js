@@ -806,6 +806,7 @@ export const fetchInfoForCustomer = async (collectionKey) => {
     infoReturned[3]=infoDoc.data().numberOfDaysToShowToCustomers;
     infoReturned[4]=infoDoc.data().maxCapacity;
     infoReturned[5]=infoDoc.data().maxReservationDurationIndexNumber;
+    console.log("Info fetched:");
     console.log(infoDoc.data());
     return infoReturned;
   } else {
@@ -1161,6 +1162,90 @@ export const addNewTable = async (collectionKey, id, capacity, smokeFriendly) =>
             await updateDoc(infoRef, { tables });
 
       console.log(`Added new table with id: ${id}, capacity: ${capacity}, smokeFriendly ${smokeFriendly}`);
+      
+    } else {
+      console.log(`Info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error data", error);
+
+  }
+
+};
+
+export const addNewMenuItem = async (collectionKey, menuItemCategory, menuItemId, menuItemName, menuItemPrice) => {
+
+  
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+
+  try {
+
+    const infoDoc = await getDoc(infoRef);
+
+    if (infoDoc.exists()) {
+
+      const menu = infoDoc.data().menu;
+
+      // Find the category in the menu
+      const categoryIndex = menu.findIndex(cat => cat.category === menuItemCategory);
+      
+      console.log(categoryIndex);
+
+      if (categoryIndex !== -1) {
+        // Category exists, add the new item
+        menu[categoryIndex].items.push({
+          id: menuItemId,
+          name: menuItemName,
+          price: menuItemPrice
+        });
+      } else {
+        // Category doesn't exist, create a new category
+        menu.push({
+          category: menuItemCategory,
+          items: [{
+            id: menuItemId,
+            name: menuItemName,
+            price: menuItemPrice
+          }]
+        });
+      }
+
+      // Update the document with the new menu
+      await setDoc(infoRef, { menu: menu }, { merge: true });
+
+      console.log(`Added new menu item table with id: ${menuItemId}, name: ${menuItemName}, price: ${menuItemPrice}, category ${menuItemCategory}`);
+      
+    } else {
+      console.log(`Info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error data", error);
+
+  }
+
+};
+
+export const updateRestaurantInfo = async (collectionKey, restaurantName, numberOfDaysToShowToCustomers, maxReservationDurationIndexNumber) => {
+
+  
+  const sampleRestaurantRef = collection(db, collectionKey);
+  const infoRef = doc(sampleRestaurantRef, "info");
+
+  try {
+
+    const infoDoc = await getDoc(infoRef);
+
+    if (infoDoc.exists()) {
+
+      // Update tables array in Firestore
+      await updateDoc(infoRef, { name: restaurantName, maxReservationDurationIndexNumber, numberOfDaysToShowToCustomers });
+
+      console.log(`Updated settings: Restaurant name: ${restaurantName}, maxReservationDurationIndexNumber: ${maxReservationDurationIndexNumber}, numberOfDaysToShowToCustomers ${numberOfDaysToShowToCustomers}`);
       
     } else {
       console.log(`Info doc does not exist.`);
