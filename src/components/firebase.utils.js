@@ -1243,7 +1243,7 @@ export const updateRestaurantInfo = async (collectionKey, restaurantName, maxRes
     if (infoDoc.exists()) {
 
       // Update tables array in Firestore
-      await updateDoc(infoRef, { name: restaurantName, maxReservationDurationIndexNumber, numberOfDaysToShowToCustomers });
+      await updateDoc(infoRef, { name: restaurantName, maxReservationDurationIndexNumber: maxReservationDurationIndexNumber, numberOfDaysToShowToCustomers: numberOfDaysToShowToCustomers });
 
       console.log(`Updated settings: Restaurant name: ${restaurantName}, maxReservationDurationIndexNumber: ${maxReservationDurationIndexNumber}, numberOfDaysToShowToCustomers ${numberOfDaysToShowToCustomers}`);
       
