@@ -211,6 +211,7 @@ const Reservations = () => {
         } else if (name === 'restaurantName') {
             setRestaurantName(value);
         } else if (name === 'reservationDuration') {
+            console.log(value);
             if (value>=1)setReservationDuration(value);
         } else if (name === 'numberOfDaysAvailableForBooking') {
             if (value>=0)setNumberOfDaysAvailableForBooking(value);
@@ -1237,7 +1238,7 @@ const Reservations = () => {
                                         onChange={handleInputChange}
                                     >
                                         {Object.entries(timesMap).slice(1, 21).map(([timeId, timeString]) => (
-                                            <option key={timeId} value={timeId}>
+                                            <option key={timeId} value={parseInt(timeId) - 1}>
                                                 {timeString}
                                             </option>
                                         ))}

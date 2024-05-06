@@ -1230,7 +1230,7 @@ export const addNewMenuItem = async (collectionKey, menuItemCategory, menuItemId
 
 };
 
-export const updateRestaurantInfo = async (collectionKey, restaurantName, numberOfDaysToShowToCustomers, maxReservationDurationIndexNumber) => {
+export const updateRestaurantInfo = async (collectionKey, restaurantName, maxReservationDurationIndexNumber, numberOfDaysToShowToCustomers) => {
 
   
   const sampleRestaurantRef = collection(db, collectionKey);
