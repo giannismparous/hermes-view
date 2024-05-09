@@ -11,7 +11,6 @@ import ProductDetail from './components/ProductDetail';
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Projects from "./components/Projects";
-import Reservations from "./components/Reservations";
 import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
@@ -53,7 +52,6 @@ function App() {
         <Route path="/samples" element={<Samples />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />
-        <Route path="/sample_restaurant/reservations" element={<Reservations />} />
         <Route path="/reserve/:collectionKey/:reservationDate/:reservationStartTimeIndex/:reservationEndTimeIndex/:people/:tableNumber" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
