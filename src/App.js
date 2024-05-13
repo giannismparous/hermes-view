@@ -25,6 +25,7 @@ import Services from "./components/Services";
 import Debug from "./components/Debug";
 import ServiceComponent from "./components/ServiceComponent";
 import Order from "./components/Order";
+import Survey from "./components/Survey";
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
-  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve") || location.pathname.startsWith("/order");
+  const shouldHideNavBar = pathsWithoutNavBar.includes(location.pathname) || location.pathname.startsWith("/projects/") || location.pathname.startsWith("/reserve") || location.pathname.startsWith("/order") || location.pathname.startsWith("/survey");
 
   // Dynamic styling for body's padding-top
   const bodyStyle = {
@@ -159,6 +160,8 @@ function App() {
         <Route path="/projects/zhj0lwnc31og" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_4/"/>} /> 
         <Route path="/projects/fb66u81wtrg9" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_5/"/>} /> 
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
+        <Route path="/survey/2379275863593087" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSfbyeTMJB4em0yE33E1HYJAr21BGeDWcd86N7efc7PhLcSgPw/viewform?embedded=true"/>} /> 
+        <Route path="/survey/8390183943903141" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSdDryiDCXGPmeu-Ka4mR7PQBUfcdOuqwM7MdjbJj9QXsDkSnA/viewform?embedded=true"/>} /> 
       </Routes>
     </div>
   );
