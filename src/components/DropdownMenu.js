@@ -14,6 +14,7 @@ const menuClosedImg = '../icons/menu-closed.png';
 const settingsOpenImg = '../icons/settings-open.png';
 const settingsClosedImg = '../icons/settings-closed.png';
 
+
 function DropdownMenu({ changeMode, currentMode}) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
