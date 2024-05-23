@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Routes,
   Route,
@@ -6,26 +6,18 @@ import {
 } from "react-router-dom";
 
 import Home from "./components/Home";
-import Products from "./components/Products";
-import ProductDetail from './components/ProductDetail';
 import Contact from "./components/Contact";
 import About from "./components/About";
-import Projects from "./components/Projects";
-import Reservations from "./components/Reservations";
 import ProjectDetail from "./components/ProjectDetail";
 import NavigationBar from "./components/NavigationBar";
 import SamplePage from "./components/SamplePage";
 import Sample3DModel from "./components/Sample3DModel";
-import Reserve from "./components/Reserve";
-import ReserveTable from "./components/ReserveTable";
-import Login from "./components/Login";
 import TagManager from 'react-gtm-module';
 import Samples from "./components/Samples";
 import Services from "./components/Services";
-import Debug from "./components/Debug";
 import ServiceComponent from "./components/ServiceComponent";
-import Order from "./components/Order";
 import Survey from "./components/Survey";
+import ReservationSystem from "./components/ReservationSystem";
 
 function App() {
 
@@ -33,7 +25,7 @@ function App() {
 
   const location = useLocation();
 
-  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations","/debug"];
+  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations","/debug", "/reservation_system"];
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
@@ -50,19 +42,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/products" element={<Products />} /> */}
-        <Route path="/sample_restaurant/reservations" element={<Reservations />} />
-        <Route path="/debug" element={<Debug />} />
         <Route path="/samples" element={<Samples />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/reserve" element={<Reserve />} />
-        <Route path="/reserve/:collectionKey/:reservationDate/:reservationStartTimeIndex/:reservationEndTimeIndex/:people/:tableNumber" element={<ReserveTable/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-
-        <Route path="/order/:collectionKey/:selectedDate/:reservationId" element={<Order/>} />
-
-        {/* <Route path="/projects" element={<Projects />} /> */}
-        {/* <Route path="/products/:productId" element={<ProductDetail />} /> */}
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/services" element={<Services />} />
@@ -160,6 +142,7 @@ function App() {
         <Route path="/projects/zhj0lwnc31og" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_4/"/>} /> 
         <Route path="/projects/fb66u81wtrg9" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_5/"/>} /> 
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
+        <Route path="/reservation_system" element={<ReservationSystem/>} /> 
         <Route path="/survey/2379275863593087" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSfbyeTMJB4em0yE33E1HYJAr21BGeDWcd86N7efc7PhLcSgPw/viewform?embedded=true"/>} /> 
         <Route path="/survey/8390183943903141" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSdDryiDCXGPmeu-Ka4mR7PQBUfcdOuqwM7MdjbJj9QXsDkSnA/viewform?embedded=true"/>} /> 
       </Routes>

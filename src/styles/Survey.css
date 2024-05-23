@@ -1,14 +1,12 @@
 body {
-
   margin: 0;
   padding: 0;
-  background-color: #000980;
 }
 
 .survey-container {
   text-align: center;
   margin: 50px auto;
-  max-width: 600px;
+  width: 100%;
   font-family: Arial, sans-serif;
 }
 

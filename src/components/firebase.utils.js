@@ -16,8 +16,7 @@ import {
   setDoc,
   collection,
   writeBatch,
-  updateDoc,
-  addDoc
+  updateDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -152,48 +151,6 @@ export const addDocumentToDatabase = async (
   }
 };
 
-// export const addCollectionAndDocuments = async (
-//   collectionKey,
-//   objectsToAdd,
-//   num
-// ) => {
-//   const batch = writeBatch(db);
-//   const collectionRef = collection(db, collectionKey);
-
-//   console.log("objectsToAdd length:", objectsToAdd.length);
-
-//   const currentDate = new Date();
-//   for (let i = 0; i < num; i++) {
-//     const date = new Date(currentDate); // Create a new date object for each iteration
-//     date.setDate(date.getDate() + i); // Add 'i' days to the current date
-
-//     console.log("Processing date:", date);
-
-//     const dateString = formatDate(date); // Format the date string
-
-//     const docRef = doc(collectionRef, dateString);
-//     for (let j = 0; j < objectsToAdd.length; j++) {
-//       console.log("i:", j);
-//       let docRef; // Declare docRef outside the if-else blocks
-
-//       if (j === 0) {
-//           docRef = doc(collectionRef, "data");
-//       } else if (j === objectsToAdd.length - 1) {
-          
-//           docRef = doc(collectionRef, getCurrentDate());
-//       } else {
-//           docRef = doc(collectionRef,"table" + objectsToAdd[j].id);
-//       }
-
-//       batch.set(docRef, objectsToAdd[j]);
-//   }
-//   }
-
-//   await batch.commit();  
-//   console.log('added to db');
-// };
-
-
 export const formatDate = (date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // Month is zero-based
@@ -269,33 +226,6 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
-
-// export const fetchTablesData = async () => {
-
-//   const restaurantsRef = collection(db, 'restaurants');
-//   const sampleRestaurantRef = doc(restaurantsRef, 'sample-restaurant');
-//   // Fetch the sample restaurant document
-//   const sampleRestaurantDoc = await getDoc(sampleRestaurantRef);
-//   if (!sampleRestaurantDoc.exists()) {
-//     console.log('Sample restaurant document does not exist');
-//     return; // Exit function if document does not exist
-//   }
-
-//   // Log the data of the sample restaurant document
-//   console.log('Sample Restaurant Data:', sampleRestaurantDoc.data().tables);
-
-//   const tablesData = sampleRestaurantDoc.data().tables;
-
-
-//   // console.log('Tables Data:');
-//   // Object.keys(tablesData).forEach(tableId => {
-//   //   console.log(tablesData[tableId]);
-//   // });
-
-//   return tablesData;
-// };
-
-// Returns true if date in collection "collectionKey" is available to reserve
 
 export const fetchMenu = async (collectionKey) => {
 
@@ -1075,6 +1005,57 @@ export const fetchTablesAvailability = async (startIndex, endIndex, date) => {
   // console.log(availableTables);
 
   return unavailableTables;
+};
+
+export const addNewLead = async (collectionKey, firstName, lastName, email, phoneNumber, businessName, businessWebsite, city, postcode, extraComments) => {
+
+  
+  const formRef = collection(db, collectionKey);
+  const leadsRef = doc(formRef, "leads");
+console.log(leadsRef)
+  try {
+
+    const leadsDoc = await getDoc(leadsRef);
+
+    if (leadsDoc.exists()) {
+
+      const businesses = leadsDoc.data().businesses;
+      const currentId = leadsDoc.data().id_counter+1;
+
+
+      businesses.push({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+        businessName: businessName,
+        businessWebsite: businessWebsite,
+        city: city,
+        postcode: postcode,
+        extraComments: extraComments,
+        id: currentId,
+      });
+
+
+      await updateDoc(leadsRef, {
+        'id_counter': currentId
+      });
+
+      await updateDoc(leadsRef, {
+        'businesses': businesses
+      });
+
+      console.log(`Added new business info.`);
+    } else {
+      console.log(`Date or info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error current date or data", error);
+
+  }
+
 };
 
 export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes, people,smokes) => {
