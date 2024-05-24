@@ -81,6 +81,7 @@ function VideoComponent({ onVideoReady }) {
         onCanPlayThrough={() => {}} // Empty function to prevent ESLint warning
         onClick={handleVideoClick} // Add an onClick handler to start the video on mobile
         poster="../other_images/video_thumbnail.jpg"
+        className="video-item"
       >
         <source
           src={isMobile ? "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4" : "https://raw.githubusercontent.com/giannismparous/hermes-view/main/public/videos/Google_Earth_VR_Edited_Compressed.mp4"}
@@ -88,7 +89,7 @@ function VideoComponent({ onVideoReady }) {
         />
       </video>
       <div ref={buttonRef} className="icon-container" onClick={handleVideoClick}>
-        <img src={playIcon} alt="Play icon" /> {/* Use the play icon */}
+        <img src={playIcon} alt="Play icon" className="video-item" /> {/* Use the play icon */}
       </div>
       {/* <div className="text-wrapper">
         <p style={{ opacity: videoReady ? 1 : 0 }}>Hermes</p>
