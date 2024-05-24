@@ -95,19 +95,19 @@ const NavigationBar = () => {
       )}
       <ul className={`nav-links ${menuOpen ? 'nav-links-activated' : 'nav-links-deactivated'}`}>
         <div className='nav-links-text'>
-          <li><Link to="/" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Home</Link></li>
-          <li><Link to="/samples" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Samples</Link></li>
-          <li><Link to="/about" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>About</Link></li>
-          <li><Link to="/contact" onClick={toggleMenu} className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>Contact Us</Link></li>
+          <li><Link to="/" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Home</Link></li>
+          <li><Link to="/samples" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Samples</Link></li>
+          <li><Link to="/about" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>About</Link></li>
+          <li><Link to="/contact" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Contact Us</Link></li>
         </div>
         <li className="social-media-list">
-          <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>
+          <a href="https://www.facebook.com/profile.php?id=61555932080153" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>
             <FontAwesomeIcon icon={faFacebookF}  size='lg'/>
           </a>
-          <a href="https://www.instagram.com/hermes_view/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>
+          <a href="https://www.instagram.com/hermes_view/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>
             <FontAwesomeIcon icon={faInstagram} size='lg'/>
           </a>
-          <a href="http://www.linkedin.com/shareArticle?mini=true&url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className= {(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}>
+          <a href="http://www.linkedin.com/shareArticle?mini=true&url=www.hermesview.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>
             <FontAwesomeIcon icon={faLinkedinIn} size='lg'/>
           </a>
         </li>
