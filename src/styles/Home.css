@@ -5,29 +5,30 @@ body {
   /* Apply background image to the body */
   /* Specify a fallback background color */
   font-family: "Josefin Sans", sans-serif;
-}  
+}
 
 .home {
   display: -webkit-box;
   display: -ms-flexbox;
   height: 100vh;
-    -webkit-box-align: center;
-      -ms-flex-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
+  background-attachment: fixed;
   background-image: url('../assets/background-blue.jpg');
   display: flex;
   flex-direction: column;
-  align-items: center; /* This will center the children horizontally */
+  align-items: center;
+  /* This will center the children horizontally */
   /* color: #ffffff; */
-  color: rgb(0,9,128);
+  color: rgb(0, 9, 128);
   line-height: 1.6;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
-  
+
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -35,6 +36,7 @@ body {
     background-attachment: scroll;
   }
 }
+
 /* 
 @media (max-width: 500px) {
   .home {
@@ -52,66 +54,79 @@ body {
   /* border-style: solid; */
 }
 
-.centered-header{
+.centered-header {
   text-align: center;
 }
 
 p {
   /* color: #ffffff; */
-  color:rgb(0,9,128);
+  color: rgb(0, 9, 128);
   font-size: 1.1rem;
   margin: 1em 0;
   text-rendering: optimizeSpeed;
 }
-  
+
 test h1 {
   /* color: rgb(255, 255, 255); */
-  color:rgb(0,9,128);
+  color: rgb(0, 9, 128);
   font-size: 2.5rem;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  position: relative; /* Needed for absolute positioning of the pseudo-element */
-  display: inline-block; /* Ensures the line is only as wide as the text */
-  margin-bottom: 1em; 
-  
+  position: relative;
+  /* Needed for absolute positioning of the pseudo-element */
+  display: inline-block;
+  /* Ensures the line is only as wide as the text */
+  margin-bottom: 1em;
+
 }
 
 test h1::after {
   content: '';
   display: block;
-  width: 50px; /* Width of the decorative line */
-  height: 5px; /* Increased thickness of the line */
+  width: 50px;
+  /* Width of the decorative line */
+  height: 5px;
+  /* Increased thickness of the line */
   /* background-color: #8a5a00;  */
-  background-color:rgb(0,9,128);
+  background-color: rgb(0, 9, 128);
   position: absolute;
   left: 0;
-  bottom: -6px; /* Adjusted for the new thickness */
-  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  bottom: -6px;
+  /* Adjusted for the new thickness */
+  border-radius: 2.5px;
+  /* Half of the height to make the ends fully rounded */
 }
 
 h2 {
   /* color: #ffffff; */
-  color:rgb(0,9,128);
+  color: rgb(0, 9, 128);
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
   text-rendering: optimizeLegibility;
-  position: relative; /* Needed for absolute positioning of the pseudo-element */
-  display: inline-block; /* Ensures the line is only as wide as the text */
-  margin-bottom: 1em; /* Space below the heading */
+  position: relative;
+  /* Needed for absolute positioning of the pseudo-element */
+  display: inline-block;
+  /* Ensures the line is only as wide as the text */
+  margin-bottom: 1em;
+  /* Space below the heading */
 }
 
 h2::after {
   content: '';
   display: block;
-  width: 100%; /* Width of the decorative line */
-  height: 5px; /* Increased thickness of the line */
+  width: 100%;
+  /* Width of the decorative line */
+  height: 5px;
+  /* Increased thickness of the line */
   /* background-color: #8a5a00; */
-  background-color: rgb(0,9,128);
+  background-color: rgb(0, 9, 128);
   position: absolute;
   left: 0;
-  bottom: -6px; /* Adjusted for the new thickness */
-  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  bottom: -6px;
+  /* Adjusted for the new thickness */
+  border-radius: 2.5px;
+  /* Half of the height to make the ends fully rounded */
 }
 
 ul {
@@ -126,26 +141,27 @@ ul li {
 }
 
 .dashed-list li::before {
-  content: "— "; /* Keep the dash here */
+  content: "— ";
+  /* Keep the dash here */
   /* color: #8a5a00; */
-  color: rgb(0,9,128);
+  color: rgb(0, 9, 128);
   /* ... other styles ... */
 }
 
 .animate-on-scroll {
-opacity: 0;
-transform: translateY(20px);
-transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .animate-on-scroll.animate {
-opacity: 1;
-transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 a {
-/* color: #8a5a00; */
-color: rgb(0,9,128);
+  /* color: #8a5a00; */
+  color: rgb(0, 9, 128);
 }
 
 .image-content {
@@ -156,10 +172,13 @@ color: rgb(0,9,128);
 
 @media (max-width: 1083px) {
   img {
-    width: 90vw;  /* Ensure the image doesn't exceed its original size */
+    width: 90vw;
+    /* Ensure the image doesn't exceed its original size */
     /* height: auto; */
-    display: block; /* Remove extra space below the image */
-    margin: auto; /* Center the image horizontally */
+    display: block;
+    /* Remove extra space below the image */
+    margin: auto;
+    /* Center the image horizontally */
     padding: auto;
     image-rendering: optimizeQuality;
   }
@@ -172,10 +191,13 @@ color: rgb(0,9,128);
 
 @media (min-width: 1083px) {
   img {
-    width: 520px;  /* Ensure the image doesn't exceed its original size */
+    width: 520px;
+    /* Ensure the image doesn't exceed its original size */
     /* height: auto; */
-    display: block; /* Remove extra space below the image */
-    margin: auto; /* Center the image horizontally */
+    display: block;
+    /* Remove extra space below the image */
+    margin: auto;
+    /* Center the image horizontally */
     padding: auto;
     image-rendering: optimizeQuality;
   }
@@ -191,7 +213,7 @@ color: rgb(0,9,128);
   /* For example: */
   font-size: 30px;
   /* color: white; */
-  color: rgb(0,9,128);
+  color: rgb(0, 9, 128);
   line-height: 0;
   margin: 0;
   /* Add more styles as needed */
@@ -203,11 +225,13 @@ color: rgb(0,9,128);
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(41, 41, 41, 0.8); /* Semi-transparent white background */
+  background-color: rgba(41, 41, 41, 0.8);
+  /* Semi-transparent white background */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Set a high z-index to ensure it's above other elements */
+  z-index: 9999;
+  /* Set a high z-index to ensure it's above other elements */
 }
 
 .image-content-icons img {
@@ -220,34 +244,46 @@ color: rgb(0,9,128);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center; /* Center the images horizontally */
+  justify-content: center;
+  /* Center the images horizontally */
   align-items: center;
-  gap: 50px; /* Add space between the images */
+  gap: 50px;
+  /* Add space between the images */
   margin-bottom: 40px;
 }
 
 .image-content-icons {
-  margin-right: 0; /* Remove right margin */
+  margin-right: 0;
+  /* Remove right margin */
   border-radius: 10px;
   width: 400px;
   height: 250px;
   /* box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);  */
-  box-shadow: 0 0 10px rgb(0,9,128);
+  box-shadow: 0 0 10px rgb(0, 9, 128);
   padding-left: 20px;
   padding-right: 20px;
-  text-align: center; /* Center text horizontally */
+  text-align: center;
+  /* Center text horizontally */
 }
 
 @keyframes floatAnimation {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .image-content-icons:hover {
-  animation: floatAnimation 1s infinite; /* 1s duration, infinite loop */
+  animation: floatAnimation 1s infinite;
+  /* 1s duration, infinite loop */
 }
 
-.custom-font-1 p{
+.custom-font-1 p {
   font-size: 30px;
 }
 
@@ -256,9 +292,9 @@ color: rgb(0,9,128);
   /* margin-bottom: 100px; */
 }
 
-.custom-font-2 p{
+.custom-font-2 p {
   font-size: 30px;
-  color: rgb(194,125,106);
+  color: rgb(194, 125, 106);
 }
 
 .custom-font-3 {
@@ -266,15 +302,16 @@ color: rgb(0,9,128);
 }
 
 
-.custom-font-4 h2{
+.custom-font-4 h2 {
   font-size: 30px;
 }
 
-.custom-font-4 p, li{
+.custom-font-4 p,
+li {
   color: white;
 }
 
-.custom-font-4 h2::after{
+.custom-font-4 h2::after {
   background-color: transparent;
 }
 
@@ -291,7 +328,7 @@ color: rgb(0,9,128);
   background-color: #EFEFEF;
 }
 
-.container-1 p{
+.container-1 p {
   padding-left: 80px;
   padding-right: 80px;
   margin-bottom: 0;
@@ -308,21 +345,22 @@ color: rgb(0,9,128);
 
 .container-2 {
   width: 100%;
-  background-color: rgb(0,9,128);
+  background-color: rgb(0, 9, 128);
   color: white;
   /* margin-top: 150px; */
 }
 
-.container-2 p, h2{
+.container-2 p,
+h2 {
   color: white;
 }
 
-.container-2 h2{
+.container-2 h2 {
   color: white;
   font-size: 50px;
 }
 
-.container-2 h1{
+.container-2 h1 {
   margin-top: 0;
   font-size: 70px;
 }
@@ -334,17 +372,17 @@ color: rgb(0,9,128);
 }
 
 
-.container-2 h2::after{
+.container-2 h2::after {
   background-color: transparent;
 }
 
 .container-3 {
   width: 100%;
-  background-color: rgb(33,33,33);
+  background-color: rgb(33, 33, 33);
 }
 
 .container-4 {
-  background-color: rgb(0,9,128);
+  background-color: rgb(0, 9, 128);
   color: white;
   /* margin-top: 150px; */
   padding-bottom: 50px;
@@ -368,22 +406,23 @@ color: rgb(0,9,128);
   }
 }
 
-.container-4 p, h2{
+.container-4 p,
+h2 {
   color: white;
 }
 
-.container-4 h2{
+.container-4 h2 {
   color: white;
   font-size: 70px;
 }
 
 @media screen and (max-width: 580px) {
-  .container-4 h2{
+  .container-4 h2 {
     font-size: 50px;
   }
 }
 
-.container-4 h2::after{
+.container-4 h2::after {
   background-color: transparent;
 }
 
@@ -393,7 +432,7 @@ color: rgb(0,9,128);
 }
 
 .sample-container h2 {
-  color: rgb(0,9,128);
+  color: rgb(0, 9, 128);
   font-size: 70px;
 }
 
@@ -418,26 +457,32 @@ color: rgb(0,9,128);
 
 .hermes {
   /* color: rgb(255, 255, 255); */
-  color:rgb(0,9,128);
+  color: rgb(0, 9, 128);
   font-size: 2.5rem;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  position: relative; /* Needed for absolute positioning of the pseudo-element */
-  display: inline-block; /* Ensures the line is only as wide as the text */
+  position: relative;
+  /* Needed for absolute positioning of the pseudo-element */
+  display: inline-block;
+  /* Ensures the line is only as wide as the text */
   margin-left: 200px;
 }
 
 .hermes::after {
   content: '';
   display: block;
-  width: 50px; /* Width of the decorative line */
-  height: 5px; /* Increased thickness of the line */
+  width: 50px;
+  /* Width of the decorative line */
+  height: 5px;
+  /* Increased thickness of the line */
   /* background-color: #8a5a00;  */
-  background-color:rgb(0,9,128);
+  background-color: rgb(0, 9, 128);
   position: absolute;
   left: 0;
-  bottom: 40px; /* Adjusted for the new thickness */
-  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  bottom: 40px;
+  /* Adjusted for the new thickness */
+  border-radius: 2.5px;
+  /* Half of the height to make the ends fully rounded */
 }
 
 @media screen and (max-width: 730px) {
@@ -467,7 +512,8 @@ color: rgb(0,9,128);
   font-weight: bold;
   text-rendering: optimizeLegibility;
   /* margin-bottom: 1em; */
-  position: relative; /* Add position relative */
+  position: relative;
+  /* Add position relative */
   margin-right: 200px;
 }
 
@@ -478,9 +524,12 @@ color: rgb(0,9,128);
   height: 5px;
   background-color: rgb(0, 9, 128);
   position: absolute;
-  bottom: 40px; /* Adjusted for the new thickness */
-  right: 0; /* Position it at the left edge of the container */
-  border-radius: 2.5px; /* Half of the height to make the ends fully rounded */
+  bottom: 40px;
+  /* Adjusted for the new thickness */
+  right: 0;
+  /* Position it at the left edge of the container */
+  border-radius: 2.5px;
+  /* Half of the height to make the ends fully rounded */
 }
 
 @media screen and (max-width: 730px) {
@@ -495,7 +544,8 @@ color: rgb(0,9,128);
   }
 
   .view::after {
-    right: 35%; /* Position it at the left edge of the container */
+    right: 35%;
+    /* Position it at the left edge of the container */
   }
 }
 
@@ -506,7 +556,8 @@ color: rgb(0,9,128);
   font-weight: bold;
   text-rendering: optimizeLegibility;
   text-align: center;
-  position: relative; /* Add position relative */
+  position: relative;
+  /* Add position relative */
   padding-top: 80px;
   padding-bottom: 80px;
   margin-bottom: 0;
@@ -521,7 +572,8 @@ color: rgb(0,9,128);
 /* Media query for screens with a width lower than 835px */
 @media screen and (max-width: 835px) {
   .text-content {
-    grid-template-columns: 1fr; /* Change to one column */
+    grid-template-columns: 1fr;
+    /* Change to one column */
   }
 }
 
@@ -545,8 +597,10 @@ color: rgb(0,9,128);
 /* Media query for screens with a width lower than 870px */
 @media screen and (max-width: 1080px) {
   .grid-container {
-    grid-template-columns: 1fr; /* Change to one column */
-    padding: 20px; /* Adjust padding for smaller screens */
+    grid-template-columns: 1fr;
+    /* Change to one column */
+    padding: 20px;
+    /* Adjust padding for smaller screens */
   }
 }
 
@@ -587,44 +641,54 @@ label {
 input[type="text"],
 input[type="email"],
 textarea {
-  width: calc(100% - 16px); /* Adjust the width to fit your design */
+  width: calc(100% - 16px);
+  /* Adjust the width to fit your design */
   border: none;
-  border-bottom: 1px solid #ccc; /* Add a bottom border */
+  border-bottom: 1px solid #ccc;
+  /* Add a bottom border */
   padding: 8px;
   box-sizing: border-box;
-  transition: border-color 0.3s; /* Add transition effect */
+  transition: border-color 0.3s;
+  /* Add transition effect */
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-  border-bottom-color: transparent; /* Remove the bottom border on focus */
+  border-bottom-color: transparent;
+  /* Remove the bottom border on focus */
 }
 
 button {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  background-color: #007bff; /* Change button color */
-  color: #fff; /* Change button text color */
+  background-color: #007bff;
+  /* Change button color */
+  color: #fff;
+  /* Change button text color */
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: rgb(0, 9, 128); /* Change button color on hover */
+  background-color: rgb(0, 9, 128);
+  /* Change button color on hover */
 }
 
 
 
 @media screen and (min-width: 1400px) {
-  .sample-display-container > *:nth-child(even) {
-    margin-left: auto; /* Push even elements to the right */
-    text-align: right; /* Align text to the right for even elements */
+  .sample-display-container>*:nth-child(even) {
+    margin-left: auto;
+    /* Push even elements to the right */
+    text-align: right;
+    /* Align text to the right for even elements */
   }
 
-  .sample-display-container > *:nth-child(odd) {
-    text-align: left; /* Align text to the left for odd elements */
+  .sample-display-container>*:nth-child(odd) {
+    text-align: left;
+    /* Align text to the left for odd elements */
   }
 }
 
@@ -632,16 +696,20 @@ button:hover {
   .sample-display-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align items to the left initially */
-    padding-left: 0; /* Add padding to the container */
-    padding-right: 0; /* Add padding to the container */
+    align-items: flex-start;
+    /* Align items to the left initially */
+    padding-left: 0;
+    /* Add padding to the container */
+    padding-right: 0;
+    /* Add padding to the container */
   }
 }
 
 .sample-item {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 0px; /* Initial gap value */
+  gap: 0px;
+  /* Initial gap value */
   padding-left: 200px;
   padding-right: 200px;
 }
@@ -667,7 +735,8 @@ button:hover {
 @media screen and (max-width: 1400px) {
   .sample-item {
     width: 100%;
-    grid-template-columns: auto; /* Adjusted gap value for smaller screens */
+    grid-template-columns: auto;
+    /* Adjusted gap value for smaller screens */
     padding-left: 0;
     padding-right: 0;
   }
@@ -680,7 +749,8 @@ button:hover {
 /* Media query for screens with a width lower than 1060px */
 @media screen and (max-width: 1640px) {
   .container-iphone {
-    margin-left: 200px; /* Adjusted gap value for smaller screens */
+    margin-left: 200px;
+    /* Adjusted gap value for smaller screens */
   }
 }
 
@@ -699,9 +769,10 @@ button:hover {
 /* Media query for screens with a width lower than 1060px */
 @media screen and (max-width: 1640px) {
   .container-ipad {
-    margin-right: 200px; /* Adjusted gap value for smaller screens */
+    margin-right: 200px;
+    /* Adjusted gap value for smaller screens */
   }
-  
+
 }
 
 @media screen and (max-width: 1400px) {
@@ -718,11 +789,13 @@ button:hover {
   }
 }
 
-.container-iphone, .container-imac, .container-ipad {
-}
+.container-iphone,
+.container-imac,
+.container-ipad {}
 
 .heading {
-  font-size: 3rem; /* Increased font size */
+  font-size: 3rem;
+  /* Increased font size */
   text-align: center;
 }
 
@@ -735,14 +808,16 @@ button:hover {
 }
 
 .animated-paragraph {
-  font-size: 30px; /* Adjust the font size to your preference */
+  font-size: 30px;
+  /* Adjust the font size to your preference */
   text-align: center;
 }
 
 .sample-info {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
+  justify-content: center;
+  /* Center content vertically */
   padding-left: 50px;
   padding-right: 50px;
 }
@@ -754,11 +829,15 @@ button:hover {
   }
 }
 
-.view-more-projects{
+.view-more-projects {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   text-decoration: none;
   font-size: 30px;
   padding-top: 50px;
+}
+
+.custom-font-4 ul li {
+  color: white;
 }

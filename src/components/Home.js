@@ -163,17 +163,21 @@ const AnimatedParagraph = ({ children, className }) => {
         </div>
         {!isMobile && <div className="sample-display-container">
           <div className="sample-item">
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
+            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
             <div className="sample-info">
-              <AnimatedHeading>Kallithea Property</AnimatedHeading>
-              <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea. It was recently renovated and it's semi-furnished.</AnimatedParagraph>
-              <Link to="/projects/1" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
+              <Link to="/projects/3" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
+                <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options. Promising an unforgettable experience for all who visit.</AnimatedParagraph>
+              </Link> 
+              <Link to="/projects/3" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
           <div className="sample-item">
             <div className="sample-info">
-              <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
-              <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
+              <Link to="/projects/5" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Urban Elegance Apartment</AnimatedHeading>
+                <AnimatedParagraph>Experience contemporary luxury in this recently built, semi-furnished apartment. Offering a stylish living space with modern amenities. A dedicated assistant is available to provide all the information you need to explore this exquisite property.</AnimatedParagraph>
+              </Link>
               <Link to="/projects/5" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"} />
@@ -181,25 +185,31 @@ const AnimatedParagraph = ({ children, className }) => {
           <div className="sample-item">
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_4/"} device={"imac"} />
             <div className="sample-info">
-              <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
-              <AnimatedParagraph>An alternative cafe bistro in the area of Dafne. Take a look at its baroque design and festive atmosphere.</AnimatedParagraph>
+              <Link to="/projects/4" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
+                <AnimatedParagraph>An alternative cafe bistro nestled in Dafni. Step into a world of baroque design, where ornate details and vintage charm create a unique and inviting ambiance. Enjoy a morning coffee, a leisurely lunch, or an evening cocktail.</AnimatedParagraph>
+              </Link>
               <Link to="/projects/4" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
           <div className="sample-item">
             <div className="sample-info">
-              <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
-              <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
+              <Link to="/sample" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Family Haven AirBnB</AnimatedHeading>
+                <AnimatedParagraph>A neat and spacious Airbnb property designed to comfortably accommodate families. This charming residence offers a perfect blend of comfort and convenience. With ample living space, modern amenities, and a warm, inviting atmosphere.</AnimatedParagraph>
+              </Link>
               <Link to="/sample" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
           </div>
           <div className="sample-item">
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
+            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_6/"} device={"iphone"} />
             <div className="sample-info">
-              <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
-              <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options.</AnimatedParagraph>
-              <Link to="/projects/3" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
+              <Link to="/projects/6" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Blackpistol barbers</AnimatedHeading>
+                <AnimatedParagraph> where classic grooming meets modern style. Located in the heart of the city, this barbershop is renowned for its top-notch service and cool, edgy atmosphere. Whether you're in for a quick trim or a complete transformation, our skilled barbers, Mike and Leon, have you covered.</AnimatedParagraph>
+              </Link>
+              <Link to="/projects/6" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
           </div>
         </div>}
@@ -207,44 +217,34 @@ const AnimatedParagraph = ({ children, className }) => {
         <div className="sample-display-container">
           <div className="sample-item">
             <div className="sample-info">
-              <AnimatedHeading>Kallithea Property</AnimatedHeading>
-              <AnimatedParagraph>A petite luxury apartement in Athens, Kallithea.</AnimatedParagraph>
-              <Link to="/projects/1" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
+              <Link to="/projects/3" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
+                <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options. Promising an unforgettable experience for all who visit.</AnimatedParagraph>
+              </Link>
+              <Link to="/projects/3" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_1/"} device={"iphone"} />
+            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
           </div>
           <div className="sample-item">
             <div className="sample-info">
-              <AnimatedHeading>Finders, Kato Patisia</AnimatedHeading>
-              <AnimatedParagraph>A recently built and semi-furnished luxury apartment in Kato Patisia. An assistan provides all the information needed for the exploration of the property.</AnimatedParagraph>
+              <Link to="/projects/5" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Urban Elegance Apartment</AnimatedHeading>
+                <AnimatedParagraph>Experience contemporary luxury in this recently built, semi-furnished apartment. Offering a stylish living space with modern amenities. A dedicated assistant is available to provide all the information you need to explore this exquisite property.</AnimatedParagraph>
+              </Link>
               <Link to="/projects/5" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_5/"} device={"ipad"}/>
           </div>
           <div className="sample-item">
             <div className="sample-info">
-              <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
-              <AnimatedParagraph>An alternative cafe bistro in the area of Dafne. Take a look at its baroque design and festive atmosphere.</AnimatedParagraph>
+              <Link to="/projects/4" style={{ textDecoration: 'none' }}>
+                <AnimatedHeading>Madania Cafe Bar</AnimatedHeading>
+                <AnimatedParagraph>An alternative cafe bistro nestled in Dafni. Step into a world of baroque design, where ornate details and vintage charm create a unique and inviting ambiance. Enjoy a morning coffee, a leisurely lunch, or an evening cocktail.</AnimatedParagraph>
+              </Link>
               <Link to="/projects/4" className="custom-font-5 view-project-text" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
             </div>
             <SampleDisplay modelPath={"https://giannismparous.github.io/vr_4/"} device={"imac"} />
           </div>
-          {/* <div className="sample-item">
-            <div className="sample-info">
-              <AnimatedHeading>Neos Kosmos AirBnB</AnimatedHeading>
-              <AnimatedParagraph>A neat spacious airbnb property read to accomodate families right in the heart of Athens.</AnimatedParagraph>
-              <Link to="/sample" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
-            </div>
-            <SampleDisplay modelPath={"/samples/sample1/index.htm"} device={"ipad"} />
-          </div> */}
-          {/* <div className="sample-item">
-            <div className="sample-info">
-              <AnimatedHeading>Athens Metro Mall</AnimatedHeading>
-              <AnimatedParagraph>Explore this enormous central shopping center. Have a glance at the dining and fashion options.</AnimatedParagraph>
-              <Link to="/projects/3" className="custom-font-5" style={{ color: 'rgb(194,125,106)' }}>View Project</Link>
-            </div>
-            <SampleDisplay modelPath={"https://giannismparous.github.io/vr_3/"} device={"iphone"} />
-          </div> */}
         </div>}
         <div className="view-more-projects">
           <Link to="/samples"className="view-more-projects" style={{ color: 'rgb(194,125,106)' }}>View More</Link>
@@ -339,51 +339,3 @@ const AnimatedParagraph = ({ children, className }) => {
 }
 
 export default Home;
-
-      {/* <button onClick={logGoogleUser}>LOGIN</button> */}
-      {/* <button onClick={addToDb}>ADD</button> */}
-      {/* <button onClick={add10DaysToDb}>ADD</button>
-      {/* <button onClick={addDateAvailabilityToDb}>ADD</button> */}
-      {/* <button onClick={removeFromDb}>REMOVE</button> */}
-      {/* <button onClick={async () => await fetchTablesAvailability(0, 2)}>AVAILABILITY</button> */}
-
-{/* <section className="container services animate-on-scroll" style={{ opacity: isVideoReady ? 1 : 0 }}>
-        <div className="centered-header">
-          <h2>Our Services</h2>
-        </div>
-        <div className="services-content">
-          <div className="text-content">
-            <p>At Hermes View, we pride ourselves on offering state-of-the-art VR tours to cater to the diverse needs of our partners. Our expansive range of services encompasses:</p>
-            <ul className="dashed-list">
-              <li>Luxurious Villas</li>
-              <li>Charming Houses</li>
-              <li>Modern Apartments</li>
-              <li>Multi-floor Office Buildings</li>
-              <li>Lavish yachts and jets</li>
-              <li>Vibrant Retail Outlets</li>
-              <li>Dynamic Co-working Spaces</li>
-              <li>Inviting Gyms and Fitness Centers</li>
-              <li>Serene Spa and Wellness Retreats</li>
-              <li>Exclusive Event and Exhibition Halls</li>
-            </ul>
-            <p>With Hermes View, real estate agencies can present properties in the most captivating and innovative manner, ensuring prospective clients experience every facet of a space, no matter the type. Elevate your listings and captivate your audience with our immersive VR tours.</p>
-          </div>
-          <div className="image-content">
-            <img src='../other_images/services.jpg' alt="Services" id="services_img" />
-          </div>
-        </div>
-      </section> */}
-      {/* <div className="image-container-icons">
-        <div className="image-content-icons">
-          <img src="../icons/360-blue.png" alt="360-icon" id="icons" />
-          <p>Experience a space in full immersion with our 360 virtual tour service.</p>
-        </div>
-        <div className="image-content-icons">
-          <img src="../icons/360-video-blue.png" alt="360-icon" id="icons" />
-          <p>A rig for every occasion. 4K – 12K capture with stereo or monoscopic options.</p>
-        </div>
-        <div className="image-content-icons">
-          <img src="../icons/code-blue.png" alt="360-icon" id="icons" />
-          <p>We design, code & deploy each 360 virtual tour bespoke to your requirements.</p>
-        </div>
-      </div> */}
