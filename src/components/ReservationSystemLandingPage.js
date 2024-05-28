@@ -46,6 +46,9 @@ const LandingForm = () => {
     }
   };
 
+  // Regular expression to validate website format
+  const websiteRegex = /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z]{2,})(?:\/\S*)?$/;
+
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -89,12 +92,12 @@ const LandingForm = () => {
         required
       />
       <input
-        type="url"
+        type="text"
         name="businessWebsite"
-        placeholder="Business Website"
+        placeholder="Business Website (example.com)"
         value={formData.businessWebsite}
         onChange={handleChange}
-        required
+        pattern={websiteRegex}
       />
       <input
         type="text"
@@ -110,7 +113,6 @@ const LandingForm = () => {
         placeholder="Postcode"
         value={formData.postcode}
         onChange={handleChange}
-        required
       />
       <textarea
         name="extraComments"
