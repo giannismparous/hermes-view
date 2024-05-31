@@ -141,6 +141,8 @@ function App() {
         <Route path="/projects/3bbkl3189ytp" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_3_sample/"/>} />
         <Route path="/projects/zhj0lwnc31og" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_4/"/>} /> 
         <Route path="/projects/fb66u81wtrg9" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_5/"/>} /> 
+        <Route path="/projects/lkd2njp1nk1l" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_6/"/>} />
+        <Route path="/blackpistol" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_6/"/>} />
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
         <Route path="/reservation_system" element={<ReservationSystem/>} /> 
         <Route path="/survey/2379275863593087" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSfbyeTMJB4em0yE33E1HYJAr21BGeDWcd86N7efc7PhLcSgPw/viewform?embedded=true"/>} /> 
