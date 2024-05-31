@@ -33,6 +33,8 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
 
   const navigate = useNavigate();
 
+  let clickTimeout;
+
   const handleOverlayClick = () => {
     if (redirectToSample) {
       let redirectUrl = "";
@@ -61,9 +63,15 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     }
   };
 
+  const debouncedHandleOverlayClick = () => {
+    clearTimeout(clickTimeout);
+    clickTimeout = setTimeout(handleOverlayClick, 200);
+  };
+
   return (
-    <Fragment className="sample-page-container">
+    <Fragment>
       <div style={{ ...containerStyle, ...style }} {...otherProps}>
+        <div style={overlayStyle} onClick={debouncedHandleOverlayClick}></div>
         <iframe
           title="3D Vista Project"
           src={modelPath}
@@ -71,9 +79,6 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
           sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups allow-popups-to-escape-sandbox"
           allowFullScreen
         ></iframe>
-        {/* {redirectToSample && (
-          <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>
-        )} */}
       </div>
     </Fragment>
   );
