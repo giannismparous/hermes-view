@@ -71,9 +71,9 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
           sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups allow-popups-to-escape-sandbox"
           allowFullScreen
         ></iframe>
-        {redirectToSample && (
+        {/* {redirectToSample && (
           <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>
-        )}
+        )} */}
       </div>
     </Fragment>
   );
