@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     height: "100%",
   };
 
-  const overlayStyle = {
+  const overlayStyle = (visible) => ({
     position: "absolute",
     top: 0,
     left: 0,
@@ -29,11 +29,17 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     bottom: 0,
     cursor: redirectToSample ? "pointer" : "default",
     zIndex: 1,
-  };
+    display: visible ? "block" : "none",
+  });
 
   const navigate = useNavigate();
 
-  let clickTimeout;
+  const [overlayVisible, setOverlayVisible] = useState(true);
+
+  useEffect(() => {
+    const hideOverlay = setTimeout(() => setOverlayVisible(false), 300);
+    return () => clearTimeout(hideOverlay);
+  }, []);
 
   const handleOverlayClick = () => {
     if (redirectToSample) {
@@ -63,15 +69,10 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     }
   };
 
-  const debouncedHandleOverlayClick = () => {
-    clearTimeout(clickTimeout);
-    clickTimeout = setTimeout(handleOverlayClick, 200);
-  };
-
   return (
     <Fragment>
       <div style={{ ...containerStyle, ...style }} {...otherProps}>
-        <div style={overlayStyle} onClick={debouncedHandleOverlayClick}></div>
+        <div style={overlayStyle(overlayVisible)} onClick={handleOverlayClick}></div>
         <iframe
           title="3D Vista Project"
           src={modelPath}
