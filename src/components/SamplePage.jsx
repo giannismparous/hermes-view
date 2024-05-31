@@ -9,7 +9,7 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     left: 0,
     right: 0,
     bottom: 0,
-    width: "100%",  // Updated to 100% width
+    width: "100%",
     height: "100%",
     border: "none",
     outline: "none",
@@ -34,7 +34,6 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
   const navigate = useNavigate();
 
   const handleOverlayClick = () => {
-    // Redirect to "/sample" only if redirectToSample is true
     if (redirectToSample) {
       let redirectUrl = "";
       switch (sampleId) {
@@ -64,17 +63,18 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
 
   return (
     <Fragment className="sample-page-container">
-      {redirectToSample && (
-        <div style={{ ...containerStyle, ...style }} {...otherProps}>
-          <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} sandbox="allow-scripts allow-same-origin allow-top-navigation allow-popups allow-popups-to-escape-sandbox" allowFullScreen></iframe>
+      <div style={{ ...containerStyle, ...style }} {...otherProps}>
+        <iframe
+          title="3D Vista Project"
+          src={modelPath}
+          style={iframeStyle}
+          sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups allow-popups-to-escape-sandbox"
+          allowFullScreen
+        ></iframe>
+        {redirectToSample && (
           <div className="overlay" style={overlayStyle} onClick={handleOverlayClick}></div>
-        </div>
-      )}
-      {!redirectToSample && (
-        <div style={{ ...containerStyle, ...style }} {...otherProps}>
-          <iframe title="3D Vista Project" src={modelPath} style={iframeStyle} sandbox="allow-scripts allow-same-origin allow-top-navigation allow-popups allow-popups-to-escape-sandbox" allowFullScreen></iframe>
-        </div>
-      )}
+        )}
+      </div>
     </Fragment>
   );
 }
@@ -82,15 +82,18 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
 SamplePage.propTypes = {
   style: PropTypes.object,
   redirectToSample: PropTypes.bool,
+  modelPath: PropTypes.string,
+  sampleId: PropTypes.number,
 };
 
 SamplePage.defaultProps = {
   style: {
     width: "100vw",
-    height: "100vh"
+    height: "100vh",
   },
-  redirectToSample: false, // Default value, won't redirect by default
-  modelPath: "/samples/sample1/index.htm"
+  redirectToSample: false,
+  modelPath: "/samples/sample1/index.htm",
+  sampleId: 1,
 };
 
 export default SamplePage;
