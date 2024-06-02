@@ -1,0 +1,12 @@
+# Directives for all robots
+User-agent: *
+
+# Optional: Directives for specific robots
+# User-agent: [robot]
+# [Directive]: [value]
+
+# Example disallow directive
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://hermesview.com/sitemap.xml
