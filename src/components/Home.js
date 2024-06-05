@@ -14,36 +14,50 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { addNewContactForm } from "./firebase.utils";
 
 function Home() {
 
   const isMobile = useMediaQuery({ maxWidth: 1400 }); // Check if screen width is <= 768px
 
-  // const logGoogleUser = async() => {
-  //   const response = await signInWithGooglePopup();
-  //   console.log(response);
-  // }
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    location: "",
+    email: "",
+    message: "",
+  });
 
-//   const addDateAvailabilityToDb = async() => {
+  const addNewContactFormToServer = async () => {
+    const response = await addNewContactForm(
+      "form",
+      formData.firstName,
+      formData.lastName,
+      formData.location,
+      formData.email,
+      formData.message,
+    );
+    console.log("Form submitted successfully!");
+    alert("Form submitted successfully!");
+  };
 
-//     const response = updateDateAvailability("sample-restaurant");
-// }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
-  // const addToDb = async() => {
-
-  //     const response = addCollectionAndDocuments("sample-restaurant", reservations_data,1);
-  //     console.log(response);
-  // }
-
-  
-
-
-//   const add10DaysToDb = async() => {
-
-//     const response = addCollectionAndDocuments("sample-restaurant", reservations_data,10);
-// }
-
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addNewContactFormToServer();
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert("Error submitting form");
+    }
+  };
 
   const scrollRef = useScrollAnimation();
   const images = [
@@ -108,30 +122,6 @@ const AnimatedParagraph = ({ children, className }) => {
         <meta name="description" content="Welcome. Our company leverages its expertise in 360-degree technology. Our range of services includes 360 virtual reality tours, panoramic photography and reel making."/>
         <link rel="canonical" href="/"/>
       </Helmet>
-      {/* <Parallax pages={3}>
-        <ParallaxLayer speed={0} factor={1} style={{
-        backgroundImage: `url('../other_images/olympus.png')`,
-        backgroundPosition: 'center', // Center the image
-        backgroundSize: "cover",
-        margin: 0, // Add this to remove any default margin
-        padding: 0, // Add this to remove any default padding
-        }}>
-        </ParallaxLayer>
-        <ParallaxLayer offset={1} factor={1.5} speed={0} style={{
-          backgroundImage: `url('../other_images/sky_bg.gif')`,
-          backgroundSize: "cover",
-          margin: 0, // Add this to remove any default margin
-          padding: 0, // Add this to remove any default padding
-        }}>
-          </ParallaxLayer>
-          <ParallaxLayer speed={0} sticky={{start:0.9,end:1.5}} style={{
-          backgroundImage: `url('../other_images/vr-headset.gif')`,
-          backgroundPosition: 'center', // Center the image
-          margin: 0, // Add this to remove any default margin
-          padding: 0, // Add this to remove any default padding
-        }}></ParallaxLayer>
-      </Parallax> */}
-      {/* <ImageSlider images={images} /> */}
       {!isVideoReady && (
         <div className="loading-overlay">
           <div className="loader-container">
@@ -305,26 +295,26 @@ const AnimatedParagraph = ({ children, className }) => {
             </div>
             <div class="form-column">
               <h2>Book a Call With Us</h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div class="form-group">
-                  <label for="first_name">First Name*:</label>
-                  <input type="text" id="first_name" name="first_name" required />
+                  <label for="firstName">First Name*:</label>
+                  <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
                 </div>
                 <div class="form-group">
-                  <label for="last_name">Last Name*:</label>
-                  <input type="text" id="last_name" name="last_name" required />
+                  <label for="lastName">Last Name*:</label>
+                  <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required />
                 </div>
                 <div class="form-group">
                   <label for="location">Location*:</label>
-                  <input type="text" id="location" name="location" required />
+                  <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
                 </div>
                 <div class="form-group">
                   <label for="email">Email*:</label>
-                  <input type="email" id="email" name="email" required />
+                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
                 </div>
                 <div class="form-group">
                   <label for="message">Message:</label>
-                  <textarea id="message" name="message"></textarea>
+                  <textarea id="message" name="message" value={formData.message} onChange={handleChange}></textarea>
                 </div>
                 <div class="form-group">
                   <button type="submit">Submit</button>

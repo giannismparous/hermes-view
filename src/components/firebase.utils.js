@@ -1058,6 +1058,52 @@ console.log(leadsRef)
 
 };
 
+export const addNewContactForm = async (collectionKey, firstName, lastName, location, email, message) => {
+
+  
+  const formRef = collection(db, collectionKey);
+  const contactRef = doc(formRef, "contact_form_homepage");
+  try {
+
+    const contactDoc = await getDoc(contactRef);
+
+    if (contactDoc.exists()) {
+
+      const entities = contactDoc.data().entities;
+      const currentId = contactDoc.data().id_counter+1;
+
+
+      entities.push({
+        firstName: firstName,
+        lastName: lastName,
+        location: location,
+        email: email,
+        message: message,
+        id: currentId,
+      });
+
+
+      await updateDoc(contactRef, {
+        'id_counter': currentId
+      });
+
+      await updateDoc(contactRef, {
+        'entities': entities
+      });
+
+      console.log(`Added new contact form info.`);
+    } else {
+      console.log(`Date or info doc does not exist.`);
+    }
+
+  } catch (error) {
+
+    console.error("Error current date or data", error);
+
+  }
+
+};
+
 export const addNewReservation = async (collectionKey, date, startIndex, endIndex, tableNumber, fullName, phone, email, notes, people,smokes) => {
 
   
