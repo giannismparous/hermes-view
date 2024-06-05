@@ -28,7 +28,7 @@ const LandingForm = () => {
       formData.extraComments
     );
     console.log("Form submitted successfully!");
-    alert("Form submitted successfully!");
+    window.location.href = "https://hermesview.com/projects/4"; // Redirect to the desired URL
   };
 
   const handleChange = (e) => {
