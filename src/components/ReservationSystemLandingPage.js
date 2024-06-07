@@ -57,6 +57,7 @@ const LandingForm = () => {
         placeholder="First Name"
         value={formData.firstName}
         onChange={handleChange}
+        className="reservation-system-input"
         required
       />
       <input
@@ -66,6 +67,7 @@ const LandingForm = () => {
         value={formData.lastName}
         onChange={handleChange}
         required
+        className="reservation-system-input"
       />
       <input
         type="email"
@@ -74,6 +76,7 @@ const LandingForm = () => {
         value={formData.email}
         onChange={handleChange}
         required
+        className="reservation-system-input"
       />
       <input
         type="tel"
@@ -82,6 +85,7 @@ const LandingForm = () => {
         value={formData.phoneNumber}
         onChange={handleChange}
         required
+        className="reservation-system-input"
       />
       <input
         type="text"
@@ -90,6 +94,7 @@ const LandingForm = () => {
         value={formData.businessName}
         onChange={handleChange}
         required
+        className="reservation-system-input"
       />
       <input
         type="text"
@@ -98,6 +103,7 @@ const LandingForm = () => {
         value={formData.businessWebsite}
         onChange={handleChange}
         pattern={websiteRegex}
+        className="reservation-system-input"
       />
       <input
         type="text"
@@ -106,6 +112,7 @@ const LandingForm = () => {
         value={formData.city}
         onChange={handleChange}
         required
+        className="reservation-system-input"
       />
       <input
         type="text"
@@ -113,14 +120,16 @@ const LandingForm = () => {
         placeholder="Postcode"
         value={formData.postcode}
         onChange={handleChange}
+        className="reservation-system-input"
       />
       <textarea
         name="extraComments"
         placeholder="Extra Comments"
         value={formData.extraComments}
         onChange={handleChange}
+        className="reservation-system-input"
       ></textarea>
-      <button type="submit">Submit</button>
+      <button type="submit" className="reservation-system-submit">Submit</button>
     </form>
   );
 };
