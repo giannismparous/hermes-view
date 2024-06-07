@@ -59,6 +59,7 @@ const LandingForm = () => {
         onChange={handleChange}
         className="reservation-system-input"
         required
+        id="firstname"
       />
       <input
         type="text"
@@ -68,6 +69,7 @@ const LandingForm = () => {
         onChange={handleChange}
         required
         className="reservation-system-input"
+        id="lastname"
       />
       <input
         type="email"
@@ -77,6 +79,7 @@ const LandingForm = () => {
         onChange={handleChange}
         required
         className="reservation-system-input"
+        id="email"
       />
       <input
         type="tel"
@@ -86,6 +89,7 @@ const LandingForm = () => {
         onChange={handleChange}
         required
         className="reservation-system-input"
+        id="phoneNumber"
       />
       <input
         type="text"
@@ -95,6 +99,7 @@ const LandingForm = () => {
         onChange={handleChange}
         required
         className="reservation-system-input"
+        id="businessName"
       />
       <input
         type="text"
@@ -104,6 +109,7 @@ const LandingForm = () => {
         onChange={handleChange}
         pattern={websiteRegex}
         className="reservation-system-input"
+        id="businessWebsite"
       />
       <input
         type="text"
@@ -113,6 +119,7 @@ const LandingForm = () => {
         onChange={handleChange}
         required
         className="reservation-system-input"
+        id="city"
       />
       <input
         type="text"
@@ -121,6 +128,7 @@ const LandingForm = () => {
         value={formData.postcode}
         onChange={handleChange}
         className="reservation-system-input"
+        id="postcode"
       />
       <textarea
         name="extraComments"
