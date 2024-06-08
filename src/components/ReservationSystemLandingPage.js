@@ -101,7 +101,7 @@ const LandingForm = () => {
         className="reservation-system-input"
         id="businessName"
       />
-      <input
+      {/* <input
         type="text"
         name="businessWebsite"
         placeholder="Business Website (example.com)"
@@ -136,7 +136,7 @@ const LandingForm = () => {
         value={formData.extraComments}
         onChange={handleChange}
         className="reservation-system-input"
-      ></textarea>
+      ></textarea> */}
       <button type="submit" className="reservation-system-submit">Submit</button>
     </form>
   );
