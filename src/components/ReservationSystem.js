@@ -1,14 +1,64 @@
-import React from "react";
+
+import React, { useEffect } from "react";
 import LandingForm from "./ReservationSystemLandingPage";
 import '../styles/ReservationSystem.css';
 
 function ReservationSystem() {
     const hermesViewBlueImgPath = '../icons/hermes-view-logo-new-blue.png';
 
+
+    useEffect(() => {
+        // Initialize Facebook Pixel
+        (function(f, b, e, v, n, t, s) {
+            if (f.fbq) return; 
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+            t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'));
+
+        window.fbq('init', '1477714302952075');
+        window.fbq('track', 'PageView');
+    }, []);
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log('Form submitted successfully');
+                    if (window.fbq) {
+                        window.fbq('track', 'Register', {eventID: 'unique-event-id'});
+                    }
+                } else {
+                    console.error('Form submission failed:', xhr.statusText);
+                }
+            }
+        };
+
+        const params = new URLSearchParams();
+        formData.forEach((value, key) => {
+            params.append(key, value);
+        });
+        xhr.send(params.toString());
+    };
+
+
     return (
         <div className="reservation-system">
             <header className="reservation-system-header">
-                <img src={hermesViewBlueImgPath} alt="HermesView Logo" className="logo" />
+                {/* <img src={hermesViewBlueImgPath} alt="HermesView Logo" className="logo" /> */}
             </header>
             <div className="reservation-system-content">
                 <div className="reservation-system-info-container" id="WhyNow">
