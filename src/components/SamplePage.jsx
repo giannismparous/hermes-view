@@ -96,7 +96,7 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
           title="3D Vista Project"
           src={modelPath}
           style={iframeStyle}
-          sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation"
+          sandbox="allow-scripts allow-same-origin allow-forms"
           allowFullScreen
         ></iframe>
       </div>
