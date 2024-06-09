@@ -44,14 +44,20 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
   }, []);
 
   useEffect(() => {
-    const iframe = iframeRef.current;
-    if (iframe) {
-      iframe.onload = () => {
-        console.log("test");
-        iframe.contentWindow.postMessage({ type: 'overrideLinks' }, '*');
-      };
-    }
-  }, [modelPath]);
+    const handleMessage = (event) => {
+      const { type, link } = event.data;
+      if (type === 'openLink' && link) {
+        console.log("Received link:", link);
+        window.open(link, '_blank'); // Open link in a new tab
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
 
   const handleOverlayClick = () => {
     if (redirectToSample) {
@@ -90,7 +96,7 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
           title="3D Vista Project"
           src={modelPath}
           style={iframeStyle}
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation"
           allowFullScreen
         ></iframe>
       </div>
