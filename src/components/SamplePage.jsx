@@ -97,7 +97,6 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
           src={modelPath}
           style={iframeStyle}
           sandbox="allow-scripts allow-same-origin allow-forms"
-          allowFullScreen
         ></iframe>
       </div>
     </Fragment>
