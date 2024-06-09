@@ -1,8 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProps }) {
+  const iframeRef = useRef(null);
+
   const iframeStyle = {
     position: "absolute",
     top: 0,
@@ -41,6 +43,16 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     return () => clearTimeout(hideOverlay);
   }, []);
 
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.onload = () => {
+        console.log("test");
+        iframe.contentWindow.postMessage({ type: 'overrideLinks' }, '*');
+      };
+    }
+  }, [modelPath]);
+
   const handleOverlayClick = () => {
     if (redirectToSample) {
       let redirectUrl = "";
@@ -74,10 +86,11 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
       <div style={{ ...containerStyle, ...style }} {...otherProps}>
         <div style={overlayStyle(overlayVisible)} onClick={handleOverlayClick}></div>
         <iframe
+          ref={iframeRef}
           title="3D Vista Project"
           src={modelPath}
           style={iframeStyle}
-          sandbox="allow-scripts allow-same-origin allow-top-navigation allow-forms"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
           allowFullScreen
         ></iframe>
       </div>
