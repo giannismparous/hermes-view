@@ -67,27 +67,24 @@ const LandingForm = () => {
         placeholder="Last Name"
         value={formData.lastName}
         onChange={handleChange}
-        required
         className="reservation-system-input"
         id="lastname"
       />
       <input
-        type="email"
+        type="text"
         name="email"
         placeholder="Email"
         value={formData.email}
         onChange={handleChange}
-        required
         className="reservation-system-input"
         id="email"
       />
       <input
-        type="tel"
+        type="text"
         name="phoneNumber"
         placeholder="Phone Number"
         value={formData.phoneNumber}
         onChange={handleChange}
-        required
         className="reservation-system-input"
         id="phoneNumber"
       />
@@ -97,7 +94,6 @@ const LandingForm = () => {
         placeholder="Business Name"
         value={formData.businessName}
         onChange={handleChange}
-        required
         className="reservation-system-input"
         id="businessName"
       />
