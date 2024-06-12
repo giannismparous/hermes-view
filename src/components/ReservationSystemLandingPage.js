@@ -58,7 +58,6 @@ const LandingForm = () => {
         value={formData.firstName}
         onChange={handleChange}
         className="reservation-system-input"
-        required
         id="firstname"
       />
       <input
