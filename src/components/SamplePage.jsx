@@ -1,8 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProps }) {
+  const iframeRef = useRef(null);
+
   const iframeStyle = {
     position: "absolute",
     top: 0,
@@ -41,6 +43,22 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
     return () => clearTimeout(hideOverlay);
   }, []);
 
+  useEffect(() => {
+    const handleMessage = (event) => {
+      const { type, link } = event.data;
+      if (type === 'openLink' && link) {
+        console.log("Received link:", link);
+        window.open(link, '_blank'); // Open link in a new tab
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   const handleOverlayClick = () => {
     if (redirectToSample) {
       let redirectUrl = "";
@@ -74,11 +92,11 @@ function SamplePage({ style, redirectToSample, modelPath, sampleId, ...otherProp
       <div style={{ ...containerStyle, ...style }} {...otherProps}>
         <div style={overlayStyle(overlayVisible)} onClick={handleOverlayClick}></div>
         <iframe
+          ref={iframeRef}
           title="3D Vista Project"
           src={modelPath}
           style={iframeStyle}
-          sandbox="allow-scripts allow-same-origin allow-top-navigation allow-forms"
-          allowFullScreen
+          sandbox="allow-scripts allow-same-origin allow-forms"
         ></iframe>
       </div>
     </Fragment>
