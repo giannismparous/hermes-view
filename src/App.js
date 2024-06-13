@@ -18,6 +18,8 @@ import Services from "./components/Services";
 import ServiceComponent from "./components/ServiceComponent";
 import Survey from "./components/Survey";
 import ReservationSystem from "./components/ReservationSystem";
+import PrivacyPolicy from './components/PrivacyPolicy';
+
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
 
   const location = useLocation();
 
-  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations","/debug", "/reservation_system", "/blackpistol"];
+  const pathsWithoutNavBar = ["/sample", "/3d-model-sample","/360-video-sample","/login","/sample_restaurant/reservations","/debug", "/reservation_system", "/blackpistol","/privacy_policy"];
 
   // Check if the current path is in the array of paths without NavBar
   // or if it starts with "/projects/"
@@ -145,6 +147,7 @@ function App() {
         <Route path="/blackpistol" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_6/"/>} />
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
         <Route path="/reservation_system" element={<ReservationSystem/>} /> 
+        <Route path="/privacy_policy" element={<PrivacyPolicy/>} />
         <Route path="/survey/2379275863593087" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSfbyeTMJB4em0yE33E1HYJAr21BGeDWcd86N7efc7PhLcSgPw/viewform?embedded=true"/>} /> 
         <Route path="/survey/8390183943903141" element={<Survey formPath="https://docs.google.com/forms/d/e/1FAIpQLSdDryiDCXGPmeu-Ka4mR7PQBUfcdOuqwM7MdjbJj9QXsDkSnA/viewform?embedded=true"/>} /> 
       </Routes>
