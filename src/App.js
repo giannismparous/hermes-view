@@ -142,6 +142,7 @@ function App() {
         <Route path="/projects/zhj0lwnc31og" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_4/"/>} /> 
         <Route path="/projects/fb66u81wtrg9" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_5/"/>} /> 
         <Route path="/projects/lkd2njp1nk1l" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_6/"/>} />
+        <Route path="/projects/ml131s24fad2" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_7/"/>} />
         <Route path="/blackpistol" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/vr_6/"/>} />
         <Route path="/projects/0" element={<SamplePage redirectToSample={false} modelPath="https://giannismparous.github.io/test_vr/"/>} /> 
         <Route path="/reservation_system" element={<ReservationSystem/>} /> 
