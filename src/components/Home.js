@@ -129,7 +129,7 @@ const AnimatedParagraph = ({ children, className }) => {
           </div>
         </div>
       )}
-      <VideoComponent onVideoReady={handleVideoReady} />
+      {/* <VideoComponent onVideoReady={handleVideoReady} /> */}
       {/* <div style={{ opacity: isVideoReady ? 1 : 0 }}> */}
       <section className="custom-font-1 container-1">
         <div className="hermes hermes-container">

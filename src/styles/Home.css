@@ -66,36 +66,6 @@ p {
   text-rendering: optimizeSpeed;
 }
 
-test h1 {
-  /* color: rgb(255, 255, 255); */
-  color: rgb(0, 9, 128);
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  position: relative;
-  /* Needed for absolute positioning of the pseudo-element */
-  display: inline-block;
-  /* Ensures the line is only as wide as the text */
-  margin-bottom: 1em;
-
-}
-
-test h1::after {
-  content: '';
-  display: block;
-  width: 50px;
-  /* Width of the decorative line */
-  height: 5px;
-  /* Increased thickness of the line */
-  /* background-color: #8a5a00;  */
-  background-color: rgb(0, 9, 128);
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  /* Adjusted for the new thickness */
-  border-radius: 2.5px;
-  /* Half of the height to make the ends fully rounded */
-}
 
 h2 {
   /* color: #ffffff; */
@@ -360,16 +330,7 @@ h2 {
   font-size: 50px;
 }
 
-.container-2 h1 {
-  margin-top: 0;
-  font-size: 70px;
-}
 
-@media screen and (max-width: 580px) {
-  .container-2 h1 {
-    font-size: 50px;
-  }
-}
 
 
 .container-2 h2::after {
@@ -840,4 +801,73 @@ button:hover {
 
 .custom-font-4 ul li {
   color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .custom-font-1 .heading {
+    font-size: 2.3rem;
+  }
+
+  .custom-font-1 p {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .custom-font-1 .heading {
+    font-size: 2rem;
+  }
+
+  .custom-font-1 p {
+    font-size: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .hermes::after {
+    bottom: 35px;
+  }
+
+  .view::after {
+    bottom: 35px;
+  }
+}
+
+.container-2 h1 {
+  margin-top: 0;
+  font-size: 70px;
+}
+
+@media screen and (max-width: 900px) {
+  .container-2 h1 {
+    margin-top: 0;
+    font-size: 50px;
+  }
+
+  .sample-container h2 {
+    color: rgb(0, 9, 128);
+    font-size: 50px;
+  }
+
+  .container-4 h2 {
+    color: white;
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .container-2 h1 {
+    margin-top: 0;
+    font-size: 40px;
+  }
+
+  .sample-container h2 {
+    color: rgb(0, 9, 128);
+    font-size: 40px;
+  }
+
+  .container-4 h2 {
+    color: white;
+    font-size: 40px;
+  }
 }
