@@ -871,3 +871,107 @@ button:hover {
     font-size: 40px;
   }
 }
+
+
+
+
+
+
+#testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#testimonials h2 {
+  font-size: 3rem;
+  color: black;
+}
+
+#testimonials h2::after {
+  background-color: transparent;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.carousel-control-prev-icon {
+  background-color: black;
+  border-radius: 50%;
+}
+
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+}
+
+.container .carousel-control-prev {
+  left: -180px;
+}
+
+.container .carousel-control-next {
+  right: -180px;
+}
+
+.carousel-button.left {
+  left: 0;
+}
+
+.carousel-button.right {
+  right: 0;
+}
+
+.testimonials-grid {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.testimonial-item {
+  flex: 0 0 32%;
+  margin: 10px;
+  transition: transform 0.5s ease-in-out;
+}
+
+@media (max-width: 1650px) {
+
+  .testimonials-grid {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .container .carousel-control-prev {
+    left: 0;
+  }
+
+  .container .carousel-control-next {
+    right: 0;
+  }
+}

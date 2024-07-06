@@ -15,8 +15,119 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { addNewContactForm } from "./firebase.utils";
+import Testimonial from "./Testimonial";
+import { Carousel } from 'react-bootstrap';
 
 function Home() {
+
+  const testimonials1 = [
+    {
+        name: 'Ioannis Aloukos',
+        date: 'πριν από 6 μήνες',
+        content: 'Πρόκειται για εξαιρετικό επαγγελματία, ο οποίος δίνει λύσεις σε όποιο ηλεκτρολογικό πρόβλημα προκύψει. Πάντα είνα πρόθυμος για να δώσει απαντήσεις στο τηλέφωνο και είναι συνεπής στα ραντεβού του.'
+    },
+    {
+        name: 'Ivelina Nikolova',
+        date: 'πριν από 3 μήνες',
+        content: 'Έμεινα πολύ ευχαριστημένη από την γρήγορη και άμεση εξυπηρέτηση… Φοβερή οργάνωση και ποιοτική εργασία και πολύ ευγενέστατος !! Σας ευχαριστώ Κος Γεώργιος Ν. Βλάχος.'
+    },
+    {
+        name: 'Yiouli Boida',
+        date: 'πριν από 7 μήνες',
+        content: 'Εξαιρετικός και ευγενικός άνθρωπος. Μου χάλασε η ασφάλεια του ψυγείου και ήρθε αμέσως! Σπάνιο πράγμα για τεχνικό. Σε λίγα λεπτά αποκαταστάθηκε το πρόβλημά μου.'
+    },
+    {
+        name: 'ΓΙΩΡΓΟΣ ΕΞΑΚΟΪΔΗΣ',
+        date: 'πριν από 6 μήνες',
+        content: 'Ο μόνος ίσως ηλεκτρολόγος που έχει έρθει να με βοηθήσει και δεν ζήτησε λεφτά. πολύ καλό παιδί και πάντα σε βοηθάει ότι και να θες.'
+    },
+    {
+        name: 'Emily kelemeni',
+        date: 'πριν από 1 χρόνο',
+        content: 'Εξαιρετικός επαγγελματίας! Ο κύριος Γιώργος πολύ ευγενικός! Πολύ καλές τιμές, άψογη δουλειά και πολύ άμεσος! Ευχαριστούμε για την συνεργασία!!! Τον συστήνω ανεπιφύλακτα!'
+    },
+    {
+        name: 'Vagelis Tatsis',
+        date: 'πριν από 11 μήνες',
+        content: 'Εξαίρετος επαγγελματίας. Ευγενεστατος. Άψογος στην δουλειά του. Ανταποκρίθηκε άμεσα αν και ήταν Κυριακή και μάλιστα με καύσωνα. Συνεπεστατος ήρθε στην ώρα του. Βρήκε αμέσως το πρόβλημα και αποκατέστησε την βλάβη. Τον συστήνω ανεπιφύλακτα!'
+    },
+];
+
+const testimonials2 = [
+    {
+        name: 'Fotios Gazis',
+        date: 'πριν από 1 χρόνο',
+        content: 'Εξαιρετικός ο κυριος Γιώργος πάντα πρόθυμος και εργατικός! Άριστες τιμές και τρομερή δουλειά! Τον προτείνω 100%!!!'
+    },
+    {
+        name: 'Efsevios Kontopoulos',
+        date: 'πριν από 7 μήνες',
+        content: 'Πολύ γρήγορη και αποτελεσματική εξυπηρέτηση. Ήρθε την ίδια μέρα που του τηλεφωνήσαμε για να συνδέσουμε το τηλέφωνο και το wifi μας. Ευχαριστώ'
+    },
+    {
+        name: 'alex papantoniou',
+        date: 'πριν από 9 μήνες',
+        content: 'Υπέροχος! Άμεση εξυπηρέτηση, με επαγγελματισμο, επίλυση προβλημάτων και υπέροχη συμπεριφορά! Σας ευχαριστούμε πολύ!'
+    },
+    {
+        name: 'panayiotis papadakis',
+        date: 'πριν από 1 χρόνο',
+        content: 'Πολύ αξιόπιστος συνεπής βρήκε το πρόβλημα άμεσα και μου έκανε και πλήρης αλλαγή πίνακα και καλωδίωση.τον συνιστώ ανεπιφύλακτα'
+    },
+    {
+        name: 'ΑΡΙΣΤΕΑ ΑΝΤΩΝΙΟΥ',
+        date: 'πριν από 7 μήνες',
+        content: 'Άψογη εξυπηρέτηση, ευγένεια, τυπικότητα, επαγγελματισμός, διάθεση για εξεύρεση πρακτικών λύσεων και τιμές που ανταποκρίνονται στο σήμερα !!! Θα συνεργαζομουν ξανά !!!!'
+    },
+    {
+        name: 'Hlias Papas',
+        date: 'πριν από 8 μήνες',
+        content: 'Συστήνω τον Γιώργο ανεπιφύλακτα. Με εξυπηρέτησε άμεσα και με προθυμία ημέρα Κυριακή. Γρήγορος , προσεκτικός και έμπειρος.'
+    },
+]
+
+const chunkTestimonials = (items, chunkSize) => {
+    const chunks = [];
+    for (let i = 0; i < items.length; i += chunkSize) {
+        chunks.push(items.slice(i, i + chunkSize));
+    }
+    return chunks;
+};
+
+const [carouselConfig, setCarouselConfig] = useState({
+    chunks1: chunkTestimonials(testimonials1, 3),
+    chunks2: chunkTestimonials(testimonials2, 3),
+    itemsPerSlide: 3,
+});
+
+useEffect(() => {
+    const handleResize = () => {
+        if (window.innerWidth >= 1650) {
+            setCarouselConfig({
+                chunks1: chunkTestimonials(testimonials1, 3),
+                chunks2: chunkTestimonials(testimonials2, 3),
+                itemsPerSlide: 3,
+            });
+        } else if (window.innerWidth >= 750) {
+            setCarouselConfig({
+                chunks1: chunkTestimonials(testimonials1, 2),
+                chunks2: chunkTestimonials(testimonials2, 2),
+                itemsPerSlide: 2
+            });
+        }
+        else {
+            setCarouselConfig({
+                chunks1: chunkTestimonials(testimonials1, 1),
+                chunks2: chunkTestimonials(testimonials2, 1),
+                itemsPerSlide: 1
+            });
+        }
+    };
+
+    handleResize(); // Call on component mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   const isMobile = useMediaQuery({ maxWidth: 1400 }); // Check if screen width is <= 768px
 
@@ -240,6 +351,53 @@ const AnimatedParagraph = ({ children, className }) => {
           <Link to="/samples"className="view-more-projects" style={{ color: 'rgb(194,125,106)' }}>View More</Link>
         </div>
       </section>
+
+      {/* <div className="container mt-5">
+      <section id="testimonials" className="text-center mt-5">
+                    <h2 className="section-heading">Αξιολογήσεις πελατών</h2>
+                    <div className="testimonials-container">
+                        <Carousel className="testimonials-carousel" interval={null}>
+                            {carouselConfig.chunks1.map((chunk, index) => (
+                                <Carousel.Item key={index}>
+                                    <div className="testimonials-grid">
+                                        {chunk.map((testimonial, idx) => (
+                                            <Testimonial
+                                                key={idx}
+                                                name={testimonial.name}
+                                                date={testimonial.date}
+                                                content={testimonial.content}
+                                                stars={testimonial.stars}
+                                                profilePic={testimonial.profilePic}
+                                            />
+                                        ))}
+                                    </div>
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+                    </div>
+                    <div className="testimonials-container">
+                        <Carousel className="testimonials-carousel" interval={null}>
+                            {carouselConfig.chunks2.map((chunk, index) => (
+                                <Carousel.Item key={index}>
+                                    <div className="testimonials-grid">
+                                        {chunk.map((testimonial, idx) => (
+                                            <Testimonial
+                                                key={idx}
+                                                name={testimonial.name}
+                                                date={testimonial.date}
+                                                content={testimonial.content}
+                                                stars={testimonial.stars}
+                                                profilePic={testimonial.profilePic}
+                                            />
+                                        ))}
+                                    </div>
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+                    </div>
+                </section>
+                </div> */}
+
         <div className="invis-container"/>
         <section className="questions container-4">
           <div className="custom-font-3">
