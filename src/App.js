@@ -60,9 +60,30 @@ function App() {
         "Personalization"
     ]}
 />} />
+      <Route path="/hermes_table" element={<ServiceComponent header="HERMES TABLE"
+    paragraph="A reservation system with VR? Try Hermes Table for free!"
+    list={[
+        "Immersive Booking Experience",
+        "Enhanced Visualization",
+        "Increased Engagement",
+        "Convenience",
+        "Personalization"
+    ]}
+/>} />
         <Route path="/services/reservation-system" element={<ServiceComponent
     header="HERMES TABLE"
     paragraph="Do you operate a restaurant or hotel? Have you thought of integrating a reservation system? Why not do it more immersive and engaging? Integrate a reservation system that combines the latest VR technologies."
+    list={[
+        "Immersive Booking Experience",
+        "Enhanced Visualization",
+        "Increased Engagement",
+        "Convenience",
+        "Personalization"
+    ]}
+/>} />
+       <Route path="/hermestable" element={<ServiceComponent
+    header="HERMESTABLE"
+    paragraph="A reservation system with VR? Try HermesTable for free!"
     list={[
         "Immersive Booking Experience",
         "Enhanced Visualization",
