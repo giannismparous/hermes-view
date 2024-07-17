@@ -62,9 +62,9 @@ function ReservationSystem() {
             </header>
             <div className="reservation-system-content">
                 <div className="reservation-system-info-container" id="WhyNow">
-                    <h2>Γιατί να το δοκιμάσεις τώρα;</h2>
+                    <h2>Γιατί να δοκιμάσεις το Hermes Table τώρα;</h2>
                     <p>
-                        Επιλέγουμε 5 εστιατόρια στην Αθήνα για να συμμετάσχουν σε μια <strong>ΔΩΡΕΑΝ</strong> δοκιμή της εφαρμογής διάρκειας 6 εβδομάδων.
+                        Επιλέγουμε 5 εστιατόρια στην Αθήνα για να συμμετάσχουν σε μια <strong>ΔΩΡΕΑΝ</strong> δοκιμή του HermesTable διάρκειας 6 εβδομάδων.
                     </p>
                     <p>
                         Τα εστιατόρια θα πρέπει να συνεργαστούν στενά για την προσαρμογή του προγράμματος στις ανάγκες τους.
