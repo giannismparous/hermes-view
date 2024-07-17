@@ -68,7 +68,7 @@ function Contact() {
       <div className="contact" ref={scrollRef}>
       <Helmet>
         <title>Contact - HermesView</title>  
-        <meta name="description" content="Reach out to us.
+        <meta name="description" content="Want to try out HermesTable?
           Fill out the form below (Name, Email, Message)"/>
         <link rel="canonical" href="/contact"/>
       </Helmet>
