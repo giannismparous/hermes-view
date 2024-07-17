@@ -50,8 +50,18 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/services" element={<Services />} />
+          <Route path="/services/hermes_table" element={<ServiceComponent header="HERMES TABLE"
+    paragraph="Do you operate a restaurant or hotel? Have you thought of integrating a reservation system? Why not do it more immersive and engaging? Integrate a reservation system that combines the latest VR technologies."
+    list={[
+        "Immersive Booking Experience",
+        "Enhanced Visualization",
+        "Increased Engagement",
+        "Convenience",
+        "Personalization"
+    ]}
+/>} />
         <Route path="/services/reservation-system" element={<ServiceComponent
-    header="IMMERSIVE RESERVATION SYSTEM"
+    header="HERMES TABLE"
     paragraph="Do you operate a restaurant or hotel? Have you thought of integrating a reservation system? Why not do it more immersive and engaging? Integrate a reservation system that combines the latest VR technologies."
     list={[
         "Immersive Booking Experience",
