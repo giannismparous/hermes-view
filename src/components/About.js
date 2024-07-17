@@ -13,7 +13,7 @@ function About() {
       <Helmet>
         <title>About - HermesView</title>  
         <meta name="description" content="About Us:
-          HermesView emerged with a visionary goal, to revolutionize the real estate landscape in Greece by simplifying the house-hunting experience."/>
+          HermesView aims to revolutionize the market with Hermes Table, the reservation app with VR"/>
         <link rel="canonical" href="/about"/>
       </Helmet>
       <div className="about" ref={scrollRef}>
