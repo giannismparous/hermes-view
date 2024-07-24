@@ -102,7 +102,7 @@ const NavigationBar = () => {
       <ul className={`nav-links ${menuOpen ? 'nav-links-activated' : 'nav-links-deactivated'}`}>
         <div className='nav-links-text'>
           <li><Link to="/" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Home</Link></li>
-          <li><Link to="/samples" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Samples</Link></li>
+          {/* <li><Link to="/samples" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Samples</Link></li> */}
           <li><Link to="/about" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>About</Link></li>
           <li><Link to="/contact" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Contact Us</Link></li>
           <li><Link to="/reservation_system" onClick={toggleMenu} className={`nav-link-item ${(scrollPosition === 0 && !isHovered && !isMobile) ? 'colored' : 'white'}`}>Apply</Link></li>
