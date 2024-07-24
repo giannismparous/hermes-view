@@ -7,6 +7,18 @@
         <priority>1.0</priority>
     </url>
     <url>
+        <loc>https://hermesview.com/hermes_table</loc>
+        <lastmod>2024-16-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://hermesview.com/hermestable</loc>
+        <lastmod>2024-16-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
         <loc>https://hermesview.com/samples</loc>
         <lastmod>2024-06-03</lastmod>
         <changefreq>weekly</changefreq>
